@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link href="../css/mui.css" rel="stylesheet" />
+		<style type="text/css">
+			body {
+				background-color: #FFFFFF;
+			}
+
+			.mui-content>.mui-table-view:first-child {
+				margin-top: 0;
+			}
+
+			.tp-img1 {
+				height: 80px;
+				width: 80px;
+				margin-top: 20px;
+
+			}
+
+			.mui-table-view {
+				border-bottom: #FFFFFF;
+			}
+
+			.tp-div1 {
+				margin: 10% 5% 5% 10%;
+				background-color: #FFFFFF;
+				border: solid #D2D2D2 1px;
+				border-radius: 0.15em;
+			}
+
+			.tp-div2 {
+				margin: 10% 10% 5% 5%;
+				background-color: #FFFFFF;
+				border: solid #D2D2D2 1px;
+				border-radius: 0.15em;
+			}
+
+			.tp-div3 {
+				margin: 5% 5% 10% 10%;
+				background-color: #FFFFFF;
+				border: solid #D2D2D2 1px;
+				border-radius: 0.15em;
+			}
+
+			.tp-div4 {
+				margin: 5% 10% 10% 5%;
+				height: 265px;
+				border: solid #D2D2D2 1px;
+				border-radius: 0.15em;
+				background: url(../images/tree_ico_yzs.png);
+				background-size: 100% 100%;
+			}
+
+			.mui-row {
+				background-color: #FFFFFF;
+			}
+
+			.p-first {
+				margin: 10px 0 2px 10px;
+				color: #0A0A0A;
+				font-weight: 500;
+				font-size: 14px;
+				width: 120px;
+			}
+
+			.p-second {
+				margin-top: 25px;
+				font-size: 14px;
+				color: #0A0A0A;
+			}
+
+			.p-third {
+				margin: 0 0 2px 12px;
+				font-size: 10px;
+			}
+
+
+
+			.ts-progressbar {
+				margin-left: 10px;
+				margin-bottom: 0px;
+				height: 6px;
+				border-radius: 1em;
+				width: 90%;
+			}
+
+			.ts-div1 {
+				width: 80%;
+			}
+
+			.ts-div2 {
+				width: 20%;
+				display: inline-block;
+			}
+
+			.tree-img1 {
+				background: url(../images/tree_bg_ywk1bg.png);
+				background-size: 100% 100%;
+				width: 100%;
+				height: 200px;
+			}
+
+			.mui-popover {
+				margin: 0 auto;
+				position: absolute;
+				width: 92%;
+				height: 68%;
+				left: 50%;
+				top: 50%;
+
+
+			}
+
+			.mui-popover .mui-popover-arrow:after {
+				display: none;
+
+			}
+
+			.mui-slider-item .img {
+				height: 200px;
+			}
+
+			.mui-slider {
+				height: 250px;
+			}
+
+			.ts-img {
+				height: 250px;
+				width: 100%;
+			}
+
+			.pop-head {
+				margin: 3px 10px 10px 10px;
+			}
+
+			.pop-content {
+				padding: 5px 10px 0 10px;
+				border-bottom: solid #D2D2D2 1px;
+			}
+
+			.pop-footer {
+				margin: 5px 2.5% 5px 2.5%;
+				height: 20px;
+				width: 95%;
+			}
+
+			.ts-location {
+				position: absolute;
+				bottom: 0;
+				margin: 5px 2.5% 5px 2.5%;
+				height: 20px;
+				width: 95%;
+				border-radius: 0.1em;
+				background-color: rgba(255, 255, 255, 0.4);
+				/* background-color:rgba(0,0,0,1); */
+			}
+
+			.span-loc {
+				position: inherit;
+				display: inline-block;
+				white-space: nowrap;
+				overflow: hidden;
+				/*超出宽度部分隐藏*/
+				text-overflow: ellipsis;
+				/*超出部分以点号代替*/
+				width: 89%;
+				color: #0A0A0A;
+				font-size: 10px;
+			}
+
+			.img-loc {
+				margin: 2px 2px 2px 2px;
+				width: 16px;
+				height: 16px;
+			}
+
+			.tp-button {
+				background-color: #218700;
+				width: 60%;
+				color: white;
+				border-radius: 2em;
+			}
+
+			.tp-button-div {
+				text-align: center;
+			}
+
+			.pop-ico {
+				margin: 2px 2px 2px 2px;
+				height: 25px;
+				width: 25px;
+			}
+
+			.footer-span {
+				line-height: 2;
+				position: inherit;
+				display: inline-block;
+				white-space: nowrap;
+				overflow: hidden;
+				/*超出宽度部分隐藏*/
+				text-overflow: ellipsis;
+				/*超出部分以点号代替*/
+				width: 80%;
+				color: #0A0A0A;
+				font-size: 14px;
+			}
+		</style>
+	</head>
+	<header class="mui-bar mui-bar-nav">
+		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		<h1 class="mui-title">选择已有树种移植</h1>
+	</header>
+	<div class="mui-content">
+		<div class="mui-row">
+			<div class="mui-col-sm-6 mui-col-xs-6">
+				<div class="tp-div1">
+					<a href="#popover1" id="openPopover1">
+						<div class="mui-row">
+							<div class="mui-col-sm-8 mui-col-xs-8" id="tp-div1">
+								<p class="p-first">金台寺许愿树</p>
+								<p class="mui-progressbar mui-progressbar-in ts-progressbar" data-progress="20"><span></span></p>
+								<p class="p-third">还差36958</p>
+							</div>
+							<div class="mui-col-sm-4 mui-col-xs-4">
+								<p class="p-second mui-pull-left">50000</p>
+							</div>
+							<div class="mui-col-sm-12 mui-col-xs-12 tree-img1">
+								<div class="ts-location">
+									<img src="../images/tree_share_location.png" class="img-loc" />
+									<span class="span-loc">广东省珠海市斗门区王保水库附近</span>
+								</div>
+							</div>
+						</div>
+					</a>
+				</div>
+			</div>
+
+			<div class="mui-col-sm-6 mui-col-xs-6">
+				<div class="tp-div2">
+					<a href="#popover1">
+						<div class="mui-row">
+							<div class="mui-col-sm-8 mui-col-xs-8" id="tp-div2">
+								<p class="p-first">观音庙许愿树</p>
+								<p class="mui-progressbar mui-progressbar-in ts-progressbar" data-progress="20"><span></span></p>
+								<p class="p-third">还差3258</p>
+							</div>
+							<div class="mui-col-sm-4 mui-col-xs-4">
+								<p class="p-second mui-pull-left">38690</p>
+							</div>
+							<div class="mui-col-sm-12 mui-col-xs-12 tree-img1">
+								<div class="ts-location">
+									<img src="../images/tree_share_location.png" class="img-loc" />
+									<span class="span-loc">广东省珠海市斗门区王保水库附近</span>
+								</div>
+							</div>
+						</div>
+					</a>
+				</div>
+			</div>
+		</div>
+
+		<div class="mui-row">
+			<div class="mui-col-sm-6 mui-col-xs-6">
+				<div class="tp-div3">
+					<a href="#popover1">
+						<div class="mui-row">
+							<div class="mui-col-sm-8 mui-col-xs-8" id="tp-div3">
+								<p class="p-first">海滨公园许愿树</p>
+								<p class="mui-progressbar mui-progressbar-in ts-progressbar" data-progress="20"><span></span></p>
+								<p class="p-third">还差36958</p>
+							</div>
+							<div class="mui-col-sm-4 mui-col-xs-4">
+								<p class="p-second mui-pull-left">50000</p>
+							</div>
+							<div class="mui-col-sm-12 mui-col-xs-12 tree-img1">
+								<div class="ts-location">
+									<img src="../images/tree_share_location.png" class="img-loc" />
+									<span class="span-loc">广东省珠海市斗门区王保水库附近</span>
+								</div>
+							</div>
+						</div>
+					</a>
+				</div>
+			</div>
+			<div class="mui-col-sm-6 mui-col-xs-6">
+				<div class=" tp-div4">
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div id="popover1" class="mui-popover">
+		<div class="mui-popover-arrow"></div>
+		<div class="mui-scroll-wrapper">
+			<div class="mui-scroll">
+				<div class="pop-head">
+					<div id="slider" class="mui-slider">
+						<div class="mui-slider-group mui-slider-loop">
+							<!-- 额外增加的一个节点(循环轮播：第一个节点是最后一张轮播) -->
+							<div class="mui-slider-item mui-slider-item-duplicate">
+								<a href="#">
+									<img src="../images/tree_ico_ywk2.png" class="ts-img" />
+								</a>
+							</div>
+							<!-- 第一张 -->
+							<div class="mui-slider-item">
+								<a href="#">
+									<img src="../images/tree_ico_ywk1.png" class="ts-img" />
+								</a>
+							</div>
+							<!-- 第二张 -->
+							<div class="mui-slider-item">
+								<a href="#">
+									<img src="../images/tree_bg_ywk1bg.png" class="ts-img" />
+								</a>
+							</div>
+							<!-- 第三张 -->
+							<div class="mui-slider-item">
+								<a href="#">
+									<img src="../images/tree_ic_xys1.png" class="ts-img" />
+								</a>
+							</div>
+							<!-- 第四张 -->
+							<div class="mui-slider-item">
+								<a href="#">
+									<img src="../images/tree_ico_ywk2.png" class="ts-img" />
+								</a>
+							</div>
+							<!-- 额外增加的一个节点(循环轮播：最后一个节点是第一张轮播) -->
+							<div class="mui-slider-item mui-slider-item-duplicate">
+								<a href="#">
+									<img src="../images/tree_ico_ywk1.png" class="ts-img">
+								</a>
+							</div>
+						</div>
+						<div class="mui-slider-indicator">
+							<div class="mui-indicator mui-active"></div>
+							<div class="mui-indicator"></div>
+							<div class="mui-indicator"></div>
+							<div class="mui-indicator"></div>
+						</div>
+					</div>
+				</div>
+				<div class="pop-content">
+					<p style="font-size: 16px; font-weight: 500; color: #0A0A0A;">金台寺许愿树</p>
+					<span style="font-size: 12px;">树种：<span style="font-size: 16px;">大榕树</span></span>
+					<p style="font-size: 12px; color: #0A0A0A;">需要能量：<span style="font-size: 16px;">52486</span></p>
+					<p style="color: #0A0A0A; font-size: 11px;">许愿树位于珠海市金台寺,是珠海著名的许愿胜地[1],坐落于广东省珠海市斗门区王保水库附近。许愿树是大棵大榕树。被当地村民视为神灵,并在诚心向树祈福许愿。
+					</p>
+					<div class="tp-button-div">
+						<button class="tp-button">申请移植</button>
+						<p style="font-size: 9px;">您的能量值不足，继续加油，拿出更多爱心做公益！</p>
+					</div>
+
+				</div>
+				<!-- <div class="pop-footer">
+					<p class="footer-span"><img src="../images/pub_ico_listaddress.png" class="pop-ico" />广东省珠海市斗门区王保水库附近</p>
+				</div> -->
+				<div class="pop-footer">
+					<img src="../images/tree_share_location.png" class="pop-ico" />
+					<span class="footer-span">广东省珠海市斗门区王保水库附近</span>
+				</div>
+			</div>
+		</div>
+
+
+		<body>
+			<script src="../js/mui.min.js"></script>
+			<script type="text/javascript" charset="utf-8">
+				mui.init({
+					swipeBack: false,
+				});
+
+				//ts-div1
+				var progressbar1 = mui('#tp-div1');
+				mui(progressbar1).progressbar().setProgress(50);
+				progressbar1.on('tap', 'a', function() {
+					mui(progressbar1).progressbar().setProgress(this.getAttribute('data-progress'));
+				});
+
+				//ts-div2
+				var progressbar2 = mui('#tp-div2');
+				mui(progressbar2).progressbar().setProgress(10);
+				progressbar2.on('tap', 'a', function() {
+					mui(progressbar2).progressbar().setProgress(this.getAttribute('data-progress'));
+				});
+
+				//ts-div3
+				var progressbar3 = mui('#tp-div3');
+				mui(progressbar3).progressbar().setProgress(20);
+				progressbar3.on('tap', 'a', function() {
+					mui(progressbar3).progressbar().setProgress(this.getAttribute('data-progress'));
+				});
+
+
+
+
+				//图片轮播
+				var slider = mui("#slider");
+				slider.slider({
+					interval: 0
+				});
+
+
+				mui('.mui-scroll-wrapper').scroll();
+				mui('body').on('shown', '.mui-popover', function(e) {
+					//console.log('shown', e.detail.id);//detail为当前popover元素
+				});
+				mui('body').on('hidden', '.mui-popover', function(e) {
+					//console.log('hidden', e.detail.id);//detail为当前popover元素
+				});
+			</script>
+		</body>
+</html>

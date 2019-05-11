@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta name="flexible" content="initial-dpr=2" />
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<title></title>
+		<link href="。。/css/mui.min.css" rel="stylesheet" />
+		<script src="http://g.tbcdn.cn/mtb/lib-flexible/0.3.4/??flexible_css.js,flexible.js"></script>
+		<style type="text/css">
+			[v-cloak] {
+				display: none
+			}
+			
+			html,
+			body {
+				background-color: #efeff4;
+			}
+			
+			.mui-bar {
+				height: 1.17rem;
+			}
+			
+			.mui-bar .mui-icon {
+				padding-top: 0.21rem;
+				font-size: 0.8rem;
+				color: black;
+			}
+			
+			.bar-title {
+				display: inline-block;
+				vertical-align: middle;
+				padding-top: .21rem;
+				font-size: 0.43rem;
+			}
+			
+			.mui-bar-nav~.mui-content {
+				padding-top: 1.17rem;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" id="back"><span class="bar-title">愿望列表</span></a>
+		</header>
+		<div class="mui-content" id="wishlist">
+			<a href="item/people.html">people</a>
+		</div>
+
+		<script src="../js/mui.js"></script>
+		<script src="../js/wishingTree.js"></script>
+		<script src="../js/native.js"></script>
+		<script src="../js/vue.min.js"></script>
+		<script type="text/javascript">
+			var wishlist = new Vue({
+				el: '#wishlist',
+				data: {
+					wishes: [], //列表信息流数据,
+					totalCount: 1,
+					pageNumber: 0,
+					pageSize: 20,
+					last: true,
+					totalPages: 1,
+					totalElements: 1,
+					number: 0,
+					size: 20,
+					sort: null,
+					numberOfElements: 1,
+					first: true
+				},
+
+			})
+			window.onload = function() {
+				
+			}
+		</script>
+	</body>
+
+</html>

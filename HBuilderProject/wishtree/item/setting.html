@@ -1,0 +1,594 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta name="flexible" content="initial-dpr=2" />
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link href="../css/mui.css" rel="stylesheet" />
+		<script src="http://g.tbcdn.cn/mtb/lib-flexible/0.3.4/??flexible_css.js,flexible.js"></script>
+
+		<style>
+			[v-cloak] {
+				display: none
+			}
+			
+			html,
+			body {
+				height: 100%;
+				width: 100%;
+				margin: 0;
+				padding: 0;
+			}
+			
+			.mui-bar {
+				height: 1.17rem;
+			}
+			
+			.mui-bar .mui-icon {
+				padding-top: 0.21rem;
+				font-size: 0.8rem;
+				color: black;
+			}
+			
+			.bar-title {
+				display: inline-block;
+				vertical-align: middle;
+				line-height: 1.17rem;
+				font-size: 0.43rem;
+			}
+			
+			.mui-bar .mui-btn-link {
+				display: inline-block;
+				line-height: 1.17rem;
+				font-size: 0.43rem;
+			}
+			
+			.mui-bar-nav~.mui-content {
+				padding-top: 1.17rem;
+			}
+			
+			.mui-content>.mui-table-view:first-child {
+				margin-top: 0;
+			}
+			
+			.st-head-span {
+				font-size: .37rem;
+				line-height: .80rem;
+				color: rgba(86, 86, 86, 1);
+			}
+			
+			.st-span {
+				display: block;
+				font-size: .37rem;
+				line-height: .6rem;
+				color: rgba(86, 86, 86, 1);
+				/*vertical-align: middle;*/
+			}
+			
+			.st-span-right {
+				position: absolute;
+				top: 50%;
+				right: .56rem;
+				display: inline-block;
+				-webkit-transform: translateY(-50%);
+				transform: translateY(-50%);
+			}
+			
+			.st-head-img {
+				height: 1.13rem;
+				width: 1.13rem;
+				/*margin-right: .29rem;*/
+				position: absolute;
+				top: 50%;
+				right: .56rem;
+				display: inline-block;
+				-webkit-transform: translateY(-50%);
+				transform: translateY(-50%);
+			}
+			
+			.st-ico {
+				width: .48rem;
+				height: .48rem;
+				position: absolute;
+				top: 50%;
+				right: .28rem;
+				display: inline-block;
+				-webkit-transform: translateY(-50%);
+				transform: translateY(-50%);
+			}
+			
+			.st-qr-img {
+				height: .87rem;
+				width: .87rem;
+				margin-right: .56rem;
+				position: absolute;
+				top: 50%;
+				right: 0px;
+				display: inline-block;
+				-webkit-transform: translateY(-50%);
+				transform: translateY(-50%);
+			}
+			
+			#content .mui-table-view .mui-table-cell {
+				position: relative;
+				overflow: hidden;
+				padding: 0.3rem 0.27rem;
+			}
+			
+			.sp {
+				color: rgba(86, 86, 86, 1);
+				font-size: 0.27rem;
+				line-height: 0.4rem;
+				margin: .25rem .36rem 0 .31rem;
+				font-family: MicrosoftYaHei;
+			}
+			
+			.input-popover {
+				position: fixed;
+				width: 90%;
+				height: 3rem;
+				border-radius: .1rem;
+				left: 5rem;
+				top: 6.5rem;
+				margin: 0 auto;
+				z-index: 9999;
+				background-color: #fff;
+				-webkit-transform: translateX(-50%) translateY(-50%);
+				-moz-transform: translateX(-50%) translateY(-50%);
+				-ms-transform: translateX(-50%) translateY(-50%);
+				transform: translateX(-50%) translateY(-50%);
+			}
+			
+			.pop-top {
+				width: 100%;
+				/*background-color: white;*/
+				text-align: center;
+				height: 1rem;
+				font-size: .37rem;
+				line-height: 1rem;
+			}
+			
+			.pop-top:before {
+				position: absolute;
+				/*top: 0;*/
+				right: 0;
+				bottom: 2rem;
+				left: 0px;
+				height: 1px;
+				content: '';
+				-webkit-transform: scaleY(.5);
+				transform: scaleY(.5);
+				background-color: #c8c7cc;
+			}
+			
+			.pop-middle {
+				font-size: .50rem;
+			}
+			
+			.pop-middle:after {
+				position: absolute;
+				/*top: 0;*/
+				right: 0;
+				bottom: 1rem;
+				left: 0px;
+				height: 1px;
+				content: '';
+				-webkit-transform: scaleY(.5);
+				transform: scaleY(.5);
+				background-color: #c8c7cc;
+			}
+			
+			.pop-bot-left {
+				width: 50%;
+				height: 1rem;
+				line-height: 1rem;
+				display: inline-block;
+				text-align: center;
+			}
+			
+			.pop-bot-left:after {
+				content: '';
+				position: absolute;
+				bottom: 0.075rem;
+				right: 50%;
+				text-align: left;
+				height: 0.85rem;
+				line-height: 0;
+				width: 1px;
+				background-color: #a89d9e;
+			}
+			
+			.pop-bot-right {
+				width: 50%;
+				height: 1rem;
+				line-height: 1rem;
+				display: inline-block;
+				text-align: center;
+			}
+			
+			.qr {
+				position: absolute;
+				left: -1000px;
+				top: -1000px;
+			}
+			
+			.mui-switch.mui-active {
+				border-color: #3298ff;
+				background-color: #3298ff;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<div id="back" style="display: inline-block;">
+				<img src="../images/pub_ico_goback.png" style="width: .51rem; height: .51rem;margin-top: .33rem; float: left;" />
+				<span class="bar-title">设置</span>
+			</div>
+			<button id="submit" class="mui-btn  mui-btn-link mui-pull-right bar-button" style="height: 1.17rem;">保存</button>
+		</header>
+		<div class="mui-content" id="content" v-cloak>
+			<ul class="mui-table-view" id="setting">
+				<li id="headSet" class="mui-table-view-cell" style="height: 1.44rem;">
+					<span class="st-head-span">上传头像</span>
+					<img src="../images/qr_head_img_xx.png" class="st-head-img" id="headImg" v-if="item.avatar == null" />
+					<img :src="item.avatar" class="st-head-img" id="headImg" v-else />
+				</li>
+				<li id="nameSet" class="mui-table-view-cell" style="height: 1.17rem;">
+					<span class="st-span">名称</span>
+					<span id="nameSpan" class="st-span-right st-span" v-cloak>{{item.name}}</span>
+				</li>
+				<li id="qrSet" class="mui-table-view-cell" style="height: 1.17rem;">
+					<span class="st-span">上传二维码</span>
+
+					<!--<img :src="item.qrCode" class="st-qr-img" id="qrImg" v-if="item.qrCode != null" />-->
+				</li>
+				<li id="noteSet" class="mui-table-view-cell" style="height: 1.17rem;">
+					<span class="st-span">标识绑定</span>
+					<span id="noteSpan" class="st-span-right st-span" v-cloak>{{item.tag}}</span>
+				</li>
+			</ul>
+
+			<ul class="mui-table-view" style="margin-top: .4rem;">
+				<li id="locSet" class="mui-table-view-cell" style="height: 1.17rem;">
+					<span class="st-span">设置许愿树地址</span>
+					<div v-if="item.location != undefined">
+						<span id="locSpan" class="st-span-right st-span" style="margin-right: .36rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; display: inline-block; width: 60%;  text-align: right;" v-cloak>{{item.location.address}}</span>
+					</div>
+
+					<img src="../images/tree_ico_address.png" class="st-ico" />
+
+				</li>
+				<li id="shareshop" class="mui-table-view-cell" style="height: 1.17rem;">
+					<span class="st-span">绑定我的分享店</span>
+					<span class="st-span-right st-span" style="margin-right: .36rem;">分享店</span>
+					<img src="../images/tree_ico_shareshop.png" class="st-ico" />
+				</li>
+			</ul>
+
+			<ul class="mui-table-view" style="margin-top: .4rem;">
+				<li class="mui-table-view-cell">
+					<span class="st-span">
+						许愿树是否公开
+					</span>
+					<div id="canSearch" class="mui-switch  mui-switch-mini" :class="canDonation ? 'mui-active' : '' " v-cloak>
+						<div class="mui-switch-handle"></div>
+					</div>
+				</li>
+			</ul>
+			<p class="sp">开启公开许愿树后，您的许愿树将会在愿望森林里被所有人搜索到。 </p>
+			<ul class="mui-table-view" style="margin-top: .4rem;">
+				<li class="mui-table-view-cell">
+					<span class="st-span">
+						捐款箱
+					</span>
+					<div id="canDonation" class="mui-switch  mui-switch-mini" :class="canDonation ? 'mui-active' : '' " v-cloak>
+						<div class="mui-switch-handle"></div>
+					</div>
+				</li>
+			</ul>
+			<p class="sp">开启捐款箱，别人就可以再您的许愿树上捐款，捐款费用只能用于帮助他人实现愿望，用于公益费用</p>
+		</div>
+
+		<div id="namepopover" class="mui-popover input-popover">
+			<div class="pop-top">
+				<span>{{name}}</span>
+			</div>
+			<div class="pop-middle">
+				<input id="nameInput" value="" style="border: 0px;height: 1rem; width: 100%; text-indent:20px;" />
+			</div>
+			<div style="height: 1rem; display: table; width: 100%;">
+				<div id="close" class="pop-bot-left">取消</div>
+				<div id="set" class="pop-bot-right">确认</div>
+			</div>
+		</div>
+		<div class="qr" id="qrcode"></div>
+
+		<script src="../js/mui.js"></script>
+		<script src="../js/vue.min.js"></script>
+		<script src="../js/native.js"></script>
+		<script src="../js/wishingTree.js"></script>
+		<script type="text/javascript" src="../js/jquery.min.js"></script>
+		<script type="text/javascript" src="../js/utf.js"></script>
+		<script type="text/javascript" src="../js/qrcode.js"></script>
+		<script type="text/javascript" src="../js/canvas2image.js"></script>
+		<script type="text/javascript" src="../js/html2canvas.js"></script>
+		<script type="text/javascript">
+			var content = new Vue({
+				el: '#content',
+				data: {
+					//					url: '../images/logo.png',
+					//					qrurl: '',
+					item: '',
+					canSearch: '',
+					canDonation: '',
+					treeloc: {
+						'address': '',
+						'longitude': '',
+						'country': '',
+						'latitude': '',
+						'province': '',
+						'city': '',
+						'county': '',
+						'street': '',
+						'circleRange': ''
+					},
+				}
+			});
+
+			var popover = new Vue({
+				el: '#namepopover',
+				data: {
+					name: '',
+					value: '',
+					popboo: ''
+				}
+			})
+
+			//			var treeloc = [];
+			var imgaction = '';
+
+			mui.init();
+
+			console.log(document.styleSheets[1].cssRules[17].style.textDecoration = 'none'); // 选项卡滚动置顶
+
+			var pop = document.getElementById("namepopover");
+			var mask = mui.createMask(function() {
+				pop.classList.remove('mui-active');
+			});
+
+			//图片回调函数
+			function picUploadComplete(data) {
+				alert(typeof(data));
+				if(imgaction == 0) {
+					content.item.qrCode = data[0].url;
+					mui.toast('二维码上传完毕');
+				} else if(imgaction == 1) {
+					content.item.avatar = data[0].url;
+					mui.toast('头像上传完毕');
+				}
+
+			}
+
+			//二维码回调函数
+			function onBindComplete(data) {
+				//				alert(1111111111)
+				content.item.qrCode = data;
+				lcodeCheck(data, function(type, data) {
+					if(type == 0) {
+						mui.toast('该二维码已被使用')
+					} else {
+						var qr = $("#qrcode").qrcode({
+							render: 'canvas', //设置渲染方式，有table和canvas，使用canvas方式渲染性能相对来说比较好
+							text: 'http://zjfx.vip/l' + data, //扫描二维码后显示的内容,可以直接填一个网址，扫描二维码后自动跳向该链接
+							width: "800", //二维码的宽度
+							height: "800", //二维码的高度
+							background: "#ffffff", //二维码的后景色
+							foreground: "#000000", //二维码的前景色
+							fillStyle: 'white',
+						});
+
+						html2canvas(document.getElementById("qrcode")).then(function(canvas) {
+							var h2qrcode = Canvas2Image.convertToPNG(canvas, 400, 400);
+							h2qrcode.className = 'st-qr-img';
+							document.getElementById('qrSet').appendChild(h2qrcode);
+						});
+					}
+				})
+			}
+
+			//获取地址
+			function onSelectAddressComplete(data) {
+												alert(JSON.stringify(data));
+				content.item.location.address = data.address;
+
+				content.treeloc.longitude = data.longitude;
+				content.treeloc.address = data.address;
+				content.treeloc.latitude = data.latitude;
+				content.treeloc.country = data.country;
+				content.treeloc.province = data.province;
+
+				content.treeloc.city = data.city;
+				content.treeloc.county = data.county;
+				content.treeloc.street = data.street;
+				content.treeloc.circleRange = data.circleRange;
+				//				alert(content.treeloc)
+
+				//								alert(JSON.stringify(content.item.location));
+				//				document.getElementById('locSpan')
+				//				var item = content.item;
+
+			}
+
+			window.onload = function() {
+				//				var locitem = localStorage.getItem('item');
+				//				console.log(locitem);
+				//				item = JSON.parse(locitem);
+
+				var search = location.search;
+				
+				var request = GetRequest(search);
+				var treeid = request['treeId'];
+				
+				//								treeid = 'ff8080816941ddf60169478f4dc802da';
+				//				alert(treeid);
+				tree1001(treeid, function(type, data) {
+					if(type == 0) {
+						alert(treeid)
+						content.item = data.data.item;
+						console.log(content.item)
+						content.canDonation = data.data.item.canDonation;
+						content.canSearch = data.data.item.canSearch;
+
+						if(data.data.item.qrcode != null) {
+
+						}
+
+					} else {
+						console.log("获取许愿树失败" + data)
+					}
+				});
+
+			}
+
+			document.getElementById('back').addEventListener('tap', function() {
+				//				alert('111');
+				window.JsInterface.closeWindow();
+			});
+
+			document.querySelector('.pop-bot-left').addEventListener('tap', function() {
+				//				alert('111');
+				mask.close();
+			});
+
+			document.getElementById('set').addEventListener('tap', function() {
+				if(popover.popboo == 0) {
+					document.getElementById('nameSpan').innerText = document.getElementById('nameInput').value
+				} else if(popover.popboo == 1) {
+					document.getElementById('noteSpan').innerText = document.getElementById('nameInput').value;
+				}
+
+				mask.close();
+			})
+
+			document.getElementById('headSet').addEventListener('tap', function() {
+				window.JsInterface.selectImages(1);
+				imgaction = "1";
+				picUploadComplete(data);
+			})
+
+			document.getElementById('qrSet').addEventListener('tap', function() {
+				//				window.JsInterface.selectImages(1);
+				//				imgaction = "0";
+				//				picUploadComplete(data);
+				bindScanWindow();
+				//				lcodeCheck(12345678, function(type, data) {
+				//					if(type == 0) {
+				//						mui.toast('该二维码已被使用')
+				//					} else {
+				//						console.log(data)
+				//						var qr = $("#qrcode").qrcode({
+				//							render: 'canvas', //设置渲染方式，有table和canvas，使用canvas方式渲染性能相对来说比较好
+				//							text: 'http://zjfx.vip/l' + data, //扫描二维码后显示的内容,可以直接填一个网址，扫描二维码后自动跳向该链接
+				//							width: "800", //二维码的宽度
+				//							height: "800", //二维码的高度
+				//							background: "#ffffff", //二维码的后景色
+				//							foreground: "#000000", //二维码的前景色
+				//							fillStyle: 'white',
+				//						});
+				//
+				//						html2canvas(document.getElementById("qrcode")).then(function(canvas) {
+				//							var h2qrcode = Canvas2Image.convertToPNG(canvas, 400, 400);
+				//							h2qrcode.className = 'st-qr-img';
+				//							document.getElementById('qrSet').appendChild(h2qrcode);
+				//						});
+				//					}
+				//				})
+			})
+
+			document.getElementById('nameSet').addEventListener('tap', function() {
+				popover.name = '名称';
+				popover.popboo = 0;
+				document.getElementById('nameInput').value = document.getElementById('nameSpan').innerText;
+				mask.show(); //显示遮罩  
+				pop.classList.add('mui-active');
+			})
+
+			document.getElementById('noteSet').addEventListener('tap', function() {
+				popover.name = '标识绑定';
+				popover.popboo = 1;
+				document.getElementById('nameInput').value = document.getElementById('noteSpan').innerText;
+				mask.show(); //显示遮罩  
+				pop.classList.add('mui-active');
+				//				openWindow('item/forest.html');
+			})
+
+			document.getElementById('locSet').addEventListener('tap', function() {
+				selectAddress();
+				onSelectAddressComplete(data);
+				//				openWindow('item/forest.html');
+			})
+
+			document.getElementById('shareshop').addEventListener('tap', function() {
+				var user = getUser();
+				mui.ajax('http://139.159.152.145:9180/api/shopList?userId=' + user.userId, {
+					headers: {
+						'Content-Type': 'application/json;charset=UTF-8',
+						"X-Requested-With": "XMLHttpRequest"
+					},
+					//					dataType: 'json', //服务器返回json格式数据
+					type: 'GET', //HTTP请求类型
+					timeout: 10000, //超时时间设置为10秒；
+					success: function(data) {
+						console.log(data)
+					},
+					error: function(xhr, type, errorThrown) {
+
+					}
+				});
+				//				openWindow('item/forest.html');
+			})
+
+			document.getElementById('submit').addEventListener('tap', function() {
+
+				var reqdata = new Object();
+				var tree = new Object();
+				tree.id = content.item.id;
+				tree.name = document.getElementById('nameSpan').innerText;
+				tree.tag = document.getElementById('noteSpan').innerText;
+
+				tree.avatar = content.item.avatar;
+				tree.qrCode = content.item.qrCode;
+				tree.shopId = 'c651f391-05f3-40a2-b1f4-e5d2f04c769d';
+				if(document.getElementById('canSearch').classList.contains('mui-active')) {
+					tree.canSearch = true;
+				} else {
+					tree.canSearch = false;
+				}
+				if(document.getElementById('canDonation').classList.contains('mui-active')) {
+					tree.canDonation = true;
+				} else {
+					tree.canDonation = false;
+				}
+				tree.location = content.treeloc;
+				reqdata.tree = tree;
+
+				setting(reqdata, function(type, data) {
+					if(type == 0) {
+
+						console.log('成功');
+						window.JsInterface.closeWindow(true);
+
+					} else {
+						console.log("失败" + data);
+					}
+				})
+			})
+		</script>
+	</body>
+
+</html>

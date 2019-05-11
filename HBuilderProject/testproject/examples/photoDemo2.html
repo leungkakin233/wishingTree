@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<!DOCTYPE html>
+		<html>
+			<head>
+				<meta charset="utf-8">
+				<title></title>
+				<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+				<meta name="flexible" content="initial-dpr=2" />
+				<meta name="apple-mobile-web-app-capable" content="yes">
+				<meta name="apple-mobile-web-app-status-bar-style" content="black">
+				<link href="../css/mui.css" rel="stylesheet" />
+				<style type="text/css">
+					
+
+					.mui-btn-link:active {
+						color: blue !important;
+					}
+
+					.back {
+						font-size: 16px;
+						line-height: 44px;
+						top: 0;
+						padding: 0;
+						color: black;
+						border: 0;
+						background: transparent;
+					}
+
+					.back:active {
+						color: red !important;
+						background: transparent !important;
+					}
+
+					.wish-textarea1 {
+						margin-top: 0.7rem;
+						margin-left: 5%;
+						width: 90%;
+						height: 4rem;
+						z-index: 5;
+						border: 0;
+						background-color: transparent;
+						overflow: hidden;
+						resize: none;
+						border-style: none;
+						border: solid 1px #000000;
+						font-weight: 500;
+					}
+
+					textarea::-webkit-input-placeholder {
+						color: black;
+						font-size: 0.375rem;
+						font-weight: 500;
+					}
+
+					.list {
+						margin-top: 30px;
+						margin-left: 5%;
+						width: 90%;
+					}
+
+					.mui-table-view:before {
+
+						width: 100%;
+					}
+
+					.mui-table-view:after {
+
+						width: 100%;
+					}
+
+					.mui-table-view-cell:after {
+
+						left: 0px;
+						width: 100%;
+					}
+
+					.addphoto {
+						width: 2.8rem;
+						height: 2.8rem;
+						z-index: 5;
+					}
+
+					.photoWall {
+						margin-left: 5%;
+						width: auto;
+					}
+
+
+					.photo {
+						margin-right: 5px;
+						width: 2.8rem;
+						height: 2.8rem;
+						z-index: 5;
+					}
+				</style>
+				<title></title>
+			</head>
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<button id="back" class=" back red mui-pull-left">取消</button>
+			<h1 class="mui-title">发表评论</h1>
+			<button id="submit" class=" mui-btn-link mui-pull-right">发布</button>
+		</header>
+		<div class="mui-content">
+			<textarea class="wish-textarea1" id="content" placeholder="此时的想法..."></textarea>
+			<!-- 			<div >
+				<div class="photoWall" id="photoWall">
+					<img src="../images/pub_ico_tianjia.png" id="addphoto" class="addphoto" />
+					<img src="../images/pub_ico_tianjia.png" id="addphoto" class="addphoto" />
+					<img src="../images/pub_ico_tianjia.png" id="addphoto" class="addphoto" />
+				</div>
+				<div style="margin-left: 5%;">
+					<img src="../images/pub_ico_tianjia.png" id="addphoto" class="addphoto" />
+				</div>
+			</div> -->
+			<div class="photoWall" id="photoWall">
+					<img src="../images/pub_ico_tianjia.png" id="addphoto" class="addphoto" />			
+			</div>
+
+
+			<ul class="mui-table-view list">
+				<li class="mui-table-view-cell" id="local">
+					<div style="display: flex;">
+						<img src="../images/tree_share_location.png" style="height: 20px;">
+						<span>所在位置</span>
+						<span id="localSpan" style="margin-left: 10px;"></span>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<script src="../js/mui.js"></script>
+		<script src="http://g.tbcdn.cn/mtb/lib-flexible/0.3.4/??flexible_css.js,flexible.js"></script>
+		<script src="../js/Sortable.min.js"></script>
+		<script src="../js/vue.min.js"></script>
+		<script type="text/javascript">
+			mui.init({
+				longtap: true,
+			});
+			var imgsrc = [];
+			var span = null;
+			var resId = null;
+
+
+			//获取url？后面数据
+			function GetRequest() {
+				var url = location.search; //获取url中"?"符后的字串
+				// alert(url);
+				var theRequest = new Object();
+				if (url.indexOf("?") != -1) {
+					var str = url.substr(1);
+					strs = str.split("&");
+					for (var i = 0; i < strs.length; i++) {
+						theRequest[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1]);
+					}
+				}
+				// alert(JSON.stringify(theRequest));
+				return theRequest;
+			}
+			//获取图片接口
+			function picUploadComplete(data) {
+				var photoWall = document.getElementById('photoWall');
+				// alert(JSON.stringify(data));
+				for (var i = 0; i < data.length; i++) {
+					var img1 = document.createElement('img');
+					img1.src = data[i].url;
+					img1.setAttribute('class', 'photo');
+					photoWall.insertBefore(img1, photoWall.childNodes[0]);
+					imgsrc.push(data[i].url);
+				}
+
+				// alert(imgsrc);
+			}
+
+			//获取地址
+			function onSelectAddressComplete(data) {
+				// alert('aaa');
+				// alert(JSON.stringify(data));
+				// alert(data.street+ data.streetNumber);
+				span = document.getElementById('localSpan');
+				span.innerHTML = data.address;
+			}
+
+			window.onload = function() {
+				var request = GetRequest();
+				resId = request['resId'];
+				// alert(resId);
+				
+				realuser = JSON.parse(localStorage.getItem('user'));
+				// alert(realuser.id)
+				// alert(JSON.stringify(realuser));
+			}
+
+
+
+			//上传
+			document.getElementById('submit').addEventListener('tap', function() {
+				var content = document.getElementById('content').value;
+				if (content == "") {
+					mui.toast('想法不能为空');
+				} else {
+					mui.ajax('http://node1.xiuhuahui.xyz:8080/platform/api/comment/v1/reply', {
+						data: {
+							"res": {
+								"id": resId,
+							},
+							"user": {
+								"userId": realuser.id,
+								"nickname":  realuser.nickname,
+								"roleId": realuser.role_id,
+								"viewType": "ALL"
+							},
+							"comment": {
+								"content": content,
+							}
+						},
+						dataType: 'json',
+						type: 'post', //HTTP请求类型
+						timeout: 10000, //超时时间设置为10秒；
+						headers: {
+							'Content-Type': 'application/json;charset=UTF-8',
+							'token': token,
+						},
+						success: function(data) {
+							// alert(JSON.stringify(data));
+							window
+						},
+						error: function(xhr, type, errorThrown) {
+							// alert(JSON.stringify(xhr) + type + errorThrown);
+						}
+					});
+				}
+
+			})
+			//增加图片
+			document.getElementById('addphoto').addEventListener('tap', function() {
+				if (imgsrc.length == 0) {
+					window.JsInterface.selectImages(8);
+					picUploadComplete(data);
+
+				} else {
+					window.JsInterface.selectImages(8 - imgsrc.length);
+					picUploadComplete(data);
+				}
+			});
+			//获取所在地址
+			document.getElementById('local').addEventListener('tap', function() {
+				window.JsInterface.selectAddress();
+				onSelectAddressComplete(data);
+			})
+			//图片排序
+			var el = document.getElementById('photoWall');
+			var sortable = Sortable.create(el, {
+				animation: 150,
+				filter: '#addphoto',
+			});
+			
+			
+			document.getElementById('back').addEventListener('tap', function() {
+				window.JsInterface.closeWindow();
+			})
+		</script>
+	</body>
+</html>

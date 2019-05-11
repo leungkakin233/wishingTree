@@ -1,0 +1,1285 @@
+<!DOCTYPE html>
+<html>
+	<meta charset="utf-8">
+	<title></title>
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<meta name="flexible" content="initial-dpr=2" />
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<link href="../css/mui.css" rel="stylesheet" />
+	<link href="../css/watchWish.css" rel="stylesheet" />
+	<link rel="stylesheet" href="../css/photoswipe.css" />
+	<link rel="stylesheet" type="text/css" href="../css/default-skin.css" />
+	<link href="../css/loading.css" rel="stylesheet" />
+	<script src="http://g.tbcdn.cn/mtb/lib-flexible/0.3.4/??flexible_css.js,flexible.js"></script>
+	<style type="text/css">
+		[v-cloak] {
+			display: none
+		}
+		
+		html,
+		body {
+			height: 100%;
+			width: 100%;
+			margin: 0;
+			padding: 0;
+		}
+		
+		.mui-bar {
+			height: 1.17rem;
+		}
+		
+		.mui-bar .mui-icon {
+			padding-top: 0.21rem;
+			font-size: 0.8rem;
+			color: black;
+		}
+		
+		.bar-title {
+			display: inline-block;
+			vertical-align: middle;
+			line-height: 1.17rem;
+			font-size: 0.43rem;
+		}
+		
+		.mui-bar .mui-btn-link {
+			display: inline-block;
+			line-height: 1.2rem;
+			font-size: 0.43rem;
+		}
+		
+		.mui-bar-nav~.mui-content {
+			padding-top: 1.17rem;
+		}
+		
+
+	</style>
+
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<div id="back" style="display: inline-block;">
+				<img src="../images/pub_ico_goback.png" style="width: .51rem; height: .51rem;margin-top: .33rem; float: left;" />
+				<span class="bar-title" >愿望详情</span>
+			</div>
+			<!--<a id="menu" class="mui-action-menu mui-icon mui-icon-bars mui-pull-right" href="#topPopover"></a>-->
+		</header>
+		<div class="mui-content mui-scroll-wrapper" id="content">
+			<div class="mui-scroll ">
+				<!--<div class="mui-content">-->
+				<!-- 愿望详情 start1 -->
+				<div class="body-bg-2" id="watchwish" v-cloak>
+					<button class="power-button">
+							愿望实现值:{{points}}
+						</button>
+
+					<img src="../images/tree_bg_ywk1_back@2x.png" class="wish-ywk1" id="wish-ywk" />
+					<!--<img src="../images/tree_bg_xyk2_positive.png" class="wish-ywk2" id="wish-ywk" />-->
+					<!--<img class="head-img" src="../images/logo.png" id="head-img" />-->
+					<img class="head-img" :src="user.avatar" id="head-img" v-cloak />
+					<div class="wish-p1" id="p1" v-cloak>{{title}}</div>
+
+					<div class="wish-p2" id="p2" v-cloak>{{content}}</div>
+
+					<div class="photo" id="photo">
+						<img :src="image" v-for="(image,index) in imageList" :id="index" :class="imgClass(index)" v-if="index < 4" />
+					</div>
+				</div>
+				<!-- 愿望详情 结束 end1 -->
+
+				<!-- 评论部分 comment start2 -->
+				<div id="sliderSegmentedControl" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted " v-cloak>
+					<a class="mui-control-item mui-active" href="#item1">
+						评论({{commentCount}})
+					</a>
+					<a class="mui-control-item" href="#item2">
+						给爱心({{likeCount}})
+					</a>
+				</div>
+
+				<div id="item1" class="mui-control-content mui-active">
+					<ul class="mui-table-view " id="hotComment" v-cloak>
+						<li>
+							<div style="padding-bottom: 5px; padding-top: 5px;">
+								<img src="../images/shareshop_label_hot.png" style="height: 0.5rem; width: 1rem; margin-left: 10px;  vertical-align: middle; " />
+								<span style="font-size: .375rem;">最热评论</span>
+							</div>
+
+						</li>
+
+						<li class="mui-table-view-cell mui-media" v-for="(hotcomment, index) in hotcomments">
+							<img class="comment-head-portrait" :src="hotcomment.user.avatar">
+							<div class="mui-media-body">
+								<p class="comment-title  mui-ellipsis-2">{{hotcomment.user.nickname}}</p>
+								<p class="comment-body ">{{hotcomment.content}}</p>
+								<div class="photogroup">
+									<img :src="image" v-for="image in hotcomment.imageUrlList" />
+								</div>
+								<div class="addlocation" v-if="hotcomment.location">
+									<img src="../images/tree_share_location.png" style="height: 15px;">
+									<h5 style="margin-top: 1.5px;">{{hotcomment.location}}</h5>
+								</div>
+
+								<div class="chat" v-if="hotcomment.replys">
+									<div class="triangle"></div>
+									<div class="rectangle">
+										<ul class="mui-list-unstyled">
+											<li class="mui-table-view-cell" v-for="(reply,innerIndex) in hotcomment.replys.content" v-if="innerIndex < 2">
+												<p>
+													{{reply.user.nickname}}：
+													<span style="color: #000000;">
+															{{reply.content}}
+														</span>
+													<span style="margin-left: 10px;" @tap="deleteOne(index,innerIndex,reply.id,hotcomment.id)" v-if="reply.user.userId == realuser.userId">删除</span>
+												</p>
+											</li>
+											<li class="mui-table-view-cell" v-if="hotcomment.replys.content.length > 2" @tap="goDetail(hotcomment)">
+												<p>查看全部{{hotcomment.replys.content.length}}条回复>>
+												</p>
+											</li>
+										</ul>
+									</div>
+								</div>
+								<div style="line-height: 16px;">
+									<span class='mui-ellipsis comment-span'>{{hotcomment.time}}</span>
+									<div class="mui-pull-right" style="display: inline-flex;">
+										<img @tap="reply(hotcomment, index)" src="../images/pub_ico_comment_nor.png" class="icon1" />
+										<div @tap="replylike(hotcomment, index, 'hc')">
+											<img src="../images/pub_ico_good_sel.png" class="icon2" v-if="hotcomment.myLike" />
+											<img src="../images/pub_ico_good_nor.png" class="icon2" v-else />
+											<p class="likenumber">{{hotcomment.like}}</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</li>
+
+					</ul>
+					<!-- 114 -->
+					<ul class="mui-table-view newComment" id="newComment" v-cloak>
+						<li>
+							<div style="padding-bottom: 5px; padding-top: 5px;">
+								<img src="../images/shareshop_label_new.png" style="height: 0.5rem; width: 1rem;margin-left: 10px;  vertical-align: middle; " />
+								<span style="font-size: .375rem;">最新评论</span>
+							</div>
+							<!--<div class="my-gallery photogroup">
+									<img :src="image" v-for="image in comment.imageUrlList" />
+									<figure v-for="item in comments[0].imageUrlList">
+										<a :href="item"  data-size="300x300">
+											<img :src="item" />
+										</a>
+									</figure>
+								</div>-->
+						</li>
+
+						<li class="mui-table-view-cell mui-media" v-for="(comment, index) in comments">
+							<!--<img class="comment-head-portrait" src="../images/tree_ico_ywk1.png">-->
+							<img class="comment-head-portrait" :src="comment.user.avatar">
+
+							<div class="mui-media-body">
+								<p class="comment-title  mui-ellipsis-2">{{comment.user.nickname}}</p>
+								<p class="comment-body ">{{comment.content}}</p>
+								<div class="my-gallery photogroup">
+									<img :src="image" v-for="image in comment.imageUrlList" />
+
+								</div>
+								<!--1111111-->
+
+								<div class="addlocation" v-if="comment.location">
+									<img src="../images/tree_share_location.png" style="height: 15px;">
+									<h5 style="margin-top: 1.5px;">{{comment.location}}</h5>
+								</div>
+
+								<div class="chat" v-if="comment.replys">
+									<div class="triangle"></div>
+									<div class="rectangle">
+										<ul class="mui-list-unstyled">
+											<li class="mui-table-view-cell" v-for="(reply,innerIndex) in comment.replys.content" v-if="innerIndex < 2">
+												<p>
+													{{reply.user.nickname}}：
+													<span style="color: #000000;">
+															{{reply.content}}
+														</span>
+													<span style="margin-left: 10px;" @tap="deleteOne(index,innerIndex,reply.id,comment.id)" v-if="reply.user.userId == realuser.userId">删除</span>
+												</p>
+											</li>
+											<li class="mui-table-view-cell" v-if="comment.replys.content.length > 2" @tap="goDetail(comment)">
+												<p>查看全部{{comment.replys.content.length}}条回复>>
+												</p>
+											</li>
+										</ul>
+									</div>
+								</div>
+								<div style="line-height: 16px;">
+									<span class='mui-ellipsis comment-span'>{{comment.time}}</span>
+									<div class="mui-pull-right" style="display: inline-flex;">
+										<img @tap="reply(comment, index)" src="../images/pub_ico_comment_nor.png" class="icon1" />
+										<div @tap="replylike(comment, index, 'nc')">
+											<img src="../images/pub_ico_good_sel.png" class="icon2" v-if="comment.myLike" />
+											<img src="../images/pub_ico_good_nor.png" class="icon2" v-else />
+											<p class="likenumber">{{comment.like}}</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</li>
+					</ul>
+				</div>
+
+				<div id="item2" class="mui-control-content">
+					<div class="morePop-character-select" v-for="(item,index) in likeList">
+							<img :id="'ll'+index" :src="item.avatar" style="width: 1rem; height: 1rem;" />
+							<span style="color: #000000; font-size: .27rem;">{{item.nickname}}</span>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+		<!-- reachwish -->
+		<!--<div class="addpoint" id="addpoint">
+				<img src="../images/pub_ioc_gongyizhi.png" class="gongyizhi">
+				<p style="color: #FAFAFA; font-size: 0.25rem; text-align: center; line-height: 0.25rem;">为他加油</p>
+			</div>-->
+		<!--<div class="reachWish" id="reachWish" v-if="!finished" v-cloak>
+				<img src="../images/pub_ioc_gongyizhi.png" class="gongyizhi">
+				<p style="color: #FAFAFA; font-size: 0.25rem; text-align: center; line-height: 0.25rem;">帮他达愿</p>
+			</div>-->
+		<!-- reachwish -->
+
+		<!-- nav bottom -->
+		<a href="#forward">
+			<nav class="bottom-select">
+				<span>帮助他</span>
+			</nav>
+		</a>
+		<a href="#characterPop">
+			<img id="character" class="character" :src="imgSrc" />
+		</a>
+
+		<!-- nav bottom -->
+
+		<!--底部pop-->
+		<!--0329-->
+		<div id="forward" class="mui-popover mui-popover-action mui-popover-bottom" style="height: auto;">
+			<ul class="mui-table-view mui-grid-view mui-grid-9">
+				<li id="addComment" class="mui-table-view-cell mui-media" style="width: 20%; height: 3.11rem; text-align: center;">
+					<img src="../images/pub_ico_fbcz_lxt_sel.png" class="img-share" /><br />
+					<p class="share-p">评论</p>
+
+				</li>
+				<li id="reachWish" class="mui-table-view-cell mui-media" style="width: 20%; height: 3.11rem; text-align: center;">
+					<img src="../images/pub_ico_fbcz_btdy_sel.png" class="img-share" />
+					<p class="share-p">帮他达愿</p>
+
+				</li>
+				<li class="mui-table-view-cell mui-media" style="width: 20%; height: 3.11rem; text-align: center;">
+					<img src="../images/pub_ico_fbcz_zjds_sel.png" class="img-share" />
+					<p class="share-p">增加打赏</p>
+
+				</li>
+				<li id="like" class="mui-table-view-cell mui-media" style="width: 20%; height: 3.11rem; text-align: center;">
+					<img :src="likeGroup[0]" class="img-share" id="loveico" v-if="islike == true"/>
+					<img :src="likeGroup[1]" class="img-share" id="loveico" v-else/>
+					<p class="share-p">给爱心</p>
+
+				</li>
+				<li class="mui-table-view-cell mui-media" style="width: 20%; height: 3.11rem; text-align: center;">
+					<img src="../images/pub_ico_fbcz_fx_sel.png" class="img-share" />
+					<p class="share-p">分享</p>
+
+				</li>
+				<li id="forwardBack" class="mui-table-view-cell mui-col-xs-12" style="height: 1.16rem;">
+					<span style="font-size: .4rem; line-height: 1.16rem;">返回</span>
+				</li>
+			</ul>
+		</div>
+		<!--2222-->
+		<div id="characterPop" class="mui-popover mui-popover-action mui-popover-bottom" style="height: auto;">
+			<div style="height: .67rem; width: 100%; background-color: #EBEBEB; padding: 0 .24em;">
+				<span style="font-size: .27rem; ">您最近参与过愿望的角色如下，可快速切换角色</span>
+			</div>
+			<div style="height: 5rem;">
+				<div class="mui-scroll-wrapper" style=" height: 5rem; top: .80rem;">
+					<div class="mui-scroll">
+						<div class="morePop-character-select" v-for="(item,index) in characterList" @tap="changeCharacter(item)">
+							<img :id="'c'+index" :src="item.avatar" style="width: 1rem; height: 1rem;" />
+							<span style="color: #000000; font-size: .27rem;">{{item.nickname}}</span>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="cPop-bottom">
+				<div class="characterPop-bottom-left mui-table-view-cell mui-media" style="padding: .24rem .27rem;">
+					<img :src="curCharacter.photo" />
+					<div class="mui-media-body" style="display: inline-block; width: 4.57rem;">
+						<p class='mui-ellipsis' style="color: #3298FF; font-size: .27rem; line-height: .50rem;">当前角色</p>
+						<p class='mui-ellipsis' style="font-size: .27rem; line-height: .50rem; color: #000000;">{{curCharacter.name}}</p>
+					</div>
+				</div>
+				<a href="#moreCharacter">
+					<div class="characterPop-bottom-right">
+						<p style="line-height: 1.44rem; color: #282828; font-size: .36rem;">切换角色</p>
+					</div>
+				</a>
+
+			</div>
+		</div>
+
+		<div id="moreCharacter" class="mui-popover mui-popover-action mui-popover-bottom" style="height: auto;">
+			<div style="height: 1.17rem; width: 100%; padding: 0 .24em; border: 1px solid rgba(210, 210, 210, 1); text-align: center;">
+				<span style="font-size: .37rem; line-height: 1.17rem; ">选择当前聊一聊角色</span>
+			</div>
+			<div style="height: 5rem;">
+				<div class="mui-scroll-wrapper" style=" height: 5rem; top: 1.4rem; ">
+					<div class="mui-scroll">
+						<div class="morePop-character-select" v-for="(character,index) in CList" @tap="check($event,index)">
+							<img :id="'character'+index" :src="character.photo" style="width: 1rem; height: 1rem;" />
+							<span style="color: #000000; font-size: .27rem;">{{character.name}}</span>
+
+							<img src="../images/money_label_txtj_nor.png" class="morePop-check-ico" v-if="istrue[index]" />
+
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="cPop-bottom">
+				<div class="moreCPop-bottom-left">
+					<p style="line-height: 1.44rem; color: #282828; font-size: .37rem; text-align: center;">更多角色>></p>
+				</div>
+				<div class="moreCPop-bottom-right" @tap="selectCharacter()">
+					<p style="line-height: 1.44rem; color: #3298FF; font-size: .37rem;">确定</p>
+				</div>
+
+			</div>
+		</div>
+
+		<!-- Root element of PhotoSwipe. Must have class pswp. -->
+		<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+			<!-- Background of PhotoSwipe. 
+         It's a separate element, as animating opacity is faster than rgba(). -->
+			<div class="pswp__bg"></div>
+
+			<!-- Slides wrapper with overflow:hidden. -->
+			<div class="pswp__scroll-wrap">
+
+				<!-- Container that holds slides. PhotoSwipe keeps only 3 slides in DOM to save memory. -->
+				<div class="pswp__container">
+					<!-- don't modify these 3 pswp__item elements, data is added later on -->
+					<div class="pswp__item"></div>
+					<div class="pswp__item"></div>
+					<div class="pswp__item"></div>
+				</div>
+
+				<!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+				<div class="pswp__ui pswp__ui--hidden">
+
+					<div class="pswp__top-bar">
+
+						<!--  Controls are self-explanatory. Order can be changed. -->
+
+						<div class="pswp__counter"></div>
+
+						<button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+						<button class="pswp__button pswp__button--share" title="Share"></button>
+
+						<!--<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>-->
+
+						<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+						<!-- Preloader demo https://codepen.io/dimsemenov/pen/yyBWoR -->
+						<!-- element will get class pswp__preloader--active when preloader is running -->
+						<div class="pswp__preloader">
+							<div class="pswp__preloader__icn">
+								<div class="pswp__preloader__cut">
+									<div class="pswp__preloader__donut"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+						<div class="pswp__share-tooltip"></div>
+					</div>
+
+					<button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+						</button>
+
+					<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+						</button>
+
+					<div class="pswp__caption">
+						<div class="pswp__caption__center"></div>
+					</div>
+
+				</div>
+
+			</div>
+		</div>
+
+		<script src="../js/mui.js"></script>
+		<script src="../js/wishingTree.js"></script>
+		<script src="../js/native.js"></script>
+		<script src="../js/vue.min.js"></script>
+		<script type="text/javascript" src="../js/jquery.min.js"></script>
+		<script type="text/javascript" src="../js/photoswipe-ui-default.js"></script>
+		<script type="text/javascript" src="../js/photoswipe.js"></script>
+		<script type="text/javascript">
+			var realuser = null;
+			var wishId = null;
+			//				var item = null;
+			var resId = null;
+			var resindex = null;
+			var rescomment = null;
+			
+			
+			var wish = new Vue({
+				el: '#watchwish',
+				data: {
+					res: {},
+					id: '',
+					title: '',
+					content: '',
+					user: {},
+					points: null,
+					imageList: [],
+					likeList: [],
+					finished: false,
+					islike : false,
+				},
+				methods: {
+					imgClass: function(index) {
+						if(this.imageList.length == 1) {
+							if(index == 0) {
+								return "img-1";
+							}
+						} else if(this.imageList.length == 2) {
+							if(index == 0) {
+								return "img-2 img-2-left-radius";
+							} else {
+								return "img-2 img-2-right-radius";
+							}
+						} else if(this.imageList.length == 3) {
+							if(index == 0) {
+								return "img-2 img-2-left-radius";
+							} else if(index == 1) {
+								return "img-4 img-4-top-right-radius";
+							} else {
+								return "img-4 img-4-bottom-right-radius";
+							}
+						} else {
+							if(index == 0) {
+								return "img-4 img-4-top-left-radius";
+							} else if(index == 1) {
+								return "img-4 img-4-top-right-radius";
+							} else if(index == 2) {
+								return "img-4 img-4-bottom-left-radius";
+							} else {
+								return "img-4 img-4-bottom-right-radius";
+							}
+						}
+
+					}
+				}
+			});
+			
+			
+			var imgGroup = [];
+			//最热评论
+			var hotComment = new Vue({
+				el: '#hotComment',
+				data: {
+					hotcomments: [],
+				}
+			});
+
+			//最新评论
+			var newComment = new Vue({
+				el: '#newComment',
+				data: {
+					comments: [],
+				},
+			});
+			//计数
+			var count = new Vue({
+				el: '#sliderSegmentedControl',
+				data: {
+					commentCount: '',
+					likeCount: '',
+				}
+			});
+
+			//角色头像
+			var characterImg = new Vue({
+				el: '#character',
+				data: {
+					imgSrc: '',
+				}
+			})
+			
+			var forward = new Vue({
+				el: '#forward',
+				data: {
+					islike: false,
+					finish: false,
+					likeGroup: ['../images/pub_ico_fbcz_aix_sel.png', '../images/pub_ico_fbcz_aix_nor.png']
+				}
+			})
+
+			var characterPop = new Vue({
+				el: '#characterPop',
+				data: {
+					curCharacter: {
+						name: '',
+						photo: '',
+						id: ''
+					},
+					characterList: [],
+				},
+				methods: {
+					changeCharacter: function(character) {
+						var that = this;
+						//						console.log(character.roleId)
+						//22222
+
+						changeCharacter(character.roleId, function(type, data) {
+							if(type == 0) {
+
+								//											console.log(that.CList[i]);
+								characterImg.imgSrc = character.avatar;
+								that.curCharacter.name = character.nickname;
+								that.curCharacter.photo = character.avatar;
+								for(var i = 0; i < moreCharacter.istrue.length; i++) {
+
+									if(moreCharacter.CList[i].id == character.roleId) {
+										Vue.set(moreCharacter.istrue, i, true);
+
+									} else {
+										Vue.set(moreCharacter.istrue, i, false);
+									}
+								}
+
+								//									alert('切换成功');
+							} else {
+								console.log('切换角色失败' + data);
+							}
+						})
+
+						mui('#characterPop').popover('hide');
+					}
+				}
+			})
+
+			var moreCharacter = new Vue({
+				el: '#moreCharacter',
+				data: {
+					CList: {},
+					istrue: []
+				},
+				methods: {
+					check: function(e, index) {
+						//							morePop-character-select
+						//							console.log(e)
+						//							console.log(e.target.getElementsByTagName("img")[0])
+						for(var i = 0; i < this.istrue.length; i++) {
+							if(i === index) {
+
+								Vue.set(this.istrue, i, true)
+								document.getElementById('character' + i).className = 'morePop-img-checked';
+								//									console.log(this.istrue);
+							} else {
+								document.getElementById('character' + i).className = 'morePop-img-nocheck';
+
+								Vue.set(this.istrue, i, false)
+							}
+						}
+
+					},
+					selectCharacter: function() {
+						var roleid = '';
+						var count = '';
+						var that = this;
+						for(var i = 0; i < this.istrue.length; i++) {
+							if(this.istrue[i] == true) {
+								roleid = this.CList[i].id;
+								count = i;
+							}
+						}
+						//						console.log(this.CList[count]);
+						changeCharacter(roleid, function(type, data) {
+							if(type == 0) {
+								//								console.log(that.CList[count])
+								//											console.log(that.CList[i]);
+								characterImg.imgSrc = that.CList[count].photo;
+								characterPop.curCharacter.name = that.CList[count].name;
+								characterPop.curCharacter.photo = that.CList[count].photo;
+								//									alert('切换成功');
+							} else {
+								console.log('切换角色失败' + data);
+							}
+						})
+
+						mui('#moreCharacter').popover('hide');
+					}
+				}
+			})
+			
+			var item2 = new Vue({
+				el: '#item2',
+				data: {
+					likeList: [],
+				}
+			})
+
+			mui.init({
+				gestureConfig: {
+					longtap: true,
+					hold: true,
+					release: true
+				},
+				pullRefresh: {
+					container: '.mui-content',
+					down: {
+						style: 'circle',
+						offset: '0px',
+						auto: false,
+						callback: pulldownRefresh
+					},
+					up: {
+						contentrefresh: '正在加载...',
+						callback: pullupRefresh
+					}
+				},
+				swipeBack: false //启用右滑关闭功能
+			});
+
+			document.styleSheets[1].cssRules[17].style.textDecoration = 'none'; // 选项卡滚动置顶
+			// 				window.onscroll = function() {
+			// 					var topScroll = document.body.scrollTop; //滚动的距离,距离顶部的距离
+			// 					var bignav = document.getElementById("slider"); //获取到导航栏id
+			// 					if (topScroll > 250) { //当滚动距离大于250px时执行下面的东西
+			// 						bignav.style.position = 'fixed';
+			// 						bignav.style.top = '0';
+			// 						bignav.style.zIndex = '9999';
+			// 					} else { //当滚动距离小于250的时候执行下面的内容，也就是让导航栏恢复原状
+			// 						bignav.style.position = 'static';
+			// 					}
+			// 				}
+
+			window.onload = function() {
+
+				var search = location.search;
+				//	alert(location.search);
+				request = GetRequest(search);
+				wishId = request['wishId'];
+				resId = request['resId'];
+//				wishId = 'ff80808169b077090169b391507f0120';
+//				resId = 'ff80808169b077090169b391507d011e';
+
+				wish1001(wishId, resId, function(type, data) {
+					if(type == 0) {
+						console.log(data.data);
+//						alert(JSON.stringify(data.data))
+						wish.res = data.data.res;
+						wish.id = data.data.id;
+						item2.likeList = data.data.likeList;
+						forward.islike = data.data.myLike;
+						forward.finish = data.data.finished;
+						wish.title = data.data.title;
+						wish.content = data.data.content;
+						wish.user = data.data.user;
+						wish.points = data.data.points;
+						count.likeCount = data.data.likeList.length;
+
+						if(data.data.imageList != null) {
+							for(var i = 0; i < data.data.imageList.length; i++) {
+								wish.imageList.push(data.data.imageList[i]);
+
+								(function(i) {
+									var start_time = new Date().getTime()
+									var img = new Image();
+									img.src = data.data.imageList[i];
+									var check = function() {
+										// 只要任何一方大于0
+										// 表示已经服务器已经返回宽高
+										if(img.width > 0 || img.height > 0) {
+											var temp = new Object();
+											temp.src = data.data.imageList[i];
+											temp.w = img.width;
+											temp.h = img.height;
+											imgGroup.push(temp);
+											//										console.log(i + 'w:' + img.width + 'h:' + img.height);
+											clearInterval(set);
+										}
+									}
+									var set = setInterval(check, 40)
+								})(i);
+
+							}
+						}
+
+					} else {
+						console.log('获取愿望详情失败' + data);
+					}
+				})
+
+				realuser = getRequestUser();
+
+				getlist();
+
+				//获取当前角色
+				getCurrentCharacter(function(type, data) {
+					if(type == 0) {
+						//													console.log(data)
+						characterImg.imgSrc = data.photo;
+						characterPop.curCharacter.name = data.name;
+						characterPop.curCharacter.photo = data.photo;
+						characterPop.curCharacter.id = data.id;
+						//						console.log(characterPop.curCharacter)
+
+					} else {
+						console.log('获取当前角色失败' + data);
+					}
+				});
+
+				//操作过的角色的列表
+				comment1010(resId, function(type, data) {
+					if(type == 0) {
+						//						console.log(1111)
+						//						console.log(data.data)
+						characterPop.characterList = data.data;
+					} else {
+						console.log('获取角色列表失败' + data);
+					}
+				})
+
+				//更多角色列表
+				characterList(function(type, data) {
+					if(type == 0) {
+						//							console.log(JSON.stringify(data));
+						moreCharacter.CList = data;
+						moreCharacter.istrue.length = data.length;
+						for(var i = 0; i < moreCharacter.istrue.length; i++) {
+							if(moreCharacter.CList[i].id == characterPop.curCharacter.id) {
+								moreCharacter.istrue[i] = true;
+							} else {
+								moreCharacter.istrue[i] = false;
+							}
+						}
+						//							console.log(moreCharacter.istrue.length);
+					} else {
+
+					}
+				})
+
+				mui(document.body).on('tap', '.photo', topOpenPhotoSwipe);
+
+				// alert('onload');
+				// alert(wish.imagelist[0]);
+				// execute above function
+				initPhotoSwipeFromDOM('.my-gallery');
+			}
+			//window.onload结束
+
+			//获取列表函数
+			function getlist() {
+				comment1001(resId, 0, 1, function(type, data) {
+					if(type == 0) {
+						if(data.data.content.length >= 3) {
+							for(var i = 0; i < 3; i++) {
+								hotComment.$data.hotcomments.push(data.data.content[i]);
+								hotComment.hotcomments[i].time = getMyDate(data.data.content[i].time);
+							}
+						} else {
+							for(var i = 0; i < data.data.content.length; i++) {
+								hotComment.$data.hotcomments.push(data.data.content[i]);
+								hotComment.hotcomments[i].time = getMyDate(data.data.content[i].time);
+
+							}
+						}
+
+						//														alert('hotcoment:' + JSON.stringify(hotComment.hotcomments));
+					} else {
+						console.log('获取热评失败' + data);
+						alert('获取热评失败' + data);
+					}
+				});
+
+				comment1001(resId, 0, 0, function(type, data) {
+					if(type == 0) {
+//																			alert(JSON.stringify(data));
+						//									alert(resId);
+						newComment.comments = data.data.content;
+
+						//							console.log(newComment.comments.length);
+						//							console.log(data.data.content[1].time)
+						for(var i = 0; i < newComment.comments.length; i++) {
+							newComment.comments[i].time = getMyDate(data.data.content[i].time);
+						}
+						//							alert(data.data.content);
+						count.commentCount = data.data.totalCount;
+						//														console.log(JSON.stringify(data.data))
+						//							alert('newC:' + JSON.stringify(newComment.comments));
+					} else {
+						console.log('获取评论失败' + data);
+						alert('获取评论失败' + data);
+					}
+				});
+			}
+
+			//回复函数
+			function reply(comment, index) {
+				rescomment = comment.id;
+				resindex = index;
+				//					alert(resindex);
+				window.JsInterface.showCommentsInputDialog('说一说');
+				onCommentsInputComplete(txt, imgs);
+			}
+
+			function pulldownRefresh() {
+				//										alert(111);
+
+				setTimeout(function() {
+
+					mui('.mui-content').pullRefresh().endPulldownToRefresh();
+					mui.toast("刷新成功");
+				}, 1500);
+			}
+
+			function pullupRefresh() {
+				//					alert(222);
+				setTimeout(function() {
+					//												mui('.mui-content').pullRefresh().endPullupToRefresh((count == totalpages - 1)); //参数为true代表没有更多数据了。
+					//						alert(1111);
+					mui('.mui-content').pullRefresh().endPullupToRefresh();
+				}, 1500);
+			}
+
+			//评论回调函数
+			function onCommentsInputComplete(txt, imgs) {
+//				alert(111111);
+				comment1002(resId, txt, imgs, rescomment, function(type, data) {
+					if(type == 0) {
+						
+						var reqcom = new Object();
+						
+						reqcom = data.data;
+						reqcom.time = getMyDate(data.data.time);
+						// alert(JSON.stringify(reqcom));
+						if(rescomment == 0) {
+							newComment.comments.unshift(reqcom);
+							// alert(JSON.stringify(newComment.comments[resindex]));
+						} else {
+							//										alert(JSON.stringify(reqcom));
+							if(newComment.comments[resindex].replys == null) {
+								newComment.comments[resindex].replys = {};
+								Vue.set(newComment.comments[resindex].replys, 'content', []);
+								newComment.comments[resindex].replys.content.push(reqcom);
+							} else {
+								newComment.comments[resindex].replys.content.unshift(reqcom);
+							}
+						}
+					} else {
+						//							console.log('发表评论失败' + data);
+						alert('发表评论失败' + data);
+					}
+				});
+			}
+
+			//删除评论函数
+			function deleteOne(index, innerIndex, replyId, commentId) {
+				// alert('commentId:' + commentId + 'replyId' + replyId);
+
+				var btnArray = ['取消', '删除'];
+				mui.confirm('确定删除吗？', '提示', btnArray, function(e) {
+					if(e.index == 1) {
+
+						comment1004(commentId, replyId, function(type, data) {
+							if(type == 0) {
+								mui.toast('删除成功');
+								newComment.comments[index].replys.content.splice(innerIndex, 1);
+							} else {
+								alert('删除失败' + data);
+							}
+						});
+					} else {
+
+					}
+				});
+
+			}
+
+			//点赞回复函数
+			function replylike(comment, index, ctype) {
+				//										alert(type);
+				// alert(JSON.stringify(resId +'  ' + comment.id));
+				// alert(token);
+				if(comment.myLike == false) {
+					comment1005(resId, comment.id, function(type, data) {
+						if(type == 0) {
+							mui.toast('点赞成功');
+
+							if(ctype == 'hc') {
+								for(var i = 0; i < newComment.comments.length; i++) {
+									if(comment.id == newComment.comments[i].id) {
+										hotComment.hotcomments[index].myLike = true;
+										hotComment.hotcomments[index].like += 1;
+										newComment.comments[i].myLike = true;
+										newComment.comments[i].like += 1;
+									}
+								}
+							} else if(ctype == 'nc') {
+
+								for(var i = 0; i < hotComment.hotcomments.length; i++) {
+									if(comment.id == hotComment.hotcomments[i].id) {
+										//											alert('i=' + i);
+										newComment.comments[index].myLike = true;
+										newComment.comments[index].like += 1;
+										hotComment.hotcomments[i].myLike = true;
+										hotComment.hotcomments[i].like += 1;
+									}
+								}
+							}
+							//						 				document.getElementsByName('icon2')[index].src = '../images/pub_ico_love_sel.png';
+							//										islike = true;
+						} else {
+							console.log('给爱心失败' + data);
+						}
+					})
+				} else {
+					comment1007(resId, comment.id, function(type, data) {
+						if(type == 0) {
+							mui.toast('取消成功');
+							if(ctype == 'hc') {
+								for(var i = 0; i < newComment.comments.length; i++) {
+									if(comment.id == newComment.comments[i].id) {
+										hotComment.hotcomments[index].myLike = false;
+										hotComment.hotcomments[index].like -= 1;
+										newComment.comments[i].myLike = false;
+										newComment.comments[i].like -= 1;
+									}
+								}
+							} else if(ctype == 'nc') {
+
+								for(var i = 0; i < hotComment.hotcomments.length; i++) {
+									if(comment.id == hotComment.hotcomments[i].id) {
+										newComment.comments[index].myLike = false;
+										newComment.comments[index].like -= 1;
+										hotComment.hotcomments[i].myLike = false;
+										hotComment.hotcomments[i].like -= 1;
+									}
+								}
+							}
+							//										document.getElementsByName('icon2')[index].src = '../images/pub_ico_love_nor.png';
+							//										islike = false;
+						} else {
+							console.log('给爱心失败' + data);
+						}
+					})
+				}
+			}
+
+			//打开评论回复
+			function goDetail(comment) {
+				// alert(JSON.stringify(comment));
+				localStorage.setItem('comment', JSON.stringify(comment));
+				openWindow('item/commentMain.html');
+
+			}
+
+			//给爱心事件
+			document.getElementById('like').addEventListener('tap', function() {
+				if(forward.islike == false) {
+					comment1005(resId, 0, function(type, data) {
+						if(type == 0) {
+							mui.toast('给爱心成功');
+							forward.islike = true;
+						} else {
+							console.log('给爱心失败' + data);
+						}
+					})
+				} else {
+					comment1007(resId, 0, function(type, data) {
+						if(type == 0) {
+							mui.toast('取消成功');
+							forward.islike = false;
+						} else {
+							console.log('给爱心失败' + data);
+						}
+					})
+				}
+			});
+
+			//达愿事件
+			document.getElementById('reachWish').addEventListener('tap', function() {
+				if(forward.finish == false) {
+					window.JsInterface.openWindow(localurl + '/item/reachWish.html');
+				} else {
+					mui.toast('愿望已经被实现了哦')
+				}
+			})
+
+			//切换角色事件
+			document.querySelector('#character').addEventListener('tap', function() {
+
+			})
+			//关闭forward pop事件
+			document.getElementById('forwardBack').addEventListener('tap', function() {
+				mui('#forward').popover('hide');
+			})
+
+			//新增评论事件
+			document.getElementById('addComment').addEventListener('tap', function() {
+				rescomment = 0;
+				window.JsInterface.showCommentsInputDialog('说一说');
+				
+				onCommentsInputComplete(txt, imgs);
+				
+			});
+
+			document.getElementById('back').addEventListener('tap', function() {
+				localStorage.removeItem('wish');
+				window.JsInterface.closeWindow();
+			});
+
+			function topOpenPhotoSwipe() {
+				var pswpElement = document.querySelectorAll('.pswp')[0];
+				var items = imgGroup;
+
+				//					console.log(imgGroup)
+
+				// build items array
+
+				// define options (if needed)
+				var options = {
+					// history & focus options are disabled on CodePen        
+					history: false,
+					focus: false,
+
+					showAnimationDuration: 0,
+					hideAnimationDuration: 0
+
+				};
+
+				var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, options);
+				gallery.init();
+			};
+
+			var initPhotoSwipeFromDOM = function(gallerySelector) {
+
+				// parse slide data (url, title, size ...) from DOM elements 
+				// (children of gallerySelector)
+				var parseThumbnailElements = function(el) {
+					var thumbElements = el.childNodes,
+						numNodes = thumbElements.length,
+						items = [],
+						figureEl,
+						linkEl,
+						size,
+						item;
+
+					for(var i = 0; i < numNodes; i++) {
+
+						figureEl = thumbElements[i]; // <figure> element
+
+						// include only element nodes 
+						if(figureEl.nodeType !== 1) {
+							continue;
+						}
+
+						linkEl = figureEl.children[0]; // <a> element
+
+						size = linkEl.getAttribute('data-size').split('x');
+
+						// create slide object
+						item = {
+							src: linkEl.getAttribute('href'),
+							w: parseInt(size[0], 10),
+							h: parseInt(size[1], 10)
+						};
+
+						if(figureEl.children.length > 1) {
+							// <figcaption> content
+							item.title = figureEl.children[1].innerHTML;
+						}
+
+						if(linkEl.children.length > 0) {
+							// <img> thumbnail element, retrieving thumbnail url
+							item.msrc = linkEl.children[0].getAttribute('src');
+							console.log(item.msrc)
+						}
+
+						item.el = figureEl; // save link to element for getThumbBoundsFn
+						items.push(item);
+					}
+
+					return items;
+				};
+
+				// find nearest parent element
+				var closest = function closest(el, fn) {
+					return el && (fn(el) ? el : closest(el.parentNode, fn));
+				};
+
+				// triggers when user clicks on thumbnail
+				var onThumbnailsClick = function(e) {
+					e = e || window.event;
+					e.preventDefault ? e.preventDefault() : e.returnValue = false;
+
+					var eTarget = e.target || e.srcElement;
+
+					// find root element of slide
+					var clickedListItem = closest(eTarget, function(el) {
+						return(el.tagName && el.tagName.toUpperCase() === 'FIGURE');
+					});
+
+					if(!clickedListItem) {
+						return;
+					}
+
+					// find index of clicked item by looping through all child nodes
+					// alternatively, you may define index via data- attribute
+					var clickedGallery = clickedListItem.parentNode,
+						childNodes = clickedListItem.parentNode.childNodes,
+						numChildNodes = childNodes.length,
+						nodeIndex = 0,
+						index;
+
+					for(var i = 0; i < numChildNodes; i++) {
+						if(childNodes[i].nodeType !== 1) {
+							continue;
+						}
+
+						if(childNodes[i] === clickedListItem) {
+							index = nodeIndex;
+							break;
+						}
+						nodeIndex++;
+					}
+
+					if(index >= 0) {
+						// open PhotoSwipe if valid index found
+						openPhotoSwipe(index, clickedGallery);
+					}
+					return false;
+				};
+
+				// parse picture index and gallery index from URL (#&pid=1&gid=2)
+				var photoswipeParseHash = function() {
+					var hash = window.location.hash.substring(1),
+						params = {};
+
+					if(hash.length < 5) {
+						return params;
+					}
+
+					var vars = hash.split('&');
+					for(var i = 0; i < vars.length; i++) {
+						if(!vars[i]) {
+							continue;
+						}
+						var pair = vars[i].split('=');
+						if(pair.length < 2) {
+							continue;
+						}
+						params[pair[0]] = pair[1];
+					}
+
+					if(params.gid) {
+						params.gid = parseInt(params.gid, 10);
+					}
+
+					return params;
+				};
+
+				var openPhotoSwipe = function(index, galleryElement, disableAnimation, fromURL) {
+					var pswpElement = document.querySelectorAll('.pswp')[0],
+						gallery,
+						options,
+						items;
+
+					items = parseThumbnailElements(galleryElement);
+
+					// define options (if needed)
+					options = {
+
+						// define gallery index (for URL)
+						galleryUID: galleryElement.getAttribute('data-pswp-uid'),
+
+						getThumbBoundsFn: function(index) {
+							// See Options -> getThumbBoundsFn section of documentation for more info
+							var thumbnail = items[index].el.getElementsByTagName('img')[0], // find thumbnail
+								pageYScroll = window.pageYOffset || document.documentElement.scrollTop,
+								rect = thumbnail.getBoundingClientRect();
+
+							return {
+								x: rect.left,
+								y: rect.top + pageYScroll,
+								w: rect.width
+							};
+						}
+
+					};
+
+					// PhotoSwipe opened from URL
+					if(fromURL) {
+						if(options.galleryPIDs) {
+							// parse real index when custom PIDs are used 
+							// http://photoswipe.com/documentation/faq.html#custom-pid-in-url
+							for(var j = 0; j < items.length; j++) {
+								if(items[j].pid == index) {
+									options.index = j;
+									break;
+								}
+							}
+						} else {
+							// in URL indexes start from 1
+							options.index = parseInt(index, 10) - 1;
+						}
+					} else {
+						options.index = parseInt(index, 10);
+					}
+
+					// exit if index not found
+					if(isNaN(options.index)) {
+						return;
+					}
+
+					if(disableAnimation) {
+						options.showAnimationDuration = 0;
+					}
+
+					// Pass data to PhotoSwipe and initialize it
+					gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, options);
+					gallery.init();
+				};
+
+				// loop through all gallery elements and bind events
+				var galleryElements = document.querySelectorAll(gallerySelector);
+
+				for(var i = 0, l = galleryElements.length; i < l; i++) {
+					galleryElements[i].setAttribute('data-pswp-uid', i + 1);
+					galleryElements[i].onclick = onThumbnailsClick;
+				}
+
+				// Parse URL and open gallery if it contains #&pid=3&gid=1
+				var hashData = photoswipeParseHash();
+				if(hashData.pid && hashData.gid) {
+					openPhotoSwipe(hashData.pid, galleryElements[hashData.gid - 1], true, true);
+				}
+			};
+
+			(function($) {
+				$('.mui-scroll-wrapper').scroll({
+					indicators: true //是否显示滚动条
+				});
+			})(mui);
+		</script>
+	</body>
+
+</html>

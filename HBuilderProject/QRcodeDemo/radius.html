@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>Document</title>
+		<style>
+			/*body img {
+				display: block;
+			}*/
+			/*img {
+				margin: 50px;
+				-webkit-border-radius: 50%;
+				-moz-border-radius: 50%;
+				border-radius: 50%;
+			}
+			
+			#canvas {
+				border: 1px solid gray;
+				margin-left: 50px;
+				display: inline-block;
+			}
+			
+			#canvas1 {
+				border: 1px solid gray;
+				margin-left: 350px;
+				display: inline-block;
+			}*/
+		</style>
+	</head>
+
+	<body id="body">
+		<strong>这是原图</strong>
+		<p><img src="//image.zhangxinxu.com/image/study/s/s256/mm1.jpg" width="256" height="191"></p>
+		<strong>这是Canvas实现</strong>
+		<p>圆角大小：<span class="range-txt"> 0 <input id="radiusInput" type="range" min="0" max="92" value="92"> 92</span></p>
+		<canvas id="canvas" width="256" height="191"></canvas>
+
+		<script type="text/javascript" src="js/jquery.js"></script>
+		<script type="text/javascript" src="js/utf.js"></script>
+		<script type="text/javascript" src="js/qrcode.js"></script>
+		<script type="text/javascript" src="js/canvas2image.js"></script>
+		<script type="text/javascript">
+			CanvasRenderingContext2D.prototype.roundRect = function(x, y, w, h, r) {
+				var min_size = Math.min(w, h);
+				if(r > min_size / 2) r = min_size / 2;
+				// 开始绘制
+				this.beginPath();
+				this.moveTo(x + r, y);
+				this.arcTo(x + w, y, x + w, y + h, r);
+				this.arcTo(x + w, y + h, x, y + h, r);
+				this.arcTo(x, y + h, x, y, r);
+				this.arcTo(x, y, x + w, y, r);
+				this.closePath();
+				return this;
+			}
+
+			// canvas元素, 图片元素
+			var canvas = document.getElementById("canvas"),
+				image = new Image(),
+				input = document.getElementById("radiusInput");
+			var context = canvas.getContext("2d");
+
+			var draw = function(obj) {
+				var pattern = context.createPattern(obj, "no-repeat");
+				context.roundRect(0, 0, obj.width, obj.height, 12);
+				context.fillStyle = pattern;
+				context.fill();
+				//				base64 = canvas.toDataURL("image/png"); 
+				//				var imgAsDataURL = canvas.toDataURL('image/png', 1);
+
+			}
+
+			image.onload = function() {
+				draw(this);
+
+			};
+
+			image.src = "//image.zhangxinxu.com/image/study/s/s256/mm1.jpg" + "?timeStamp=" + new Date();
+//			image.setAttribute("crossOrigin", 'anonymous')
+			input.addEventListener("change", function() {
+				context.clearRect(0, 0, canvas.width, canvas.height);
+				draw(image);
+
+			});
+
+			function canvasToImg(canvas, width, height) {
+				var can2Img = Canvas2Image.convertToJPEG(canvas, width, height);
+				console.log(can2Img);
+				//				document.getElementById('body').appendChild(can2Img)
+				var img = new Image();
+				img.src = can2Img.src;
+				document.getElementById('body').appendChild(img);
+			}
+		</script>
+	</body>
+
+</html>

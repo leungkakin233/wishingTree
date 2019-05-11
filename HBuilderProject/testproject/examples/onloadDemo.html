@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="utf-8">
+	<title>Webview Example</title>
+	<script type="text/javascript">
+var ws=null,embed=null;
+// H5 plus事件处理
+function plusReady(){
+	ws=plus.webview.currentWebview();
+	embed=plus.webview.create('http://m.weibo.cn/u/3196963860', '', {top:'46px',bottom:'0px'});
+	embed.onloaded=embedLoaded;
+	ws.append(embed);
+}
+if(window.plus){
+	plusReady();
+}else{
+	document.addEventListener('plusready', plusReady, false);
+}
+// 页面加载完成事件回调函数
+function embedLoaded(e){
+	alert('Loaded!');
+}
+	</script>
+	</head>
+	<body>
+		Webview窗口页面加载完成事件
+		<button onclick="embed.loadURL('http://m.weibo.cn')">onloaded</button>
+	</body>
+</html>

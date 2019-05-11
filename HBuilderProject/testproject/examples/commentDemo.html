@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html>
+	<meta charset="utf-8">
+	<title></title>
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<meta name="flexible" content="initial-dpr=2" />
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<link href="../css/mui.css" rel="stylesheet" />
+	<style type="text/css">
+		[v-cloak] {
+			display: none
+		}
+
+		.wish-title-right {
+			font-size: 18px;
+			position: relative;
+			z-index: 20;
+			padding-top: 10px;
+			padding-bottom: 10px;
+		}
+
+		html,
+		body {
+			height: 100%;
+			width: 100%;
+			margin: 0;
+			padding: 0;
+		}
+
+		.body-bg {
+			background: url(../images/tree_bg_xyk2bg.png) no-repeat;
+			width: 100%;
+			height: 560px;
+			background-size: 100% 100%;
+		}
+
+		.body-bg-2 {
+			background: url(../images/tree_bg_ywk1bg.png) no-repeat;
+			width: 100%;
+			height: 560px;
+			background-size: 100% 100%;
+		}
+
+		.wish-ywk1 {
+			position: absolute;
+			margin: 0 auto;
+			top: 0;
+			left: 0;
+			bottom: 0;
+			right: 0;
+			height: 500px;
+			width: 100%;
+			overflow: hidden;
+			resize: none;
+			border-style: none;
+			z-index: 1;
+		}
+
+		.wish-ywk2 {
+			position: absolute;
+			margin: 0 auto;
+			top: 0.12rem;
+			left: 0;
+			bottom: 0;
+			right: 0;
+			height: 500px;
+			width: 100%;
+			z-index: 1;
+		}
+
+		.wish-p1 {
+			position: absolute;
+
+			top: 155px;
+			left: 1.5rem;
+			bottom: 0;
+			right: 0;
+			width: 75%;
+			height: 60px;
+			z-index: 5;
+			border: 0;
+			background-color: transparent;
+			overflow: hidden;
+			resize: none;
+			border-style: none;
+			color: #FAFAFA;
+			font-weight: 500;
+			font-size: 0.375rem;
+		}
+
+		.wish-p2 {
+			position: absolute;
+			top: 200px;
+			left: 1.5rem;
+			bottom: 180px;
+			right: 0;
+			width: 75%;
+			height: 60px;
+			z-index: 5;
+			border: 0;
+			background-color: transparent;
+			overflow: hidden;
+			resize: none;
+			border-style: none;
+			color: #FAFAFA;
+			font-weight: 500;
+			font-size: 0.375rem;
+		}
+
+		.head-img {
+			position: absolute;
+			top: 110px;
+			left: 4.6rem;
+			right: 0;
+			bottom: 0;
+			width: 35px;
+			height: 35px;
+			z-index: 5;
+		}
+
+		.power-button {
+			position: absolute;
+			right: 0px;
+			top: 20px;
+			height: 40px;
+			width: 150px;
+			border-radius: 2em;
+			text-align: center;
+			background-color: red;
+			color: white;
+		}
+
+		.wish-form {
+			position: absolute;
+			margin: 0 auto;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			top: 0;
+			width: 100%;
+			height: 80%;
+		}
+
+
+
+		#topPopover {
+			position: fixed;
+			top: 16px;
+			right: 6px;
+		}
+
+		#topPopover .mui-popover-arrow {
+			left: auto;
+			right: 6px;
+		}
+
+		.mui-popover {
+			width: 120px;
+			height: 140px;
+		}
+
+		.img-group {
+			width: 35px;
+			height: 35px;
+		}
+
+		.p-title {
+			margin: 10px 10px 0px 10px;
+			font-size: 16px;
+		}
+
+		.img-group-control {
+			margin: 5px 5px 0 5px;
+			border: 0;
+		}
+
+		.comment-head-portrait {
+			line-height: 44px;
+			max-width: 40px;
+			height: 40px;
+			float: left;
+			border: 0;
+			margin-right: 11px;
+			outline: none;
+			white-space: nowrap;
+			border-radius: 100%;
+		}
+
+		.love-ico {
+			line-height: 37px;
+			max-width: 24px;
+			height: 18px;
+			float: left;
+			border: 0;
+			margin-right: 11px;
+			outline: none;
+			white-space: nowrap;
+
+		}
+
+		.comment-title {
+			font-weight: 600;
+			color: #102F75;
+		}
+
+		.comment-body {
+			font-weight: 500;
+			color: #282828;
+			width: 100%;
+			height: auto;
+			word-wrap: break-word;
+			word-break: break-all;
+			overflow: hidden;
+		}
+
+		.time-span {
+			font-size: 14px;
+			color: #909090;
+		}
+
+		.wish-img-second {
+			line-height: 44px;
+			max-width: 40px;
+			height: 40px;
+			float: left;
+			border: 0;
+			margin-right: 11px;
+			margin-left: 33px;
+			outline: none;
+			white-space: nowrap;
+		}
+
+		.mui-segmented-control .mui-control-item {
+			line-height: 33px;
+			display: table-cell;
+			overflow: hidden;
+			width: 1%;
+			-webkit-transition: background-color .1s linear;
+			transition: background-color .1s linear;
+
+			white-space: nowrap;
+			text-overflow: ellipsis;
+		}
+
+		.control-item1 {
+			color: #0062CC;
+
+		}
+
+		.control-item2 {
+			text-align: right;
+		}
+
+		.mui-control-content {
+			background-color: white;
+			height: 100%;
+		}
+
+		.mui-control-content .mui-loading {
+			margin-top: 50px;
+		}
+
+		.bottom-select {
+
+			position: fixed;
+			width: 100%;
+			left: 0px;
+			z-index: 105;
+			bottom: 0px;
+		}
+
+		.bottom-select-left {
+			text-align: center;
+			font-size: 0.40rem;
+			background-color: #EFEFF4;
+		}
+
+		.bottom-select-left:before {
+			content: '';
+			position: absolute;
+			left: auto;
+			top: 15%;
+			bottom: auto;
+			right: 0;
+			height: 70%;
+			width: 1px;
+			background-color: #a89d9e;
+		}
+
+		.bottom-select-right {
+			text-align: center;
+			font-size: 0.40rem;
+			background-color: #EFEFF4;
+
+		}
+
+		.bottom-select-right:before {
+			content: '';
+			position: absolute;
+			left: -1px;
+			top: 15%;
+			bottom: auto;
+			right: auto;
+			height: 70%;
+			width: 1px;
+			background-color: #a89d9e;
+		}
+
+		.photo {
+			width: 1.25rem;
+			height: 1.25rem;
+			border-radius: 0.5em;
+			position: absolute;
+			top: 6.6rem;
+			left: 4.4rem;
+			bottom: 0;
+			right: 0;
+			z-index: 50;
+		}
+
+		.photogroup {
+			padding-top: 7px;
+		}
+
+		.photogroup img {
+			width: 18%;
+		}
+
+		.addlocation {
+			display: flex;
+		}
+
+		.chat {}
+
+		.triangle {
+			width: 10px;
+			height: 10px;
+			border: solid 10px;
+			border-color: #FFFFFF #FFFFFF #F3F3F3 #FFFFFF;
+			margin-left: 20px;
+		}
+
+		.rectangle {
+			height: auto;
+			padding: 10px;
+			background-color: #F3F3F3;
+		}
+
+		.rectangle p {
+			color: #102F75;
+			font-size: 0.3rem;
+		}
+
+		.reachWish {
+			background-color: rgba(161, 51, 208, 0.8);
+			position: fixed;
+			bottom: 1.4rem;
+
+			right: 10px;
+			width: 1.5rem;
+			height: 1.5rem;
+			border-radius: 100%;
+			z-index: 105;
+		}
+
+		.addpoint {
+
+			background-color: rgba(255, 51, 51, 0.8);
+			position: fixed;
+			bottom: 3.2rem;
+			right: 10px;
+			width: 1.5rem;
+			height: 1.5rem;
+			border-radius: 100%;
+			z-index: 105;
+		}
+
+		.gongyizhi {
+			margin-left: 0.43rem;
+			margin-top: 0.1rem;
+			width: 0.6rem;
+			height: 0.6rem;
+		}
+
+		.icon1 {
+			height: 0.4rem;
+			width: 0.4rem;
+			margin-right: 20px;
+			margin-top: 2px;
+			display: inline-block;
+		}
+
+		.icon2 {
+			height: 0.4rem;
+			width: 0.4rem;
+			display: inline-block;
+		}
+	</style>
+	</head>
+	<body>
+		<body>
+			<header class="mui-bar mui-bar-nav">
+				<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" id="back"></a>
+				<h1 class="mui-title">许愿</h1>
+				<a id="menu" class="mui-action-menu mui-icon mui-icon-bars mui-pull-right" href="#topPopover"></a>
+			</header>
+			<div class="mui-content  mui-scroll-wrapper">
+				<div class="mui-scroll ">
+				
+
+
+
+					<div>
+						<!--<div id="segmentedControl" class="mui-segmented-control">-->
+						<div id="sliderSegmentedControl" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted ">
+							<a class="mui-control-item mui-active" href="#item1">
+								评论（8）
+							</a>
+							<a class="mui-control-item" href="#item2">
+								给爱心
+							</a>
+						</div>
+						<div>
+							<div id="item1" class="mui-control-content mui-active">
+								<ul class="mui-table-view">
+									<li>
+										<div style="display: flex;">
+											<img src="../images/shareshop_label_hot.png" style="height: 0.5rem; width: 1rem; margin-top: 10px; margin-left: 10px;"><span
+											 style="margin-top: 10px; margin-left: 5px;">最热</span>
+										</div>
+									</li>
+
+									<li class="mui-table-view-cell mui-media">
+										<img class="comment-head-portrait" src="../images/tree_ico_ywk1.png">
+										<div class="mui-media-body">
+											<p class="comment-title  mui-ellipsis-2">叶子姐姐</p>
+											<p class="comment-body ">叶子姐姐叶子姐姐叶子姐姐叶子姐姐叶子姐姐叶子姐姐叶子姐姐</p>
+											<div class="photogroup">
+												<img src="../images/logo.png">
+												<img src="../images/logo.png">
+												<img src="../images/map_ico_oftenaddress_nor.png">
+												<img src="../images/map_ico_oftenaddress_sel.png">
+											</div>
+											<div class="addlocation">
+												<img src="../images/tree_share_location.png" style="height: 15px;">
+												<h5 style="margin-top: 1.5px;">珠海市情侣路</h5>
+											</div>
+
+											<div class="chat">
+												<div class="triangle"></div>
+												<div class="rectangle">
+													<p id="">
+														热心市民小曹：
+														<span id="">
+															落花有意，流水无情
+														</span>
+													</p>
+													<p id="">
+														翠香街最靓的仔：
+														<span id="">
+															落花有意，流水无情
+														</span>
+													</p>
+												</div>
+											</div>
+											<div style="margin-top: 4px;">
+												<span class='mui-ellipsis wish-span'>2018.02.10 19:50</span>
+												<div class="mui-pull-right">
+													<img src="../images/pub_ico_comment_nor.png" class="icon1" />
+													<img src="../images/pub_ico_good_nor.png" class="icon2" />
+													<p style="display: inline-block;">255</p>
+												</div>
+											</div>
+										</div>
+									</li>
+
+
+									<li class="mui-table-view-cell mui-media">
+										<a href="javascript:;">
+											<img class="comment-head-portrait" src="../images/tree_ico_ywk1.png">
+											<div class="mui-media-body">
+												<p class="mui-h4 wish-title mui-ellipsis-2">一个渴望学习的孩子啊啊啊啊啊啊啊啊</p>
+
+												<span class='mui-ellipsis wish-span'>2018.02.10 19:50</span>
+												<span class="mui-ellipsis wish-span mui-pull-right blue">实现值:52600k</span>
+											</div>
+										</a>
+									</li>
+
+
+								</ul>
+							</div>
+
+
+
+							<div id="item2" class="mui-control-content">
+								<ul class="mui-table-view">
+									<li class="mui-table-view-cell mui-media">
+										<a href="javascript:;">
+											<img class="wish-img" src="../images/tree_ico_ywk1.png">
+											<div class="mui-media-body">
+												<p class="mui-h4 wish-title mui-ellipsis-2">一个渴望学习的孩子啊啊啊啊啊啊啊啊aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+												<span class=" wish-span blue">欧阳明明</span>
+												<span class=" wish-span">2018.02.10 19:50</span>
+												<span class=" wish-span mui-pull-right blue">实现值:52600k</span>
+											</div>
+										</a>
+									</li>
+								</ul>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- reachwish -->
+			<div class="addpoint" id="addpoint">
+				<img src="../images/pub_ioc_gongyizhi.png" class="gongyizhi">
+				<p style="color: #FAFAFA; font-size: 0.25rem; text-align: center; line-height: 0.25rem;">为他加油</p>
+			</div>
+			<div class="reachWish" id="reachWish" v-if="!finished" v-cloak>
+				<img src="../images/pub_ioc_gongyizhi.png" class="gongyizhi">
+				<p style="color: #FAFAFA; font-size: 0.25rem; text-align: center; line-height: 0.25rem;">帮他达愿</p>
+			</div>
+			<!-- reachwish -->
+
+
+			<!-- nav bottom -->
+			<nav class="bottom-select">
+				<ul class="mui-table-view">
+					<div class="mui-row">
+						<div class="mui-col-sm-6 mui-col-xs-6 bottom-select-left">
+							<li class="mui-table-view-cell" id="addComment">
+								评论
+							</li>
+						</div>
+						<div class="mui-col-sm-6 mui-col-xs-6 bottom-select-right">
+							<li class="mui-table-view-cell">
+								爱心
+							</li>
+						</div>
+					</div>
+				</ul>
+			</nav>
+			<!-- nav bottom -->
+
+			<div id="topPopover" class="mui-popover">
+				<div class="mui-popover-arrow"></div>
+				<div class="mui-scroll-wrapper">
+					<div class="mui-scroll">
+						<ul class="mui-table-view">
+						</ul>
+					</div>
+				</div>
+			</div>
+
+			<script src="../js/mui.js"></script>
+			<script src="http://g.tbcdn.cn/mtb/lib-flexible/0.3.4/??flexible_css.js,flexible.js"></script>
+			<script src="../js/vue.min.js"></script>
+			<script type="text/javascript">
+				var localurl = 'http://192.168.1.95:8020';
+
+				var wish = new Vue({
+					el: '#watchwish',
+					data: {
+						res: {},
+						id: '',
+						title: '',
+						content: '',
+						user: {},
+						points: null,
+						imagelist: [],
+						finished: false,
+					}
+				});
+
+				var comment = new Vue({
+					el: '#item1',
+					data: {
+
+					}
+				});
+
+				var reachWish = new Vue({
+					el: '#reachWish',
+					data: {
+						finished: false,
+					}
+				})
+				mui.init({
+					swipeBack: false,
+
+				});
+				console.log(document.styleSheets[2].cssRules[17].style.textDecoration = 'none');
+
+				// 选项卡滚动置顶
+				// 				window.onscroll = function() {
+				// 					var topScroll = document.body.scrollTop; //滚动的距离,距离顶部的距离
+				// 					var bignav = document.getElementById("slider"); //获取到导航栏id
+				// 					if (topScroll > 250) { //当滚动距离大于250px时执行下面的东西
+				// 						bignav.style.position = 'fixed';
+				// 						bignav.style.top = '0';
+				// 						bignav.style.zIndex = '9999';
+				// 					} else { //当滚动距离小于250的时候执行下面的内容，也就是让导航栏恢复原状
+				// 						bignav.style.position = 'static';
+				// 					}
+				// 				}
+
+				window.onload = function() {
+// 					var item = JSON.parse(localStorage.getItem('wish'));
+// 					var realuser = JSON.parse(localStorage.getItem('user'));
+// 					alert(JSON.stringify(realuser));
+// 
+// 					wish.res = item.res;
+// 
+// 					wish.id = item.id;
+// 					wish.title = item.title;
+// 					wish.content = item.content;
+// 					wish.user = item.user;
+// 					wish.points = item.points;
+// 					wish.imagelist = item.imageList;
+// 					reachWish.finished = item.finished;
+// 					document.getElementById('photo').src = wish.imagelist[0];
+					// alert(JSON.stringify(wish.res));
+
+					// alert('onload');
+					// alert(wish.imagelist[0]);
+// 					document.getElementById('photo').style.backgroundImage = wish.imageList[0];
+// 					document.getElementById('photo').style.backgroundSize = "30px 30px";
+
+					mui.ajax('http://node1.xiuhuahui.xyz:8080/platform/api/comment/v1/list', {
+						data: {
+							"res": {
+								"id": "ff80808166a1d4e00166a3ca7b4400bc",
+								// "id": wish.res.id,
+							},
+							"user": {
+								"userId": "daf58a10-ac7f-4661-bef1-a03948b7ddea",
+								"nickname": "ICE",
+								"roleId": "601a72ba-df85-44d2-b5d2-80ba56f7bad2",
+								"viewType": "ALL"
+							}
+						},
+						dataType: 'json',
+						type: 'post', //HTTP请求类型
+						timeout: 10000, //超时时间设置为10秒；
+						headers: {
+							'Content-Type': 'application/json;charset=UTF-8',
+						},
+						success: function(data) {
+							// alert(JSON.stringify(data));
+							comment = data.data;
+							// alert(JSON.stringify(comment));
+						},
+						error: function(xhr, type, errorThrown) {
+							alert('获取评论失败');
+						}
+					});
+				}
+
+
+				document.getElementById('addComment').addEventListener('tap', function() {
+					window.open("../addComment.html");
+// 					mui.ajax('http://node1.xiuhuahui.xyz:8080/platform/cloud-data-api/comment/v1/reply', {
+// 						data: {
+// 							"res": {
+// 								"id": wish.res.id,
+// 							},
+// 							"user": {
+// 								"userId": realuser.userId,
+// 								"nickname": realuser.nickname,
+// 								"roleId": realuser.role_id,
+// 								"viewType": "ALL"
+// 							},
+// 							"comment": {
+// 								"content": "评论内容"
+// 							}
+// 						},
+// 						dataType: 'json',
+// 						type: 'post', //HTTP请求类型
+// 						timeout: 10000, //超时时间设置为10秒；
+// 						headers: {
+// 							'Content-Type': 'application/json;charset=UTF-8',
+// 						},
+// 						success: function(data) {
+// 
+// 						},
+// 						error: function(xhr, type, errorThrown) {
+// 
+// 						}
+// 					});
+				})
+
+				document.getElementById('reachWish').addEventListener('tap', function() {
+					window.JsInterface.openWindow(localurl + '/wishingTreeMuiRem/item/reachWish.html');
+				})
+
+
+
+				document.getElementById('back').addEventListener('tap', function() {
+					localStorage.removeItem('wish');
+					window.JsInterface.closeWindow();
+				});
+
+				(function($) {
+					$('.mui-scroll-wrapper').scroll({
+						indicators: true //是否显示滚动条
+					});
+				})(mui);
+// 				
+// 				<div class="body-bg" id="watchwish" v-cloak>
+// 					<!-- <div class="mui-content body-bg-2"> -->
+// 					<button class="power-button">
+// 						愿望实现值:{{points}}
+// 					</button>
+// 					<div class="wish-form">
+// 						<div>
+// 							<img src="../images/tree_bg_ywk1_back@2x.png" class="wish-ywk1" id="wish-ywk" />
+// 							<!-- <img src="../images/tree_bg_xyk2_positive.png" class="wish-ywk2" id="wish-ywk" /> -->
+// 						</div>
+// 						<img class="head-img" src="../images/logo.png" id="head-img" />
+// 						<p class="wish-p1" id="p1" v-cloak>{{title}}</p>
+// 						<p class="wish-p2" id="p2" v-cloak>{{content}}</p>
+// 						<!-- <div id='imagelist' class="image-list1"></div> 
+// 									<div class="photo" id="photo"></div> -->
+// 					</div>
+// 					<img src="" class="photo" id="photo" />
+// 				</div>
+			</script>
+		</body>
+</html>

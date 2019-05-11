@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en" class="feedback">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title></title>
+	<link href="../../css/mui.css" rel="stylesheet"/>
+    <link href="../../css/mui.min.css" rel="stylesheet"/>
+	<link rel="stylesheet" type="text/css" href="../../css/feedback.css"/>
+	<style type="text/css">
+		.mui-bar, .mui-bar-nav{
+			background-color: #F3F3F3;
+			height: 50px;
+		}
+		.mui-bar.mui-bar-nav a{
+			color: black;
+			font-size: 18px;
+			padding-top: 17px;
+		}
+		.mui-content{
+			width: 90%;
+			margin:2rem auto;
+			/* background-color: #FFFFFF; */
+		}
+		.mui-content input{
+			height: 3.7rem;
+			border-radius: 0;
+			border-bottom:1px solid #d8d8d8;
+		}
+		
+		.autotextarea{
+			border-top-right-radius:7px;
+			border-top-left-radius:7px;
+		}
+		.input2{
+			/* background-color: #000000; */
+		}
+		.row .image-list{
+
+		}
+		.selectphoto{
+			background-color: #000000;
+		}
+		h5{
+			padding-left: 0.7rem;
+		}
+		.bgc{
+			background-color: #FFFFFF;
+			border-radius: 7px;
+		}
+		.location{
+			height: 2.5rem;
+			border-top: 1px solid #ebebeb;
+			display: flex;
+		}
+		.adress{
+			height: 100%;
+			width: 20%;
+			text-align: center;
+		}
+		.adress p{
+			line-height: 1.3rem;
+		}
+		.text{
+			width: 70%;
+		}
+		.icon img{
+			height: 1.25rem;
+			margin-top: 0.5rem;
+		}
+
+	</style>
+</head>
+<body>
+	
+	<header class="mui-bar mui-bar-nav">
+		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left">求助</a>
+		<button id="submit" class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">提交</button>
+	</header>
+	
+	<div class="mui-content">
+		<div class="bgc">
+		<form action="" method="post">
+		<div class="input2">
+			<textarea id="textarea" class="autotextarea" rows="6" cols="100%" placeholder="请输入文本说明(如我在哪里看见过)"></textarea>
+		</div>
+		<div class="tip">
+			<h5>上传图片说明</h5>
+		</div>
+		<div class="selectphoto">
+			<div id='image-list' class="row image-list"></div>
+		</div>
+		<div class="location">
+			<div class="adress">
+				<p>地址</p>
+			</div>
+			<div class="text">
+				<p></p>
+			</div>
+			<div class="icon">
+				<img src="../image/location@3x.png" >
+			</div>
+		</div>
+		</form>
+		</div>
+	</div>
+	
+	<script src="../../js/mui.min.js"></script>
+	<script src="../../js/uploadphoto.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/commonFunction.js" ></script>
+	<script type="text/javascript">
+		function makeExpandingArea(el) {
+				var setStyle = function(el) {
+					el.style.height = 'auto';
+					el.style.height = el.scrollHeight + 'px';
+					// console.log(el.scrollHeight);
+				}
+				var delayedResize = function(el) {
+					window.setTimeout(function() {
+						setStyle(el)
+					},
+					0);
+				}
+				if (el.addEventListener) {
+					el.addEventListener('input',function() {
+						setStyle(el)
+					},false);
+					setStyle(el)
+				} else if (el.attachEvent) {
+					el.attachEvent('onpropertychange',function() {
+						setStyle(el)
+					});
+					setStyle(el)
+				}
+				if (window.VBArray && window.addEventListener) { //IE9
+					el.attachEvent("onkeydown",function() {
+						var key = window.event.keyCode;
+						if (key == 8 || key == 46) delayedResize(el);
+
+					});
+					el.attachEvent("oncut",function() {
+						delayedResize(el);
+					}); //处理粘贴
+				}
+			}
+			makeExpandingArea(textarea);
+// 				if(feedback.files.length>4){
+// 					document.getElementById("image-list").style.height=160px;
+// 				}
+			
+	</script>
+</body>
+</html>

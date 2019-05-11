@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>Document</title>
+		<script src="http://g.tbcdn.cn/mtb/lib-flexible/0.3.4/??flexible_css.js,flexible.js"></script>
+		<link href="css/mui.css" rel="stylesheet" />
+		<style>
+			body img {
+				display: block;
+			}
+			
+			canvas {
+				/*display: inline-block;*/
+				position: relative;
+				/*border: 1px solid #888;*/
+				/*padding: .26rem .39rem .68rem .39rem;*/
+				padding: .26rem 0 0 0;
+				width: 8rem;
+				height: 8rem;
+			}
+			
+			.qrcode {
+				text-align: center;
+			}
+			
+			.qr-5 {
+				border: 1px dashed #888;
+				display: inline-block;
+				text-align: center;
+				width: 3.2rem;
+				height: 3.32rem;
+			}
+			
+			.qr-5 p {
+				line-height: 0.45rem;
+				font-size: .28rem;
+				color: #0060EB;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="qrcode"></div>
+		<hr/>
+		<div id='qrcode2'></div>
+		<div id="aaa"></div>
+		
+		
+		<script type="text/javascript" src="js/mui.js"></script>
+		<script type="text/javascript" src="js/vue.min.js"></script>
+		<script type="text/javascript" src="js/native.js"></script>
+		<script type="text/javascript" src="js/jquery.js"></script>
+		<script type="text/javascript" src="js/utf.js"></script>
+		<script type="text/javascript" src="js/qrcode.js"></script>
+		<script type="text/javascript" src="js/html2canvas.js"></script>
+		<script type="text/javascript" src="js/canvas2image.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				
+				
+				var qr = document.createElement('div');
+//				qr.style.display = 'none';
+				$(qr).qrcode({
+					render: 'canvas', //设置渲染方式，有table和canvas，使用canvas方式渲染性能相对来说比较好
+					text: "https://github.com/RiceSmall/QRcode", //扫描二维码后显示的内容,可以直接填一个网址，扫描二维码后自动跳向该链接
+					width: "800", //二维码的宽度
+					height: "800", //二维码的高度
+					background: "#ffffff", //二维码的后景色
+					foreground: "#000000", //二维码的前景色
+					//      src: 'img/photo.jpg'
+				});
+				
+//				document.body.appendChild(qr);
+				
+				console.log($(qr));
+				
+				Canvas2Image.convertToPNG(qr.childNodes[0], 800, 800);
+				
+				
+				html2canvas(qr).then(function(canvas) {
+					var h2qrcode = {};
+//					console.log(1111)
+					h2qrcode = Canvas2Image.convertToPNG(canvas, 800, 800);
+//					console.log(1111)
+					var h2qrcodeloc = h2qrcode.src.replace('data:image/png;base64,', "");
+					
+					
+//					decoderBase64File(h2qrcodeloc);
+				});
+
+				//				$("#qrcode").qrcode({
+				//					render: 'canvas', //设置渲染方式，有table和canvas，使用canvas方式渲染性能相对来说比较好
+				//					text: "https://github.com/RiceSmall/QRcode", //扫描二维码后显示的内容,可以直接填一个网址，扫描二维码后自动跳向该链接
+				//					width: "800", //二维码的宽度
+				//					height: "800", //二维码的高度
+				//					background: "#ffffff", //二维码的后景色
+				//					foreground: "#000000", //二维码的前景色
+				//					//      src: 'img/photo.jpg'
+				//				});
+				//
+				//				function creatEwm(base64, canvas) {
+				//					var ctx = canvas.getContext("2d");
+				//					var img = document.createElement('img');
+				//					img.setAttribute("crossOrigin", 'Anonymous')
+				//					//      img.src = 'img/photo.jpg'
+				//					img.src = 'http://139.159.148.149:8081/platform/file/ff808081685e94a101686fc8590207ad.jpg'
+				//					img.onload = function() {
+				//						var imgUpload = new Image();
+				//						imgUpload.src = base64();
+				//						imgUpload.onload = function() {
+				//							// 绘制
+				//							ctx.drawImage(imgUpload, 0, 0, 400, 400);
+				//							ctx.drawImage(img, 78, 80, 40, 40);
+				//						};
+				//					}
+				//
+				////					var imgCanvas = document.createElement('canvas');
+				////					var imgContext = imgCanvas.getContext('2d');
+				////					//确保canvas元素的大小和图片的尺寸一致  
+				////					imgCanvas.width = 100;
+				////					imgCanvas.height = 100;
+				////					//渲染图片到canvas中  
+				////					var head = new Image();
+				////					// head.src = 'http://139.159.148.149:8081/platform/file/ff808081685e94a101686fc8590207ad.jpg' + "?timeStamp=" + new Date();
+				////					head.src = img.url + "?timeStamp=" + new Date();
+				////					head.setAttribute("crossOrigin", 'anonymous');
+				////					head.onload = function() {
+				////						imgContext.drawImage(this, 0, 0, 100, 100);
+				////						var imgAsDataURL = imgCanvas.toDataURL('image/png', 1);
+				////						// document.body.appendChild(imgCanvas);
+				////					}
+				//
+				//				}
+				//
+				//				function convertCanvasToImage() {
+				//					var canvas = $("#qrcode canvas")[0].toDataURL("image/jpeg");
+				//					return canvas;
+				//				}
+				//
+				//				creatEwm(convertCanvasToImage, $("#qrcode canvas")[0]);
+				//
+				//				html2canvas(document.getElementById("qrcode")).then(function(canvas) {
+				//					//						document.body.appendChild(canvas);
+				//					var h2qrcode = Canvas2Image.convertToPNG(canvas, 2480, 3508);
+				//					var h2qrcodeloc = h2qrcode.src.replace('data:image/png;base64,', "");
+				//					decoderBase64File(h2qrcodeloc);
+				//				});
+				//
+			});
+		</script>
+	</body>
+
+</html>

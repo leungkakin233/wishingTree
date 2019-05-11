@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title></title>
+    <link href="../../css/mui.min.css" rel="stylesheet"/>
+    <link href="../../css/preview.css" rel="stylesheet"/>
+	<style type="text/css">
+		.mui-bar, .mui-bar-nav{
+			background-color: #F3F3F3;
+			height: 50px;
+		}
+		.mui-bar.mui-bar-nav a{
+			color: black;
+			font-size: 18px;
+			padding-top: 17px;
+		}
+		.mui-content{
+			width: 90%;
+			margin:2rem auto;
+		}
+		.mui-content input{
+			height: 3.7rem;
+			border-radius: 0;
+			border-bottom:1px solid #d8d8d8;
+		}
+		
+		.autotextarea{
+			border-top-right-radius:7px;
+			border-top-left-radius:7px;
+			border: none;
+		}
+		.selectphoto{
+			background-color: #FFFFFF;
+			padding-left: 0.7rem;
+			display: flex;
+			flex-wrap: wrap;
+		}
+		.imgbox{
+			margin-right:1.3% ;
+			margin-left:1.3% ;
+			margin-bottom: 2%;
+			height: 4rem;
+			width: 4rem;
+			border: none;
+			position: relative;
+		}
+		.imgbox>.close_icon{
+			position: absolute;
+			background-color: rgba(0,0,0,0.2);
+			background-o: ;
+			width: 0.8rem !important;
+			height: 0.8rem !important;
+			right:-0.1rem;
+			top: 0;
+		}
+		.imgbox img{
+			height: 4rem;
+			width: 100% !important;
+		}
+		.selectphoto img{
+			margin-right:2% ;
+			height: 4rem;
+			width: 17%;
+		}
+		h5{
+			padding-left: 0.7rem;
+		}
+		.bgc{
+			background-color: #FFFFFF;
+			border-radius: 7px;
+		}
+		.location{
+			height: 2.5rem;
+			border-top: 1px solid #ebebeb;
+			display: flex;
+		}
+		.adress{
+			height: 100%;
+			width: 20%;
+		}
+		.adress p{
+			line-height:2.5rem;
+			padding-right: 0;
+			padding-left: 0.7rem;
+		}
+		.text{
+			width: 70%;
+			line-height:2.5rem;
+			overflow: hidden;
+		}
+		.icon img{
+			height: 1.25rem;
+			margin-top: 0.5rem;
+		}
+		.blank{
+			width: 61%;
+		}
+		.mui-input-row{
+			border-top:1px solid #d8d8d8;
+			border-bottom: none;
+			width: 100%;
+			display: flex;
+		}
+		li{
+			list-style: none;
+			font-size: 1rem;
+			color: #4b4e51 ;
+		}
+		p ,h5{
+			color: #4b4e51 ;
+		}
+	</style>
+</head>
+<body>
+	
+	<header class="mui-bar mui-bar-nav">
+		<a id="back" class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left">帮助他-更新求助信息</a>
+		<button id="submit" class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">提交</button>
+	</header>
+	
+	<div class="mui-content">
+		<div class="bgc">
+		<form action="" method="post">
+		<div class="input2">
+			<textarea id="textarea" class="autotextarea" rows="6" cols="100%" placeholder="请输入文本说明(如我在哪里看见过)"></textarea>
+		</div>
+		<div class="tip">
+			<h5>上传图片说明</h5>
+		</div>
+		<div id="selectphoto" class="selectphoto">
+			<div id="exam" class="imgbox">
+				<img id="choosephoto" src="../../image/pub_ico_tianjia.png"/>
+			</div>
+		</div>
+		<div id="getlocation" class="location">
+			<div class="adress">
+				<p>地址</p>
+			</div>
+			<div class="text">
+				<p id="location"></p>
+			</div>
+			<div class="icon">
+				<img src="../../image/location@3x.png" >
+			</div>
+		</div>
+		</form>
+		</div>
+	</div>
+	
+	<script src="../../js/mui.min.js"></script>
+	<script src="../../js/mui.zoom.js"></script>
+	<script src="../../js/mui.previewimage.js"></script>
+	<script src="../../js/http.js"></script>
+	<script src="../../js/getuser.js"></script>
+	<script src="../../js/uploadphoto.js"></script>
+	<script src="../../js/commonFunction.js" ></script>
+	<script type="text/javascript">
+			
+			function GetRequest() {
+				var url = location.search; //获取url中"?"符后的字串
+				var request = new Object();
+				if(url.indexOf("?") != -1) {
+					var str = url.substr(1);
+					strs = str.split("&");
+					for(var i = 0; i < strs.length; i++) {
+						request[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1]);
+					}
+				}
+				res_id = request.res_id;
+				id = request.id;
+			}
+			GetRequest();
+
+		
+//			页面关闭
+			document.getElementById("back").addEventListener("tap",function(){
+			if(close()==true){
+					window.JsInterface.closeWindow(true);
+				}else if(close()==false){
+					window.webkit.messageHandlers.closeWindow.postMessage({});
+				}
+			});
+			
+//			调用图片预览
+			mui.previewImage();
+			
+//			获取当前位置
+			document.getElementById('location').innerHTML=getLocation().address;
+		
+//			获取位置
+			document.getElementById('getlocation').addEventListener('tap', function() {
+					window.JsInterface.selectAddress();
+				})
+				function onSelectAddressComplete(data){
+					longitude = data.longitude;
+					latitude = data.latitude;
+					Address = data.address;
+					country = data.country;
+					province = data.province;
+					city = data.city;
+					county = data.county;
+					street = data.street;
+					hasSpeed = data.hasSpeed;
+					speed = data.speed;
+					hasRadius = data.hasRadius;
+					radius = data.radius;
+					circleRange = data.circleRange;
+					document.getElementById("location").innerHTML=Address;
+				};
+		
+			
+//			提交评论
+			document.getElementById('submit').addEventListener('tap', function(){
+				var description=document.getElementById('textarea').value;
+				mui.ajax('http://139.159.148.149:8081/platform/api/comment/v1/reply', {
+				data: {
+					"res": {
+						"id": res_id,
+						"viewType": "ALL"
+					},
+					"comment": {
+						"content": description,
+						"imageUrlList":arr
+					}
+				},
+				headers: {
+					'Content-Type': 'application/json;charset=UTF-8',
+					"token": token
+				},
+				dataType: 'json', //服务器返回json格式数据
+				type: 'post', //HTTP请求类型
+				timeout: 10000, //超时时间设置为10秒；=
+				success: function(data) { //服务器返回响应，根据响应结果，分析是否登录成功；
+					mui.toast('上传成功');
+//					alert(JSON.stringify(data));
+				},
+				error: function(xhr, type, errorThrown){//异常处理；
+					alert('上传失败');
+				}
+			});
+			
+			mui.ajax('http://139.159.148.149:8081/platform/api/activity/v1/signIn/help',{
+		    data:{
+				"user": {
+							"userId":userid,
+							"nickname":nickname,
+							"roleId": roleId,
+							"token": token,
+							"viewType": "ALL",
+						},
+						"item": {
+							"id":id,
+						}
+						},
+					headers: {
+						'Content-Type': 'application/json;charset=UTF-8',
+						"token": token
+					},
+		    dataType:'json',//服务器返回json格式数据
+		    type:'post',//HTTP请求类型
+		    timeout:10000,//超时时间设置为10秒；
+		    success:function(data){
+		        window.JsInterface.closeWindow(true);
+		    },
+		    error:function(xhr,type,errorThrown){
+		        //异常处理；
+		        alert ('参加失败');
+		    }
+		});
+			
+			})
+		
+		
+		
+//		    输入框自适应高度
+		function makeExpandingArea(el) {
+				var setStyle = function(el) {
+					el.style.height = 'auto';
+					el.style.height = el.scrollHeight + 'px';
+					// console.log(el.scrollHeight);
+				}
+				var delayedResize = function(el) {
+					window.setTimeout(function() {
+						setStyle(el)
+					},
+					0);
+				}
+				if (el.addEventListener) {
+					el.addEventListener('input',function() {
+						setStyle(el)
+					},false);
+					setStyle(el)
+				} else if (el.attachEvent) {
+					el.attachEvent('onpropertychange',function() {
+						setStyle(el)
+					});
+					setStyle(el)
+				}
+				if (window.VBArray && window.addEventListener) { //IE9
+					el.attachEvent("onkeydown",function() {
+						var key = window.event.keyCode;
+						if (key == 8 || key == 46) delayedResize(el);
+
+					});
+					el.attachEvent("oncut",function() {
+						delayedResize(el);
+					}); //处理粘贴
+				}
+			}
+			makeExpandingArea(textarea);
+	</script>
+</body>
+</html>

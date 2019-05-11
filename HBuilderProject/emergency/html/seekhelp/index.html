@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link href="../../css/preview.css" rel="stylesheet" />
+		<style type="text/css">.mui-bar,
+.mui-bar-nav {
+	background-color: #F3F3F3;
+	height: 50px;
+}
+
+.mui-bar.mui-bar-nav a {
+	color: black;
+	font-size: 18px;
+	padding-top: 17px;
+}
+
+.mui-content {
+	margin-top: 5px;
+}
+
+.bgc {
+	background-color: #FFFFFF;
+}
+
+.mui-content input {
+	height: 3.7rem;
+	border-radius: 0;
+	margin-bottom: 0px;
+	border-bottom: 1px solid #d8d8d8 !important;
+	border: none;
+}
+
+.label-kind {
+	height: 3rem;
+	font-size: 1rem;
+	padding-left: 1rem;
+	background-color: #FFFFFF;
+	padding-top: 0.8rem;
+}
+
+.span1 {
+	float: right;
+	padding-right: 1rem;
+}
+
+.span3 {
+	width: 77%;
+	margin-right: 0.5rem;
+}
+
+.span4 {
+	font-size: 1.3rem;
+	padding-left: 1rem;
+}
+
+.span5 {
+	width: 85%;
+	padding-right: 0.5rem;
+	text-align: right;
+}
+
+.autotextarea {
+	border-bottom: none;
+	border-left: none;
+	border-right: none;
+	margin-bottom: 0px;
+}
+
+.location {
+	width: 100%;
+	background-color: #FFF;
+	font-size: 1rem;
+}
+
+.location img {
+	height: 100%;
+	padding-top: 0.5rem;
+}
+
+.map-story {
+	padding-left: 1rem;
+	padding-top: 0;
+}
+
+.selectphoto {
+	padding-left: 1rem;
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.imgbox {
+	margin-right: 1.3%;
+	margin-left: 1.3%;
+	margin-bottom: 2%;
+	height: 4rem;
+	width: 4rem;
+	border: none;
+	position: relative;
+}
+
+.imgbox>.close_icon {
+	position: absolute;
+	background-color: rgba(0, 0, 0, 0.2);
+	width: 0.8rem !important;
+	height: 0.8rem !important;
+	right: -0.1rem;
+	top: 0;
+}
+
+.imgbox img {
+	height: 4rem;
+	width: 100% !important;
+}
+
+.selectphoto img {
+	margin-right: 2%;
+	height: 4rem;
+	width: 17%;
+}
+
+.seetype,
+.award {
+	border-bottom: 1px solid #ececec;
+	padding-left: 1rem;
+}
+
+img {
+	height: 100%;
+}
+
+li {
+	width: 100%;
+	display: flex;
+	height: 3rem;
+	line-height: 3rem;
+	padding-top: 0 !important;
+}
+
+ul {
+	width: 100%;
+	background-color: #FFF;
+	padding-left: 0rem;
+	font-size: 1rem;
+}
+
+button {
+	width: 90% !important;
+	margin-left: 5% !important;
+}
+
+.popover1,
+.popover2 {
+	position: fixed;
+	height: 190px;
+	width: 60% !important;
+	left: 20% !important;
+	top: 40% !important;
+}
+
+.numberpopover {
+	position: fixed;
+	height: 120px;
+	width: 60% !important;
+	left: 20% !important;
+	top: 40% !important;
+	overflow: hidden;
+}
+
+.button2 {
+	width: 100% !important;
+	margin-left: 0 !important;
+	border-radius: 10% !important;
+	border: none;
+}
+
+#go {
+	position: fixed;
+	bottom: 0.5rem;
+}
+
+#go>img {
+	left: 2rem;
+	top: 15%;
+	width: 2.5rem;
+	height: 2.5rem;
+	border-radius: 50%;
+	position: absolute;
+}
+
+.mui-numbox {
+	width: 100%;
+	height: 60%;
+	border-style: none;
+}
+
+.mui-btn-numbox-minus,
+.mui-btn-numbox-plus {
+	width: 30% !important;
+}
+
+.mui-input-numbox {
+	width: 40% !important;
+}
+
+.mui-btn-numbox-minus {
+	margin-left: 0 !important;
+}
+
+.icon_wall {
+	height: 100%;
+	width: 65%;
+	display: flex;
+	float: right;
+	overflow-x: scroll;
+	/*padding-right: 0.5rem;*/
+	text-align: right;
+	margin-right: 1rem;
+}
+
+.icon_wall img {
+	float: right;
+	height: 2.4rem;
+	width: 2.4rem;
+	margin-top: 0.3rem;
+	margin-right: 0.6rem;
+}</style>
+	</head>
+
+	<body>
+
+		<header class="mui-bar mui-bar-nav">
+			<a id="back" class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left">求助</a>
+		</header>
+
+		<div class="mui-content">
+			<form action="" method="post">
+				<input class="input1" type="text" maxlength="30" placeholder="请输入6-30个字的标题" />
+				<div class="label-kind">
+					类别标签<span class="span1"></span>
+				</div>
+				<div class="bgc">
+					<div class="input2">
+						<textarea id="textarea" class="autotextarea" placeholder="请输入20-200字内的求助内容概述" rows="6" cols="100%"></textarea>
+					</div>
+					<div id="selectphoto" class="selectphoto">
+						<!--<div class="imgbox">
+				<img class="close_icon" src="../../image/pub_ico_close.png"/>
+				<img src="../../image/7.jpg" data-preview-src="" data-preview-group="1"/>
+			</div>-->
+						<div id="exam" class="imgbox">
+							<img id="choosephoto" src="../../image/tree_ico_photo_nor.png" />
+						</div>
+					</div>
+				</div>
+				<ul>
+					<li id="getlocation" class="mui-table-view-cell location">
+
+						<img src="../../image/location@3x.png" />
+						<span id="location" class="span2"></span>
+
+					</li>
+					<li class="mui-table-view-cell map-story">
+						放入我的地图故事
+						<div id="switch" class="mui-switch mui-switch-blue mui-active mui-switch-mini">
+							<div class="mui-switch-handle"></div>
+						</div>
+					</li>
+				</ul>
+				<ul>
+					<li id="WhoCanSee" class="seetype">
+						<div style="width: 35%;">
+							谁可以看
+						</div>
+						<div class="icon_wall">
+							<span class="span3"><a id='quanxian'>公开</a></span>
+						</div>
+					</li>
+					<li id="@who" class="friends" style="padding-left: 0;">
+						<div style="width: 35%;">
+							<span class="span4">@</span>提醒谁看
+						</div>
+						<div class="icon_wall">
+						</div>
+					</li>
+				</ul>
+				<ul>
+					<li class="award">
+						打赏<span class="span5"><a id="awardnumber" style="color:#fb8d80;">0</a></span>
+					</li>
+				</ul>
+
+			</form>
+			<button id="go" type="button" class="mui-btn mui-btn-blue mui-btn-block"><img/>发布</button>
+			
+
+			<div id="helptype" class="popover2 mui-popover">
+				<ul class="mui-table-view">
+					<li id="0" class="mui-table-view-cell help">110紧急求助</li>
+					<li id="1" class="mui-table-view-cell help">120紧急求助</li>
+					<li id="2" class="mui-table-view-cell help">家庭求助</li>
+					<li id="3" class="mui-table-view-cell help">社会求助</li>
+					<li id="4" class="mui-table-view-cell help">公益求助</li>
+				</ul>
+			</div>
+			<div id="middlePopover" class="mui-popover popover1">
+				<ul class="mui-table-view">
+					<li id="public" class="mui-table-view-cell scope">公开</li>
+					<li id="private" class="mui-table-view-cell scope">私有</li>
+					<li id="share" class="mui-table-view-cell scope">给谁看</li>
+					<li id="unshare" class="mui-table-view-cell scope">不给谁看</li>
+				</ul>
+			</div>
+
+			<div id="otherPopover" class="numberpopover mui-popover">
+				<div class="mui-numbox" data-numbox-min='0'>
+					<button class="mui-btn mui-btn-numbox-minus" type="button">-</button>
+					<input class="mui-input-numbox" value="50" type="number" />
+					<button class="mui-btn mui-btn-numbox-plus" type="button">+</button>
+				</div>
+				<div style="width: 100%;height: 40%;">
+					<button class="button2">确认</button>
+				</div>
+			</div>
+		</div>
+		<div style="height: 5rem;width: 100%;"></div>
+
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/mui.zoom.js"></script>
+		<script src="../../js/mui.previewimage.js"></script>
+		<script src="../../js/uploadphoto.js"></script>
+		<script src="../../js/http.js"></script>
+		<script src="../../js/base64.js"></script>
+		<script src="../../js/commonFunction.js"></script>
+		<script type="text/javascript">
+		mui.ajax('http://139.159.149.232:8000/zhi/szrole/role/', {
+		//					data: {},
+		headers: {
+			'Content-Type': 'application/json;charset=UTF-8',
+			"Authorization": getToken()
+		},
+		dataType: "json",
+		type: "GET",
+		Timeout: 3000,
+		success: function(data) {
+			//					alert(JSON.stringify(data))
+			for(var i = 0; i < data.length; i++) {
+				if(data[i].rtype == 'User') {
+					document.getElementById('go').children[0].src = data[i].photo;
+					break;
+				}
+			}
+		},
+		error: function(xhr, type, errorThrown) {
+			mui.toast('获取账号角色头像失败')
+		}
+	})
+
+	mui.previewImage();
+	mui.init({
+		gestureConfig: {
+			longtap: true,
+			hold: true,
+			release: true
+		}
+	})
+	
+	if(localStorage.getItem('authorizeList')) {
+		var authorizeList = JSON.parse(localStorage.getItem('authorizeList'));
+		localStorage.setItem('authorizeList', JSON.stringify(authorizeList));
+	} else {
+		var authorizeList = new Object();
+	}
+	
+	if(localStorage.getItem('reminderList')) {
+		var reminderList = JSON.parse(localStorage.getItem('reminderList'));
+		//					alert(localStorage.getItem('reminderList'))
+		localStorage.setItem('reminderList', JSON.stringify(reminderList));
+	} else {
+		var reminderList = new Array;
+	}
+	
+	window.onload = function() {
+		var req_typeid;
+		var type;
+
+	if(localStorage.getItem('remindORwhoCanSee')) {
+		var remindORwhoCanSee = localStorage.getItem('remindORwhoCanSee');
+		if(remindORwhoCanSee == 'WhoCanSee') {
+			if(localStorage.getItem('SecondArray')) {
+				authorizeList = JSON.parse(localStorage.getItem('SecondArray'));
+				localStorage.setItem('authorizeList', JSON.stringify(authorizeList));
+			}
+		} else if(remindORwhoCanSee == '@who') {
+			if(localStorage.getItem('reminderList')) {
+				reminderList = JSON.parse(localStorage.getItem('reminderList'));
+				//					for(var i=0;i<reminderList.length;i++){
+				//						delete reminderList[i].whiteList;
+				//					}
+				localStorage.setItem('reminderList', JSON.stringify(reminderList));
+			}
+		}
+	} else {
+		var remindORwhoCanSee;
+	}
+	//				alert(JSON.stringify(authorizeList))
+	function load_localstorage() {
+		var C = document.getElementById('exam');
+		var item = JSON.parse(localStorage.getItem('item'));
+		var req_typeid = localStorage.getItem('req_typeid');
+		var isActive = localStorage.getItem('isActive');
+
+		localStorage.removeItem('item');
+		localStorage.removeItem('req_typeid');
+		localStorage.removeItem('isActive');
+
+		if(isActive == 'false') {
+			document.getElementById("switch").classList.remove("mui-active");
+		} else {
+			document.getElementById("switch").classList.add("mui-active");
+		}
+		switch(req_typeid) {
+			case "4028834c6809d6c7016809d769800001":
+				type = '110紧急求助';
+				break;
+			case "4028834c6809d6c7016809d769810002":
+				type = '120紧急求助';
+				break;
+			case "4028834c6809d6c7016809d769810005":
+				type = '家庭求助';
+				break;
+			case "4028834c6809d6c7016809d769810003":
+				type = '社会求助';
+				break;
+			case "4028834c6809d6c7016809d769810004":
+				type = '公益求助';
+				break;
+			default:
+				type = '公益求助';
+				break;
+		}
+		document.getElementsByClassName('span1')[0].innerHTML = type;
+		if(item) {
+			document.getElementsByTagName('input')[0].value = item.title;
+			document.getElementById('textarea').value = item.content;
+
+			function loadphoto() {
+				var len = item.imageUrlList.length;
+				for(i = 0; i < len; i++) {
+					one = item.imageUrlList[i];
+					arr.push(one);
+					if(i > 7) {
+						C.style.display = 'none';
+					}
+					img = new Image();
+					img.src = one;
+					img.setAttribute('data-preview-group', '1');
+					img.setAttribute('data-preview-src', '');
+					var div = document.createElement('div');
+					div.setAttribute('class', 'imgbox');
+					var close = document.createElement('img');
+					close.setAttribute('class', 'close_icon');
+					close.setAttribute('src', '../../image/pub_ico_close.png');
+					div.appendChild(close);
+					div.appendChild(img);
+					document.getElementById("selectphoto").insertBefore(div, C);
+				};
+			}
+			loadphoto();
+		}
+	}
+	load_localstorage();
+
+	if(authorizeList.list && authorizeList.list.length > 0) {
+		document.getElementsByClassName('icon_wall')[0].innerHTML = null;
+		for(var i = 0; i < authorizeList.list.length; i++) {
+			var img = new Image();
+			if(authorizeList.list[i].user) {
+				img.src = authorizeList.list[i].user.icon;
+				document.getElementsByClassName('icon_wall')[0].appendChild(img);
+			} else if(authorizeList.list[i].group) {
+				img.src = authorizeList.list[i].group.icon;
+				document.getElementsByClassName('icon_wall')[0].appendChild(img);
+			}
+
+		}
+	}
+
+	if(reminderList.length > 0) {
+		document.getElementsByClassName('icon_wall')[1].innerHTML = null;
+		for(var i = 0; i < reminderList.length; i++) {
+			var img = new Image();
+			if(reminderList[i].user) {
+				img.src = reminderList[i].user.icon;
+				document.getElementsByClassName('icon_wall')[1].appendChild(img);
+			} else if(reminderList[i].group) {
+				img.src = reminderList[i].group.icon;
+				document.getElementsByClassName('icon_wall')[1].appendChild(img);
+			}
+
+		}
+	}
+}
+
+//		页面关闭
+document.getElementById("back").addEventListener("tap", function() {
+	localStorage.removeItem('reminderList');
+	localStorage.removeItem('authorizeList');
+				if(close()==true){
+					window.JsInterface.closeWindow();
+				}else if(close()==false){
+					window.webkit.messageHandlers.closeWindow.postMessage({});
+				}
+});
+
+//		获取当前位置
+getLocation();
+document.getElementById('location').innerHTML = getLocation().address;
+
+//		获取位置
+document.getElementById('getlocation').addEventListener('tap', function() {
+	window.JsInterface.selectAddress();
+})
+
+function onSelectAddressComplete(data) {
+	Address = data;
+	document.getElementById("location").innerHTML = Address.address;
+};
+
+//		公益类型
+mui("body").on('tap', ".label-kind", function() {
+	mui('.popover2').popover('show'); //显示
+	mui('.popover2').popover('hide'); //隐藏
+	mui('.popover2').popover('toggle'); //自动识别处理显示隐藏状态
+})
+
+getUser();
+req_typeid = '4028834c6809d6c7016809d769810004';
+mui("body").on('tap', ".help", function() {
+	var type = this.innerHTML;
+	var typeid = this.id;
+	document.getElementsByClassName('span1')[0].innerHTML = type;
+	mui.ajax('http://139.159.148.149:8081/platform/api/activity/v1/category/list/help', {    
+		headers: {
+			'Content-Type': 'application/json;charset=UTF-8',
+			"token": getToken()
+		},
+		    dataType: 'json', //服务器返回json格式数据
+		    type: 'get', //HTTP请求类型
+		    timeout: 10000, //超时时间设置为10秒；
+		    success: function(data) { 
+			req_typeid = data.data[typeid].id;
+		},
+		    error: function(xhr, type, errorThrown) {        
+			mui.toast('啊哦，出问题了');    
+		}
+	});
+	mui('.popover2').popover('hide'); //隐藏
+})
+
+function CacheData() {
+	var isActive = document.getElementById("switch").classList.contains("mui-active");
+	var title = document.getElementsByTagName('input')[0].value;
+	var content = document.getElementById('textarea').value;
+	var integral = Number(document.getElementById('awardnumber').innerHTML) + Number(500);
+	var map_arr = new Array;
+	var another_arr = new Array;
+	var item = new Object();
+	item.title = title;
+	if(title == '') {
+		switch(req_typeid) {
+			case "4028834c6809d6c7016809d769800001":
+				item.title = '110紧急求助';
+				break;
+			case "4028834c6809d6c7016809d769810002":
+				item.title = '120紧急求助';
+				break;
+			case "4028834c6809d6c7016809d769810005":
+				item.title = '家庭求助';
+				break;
+			case "4028834c6809d6c7016809d769810003":
+				item.title = '社会求助';
+				break;
+			case "4028834c6809d6c7016809d769810004":
+				item.title = '公益求助';
+				break;
+		}
+	}
+	item.content = content;
+	if(!arr[0]) {
+		switch(req_typeid) {
+			case "4028834c6809d6c7016809d769800001":
+				map_arr[0] = '../../image/110@2x.png';
+				break;
+			case "4028834c6809d6c7016809d769810002":
+				map_arr[0] = '../../image/120@2x.png';
+				break;
+			case "4028834c6809d6c7016809d769810005":
+				map_arr[0] = '../../image/callfamily@2x.png';
+				break;
+			case "4028834c6809d6c7016809d769810003":
+				map_arr[0] = '../../image/clique@2x.png';
+				break;
+			case "4028834c6809d6c7016809d769810004":
+				map_arr[0] = '../../image/zhijia_icon.png';
+				break;
+		}
+	}
+	item.imageUrlList = arr;
+	if(map_arr[0]) {
+		another_arr[0] = map_arr[0];
+	} else {
+		another_arr[0] = arr[0];
+	}
+	localStorage.setItem('isActive', isActive);
+	localStorage.setItem('item', JSON.stringify(item));
+	localStorage.setItem('req_typeid', req_typeid);
+	//根据指令判断进入哪个选择界面
+	if(remindORwhoCanSee == 'WhoCanSee') {
+		window.JsInterface.openWindow(localurl + '/html/whoPermittedToView/view_kind.html');
+	} else if(remindORwhoCanSee == '@who') {
+		window.JsInterface.openWindow(localurl + '/html/whoPermittedToView/selectContactFriends.html');
+	}
+}
+
+//谁可以看
+document.getElementById('WhoCanSee').addEventListener('tap', function() {
+	remindORwhoCanSee = 'WhoCanSee';
+	localStorage.setItem('remindORwhoCanSee', remindORwhoCanSee);
+	CacheData();
+})
+
+//		提醒谁看
+document.getElementById('@who').addEventListener('tap', function() {
+	remindORwhoCanSee = '@who';
+	localStorage.setItem('remindORwhoCanSee', remindORwhoCanSee);
+	CacheData();
+})
+
+//		打赏金额popover
+mui("body").on('tap', ".award", function() {
+	mui('.numberpopover').popover('show'); //显示
+	mui('.numberpopover').popover('hide'); //隐藏
+	mui('.numberpopover').popover('toggle'); //自动识别处理显示隐藏状态
+})
+
+// 		打赏金额确认
+mui("body").on('tap', ".button2", function() {
+	var num = document.getElementsByClassName('mui-input-numbox')[0].value;
+	document.getElementById('awardnumber').innerHTML = num;
+	mui('.numberpopover').popover('hide'); //隐藏
+})
+
+//		发送请求 
+document.getElementById('go').addEventListener('tap', function() {
+	var title = document.getElementsByTagName('input')[0].value;
+	var content = document.getElementById('textarea').value;
+	var integral = Number(document.getElementById('awardnumber').innerHTML) + Number(500);
+	var map_arr = new Array;
+	var another_arr = new Array;
+	var item = new Object();
+	item.title = title;
+	if(title == '') {
+		switch(req_typeid) {
+			case "4028834c6809d6c7016809d769800001":
+				item.title = '110紧急求助';
+				break;
+			case "4028834c6809d6c7016809d769810002":
+				item.title = '120紧急求助';
+				break;
+			case "4028834c6809d6c7016809d769810005":
+				item.title = '家庭求助';
+				break;
+			case "4028834c6809d6c7016809d769810003":
+				item.title = '社会求助';
+				break;
+			case "4028834c6809d6c7016809d769810004":
+				item.title = '公益求助';
+				break;
+		}
+	}
+	item.content = content;
+	if(!arr[0]) {
+		switch(req_typeid) {
+			case "4028834c6809d6c7016809d769800001":
+				map_arr[0] = '../../image/110@2x.png';
+				break;
+			case "4028834c6809d6c7016809d769810002":
+				map_arr[0] = '../../image/120@2x.png';
+				break;
+			case "4028834c6809d6c7016809d769810005":
+				map_arr[0] = '../../image/callfamily@2x.png';
+				break;
+			case "4028834c6809d6c7016809d769810003":
+				map_arr[0] = '../../image/clique@2x.png';
+				break;
+			case "4028834c6809d6c7016809d769810004":
+				map_arr[0] = '../../image/zhijia_icon.png';
+				break;
+		}
+	}
+	item.imageUrlList = arr;
+	if(map_arr[0]) {
+		another_arr[0] = map_arr[0];
+	} else {
+		another_arr[0] = arr[0];
+	}
+
+	IndexsendHelpByCategory(req_typeid, item, reminderList, authorizeList.list, function(type, data) {
+		if(type == 0) {
+			var id = data.data.id;
+			var res_id = data.data.res.id;
+			var star_id = 'help:' + id + '#' + res_id;
+			var base = new Base64();
+			var base64_content = base.encode(content);
+			//同步到图钉
+			var isActive = document.getElementById("switch").classList.contains("mui-active");
+			if(isActive) {
+				mui.ajax('http://139.159.148.149:8081/platform/api/user/v1/social/add', {
+					data: {
+						"res": {
+							"title": title,
+							"viewType": "ALL"
+						},
+						"reminderList": reminderList,
+						"authorizeList": authorizeList.list,
+						"news": {
+							'extParameters': [{
+								'key': star_id,
+								'value': another_arr[0]
+							}],
+							"content": base64_content,
+							"location": Address,
+							"imageUrlList": arr
+						}
+					},
+					headers: {
+						'Content-Type': 'application/json;charset=UTF-8',
+						"token": getToken()
+					},
+					dataType: "json",
+					type: "post",
+					Timeout: 5000,
+					success: function(data) {
+						//							alert('同步成功')
+					},
+					error: function(xhr, type, errorThrown) {
+						alert(xhr.responseText)
+					}
+				})
+			} else {}
+			//				        alert(JSON.stringify(data))
+			window.JsInterface.openWindow(localurl + "/html/seekhelp/helpdetail.html?id=" + id + '&res_id=' + res_id);
+		} else {
+
+		}
+	})
+})
+//		function makeExpandingArea(el) {
+//				var setStyle = function(el) {
+//					el.style.height = 'auto';
+//					el.style.height = el.scrollHeight + 'px';
+//					// console.log(el.scrollHeight);
+//				}
+//				var delayedResize = function(el) {
+//					window.setTimeout(function() {
+//						setStyle(el)
+//					},
+//					0);
+//				}
+//				if (el.addEventListener) {
+//					el.addEventListener('input',function() {
+//						setStyle(el)
+//					},false);
+//					setStyle(el)
+//				} else if (el.attachEvent) {
+//					el.attachEvent('onpropertychange',function() {
+//						setStyle(el)
+//					});
+//					setStyle(el)
+//				}
+//				if (window.VBArray && window.addEventListener) { //IE9
+//					el.attachEvent("onkeydown",function() {
+//						var key = window.event.keyCode;
+//						if (key == 8 || key == 46) delayedResize(el);
+//
+//					});
+//					el.attachEvent("oncut",function() {
+//						delayedResize(el);
+//					}); //处理粘贴
+//				}
+//			}
+//			makeExpandingArea(textarea);</script>
+	</body>
+
+</html>

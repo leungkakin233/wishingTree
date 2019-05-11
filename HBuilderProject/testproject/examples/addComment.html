@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta name="flexible" content="initial-dpr=2" />
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link href="../css/mui.css" rel="stylesheet" />
+		<style type="text/css">
+			.mui-content {
+				background-color: white;
+
+			}
+
+			.mui-btn-link:active {
+				color: blue !important;
+			}
+
+			.back {
+				font-size: 16px;
+				line-height: 44px;
+				top: 0;
+				padding: 0;
+				color: black;
+				border: 0;
+				background: transparent;
+			}
+
+			.back:active {
+				color: red !important;
+				background: transparent !important;
+			}
+
+			.wish-textarea1 {
+				margin-top: 0.7rem;
+				margin-left: 5%;
+				width: 90%;
+				height: 4rem;
+				z-index: 5;
+				border: 0;
+				background-color: transparent;
+				overflow: hidden;
+				resize: none;
+				border-style: none;
+				border: solid 1px #000000;
+				font-weight: 500;
+			}
+
+			textarea::-webkit-input-placeholder {
+				color: black;
+				font-size: 0.375rem;
+				font-weight: 500;
+			}
+
+			.list {
+				left: 5%;
+				width: 85%;
+			}
+
+			.mui-table-view:before {
+				left: 5%;
+				width: 95%;
+			}
+
+			.mui-table-view:after {
+				left: 5%;
+				width: 95%;
+			}
+
+			.mui-table-view-cell:after {
+				width: 95%;
+			}
+
+			.addphoto {
+				margin: 5%;
+				width: 2.5rem;
+				height: 2.5rem;
+				top: 8.75rem;
+				left: 4.4rem;
+				bottom: 0;
+				right: 0;
+				z-index: 5;
+			}
+
+			.photoWall {}
+
+			.photoWall img {
+				margin: 5%;
+				width: 3rem;
+				height: 3rem;
+				top: 8.75rem;
+				left: 4.4rem;
+				bottom: 0;
+				right: 0;
+				z-index: 5;
+			}
+		</style>
+		<title></title>
+	</head>
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<button id="submit" class=" back red mui-pull-left">取消</button>
+			<h1 class="mui-title">发表评论</h1>
+			<button id="submit" class=" mui-btn-link mui-pull-right" disabled="disabled">发布</button>
+		</header>
+		<div class="mui-content">
+			<textarea class="wish-textarea1" id="textarea1" placeholder="此时的想法..."></textarea>
+			<div class="photoWall">
+				<img src="../images/add.png" class="addphoto" id="addphoto" />
+
+			</div>
+
+			<ul id="items">
+				<li>item 1</li>
+				<li>item 2</li>
+				<li>item 3</li>
+			</ul>
+		</div>
+		<script src="../js/mui.js"></script>
+		<script src="http://g.tbcdn.cn/mtb/lib-flexible/0.3.4/??flexible_css.js,flexible.js"></script>
+		<script src="../js/vue.min.js"></script>
+		<script src="../js/Sortable.min.js"></script>
+		<script type="text/javascript">
+			mui.init({
+				longtap: true,
+			});
+			var imgsrc = [];
+
+			document.getElementById('submit').addEventListener('tap', function() {
+				mui.toast('发布成功');
+			})
+
+			document.getElementById('addphoto').addEventListener('taop', function() {
+
+			})
+
+			var el = document.getElementById('items');
+			var sortable = Sortable.create(el, {});
+		</script>
+	</body>
+</html>

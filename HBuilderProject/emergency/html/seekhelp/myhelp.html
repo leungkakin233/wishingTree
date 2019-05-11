@@ -1,0 +1,398 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.css" rel="stylesheet" />
+		<link href="../../css/mui.min.css" rel="stylesheet">
+		<link href="../../css/mui.indexedlist.css" rel="stylesheet" />
+		<style type="text/css">
+			.mui-bar,
+			.mui-bar-nav {
+				background-color: #F3F3F3;
+				height: 9rem;
+				background-image: url(../../image/sos_bg_top.png);
+				background-repeat: no-repeat;
+				background-size: 100% 100%;
+				-moz-background-size: 100% 100%;
+			}
+			
+			#back {
+				height: 2rem;
+				position: absolute;
+				top: 0.6rem;
+			}
+			
+			#ALLseekHelp {
+				position: absolute;
+				top: 0.6rem;
+				right: 1rem;
+				color: white;
+				line-height: 2rem;
+				background-color: rgba(147, 40, 5, 0.8);
+				height: 2rem;
+				width: 6rem;
+				text-align: center;
+				border-radius: 15px;
+			}
+			
+			.mui-content {
+				margin-top: 9.8rem;
+			}
+			
+			.mui-slider-indicator.mui-segmented-control.mui-segmented-control-inverted {
+				background-color: #f3f3f3;
+				height: 3.5rem;
+				padding-top: 0.5rem;
+				vertical-align: middle;
+				position: fixed;
+				z-index: 9;
+				top: 9rem;
+			}
+			
+			.mui-slider-group {
+				margin-top: 12.5rem;
+			}
+			
+			.list {
+				background-color: #FFF;
+				border-bottom: 1px solid #ebebeb;
+				height: 5rem;
+				display: flex;
+				padding-right: 0.2rem;
+			}
+			
+			.icon {
+				height: 100%;
+				width: 5rem;
+				text-align: center;
+			}
+			
+			.icon img {
+				height: 59%;
+				width: 68%;
+				margin-top: 24%;
+			}
+			
+			.text {
+				width: 100%;
+				padding-top: 0.4rem;
+			}
+			
+			.text p {
+				color: #000000;
+				font-size: 1rem;
+				margin-top: 0.4rem;
+				margin-bottom: 0.8rem;
+			}
+			
+			.text span {
+				font-size: 0.7rem;
+				margin-right: 0.5rem;
+			}
+			
+			.text img {
+				height: 0.7rem;
+			}
+			
+			.status {
+				color: #3298ff;
+			}
+			
+			.distance {
+				float: right;
+				margin-right: 1rem !important;
+				padding-top: 0.1rem;
+			}
+			
+			.addhelp {
+				height: 3.2rem;
+				width: 3.2rem;
+				position: fixed;
+				border-radius: 50%;
+				right: 1rem;
+				bottom: 3rem;
+				z-index: 1000;
+				display: felx;
+			}
+			
+			.addhelp img {
+				height: 100%;
+			}
+			.tips{
+				border: none;
+				padding-top: 4rem;
+				text-align: center;
+				font-size: 1rem;
+				display: none;
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<header class="mui-bar mui-bar-nav">
+			<img id="back" src="../../image/pub_ico_fanhui_nor.png" />
+			<div id="ALLseekHelp">
+				周边求助
+			</div>
+		</header>
+		<div class="mui-content">
+			<div id="sliderSegmentedControl" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+				<a class="mui-control-item mui-active" href="#item1mobile">
+					我的求助
+				</a>
+				<a class="mui-control-item" href="#item2mobile">
+					我帮助过的
+				</a>
+			</div>
+			<div class="mui-slider-group mui-scroll-wrapper">
+				<div class="mui-scroll">
+					<div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
+						<div id="totallist1" class="totallist">
+							<p class="tips">您还没有发过求助，太厉害了！</p>
+						</div>
+					</div>
+					<div id="item2mobile" class="mui-slider-item mui-control-content">
+						<div id="totallist2" class="totallist">
+							<p class="tips">您没有帮助过谁，去看看周边有没有人值得去帮的吧！小智会有公益值奖励给您哦！</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="addhelp" class="addhelp">
+				<img src="../../image/add@2x.png" />
+			</div>
+		</div>
+
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/getuser.js"></script>
+		<script src="../../js/http.js"></script>
+		<script src="../../js/native.js"></script>
+		<script src="../../js/commonFunction.js"></script>
+		<script type="text/javascript">
+
+			window.onload = function() {
+				mui('.mui-content').slider().stopped = true;
+				mui('.mui-scroll-wrapper').scroll().scrollTo(0, 0);
+				var totalpages;
+				//				var count = 0;
+			}
+
+			mui.init({
+				pullRefresh: {
+					container: '.mui-slider-group',
+					up: {
+						auto: true,
+						contentrefresh: '正在加载...',
+						callback: pullupRefresh
+					}
+				}
+			})
+
+   			//时间换算
+			function addZero(num) {
+				if(parseInt(num) < 10) {
+					num = '0' + num;
+				}
+				return num;
+			}
+			function getMyDate(str) {    
+				var oDate = new Date(str),
+					    oYear = oDate.getFullYear(),
+					    oMonth = oDate.getMonth() + 1,
+					    oDay = oDate.getDate(),
+					    oHour = oDate.getHours(),
+					    oMin = oDate.getMinutes(),
+					    oSen = oDate.getSeconds(),
+					    oTime = oYear + '-' + addZero(oMonth) + '-' + addZero(oDay) + ' ' + addZero(oHour) + ':' + addZero(oMin) + ':' + addZero(oSen);    
+				return oTime;
+			}
+
+			//			页面关闭
+			document.getElementById("back").addEventListener("tap", function() {
+				if(close()==true){
+					window.JsInterface.closeWindow(true);
+				}else if(close()==false){
+					window.webkit.messageHandlers.closeWindow.postMessage({});
+				}
+			});
+
+			//			跳转到发布求助
+			mui('body').on('tap', '#addhelp', function() {
+				window.JsInterface.openWindow(localurl + "/html/seekhelp/index.html");
+			})
+
+			//			跳转到周边求助
+			mui('body').on('tap', '#ALLseekHelp', function() {
+				window.JsInterface.openWindow(localurl + "/html/seekhelp/all_seekhelp.html");
+			})
+
+			//			列表跳转到详情
+			mui('body').on('tap', '.list', function() {
+				var id = this.id;
+				var res_id = this.getAttribute('data-res_id');
+				window.JsInterface.openWindow(localurl + "/html/seekhelp/helpdetail.html?id=" + id + '&res_id=' + res_id);
+			})
+
+			var URL1 = 'user/v1/activity/list/create/help?pageNo=';
+			var URL2 = 'user/v1/activity/list/singIn/help?pageNo=';
+			
+
+			function getlist(url, count) {
+				mui.ajax('http://139.159.148.149:8081/platform/api/' + url + count, {
+					data: {
+						"user": {
+							"userId": userid,
+							"nickname": nickname,
+							"roleId": roleId,
+							"token": token,
+							"viewType": "ALL"
+						}
+					},
+					headers: {
+						'Content-Type': 'application/json;charset=UTF-8',
+						"token": token
+					},
+					dataType: "json",
+					type: "post",
+					Timeout: 10000,
+					success: function(data) {
+//						alert(JSON.stringify(data))
+						//						totalpages=data.data.totalPages;
+						
+						if(data.data==null&&count==0){
+							if(url == 'user/v1/activity/list/create/help?pageNo=') {
+							document.getElementsByClassName('tips')[0].style.display='block';
+						} else {
+							document.getElementsByClassName('tips')[1].style.display='block';
+						}
+						}else{
+							var len = data.data.content.length;
+						if(url == 'user/v1/activity/list/create/help?pageNo=') {
+							var totallist = document.getElementById('totallist1');
+							totalpages1 = data.data.totalPages;
+						} else {
+							var totallist = document.getElementById('totallist2');
+							totalpages2 = data.data.totalPages;
+						}
+						for(var i = 0; i < len; i++) {
+							var list = document.createElement('div');
+
+							list.setAttribute('class', 'list');
+							list.setAttribute('id', data.data.content[i].id);
+							list.setAttribute('data-res_id', data.data.content[i].res.id);
+							totallist.appendChild(list);
+
+							var icon = document.createElement('div');
+							icon.setAttribute('class', 'icon');
+							if(data.data.content[i].imageUrlList[0]) {
+								icon.innerHTML = '<img src=' + data.data.content[i].imageUrlList[0] + '>';
+							} else {
+								switch(data.data.content[i].category.name) {
+									case "110求助":
+										icon.innerHTML = '<img class=\'icon\' src=\'../../image/110@2x.png\' style="background-color:#EB334D;">';
+										break;
+									case '120求助':
+										icon.innerHTML = '<img class=\'icon\' src=\'../../image/120@2x.png\' style="background-color:#F75B5C;">';
+										break;
+									case '家庭求助':
+										icon.innerHTML = '<img class=\'icon\' src=\'../../image/callfamily@2x.png\' style="background-color:#D97A4E;">';
+										break;
+									case '社会求助':
+										icon.innerHTML = '<img class=\'icon\' src=\'../../image/clique@2x.png\' style="background-color:#F59F30;">';
+										break;
+									case '公益求助':
+										icon.innerHTML = '<img class=\'icon\' src=\'../../image/sos_label_zjgy.png\'>';
+										break;
+								}
+							}
+							list.appendChild(icon);
+
+							var text = document.createElement('div');
+							text.setAttribute('class', 'text');
+							list.appendChild(text);
+
+							var p = document.createElement('p');
+							if(data.data.content[i].title.length>18){
+								p.innerHTML=data.data.content[i].title.slice(0,18)+'...'
+							}else{
+								p.innerHTML = data.data.content[i].title;
+							}
+							text.appendChild(p);
+
+							var location = document.createElement('span');
+							text.appendChild(location);
+							location.setAttribute('class', 'location');
+							location.innerHTML = '<img src="../../image/surrounding@2x.png" >' + data.data.content[i].location.province + data.data.content[i].location.city;
+
+							var time = document.createElement('span');
+							text.appendChild(time);
+							time.setAttribute('class', 'time');
+							var k = new Date().getTime();
+							var howlong = Math.floor((k - data.data.content[i].createTime) / 3600000);
+							if((k - data.data.content[i].createTime) / 60000 < 60) {
+								time.innerHTML = '[' + Math.floor((k - data.data.content[i].createTime) / 60000) + '分钟前' + ']';
+							} else if(howlong < 24) {
+								time.innerHTML = '[' + howlong + '小时前' + ']';
+							} else if(howlong < 720) {
+								time.innerHTML = '[' + Math.floor(howlong / 24) + '天前' + ']';
+							} else if(howlong > 720) {
+								time.innerHTML = '[' + getMyDate(data.data.content[i].createTime) + ']';
+							}
+
+							var status = document.createElement('span');
+							text.appendChild(status);
+							status.setAttribute('class', 'status');
+							if(data.data.content[i].status.opening == true && data.data.content[i].total == 0) {
+								status.innerHTML = '[等待帮助]';
+							} else if(data.data.content[i].status.opening == true && data.data.content[i].total > 0) {
+								status.innerHTML = '[求助中]';
+							} else {
+								status.innerHTML = '[已完成]';
+							}
+
+							var distance = document.createElement('span');
+							text.appendChild(distance);
+							distance.setAttribute('class', 'distance');
+							var lat1=Number(getLocation().latitude);
+							var lng1=Number(getLocation().longitude);
+							var lat2=Number(data.data.content[i].location.latitude);
+							var lng2=Number(data.data.content[i].location.longitude);
+							distance.innerHTML = '距离'+Math.floor(getFlatternDistance(lat1,lng1,lat2,lng2))+'m';
+						}
+//						mui.toast('更新成功')
+					}},
+					error: function(xhr, type, errorThrown) {
+						mui.toast('更新失败')
+					}
+				})
+			}
+			
+			
+			var totalpages1;
+			var totalpages2;
+			var count1 = 0;
+			var count2 = 0;
+			var biggerTotalpages=totalpages1>totalpages2?totalpages1:totalpages2;
+			function pullupRefresh() {
+				setTimeout(function() {
+					if(document.getElementsByClassName('mui-slider-item mui-control-content mui-active')[0].getAttribute('id') == 'item1mobile') {
+						mui('.mui-slider-group').pullRefresh().endPullupToRefresh((count2 == biggerTotalpages - 1));
+						getlist(URL1, count1);
+						count1++;
+					} else if(document.getElementsByClassName('mui-slider-item mui-control-content mui-active')[0].getAttribute('id') == 'item2mobile') {
+						mui('.mui-slider-group').pullRefresh().endPullupToRefresh((count2 == biggerTotalpages - 1));
+						getlist(URL2, count2);
+						count2++;
+					}
+				}, 1500);
+			}
+			getlist(URL2, count2);
+			count2++;
+		</script>
+	</body>
+
+</html>

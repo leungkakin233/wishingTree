@@ -1,0 +1,314 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta name="flexible" content="initial-dpr=2" />
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<title></title>
+		<link href="../css/mui.css" rel="stylesheet" />
+		<style type="text/css">
+			.power-head {
+				line-height: 42px;
+				max-width: 80px;
+				height: 80px;
+				float: left;
+				border: 0;
+				margin: 18px 10px;
+				margin-right: 10px;
+				outline: none;
+				white-space: nowrap;
+				-webkit-tap-highlight-color: transparent;
+			}
+
+			.pl-title {
+				margin-top: 30px;
+				margin-bottom: 10px;
+			}
+
+			.mui-content>.mui-table-view:first-child {
+				margin-top: 0;
+			}
+
+			.pl-span-title {
+				color: red;
+			}
+
+			.div-collection {
+				display: inline-block;
+				margin-left: 2px;
+				margin-right: 2px;
+				width: 31%;
+				height: 30px;
+				background-color: #EC16A3;
+				border-radius: 1em;
+				text-align: center;
+				font-size: 12px;
+				line-height: 2;
+				color: white;
+			}
+
+			.div-release {
+				display: inline-block;
+				margin-left: 2px;
+				margin-right: 2px;
+				height: 30px;
+				width: 31%;
+				background-color: #FB9A00;
+				border-radius: 1em;
+				text-align: center;
+				font-size: 12px;
+				line-height: 2;
+				color: white;
+			}
+
+			.div-Comment {
+				display: inline-block;
+				margin-left: 2px;
+				margin-right: 2px;
+				height: 30px;
+				width: 31%;
+				background-color: #3779BD;
+				border-radius: 1em;
+				text-align: center;
+				font-size: 12px;
+				line-height: 2;
+				color: white;
+			}
+
+			.div-get {
+				display: inline-block;
+				margin-left: 2px;
+				margin-right: 2px;
+				height: 30px;
+				width: 31%;
+				margin-top: 10px;
+				background-color: #3298FF;
+				border-radius: 1em;
+				text-align: center;
+				font-size: 12px;
+				line-height: 2;
+				color: white;
+			}
+
+			.div-commonweal {
+				display: inline-block;
+				margin-top: 10px;
+				margin-left: 2px;
+				margin-right: 2px;
+				height: 30px;
+				width: 31%;
+				background-color: #FF3232;
+				border-radius: 1em;
+				text-align: center;
+				font-size: 12px;
+				line-height: 2;
+				color: white;
+			}
+
+			.div-walk {
+				display: inline-block;
+				margin-top: 10px;
+				margin-left: 2px;
+				margin-right: 2px;
+				height: 30px;
+				width: 31%;
+				background-color: #0DA129;
+				border-radius: 2em;
+				text-align: center;
+				font-size: 12px;
+				line-height: 2;
+				color: white;
+			}
+
+			.pl-p {
+				margin-bottom: 0;
+				margin-left: 10px;
+			}
+
+			.pl-img {
+				max-width: 25px;
+				height: 25px;
+				float: left;
+				border: 0;
+				margin-right: 2px;
+				outline: none;
+				white-space: nowrap;
+				-webkit-tap-highlight-color: transparent;
+			}
+
+			.pl-span {
+				display: inline-block;
+				padding-top: 2px;
+				line-height: 1.4;
+			}
+
+			.span-second {
+				line-height: 1.9;
+			}
+
+			.span-third {
+				line-height: 1.5;
+				color: #014393;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" id="back"></a>
+			<h1 class="mui-title">公益值清单</h1>
+		</header>
+		<div class="mui-content" id="powerList">
+
+			<p class="pl-p">公益值收集统计:</p>
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<!-- 					<div class="mui-table-cell div-collection"><span>收藏 6592</span></div>
+					<div class="mui-table-cell div-release"><span>发布登记 4862</span></div>
+					<div class="mui-table-cell div-Comment"><span>点评 6589</span></div>
+					<div class="mui-table-cell div-get"><span>收取 58920</span></div>
+					<div class="mui-table-cell div-commonweal"><span>公益 68953</span></div>
+					<div class="mui-table-cell div-walk"><span>步行 6589 </span></div> -->
+					<div class="mui-row">
+						<div class="mui-table-cell mui-col-xs-4 div-collection"><span>收藏 6592</span></div>
+						<div class="mui-table-cell  mui-col-xs-4  div-release"><span>发布登记 4862</span></div>
+						<div class="mui-table-cell  mui-col-xs-4 div-Comment"><span>点评 6589</span></div>
+						<div class="mui-table-cell  mui-col-xs-4 div-get"><span>收取 58920</span></div>
+						<div class="mui-table-cell  mui-col-xs-4 div-commonweal"><span>公益 68953</span></div>
+						<div class="mui-table-cell  mui-col-xs-4 div-walk"><span>步行 6589 </span></div>
+					</div>
+				</li>
+
+
+				<!-- vue循环从这里开始 -->
+				<li class="mui-table-view-cell" v-for="log in logs">
+					<div class="mui-row">
+						<div class="mui-table-cell mui-col-sm-5 mui-col-xs-5 mui-text-left">
+							<img src="../images/tree_label_05ly.png" class="pl-img" />
+
+							<span class="pl-span">{{log.description}}</span>
+						</div>
+						<div class="mui-table-cell mui-col-sm-5 mui-col-xs-5">
+							<p class="span-second">{{log.time}}</p>
+						</div>
+						<div class="mui-table-cell mui-col-sm-2 mui-col-xs-2 mui-text-right">
+							<span class="span-third">{{log.point}}</span>
+						</div>
+					</div>
+				</li>
+
+				<li class="mui-table-view-cell"v-for="(item, index) in list" :key="item.key">
+					<div class="mui-row">
+						<div class="mui-table-cell mui-col-sm-3 mui-col-xs-3 mui-text-left">
+							<img src="../images/tree_label_05ly.png" class="pl-img" />
+
+							<span class="pl-span">{{item.val}}</span>
+						</div>
+						<div class="mui-table-cell mui-col-sm-3 mui-col-xs-3">
+							<p class="span-second">{{index}}</p>
+						</div>
+						<div class="mui-table-cell mui-col-sm-2 mui-col-xs-2 mui-text-right">
+							<span class="span-third">{{item.key}}</span>
+						</div>
+						<div class="mui-table-cell mui-col-sm-4 mui-col-xs-4 mui-text-right">
+							<span class="span-third" @click="deleteOne(index)">delete</span>
+						</div>
+					</div>
+				</li>
+
+				<div>
+					<div style="height: 45px;"></div>
+					<div v-for="(item, index) in list" :key="item.key">
+						<div>{{item.val}}+{{index}}</div>
+						<div @click="deleteOne(index)">delete</div>
+						<div style="height: 40px"></div>
+					</div>
+				</div>
+			</ul>
+		</div>
+		<script src="../js/mui.js"></script>
+		<script src="../js/vue.min.js"></script>
+		<script src="http://g.tbcdn.cn/mtb/lib-flexible/0.3.4/??flexible_css.js,flexible.js"></script>
+		<script type="text/javascript">
+			mui.init();
+			var treeid = null;
+
+
+			document.styleSheets[2].cssRules[17].style.textDecoration = 'none';
+
+			window.onload = function() {
+				var Storage = localStorage;
+				treeid = Storage.getItem("treeid");
+				// alert(treeid);
+
+
+				mui.ajax('http://node1.xiuhuahui.xyz:8080/platform/api/tree/v1/log/list', {
+					data: {
+						tree: {
+							id: "4028836a6750c926016750c94cd20000"
+						}
+					},
+					async: true,
+					dataType: 'json',
+					crossDomain: true,
+					type: 'post', //HTTP请求类型
+					timeout: 10000, //超时时间设置为10秒；
+					headers: {
+						'Content-Type': 'application/json;charset=UTF-8',
+					},
+					success: function(data) {
+						// alert(JSON.stringify(data));
+						powerlist.logs = data.data.content;
+						console.log(JSON.stringify(powerlist.logs));
+					},
+					error: function(xhr, type, errorThrown) {
+
+					}
+				});
+			}
+
+
+			var powerlist = new Vue({
+				el: '#powerList',
+				data: {
+					logs: [], //列表信息流数据,
+					list: [{
+							val: 111,
+							key: 1
+						},
+						{
+							val: 222,
+							key: 2
+						},
+						{
+							val: 333,
+							key: 3
+						},
+						{
+							val: 444,
+							key: 4
+						},
+						{
+							val: 555,
+							key: 5
+						}
+					]
+				},
+				methods: {
+					deleteOne(index) {
+						this.list.splice(index, 1)
+					}
+				}
+			})
+
+
+			document.getElementById('back').addEventListener('tap', function() {
+				window.JsInterface.closeWindow();
+			})
+		</script>
+	</body>
+
+</html>

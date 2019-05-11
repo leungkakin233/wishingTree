@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta name="flexible" content="initial-dpr=2" />
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<title></title>
+		<link href="../css/mui.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../css/shareH5.css" />
+		<script src="http://g.tbcdn.cn/mtb/lib-flexible/0.3.4/??flexible_css.js,flexible.js"></script>
+		<style type="text/css">
+			[v-cloak] {
+				display: none
+			}
+			
+			html,
+			body {
+				background-color: #efeff4;
+			}
+			
+			a:hover {
+				text-decoration: none;
+			}
+			
+			.img-popover {
+				position: fixed;
+				width: 0;
+				height: 0;
+				border-radius: 0;
+				left: 1.75rem;
+				top: 5rem;
+				margin: 0 auto;
+				z-index: 9999;
+				background-color: #fff;
+				-webkit-transform: translateX(-50%) translateY(-50%);
+				-moz-transform: translateX(-50%) translateY(-50%);
+				-ms-transform: translateX(-50%) translateY(-50%);
+				transform: translateX(-50%) translateY(-50%);
+			}
+			
+			canvas {
+				width: 6.5rem;
+				height: 6.5rem;
+			}
+		</style>
+	</head>
+
+	<body>
+		<!--<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" id="back"><span class="bar-title">愿望列表</span></a>
+		</header>-->
+		<div class="mui-content" id="content">
+			<div class="ss_head">
+				<div class="ss_head_left" @click="pageBack()">
+					<img src="../img/shopIndex/shop_icon_back.png" />
+				</div>
+				<div class="ss_head_right">
+					<a href="#popover" id="showMore">
+						<img src="../img/shopIndex/shop_icon_more.png" id="showMore" />
+					</a>
+				</div>
+			</div>
+
+			<div class="ss_head_img_group" id="imgGroup" v-cloak>
+				<div id="slider" class="mui-slider" style="height: 7rem">
+					<div class="mui-slider-group mui-slider-loop">
+						<!-- 额外增加的一个节点(循环轮播：第一个节点是最后一张轮播) -->
+						<div class="mui-slider-item mui-slider-item-duplicate">
+							<img :src="imgtest[imgtest.length-1]">
+						</div>
+						<div class="mui-slider-item" v-for="(item,index) in imgtest" :id='index'>
+							<img :src="item" :id="index" />
+						</div>
+						<div class="mui-slider-item mui-slider-item-duplicate">
+							<img :src="imgtest[0]">
+						</div>
+					</div>
+					<div class="mui-slider-indicator">
+						<!--<div class="mui-indicator mui-active"></div>-->
+						<div class="mui-indicator" v-for="(item,index) in imgtest" :class="addclass(index)"></div>
+						<!--<div class="mui-indicator"  ></div>
+						<div class="mui-indicator"></div>-->
+					</div>
+				</div>
+			</div>
+			<div id="ssInfoGroup" v-cloak>
+				
+				<div class="ss_self_info  mui-media">
+					<img class="mui-media-object mui-pull-right" src="../img/ability/ewm.png" id="qrpop">
+					<div class="mui-media-body">
+						<p class="ss_info_name mui-ellipsis">{{name}}</p>
+						<p class="ss_info_nickname mui-ellipsis" style="line-height: .51rem;">物品标识码:<span style="color: #000000;"></span></p>
+						<p class="ss_info_nickname mui-ellipsis" style="line-height: .51rem;">分类:<span style="color: #000000;"></span></p>
+					</div>
+				</div>
+				<!--
+                	描述：通讯录
+                -->
+				<div class="ss_info_group" v-cloak>
+					<ul id="phonebook" v-if="phonebook == ''">
+						
+					</ul>
+					<ul class="mui-table-view" id="phonebook" v-else-if="phonebook.length == 1">
+						<li class="mui-table-view-cell">
+							<a class="mui-navigate-right">
+								<img src="../img/ability/function_ico_phonebook.png" />
+								<span style="color: black;">{{phonebook[0].type}}:{{phonebook[0].data}}</span>
+							</a>
+						</li>
+					</ul>
+					<ul class="mui-table-view" id="phonebook" v-else>
+						<li class="mui-table-view-cell mui-collapse">
+							<a class="mui-navigate-right" href="#">
+								<img src="../img/ability/function_ico_phonebook.png" />
+								<span style="color: black;">通讯录</span>
+								<span class="ss_info_number">{{phonebook.length}}</span>
+							</a>
+							<div class="mui-collapse-content">
+								<ul class="mui-table-view  mui-table-view-chevron">
+									<li class="phone-view-cell  mui-media" v-for="item in phonebook">
+										<span style="color: black;">{{item.type}}:{{item.data}}</span>
+									</li>
+									<!--<li class="phone-view-cell  mui-media">
+									<span style="color: black;">手机</span>
+								</li>
+								<li class="phone-view-cell  mui-media">
+									<span style="color: black;">手机</span>
+								</li>-->
+								</ul>
+							</div>
+						</li>
+					</ul>
+				</div>
+				
+				
+				
+				<div class="ss_info_group">
+					<ul class="mui-table-view ">
+						<!--单位团体-->
+						<li id="company" style="display: none;" v-if="workunity == ''">
+							
+						</li>
+						<li class="mui-table-view-cell mui-media" id="company" v-else-if="workunity.length == 1">
+							<a class="mui-navigate-right">
+								<img class="mui-pull-left" :src="workunity[0].ico" />
+								<!--../img/ability/function_ico_company.png-->
+								<div class="mui-media-body">
+									<p class="mui-ellipsis ss_info_title">{{workunity[0].title}}</p>
+									<span class="ss_info_number">职位职称</span>
+								</div>
+								<div>
+									<img src="../img/pub/pub_ico_listaddressblus.png" style="width: .27rem; height: .27rem; float: left; margin: .11rem .1rem 0 .1rem;" />
+									<p class='ss_info_loc mui-ellipsis'>{{workunity[0].address}}</p>
+								</div>
+							</a>
+						</li>
+						<li class="mui-table-view-cell mui-collapse" id="company" v-else>
+							<a class="mui-navigate-right" href="#">
+								<img src="../img/ability/function_ico_company.png" />
+								<span>单位团体</span>
+								<span class="ss_info_number">{{workunity.length}}</span>
+							</a>
+							<div class="mui-collapse-content">
+								<ul class="mui-table-view  mui-table-view-chevron">
+									<li class="mui-table-view-cell mui-media" v-for="item in workunity">
+										<a class="mui-navigate-right" style="padding-left: 0;">
+											<img class=" mui-pull-left" :src="item.ico">
+											<div class="mui-media-body">
+												<p class="mui-ellipsis ss_info_title">{{item.title}}</p>
+												<div class="mui-media-body">
+													<img src="../img/pub/pub_ico_listaddressblus.png" style="width: .27rem; height: .27rem; float: left; margin: .11rem .1rem 0 .1rem;" />
+													<p class='ss_info_loc mui-ellipsis'>{{item.address}}</p>
+												</div>
+												<span class="ss_info_number">职位职称</span>
+											</div>
+										</a>
+									</li>
+
+								</ul>
+							</div>
+						</li>
+
+						<li class="mui-table-view-cell mui-collapse" id="jineng">
+							<a class="mui-navigate-right" href="#">
+								<img src="../img/ability/function_ico_jineng.png" />
+								<span>职业技能</span>
+								<span class="ss_info_number">3</span>
+							</a>
+							<div class="mui-collapse-content">
+								<ul class="mui-table-view  mui-table-view-chevron">
+									<li class="mui-table-view-cell mui-media">
+										<a class="mui-navigate-right" style="padding-left: 0;">
+											<img class=" mui-pull-left" src="../img/ability/function_ico_jineng.png">
+											<div class="mui-media-body">
+												<p class="mui-ellipsis ss_info_title">公司名称</p>
+												<div class="mui-media-body">
+													<p class='ss_info_loc mui-ellipsis' style="padding-left: .1rem;">珠海市香洲区人民东路221号西海大厦A504</p>
+												</div>
+												<span class="ss_info_number" style="color: red;">全职1,2000/月</span>
+											</div>
+										</a>
+									</li>
+
+								</ul>
+							</div>
+						</li>
+						<!--<li class="mui-table-view-cell " id="jineng">
+						<a class="mui-navigate-right">
+							<img class="mui-pull-left" src="../img/ability/function_ico_jineng.png" />
+							<div class="mui-media-body" >
+								<p class="mui-ellipsis ss_info_title">项目经理</p>
+								<span class="ss_info_number" style="color: red;">全职1,2000/月</span>
+							</div>
+							<div >
+								<p class='ss_info_loc mui-ellipsis' style="padding-left: .1rem;">珠海市香洲区人民东路221号西海大厦A504</p>
+							</div>		
+						</a>
+					</li>-->
+						<li class="mui-table-view-cell" id="together">
+							<a class="mui-navigate-right">
+								<img class="mui-pull-left" src="../img/ability/function_ico_together.png" />
+								<div class="mui-media-body">
+									<p class="mui-ellipsis ss_info_title">移动定位</p>
+									<span class="ss_info_number " style="width: 50%;">珠海市香洲区人民东路221号西海大厦A504</span>
+								</div>
+								<div>
+									<p class='ss_info_loc mui-ellipsis' style="padding-left: .1rem; color: blue;">[人]</p>
+								</div>
+							</a>
+						</li>
+						<li id="family" v-if="family == ''">
+							
+						</li>
+						<li class="mui-table-view-cell mui-media" id="family" v-if="family.length == 1">
+							<a class="mui-navigate-right">
+								<img class="mui-pull-left" :src="hasIco(family[0].ico)" />
+								<div class="mui-media-body">
+									<p class="mui-ellipsis ss_info_title">{{family[0].title}}</p>
+									<span class="ss_info_number">成员</span>
+								</div>
+								<div>
+									<img src="../img/pub/pub_ico_listaddressblus.png" style="width: .27rem; height: .27rem; float: left; margin: .11rem .1rem 0 .1rem;" />
+									<p class='ss_info_loc mui-ellipsis'>{{family[0].adress}}</p>
+								</div>
+							</a>
+						</li>
+						<li class="mui-table-view-cell mui-collapse" id="family" v-else>
+							<a class="mui-navigate-right" href="#">
+								<img src="../img/ability/function_ico_family.png" />
+								<span>家庭</span>
+								<span class="ss_info_number">{{family.length}}</span>
+							</a>
+							<div class="mui-collapse-content">
+								<ul class="mui-table-view  mui-table-view-chevron">
+									<li class="mui-table-view-cell mui-media" v-for="item in family">
+										<a class="mui-navigate-right" style="padding-left: 0;">
+											<img class=" mui-pull-left" :src="hasIco(item.ico)">
+											<div class="mui-media-body">
+												<p class="mui-ellipsis ss_info_title">{{item.title}}</p>
+												<div class="mui-media-body">
+													<img src="../img/pub/pub_ico_listaddressblus.png" style="width: .27rem; height: .27rem; float: left; margin: .11rem .1rem 0 .1rem;" />
+													<p class='ss_info_loc mui-ellipsis'>{{item.adress}}</p>
+												</div>
+												<span class="ss_info_number">职位职称</span>
+											</div>
+										</a>
+									</li>
+									<!--<li class="mui-table-view-cell mui-media">
+											<a class="mui-navigate-right" style="padding-left: 0;">
+												<img class=" mui-pull-left" src="../img/ability/function_ico_family.png">
+												<div class="mui-media-body">
+													<p class="mui-ellipsis ss_info_title">名称</p>
+													<div class="mui-media-body">
+														<img src="../img/pub/pub_ico_listaddressblus.png" style="width: .27rem; height: .27rem; float: left; margin: .11rem .1rem 0 .1rem;" />
+														<p class='ss_info_loc mui-ellipsis'>珠海市香洲区人民东路221号西海大厦A504</p>
+													</div>
+													<span class="ss_info_number">职位职称</span>
+												</div>
+											</a>
+										</li>-->
+								</ul>
+							</div>
+						</li>
+						<li id="notebook" v-if="notepad == '' ">
+							
+						</li>
+						<li class="mui-table-view-cell mui-media" id="notebook" v-else-if="notepad.length == 1 ">
+							<a class="mui-navigate-right">
+								<img src="../img/ability/function_ico_notebook.png" />
+								<span>记事本</span>
+							</a>
+						</li>
+						<li class="mui-table-view-cell mui-collapse" id="notebook" v-else>
+							<a class="mui-navigate-right" href="#">
+								<img src="../img/ability/function_ico_notebook.png" />
+								<span>记事本</span>
+								<span class="ss_info_number">3</span>
+							</a>
+							<div class="mui-collapse-content">
+								<ul class="mui-table-view  mui-table-view-chevron">
+									<li class="mui-table-view-cell mui-media">
+										<a class="mui-navigate-right" style="padding-left: 0;">
+											<img src="../img/ability/function_ico_notebook.png">
+											<span class="mui-ellipsis ss_info_title">名称</span>
+										</a>
+									</li>
+									<li class="mui-table-view-cell mui-media">
+										<a class="mui-navigate-right" style="padding-left: 0;">
+											<img src="../img/ability/function_ico_notebook.png">
+											<span class="mui-ellipsis ss_info_title">名称</span>
+										</a>
+									</li>
+								</ul>
+							</div>
+						</li>
+
+						<!--electronicDrawer-->
+						<li id="eilocker" v-if="electronicDrawer ==''">
+							
+						</li>
+						<li class="mui-table-view-cell mui-media" id="eilocker" v-else-if="electronicDrawer.length == 1">
+							<a class="mui-navigate-right">
+								<img class="mui-pull-left" src="../img/ability/function_ico_eilocker.png" />
+								<div class="mui-media-body">
+									<p class="mui-ellipsis ss_info_title">{{electronicDrawer[0].title}}</p>
+								</div>
+								<div>
+									<img src="../img/pub/pub_ico_listaddressblus.png" style="width: .27rem; height: .27rem; float: left; margin: .11rem .1rem 0 .1rem;" />
+									<p class='ss_info_loc mui-ellipsis'>珠海市香洲区人民东路221号西海大厦A504</p>
+								</div>
+							</a>
+						</li>
+						<li class="mui-table-view-cell mui-collapse" id="eilocker" v-else>
+							<a class="mui-navigate-right" href="#">
+								<img src="../img/ability/function_ico_eilocker.png" />
+								<span>电子抽屉</span>
+								<span class="ss_info_number">3{{electronicDrawer.length}}</span>
+							</a>
+							<div class="mui-collapse-content">
+								<ul class="mui-table-view  mui-table-view-chevron">
+									<li class="mui-table-view-cell mui-media">
+										<a class="mui-navigate-right" style="padding-left: 0;">
+											<img class=" mui-pull-left" src="../img/ability/function_ico_eilocker.png">
+											<div class="mui-media-body">
+												<p class="mui-ellipsis ss_info_title">名称</p>
+												<div class="mui-media-body">
+													<img src="../img/pub/pub_ico_listaddressblus.png" style="width: .27rem; height: .27rem; float: left; margin: .11rem .1rem 0 .1rem;" />
+													<p class='ss_info_loc mui-ellipsis'>珠海市香洲区人民东路221号西海大厦A504</p>
+												</div>
+											</div>
+										</a>
+									</li>
+									<li class="mui-table-view-cell mui-media">
+										<a class="mui-navigate-right" style="padding-left: 0;">
+											<img class=" mui-pull-left" src="../img/ability/function_ico_eilocker.png">
+											<div class="mui-media-body">
+												<p class="mui-ellipsis ss_info_title">名称</p>
+												<div class="mui-media-body">
+													<img src="../img/pub/pub_ico_listaddressblus.png" style="width: .27rem; height: .27rem; float: left; margin: .11rem .1rem 0 .1rem;" />
+													<p class='ss_info_loc mui-ellipsis'>珠海市香洲区人民东路221号西海大厦A504</p>
+												</div>
+											</div>
+										</a>
+									</li>
+								</ul>
+							</div>
+						</li>
+
+						<li class="mui-table-view-cell mui-collapse" id="guard">
+							<a class="mui-navigate-right" href="#">
+								<img src="../img/ability/function_ico_guard.png" />
+								<span>安全守护</span>
+								<span class="ss_info_number">3</span>
+							</a>
+							<div class="mui-collapse-content">
+								<ul class="mui-table-view  mui-table-view-chevron">
+									<li class="mui-table-view-cell mui-media">
+										<a class="mui-navigate-right" style="padding-left: 0;">
+											<img class=" mui-pull-left" src="../img/ability/function_ico_guard.png">
+											<div class="mui-media-body">
+												<p class="mui-ellipsis ss_info_title">名称</p>
+												<div class="mui-media-body">
+													<img src="../img/pub/pub_ico_listaddressblus.png" style="width: .27rem; height: .27rem; float: left; margin: .11rem .1rem 0 .1rem;" />
+													<p class='ss_info_loc mui-ellipsis'>珠海市香洲区人民东路221号西海大厦A504</p>
+												</div>
+											</div>
+										</a>
+									</li>
+									<li class="mui-table-view-cell mui-media">
+										<a class="mui-navigate-right" style="padding-left: 0;">
+											<img class=" mui-pull-left" src="../img/ability/function_ico_guard.png">
+											<div class="mui-media-body">
+												<p class="mui-ellipsis ss_info_title">名称</p>
+												<div class="mui-media-body">
+													<img src="../img/pub/pub_ico_listaddressblus.png" style="width: .27rem; height: .27rem; float: left; margin: .11rem .1rem 0 .1rem;" />
+													<p class='ss_info_loc mui-ellipsis'>珠海市香洲区人民东路221号西海大厦A504</p>
+												</div>
+											</div>
+										</a>
+									</li>
+								</ul>
+							</div>
+						</li>
+
+						<!--<li class="mui-table-view-cell mui-media" id="guard">
+						<a class="mui-navigate-right">
+							<img class="mui-pull-left" src="../img/ability/function_ico_guard.png" />
+							<div class="mui-media-body" >
+								<p class="mui-ellipsis ss_info_title">安全守护</p>
+							</div>
+							<div>
+								<img src="../img/pub/pub_ico_listaddressblus.png" style="width: .27rem; height: .27rem; float: left; margin: .11rem .1rem 0 .1rem;" />
+								<p class='ss_info_loc mui-ellipsis'>珠海市香洲区人民东路221号西海大厦A504</p>
+							</div>
+						</a>
+					</li>-->
+						<li class="mui-table-view-cell" id="lose">
+							<a class="mui-navigate-right">
+								<img class="mui-pull-left" src="../img/ability/function_ico_lose.png" />
+								<div class="mui-media-body">
+									<p class="mui-ellipsis ss_info_title">遗失找寻</p>
+								</div>
+								<div>
+									<img src="../img/pub/pub_ico_listaddressblus.png" style="width: .27rem; height: .27rem; float: left; margin: .11rem .1rem 0 .1rem;" />
+									<p class='ss_info_loc mui-ellipsis' style="width: 40%;">珠海市香洲区人民东路221号西海大厦A504</p>
+								</div>
+								<span class="ss_info_number" style="color: red;">￥20+100<img src="../img/pub/pub_ioc_gongyizhi.png" style="width: .6rem; height: .6rem; margin-bottom: .1rem;"/></span>
+							</a>
+						</li>
+						<!--<li class="mui-table-view-cell" id="warn">
+						<a class="mui-navigate-right">
+							<img class="mui-pull-left" src="../img/ability/function_ico_warn.png" />
+							<div class="mui-media-body" >
+								<p class="mui-ellipsis ss_info_title">日程提醒</p>
+							</div>
+							<div>
+								<span class='ss_info_loc mui-ellipsis' style="color: black; margin-left: .1rem;">14:30~16:30</span>
+								<span class='ss_info_loc mui-ellipsis' style="color: black;">30分钟之后</span>
+							</div>
+						</a>
+					</li>-->
+						<li class="mui-table-view-cell mui-collapse" id="warn">
+							<a class="mui-navigate-right" href="#">
+								<img src="../img/ability/function_ico_warn.png" />
+								<span>日程提醒</span>
+								<span class="ss_info_number">3</span>
+							</a>
+							<div class="mui-collapse-content">
+								<ul class="mui-table-view  mui-table-view-chevron">
+									<li class="mui-table-view-cell mui-media">
+										<a class="mui-navigate-right" style="padding-left: 0;">
+											<img class=" mui-pull-left" src="../img/ability/function_ico_warn.png">
+											<div class="mui-media-body">
+												<p class="mui-ellipsis ss_info_title">名称</p>
+												<div class="mui-media-body">
+
+													<p class='ss_info_loc mui-ellipsis' style="margin-left: .1rem;">珠海市香洲区人民东路221号西海大厦A504</p>
+												</div>
+											</div>
+										</a>
+									</li>
+									<li class="mui-table-view-cell mui-media">
+										<a class="mui-navigate-right" style="padding-left: 0;">
+											<img class=" mui-pull-left" src="../img/ability/function_ico_warn.png">
+											<div class="mui-media-body">
+												<p class="mui-ellipsis ss_info_title">名称</p>
+												<div class="mui-media-body">
+
+													<p class='ss_info_loc mui-ellipsis' style="margin-left: .1rem;">珠海市香洲区人民东路221号西海大厦A504</p>
+												</div>
+											</div>
+										</a>
+									</li>
+								</ul>
+							</div>
+						</li>
+
+						<li id="shareshop" v-if="shareStore == '' || shareStore.visibility">
+						</li>
+						<li class="mui-table-view-cell" id="shareshop" v-else-if="shareStore.length == 1">
+							<a class="mui-navigate-right">
+								<img class="mui-pull-left" src="../img/ability/function_ico_shareshop.png" />
+								<div class="mui-media-body">
+									<p class="mui-ellipsis ss_info_title">{{shareStore.title}}</p>
+								</div>
+								<div>
+									<img src="../img/pub/pub_ico_listaddressblus.png" style="width: .27rem; height: .27rem; float: left; margin: .11rem .1rem 0 .1rem;" />
+									<p class='ss_info_loc mui-ellipsis' style="width: 40%;">{{shareStore.address}}</p>
+								</div>
+							</a>
+						</li>
+						<li class="mui-table-view-cell mui-collapse" id="shareshop" v-else>
+							<a class="mui-navigate-right" href="#">
+								<img src="../img/ability/function_ico_shareshop.png" />
+								<span>分享店</span>
+								<span class="ss_info_number">3</span>
+							</a>
+							<div class="mui-collapse-content">
+								<ul class="mui-table-view  mui-table-view-chevron">
+									<li class="mui-table-view-cell mui-media">
+										<a class="mui-navigate-right" style="padding-left: 0;">
+											<img class=" mui-pull-left" src="../img/ability/function_ico_shareshop.png">
+											<div class="mui-media-body">
+												<p class="mui-ellipsis ss_info_title">名称</p>
+												<div class="mui-media-body">
+													<img src="../img/pub/pub_ico_listaddressblus.png" style="width: .27rem; height: .27rem; float: left; margin: .11rem .1rem 0 .1rem;" />
+													<p class='ss_info_loc mui-ellipsis'>珠海市香洲区人民东路221号西海大厦A504</p>
+												</div>
+											</div>
+										</a>
+									</li>
+									<li class="mui-table-view-cell mui-media">
+										<a class="mui-navigate-right" style="padding-left: 0;">
+											<img class=" mui-pull-left" src="../img/ability/function_ico_shareshop.png">
+											<div class="mui-media-body">
+												<p class="mui-ellipsis ss_info_title">名称</p>
+												<div class="mui-media-body">
+													<img src="../img/pub/pub_ico_listaddressblus.png" style="width: .27rem; height: .27rem; float: left; margin: .11rem .1rem 0 .1rem;" />
+													<p class='ss_info_loc mui-ellipsis'>珠海市香洲区人民东路221号西海大厦A504</p>
+												</div>
+											</div>
+										</a>
+									</li>
+								</ul>
+							</div>
+						</li>
+
+						<li class="mui-table-view-cell mui-collapse" id="sharesp">
+							<a class="mui-navigate-right" href="#">
+								<img src="../img/ability/function_ico_sharesp.png" />
+								<span>分享商品</span>
+								<span class="ss_info_number">3</span>
+							</a>
+							<div class="mui-collapse-content">
+								<ul class="mui-table-view  mui-table-view-chevron">
+									<li class="mui-table-view-cell mui-media">
+										<a class="mui-navigate-right" style="padding-left: 0;">
+											<img class=" mui-pull-left" src="../img/ability/function_ico_sharesp.png">
+											<div class="mui-media-body">
+												<p class="mui-ellipsis ss_info_title">名称</p>
+												<div class="mui-media-body">
+													<span class='ss_info_loc mui-ellipsis' style="margin-left: .1rem; color: #8f8f94;">单价: 111111</span>
+													<span class='ss_info_loc mui-ellipsis' style="margin-left: .1rem; color: #8f8f94;">分享收益: 11111 </span>
+												</div>
+											</div>
+										</a>
+									</li>
+									<li class="mui-table-view-cell mui-media">
+										<a class="mui-navigate-right" style="padding-left: 0;">
+											<img class=" mui-pull-left" src="../img/ability/function_ico_sharesp.png">
+											<div class="mui-media-body">
+												<p class="mui-ellipsis ss_info_title">名称</p>
+												<div class="mui-media-body">
+													<span class='ss_info_loc mui-ellipsis' style="margin-left: .1rem; color: #8f8f94;">单价: 111111</span>
+													<span class='ss_info_loc mui-ellipsis' style="margin-left: .1rem; color: #8f8f94;">分享收益: 11111 </span>
+												</div>
+											</div>
+										</a>
+									</li>
+								</ul>
+							</div>
+						</li>
+
+						<!--<li class="mui-table-view-cell" id="sharesp">
+						<a class="mui-navigate-right">
+							<img class="mui-pull-left" src="../img/ability/function_ico_sharesp.png" />
+							<div class="mui-media-body" >
+								<p class="mui-ellipsis ss_info_title">分享商品</p>
+							</div>
+							<div>
+								<span class='ss_info_loc ' style="color: #8f8f94; margin-left: .1rem;">单价: 111111</span>
+								<span class='ss_info_loc ' style="color: #8f8f94;">分享收益: 11111</span>
+							</div>
+						</a>
+					</li>-->
+						<li class="mui-table-view-cell mui-collapse" id="shangpinshuxing">
+							<a class="mui-navigate-right" href="#">
+								<img src="../img/ability/function_ico_shangpinshuxing.png" />
+								<span>分享商品</span>
+								<span class="ss_info_number">3</span>
+							</a>
+							<div class="mui-collapse-content">
+								<ul class="mui-table-view  mui-table-view-chevron">
+									<li class="mui-table-view-cell mui-media">
+										<a class="mui-navigate-right" style="padding-left: 0;">
+											<img class=" mui-pull-left" src="../img/ability/function_ico_shangpinshuxing.png">
+											<div class="mui-media-body">
+												<p class="mui-ellipsis ss_info_title">名称</p>
+												<div class="mui-media-body">
+													<span class='ss_info_loc mui-ellipsis' style="margin-left: .1rem; color: #8f8f94;">[属性类型]</span>
+													<span class='ss_info_loc mui-ellipsis' style="margin-left: .1rem; color: red;">￥11223.00</span>
+												</div>
+											</div>
+										</a>
+									</li>
+									<li class="mui-table-view-cell mui-media">
+										<a class="mui-navigate-right" style="padding-left: 0;">
+											<img class=" mui-pull-left" src="../img/ability/function_ico_shangpinshuxing.png">
+											<div class="mui-media-body">
+												<p class="mui-ellipsis ss_info_title">名称</p>
+												<div class="mui-media-body">
+													<span class='ss_info_loc mui-ellipsis' style="margin-left: .1rem; color: #8f8f94;">[属性类型]</span>
+													<span class='ss_info_loc mui-ellipsis' style="margin-left: .1rem; color: red;">￥11223.00 </span>
+												</div>
+											</div>
+										</a>
+									</li>
+								</ul>
+							</div>
+						</li>
+
+						<!--<li class="mui-table-view-cell" id="shangpinshuxing">
+						<a class="mui-navigate-right">
+							<img class="mui-pull-left" src="../img/ability/function_ico_shangpinshuxing.png" />
+							<div class="mui-media-body" >
+								<p class="mui-ellipsis ss_info_title">分享商品</p>
+							</div>
+							<div>
+								<span class='ss_info_loc ' style="color: #8f8f94; margin-left: .1rem;">[属性类型]</span>
+								<span class='ss_info_loc ' style="color: red;">￥11111.00</span>
+							</div>
+						</a>
+					</li>-->
+						<li class="mui-table-view-cell mui-collapse" id="tuding">
+							<a class="mui-navigate-right" href="#">
+								<img src="../img/ability/function_ico_tuding.png" />
+								<span>地图故事</span>
+								<span class="ss_info_number">3</span>
+							</a>
+							<div class="mui-collapse-content">
+								<ul class="mui-table-view  mui-table-view-chevron">
+									<li class="mui-table-view-cell mui-media">
+										<a class="mui-navigate-right" style="padding-left: 0;">
+											<img src="../img/ability/function_ico_tuding.png">
+											<span class="mui-ellipsis ss_info_title">地图故事</span>
+										</a>
+									</li>
+									<li class="mui-table-view-cell mui-media">
+										<a class="mui-navigate-right" style="padding-left: 0;">
+											<img src="../img/ability/function_ico_tuding.png">
+											<span class="mui-ellipsis ss_info_title">地图故事</span>
+										</a>
+									</li>
+								</ul>
+							</div>
+						</li>
+						<!--<li class="mui-table-view-cell mui-media" id="tuding">
+						<a class="mui-navigate-right">
+							<img  src="../img/ability/function_ico_tuding.png" />
+							<span>地图故事</span>
+						</a>
+					</li>-->
+						<li class="mui-table-view-cell mui-collapse" id="advertising">
+							<a class="mui-navigate-right" href="#">
+								<img src="../img/ability/function_ico_advertising.png" />
+								<span>职业技能</span>
+								<span class="ss_info_number">3</span>
+							</a>
+							<div class="mui-collapse-content">
+								<ul class="mui-table-view  mui-table-view-chevron">
+									<li class="mui-table-view-cell mui-media">
+										<a class="mui-navigate-right" style="padding-left: 0;">
+											<img class=" mui-pull-left" src="../img/ability/function_ico_advertising.png">
+											<div class="mui-media-body">
+												<p class="mui-ellipsis ss_info_title">公司名称</p>
+												<div class="mui-media-body">
+													<p class='ss_info_loc mui-ellipsis' style="padding-left: .1rem; width: 80%;">珠海市香洲区人民东路221号西海大厦A504</p>
+												</div>
+
+											</div>
+										</a>
+									</li>
+
+								</ul>
+							</div>
+						</li>
+						<li class="mui-table-view-cell " id="advertising">
+							<a class="mui-navigate-right">
+								<img class="mui-pull-left" src="../img/ability/function_ico_advertising.png" />
+								<div class="mui-media-body">
+									<p class="mui-ellipsis ss_info_title">广告宣传</p>
+								</div>
+								<div>
+									<p class='ss_info_loc mui-ellipsis' style="padding-left: .1rem; width: 80%;">珠海市香洲区人民东路221号西海大厦A504</p>
+								</div>
+							</a>
+						</li>
+						<li class="mui-table-view-cell mui-collapse" id="wishtree">
+							<a class="mui-navigate-right" href="#">
+								<img src="../img/ability/function_ico_wishtree.png" />
+								<span>许愿树</span>
+								<span class="ss_info_number">3</span>
+							</a>
+							<div class="mui-collapse-content">
+								<ul class="mui-table-view  mui-table-view-chevron">
+									<li class="mui-table-view-cell mui-media">
+										<a class="mui-navigate-right" style="padding-left: 0;">
+											<img class=" mui-pull-left" src="../img/ability/function_ico_wishtree.png">
+											<div class="mui-media-body">
+												<p class="mui-ellipsis ss_info_title">许愿树</p>
+												<div class="mui-media-body">
+													<img src="../img/pub/pub_ico_listaddressblus.png" style="width: .27rem; height: .27rem; float: left; margin: .11rem .1rem 0 .1rem;" />
+													<p class='ss_info_loc mui-ellipsis'>珠海市香洲区人民东路221号西海大厦A504</p>
+												</div>
+											</div>
+										</a>
+									</li>
+									<li class="mui-table-view-cell mui-media">
+										<a class="mui-navigate-right" style="padding-left: 0;">
+											<img class=" mui-pull-left" src="../img/ability/function_ico_wishtree.png">
+											<div class="mui-media-body">
+												<p class="mui-ellipsis ss_info_title">许愿树</p>
+												<div class="mui-media-body">
+													<img src="../img/pub/pub_ico_listaddressblus.png" style="width: .27rem; height: .27rem; float: left; margin: .11rem .1rem 0 .1rem;" />
+													<p class='ss_info_loc mui-ellipsis'>珠海市香洲区人民东路221号西海大厦A504</p>
+												</div>
+											</div>
+										</a>
+									</li>
+								</ul>
+							</div>
+						</li>
+						<!--<li class="mui-table-view-cell mui-media" id="wishtree">
+						<a class="mui-navigate-right">
+							<img class="mui-pull-left" src="../img/ability/function_ico_wishtree.png" />
+							<div class="mui-media-body" >
+								<p class="mui-ellipsis ss_info_title">公司名称</p>
+							</div>
+							<div>
+								<img src="../img/pub/pub_ico_listaddressblus.png" style="width: .27rem; height: .27rem; float: left; margin: .11rem .1rem 0 .1rem;" />
+								<p class='ss_info_loc mui-ellipsis'>珠海市香洲区人民东路221号西海大厦A504</p>
+							</div>
+						</a>
+					</li> -->
+						<li class="mui-table-view-cell mui-collapse" id="jinengrenzheng">
+							<img src="../img/ability/function_ico_jinengrenzheng.png" />
+							<span>技能认证</span>
+							<div class="ss_info_number" style="width: auto; right: 15px;">
+								<img src="../img/ability/function_ico_renzheng_yes.png" style="width: .45rem; height: .45rem; margin-right: 0;">
+								<span>智物认证</span>
+								<img src="../img/ability/function_ico_renzheng_yes.png" style="width: .45rem; height: .45rem; margin-right: 0;">
+								<span>图片认证</span>
+							</div>
+						</li>
+						<li class="mui-table-view-cell mui-collapse" id="fanweiqian">
+							<a class="mui-navigate-right" href="#">
+								<img src="../img/ability/function_ico_fanweiqian.png" />
+								<span>范围圈</span>
+								<span class="ss_info_number">3</span>
+							</a>
+							<div class="mui-collapse-content">
+								<ul class="mui-table-view  mui-table-view-chevron">
+									<li class="mui-table-view-cell mui-media">
+										<a class="mui-navigate-right" style="padding-left: 0;">
+											<img class=" mui-pull-left" src="../img/ability/function_ico_fanweiqian.png">
+											<div class="mui-media-body">
+												<p class="mui-ellipsis ss_info_title">许愿树</p>
+												<div class="mui-media-body">
+													<img src="../img/pub/pub_ico_listaddressblus.png" style="width: .27rem; height: .27rem; float: left; margin: .11rem .1rem 0 .1rem;" />
+													<p class='ss_info_loc mui-ellipsis'>珠海市香洲区人民东路221号西海大厦A504</p>
+												</div>
+											</div>
+										</a>
+									</li>
+									<li class="mui-table-view-cell mui-media">
+										<a class="mui-navigate-right" style="padding-left: 0;">
+											<img class=" mui-pull-left" src="../img/ability/function_ico_fanweiqian.png">
+											<div class="mui-media-body">
+												<p class="mui-ellipsis ss_info_title">许愿树</p>
+												<div class="mui-media-body">
+													<img src="../img/pub/pub_ico_listaddressblus.png" style="width: .27rem; height: .27rem; float: left; margin: .11rem .1rem 0 .1rem;" />
+													<p class='ss_info_loc mui-ellipsis'>珠海市香洲区人民东路221号西海大厦A504</p>
+												</div>
+											</div>
+										</a>
+									</li>
+								</ul>
+							</div>
+						</li>
+						<!--<li class="mui-table-view-cell mui-media" id="fanweiqian">
+						<a class="mui-navigate-right">
+							<img class="mui-pull-left" src="../img/ability/function_ico_fanweiqian.png" />
+							<div class="mui-media-body" >
+								<p class="mui-ellipsis ss_info_title">范围圈</p>
+							</div>
+							<div>
+								<img src="../img/pub/pub_ico_listaddressblus.png" style="width: .27rem; height: .27rem; float: left; margin: .11rem .1rem 0 .1rem;" />
+								<p class='ss_info_loc mui-ellipsis'>珠海市香洲区人民东路221号西海大厦A504</p>
+							</div>
+						</a>
+					</li> -->
+						<li class="mui-table-view-cell" id="wuliantiaokon">
+							<a class="mui-navigate-right">
+								<img src="../img/ability/function_ico_wuliantiaokon.png" />
+								<span>物联调控</span>
+							</a>
+						</li>
+
+					</ul>
+				</div>
+				<div class="loc" id="address" v-cloak> 
+					<img src="../img/pub/tree_ico_address.png" />
+					<span>{{address}}</span>
+				</div>
+			</div>
+			<button class="ss_button_left mui-btn">打招呼</button>
+			<button class="ss_button_right mui-btn">借我用一用</button>
+			<!--<div class="zhi" id="zhi">
+				<img src="../img/ability/function_zhi_share_in.png" />
+			</div>
+			<div class="saveToContacts" id="saveToContacts">
+				<img src="../img/ability/function_icon_saveToContacts_in.png" />
+			</div>-->
+
+			<div id="popover" class="mui-popover">
+				<ul class="mui-table-view">
+					<li class="mui-table-view-cell">
+						<img class="ss_head_more_img" src="../img/shopDetail/pub_ico_share.png" />
+						<span>分享</span>
+					</li>
+					<li class="mui-table-view-cell">
+						<img class="ss_head_more_img" src="../img/pub/pub_ico_collect_nor.png" />
+						<span>收藏</span>
+					</li>
+					<li class="mui-table-view-cell">
+						<img class="ss_head_more_img" src="../img/pub/pub_ico_friend.png" />
+						<span>加为好友</span>
+					</li>
+					<li class="mui-table-view-cell">
+						<img class="ss_head_more_img" src="../img/pub/pub_ico_blacklist.png" />
+						<span>加入黑名单</span>
+					</li>
+				</ul>
+			</div>
+
+			<div id="qrpopover" class="mui-popover img-popover">
+				<div id="zhiwuqr">
+					<!--<img src="../img/ability/ewm.png" />-->
+
+				</div>
+			</div>
+		</div>
+
+		<script src="../js/mui.js"></script>
+		<script type="text/javascript" src="../js/jquery.js"></script>
+		<script type="text/javascript" src="../js/utf.js"></script>
+		<script type="text/javascript" src="../js/qrcode.js"></script>
+		<script src="../js/native.js"></script>
+		<script src="../js/vue.min.js"></script>
+		<script type="text/javascript" src="../js/shareH5.js"></script>
+		<script type="text/javascript">
+			//			var ssInfoGroup = new Vue({
+			//				el: '#content',
+			//				data: {
+			//					
+			//				},
+			//			});
+
+			var ssHeadImgGroup = new Vue({
+				el: '#imgGroup',
+				data: {
+					imgtest: [
+						//						'https://farm2.staticflickr.com/1043/5186867718_06b2e9e551_b.jpg',
+//						'http://139.159.148.149:8081/platform/file/ff80808168a7422a0168da64829d1139.jpg',
+						//						'https://farm7.staticflickr.com/6175/6176698785_7dee72237e_b.jpg',
+					],
+				},
+				methods: {
+					addclass: function(index) {
+						//						console.log(index)
+						if(index == 0) {
+							return 'mui-active';
+						}
+					}
+				}
+			});
+
+			var ssInfoGroup = new Vue({
+				el: '#ssInfoGroup',
+				data: {
+					id: '', //智物id
+					name: '', //智物名称
+					address: '', //地址
+					phonebook: [], //电话
+					workunity: [], //工作单位
+					family: [], //家庭
+					notepad: [], //记事本
+					electronicDrawer: [], //电子抽屉
+					shareStore: [], //分享店
+					securityGuard: [], //安全守护
+					lostSearch: [], //遗失找寻
+					withWho: [], //和谁在一起
+					coupleRegulation: [], //物联调控
+					memberGroup: [], //成员组
+					jobSkill: [], //职位技能
+					scheduleRemind: [], //日程提醒
+					wishingTree: [], //许愿树
+					mobileLocation: [], //移动定位
+					skillMatch: [], //智能匹配
+					personalBelonging: [], //随身物品
+					thumbtack: [], //图钉
+					releaseNews: [], //新闻发布
+					seekHelp: [], //求助
+					myCollection: [], //我的收藏
+					memberGroup2: [], //成员组2
+					companyGroup: [], //单位组
+					linkmanGroup: [], //通讯录组
+
+				},
+				methods: {
+					hasIco: function(ico) {
+						if(ico == null) {
+							return '../img/ability/function_ico_family.png'
+						} else {
+							return ico;
+						}
+					}
+				}
+			});
+
+			window.onload = function() {
+				document.styleSheets[0].cssRules[17].style.textDecoration = 'none';
+				
+				var search = location.search;
+				request = GetRequest(search);
+				var zhiwuid = request['zhiwu'];
+				var zhiwuid = 3321;
+				shareCheck(zhiwuid, function(type, data) {
+					if(type == 0) {
+						//						unescape(data);
+						console.log(data);
+						ssInfoGroup.name = data.name;
+						
+						ssInfoGroup.id = data.id;
+						ssInfoGroup.address = data.position.address;
+//						console.log(data.websites)
+						for(var i=0; i< data.websites.length; i++){
+							ssHeadImgGroup.imgtest.push(data.websites[i].url)
+						}
+						console.log(JSON.parse(data.functionitems[2].data));
+						
+						var head = new Image();
+						head.src = data.header + "?timeStamp=" + new Date();
+						head.setAttribute("crossOrigin", 'anonymous');
+
+						$("#zhiwuqr").qrcode({
+							render: 'canvas', //设置渲染方式，有table和canvas，使用canvas方式渲染性能相对来说比较好
+							text: "zhiwu:" + ssInfoGroup.id, //扫描二维码后显示的内容,可以直接填一个网址，扫描二维码后自动跳向该链接
+							width: "800", //二维码的宽度
+							height: "800", //二维码的高度
+							background: "#ffffff", //二维码的后景色
+							foreground: "#000000", //二维码的前景色
+							src: head.src,
+						});
+
+						for(var i = 0; i < data.functionitems.length; i++) {
+							switchFC(ssInfoGroup, data.functionitems[i].data, data.functionitems[i].name);
+						}
+					} else {
+						console.log('失败' + data);
+					}
+				})
+
+				console.log(ssInfoGroup.family.length);
+
+			}
+			//windows onload end
+
+			var pop = document.getElementById("qrpopover");
+			var mask = mui.createMask(function() {
+				pop.classList.remove('mui-active');
+			});
+
+			// 显示  
+			document.querySelector('#qrpop').addEventListener('tap', function() {
+				mask.show(); //显示遮罩  
+				pop.classList.add('mui-active');
+			})
+		</script>
+	</body>
+
+</html>

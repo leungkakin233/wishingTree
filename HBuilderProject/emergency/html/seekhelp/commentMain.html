@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html>
+
+	<meta charset="utf-8">
+	<title></title>
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<meta name="flexible" content="initial-dpr=2" />
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<link href="../../css/mui.css" rel="stylesheet" />
+	<script src="http://g.tbcdn.cn/mtb/lib-flexible/0.3.4/??flexible_css.js,flexible.js"></script>
+	<style type="text/css">
+		[v-cloak] {
+			display: none
+		}
+
+		.mui-bar {
+			height: 1.17rem;
+		}
+
+		.mui-bar .mui-icon {
+			padding-top: 0.21rem;
+			font-size: 0.8rem;
+			color: black;
+		}
+
+		.bar-title {
+			display: inline-block;
+			vertical-align: middle;
+			padding-top: .21rem;
+			font-size: 0.43rem;
+		}
+
+		.mui-bar-nav~.mui-content {
+			padding-top: 1.17rem;
+		}
+
+		/* 					.mui-btn-link:active {
+						color: blue !important;
+					} */
+		/* 					.back {
+						font-size: 16px;
+						line-height: 44px;
+						top: 0;
+						padding: 0;
+						color: black;
+						border: 0;
+						background: transparent;
+					}
+
+					.back:active {
+						color: red !important;
+						background: transparent !important;
+					} */
+
+		.newComment {
+			min-height: 100%;
+			height: 100%;
+			height: auto !important;
+			margin-bottom: 44px !important;
+		}
+
+		.comment-head-portrait {
+			max-width: 0.85rem;
+			height: 0.85rem;
+			float: left;
+			border: 0;
+			margin: 0 0.21rem 0 0;
+			outline: none;
+			white-space: nowrap;
+			border-radius: 100%;
+		}
+
+		.comment-head-portrait-min {
+			max-width: 0.67rem;
+			height: 0.67rem;
+			float: left;
+			border: 0;
+			margin-right: 11px;
+			outline: none;
+			white-space: nowrap;
+			border-radius: 100%;
+		}
+
+		.comment-span {
+			font-size: 0.27rem;
+			/* margin-top: 0.15rem; */
+			color: #8f8f94;
+			display: inline-block;
+		}
+
+		.comment-span-min {
+			font-size: 0.27rem;
+			color: #8f8f94;
+			display: inline-block;
+		}
+
+		.commentarea {
+			margin: 10px 5% 2px 5%;
+			height: 100px;
+			width: 90%;
+			font-size: 16px;
+		}
+
+		.photo {
+			width: 1.25rem;
+			height: 1.25rem;
+			border-radius: 0.5em;
+			position: absolute;
+			top: 6.6rem;
+			left: 4.4rem;
+			bottom: 0;
+			right: 0;
+			z-index: 50;
+		}
+
+		.photogroup>img {
+			padding: 0.2rem;
+			width: 1.8rem;
+			height: 1.8rem;
+		}
+
+		.photogroup-min>img {
+			padding: 0.2rem;
+			width: 1.8rem;
+			height: 1.8rem;
+		}
+
+		.icon1 {
+			height: 0.45rem;
+			width: 0.45rem;
+			margin-right: 0.7rem;
+			margin-top: 0.02rem;
+		}
+
+		.icon2 {
+			height: 0.45rem;
+			width: 0.45rem;
+		}
+
+		.loc-ico {
+			margin-top: 0.15rem;
+			height: 0.27rem;
+			width: 0.27rem;
+		}
+
+		.likenumber {
+			color: #8f8f94;
+			font-size: 0.32rem;
+			vertical-align: middle;
+		}
+
+		.addlocation {
+			display: flex;
+		}
+
+		.bottom-select {
+			position: fixed;
+			width: 100%;
+			left: 0px;
+			z-index: 105;
+			bottom: 0px;
+		}
+
+		.comment-title {
+			font-size: 0.37rem;
+			font-weight: 600;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			font-family: MicrosoftYaHei;
+			white-space: nowrap;
+			color: #102F75;
+			margin-bottom: 20px;
+		}
+
+		.comment-title-min {
+			font-size: 0.3rem;
+			text-overflow: ellipsis;
+			font-family: MicrosoftYaHei;
+			white-space: nowrap;
+			overflow: hidden;
+			font-weight: 600;
+			color: #102F75;
+		}
+
+		.comment-body {
+			font-weight: 500;
+			font-size: 0.35rem;
+			font-family: MicrosoftYaHei;
+			color: #282828;
+			width: 100%;
+			height: auto;
+			word-wrap: break-word;
+			word-break: break-all;
+			overflow: hidden;
+		}
+
+		.comment-body-min {
+			margin-top: 0.27rem;
+			font-size: 0.30rem;
+			font-weight: 500;
+			color: #282828;
+			width: 100%;
+			height: auto;
+			word-wrap: break-word;
+			word-break: break-all;
+			overflow: hidden;
+		}
+
+		.bottom-select {
+			background-color: #F3F3F3;
+			position: fixed;
+			bottom: 0px;
+			width: 100%;
+			left: 0px;
+			z-index: 105;
+			height: 1.17rem;
+			border-top: solid 1px #D2D2D2;
+		}
+
+		.commentarea {
+			margin: 0.16rem 0.47rem;
+			padding-left: 0.24rem;
+			padding-right: 10px;
+			width: 9.08rem;
+			height: 0.85rem;
+			z-index: 5;
+			border: 0;
+			background-color: white;
+			overflow: hidden;
+			resize: none;
+			border-style: none;
+			border-radius: 0.3em;
+			border: solid 1px #c8c7cc;
+			line-height: 0.88rem;
+			font-size: 14px;
+			color: #909090;
+		}
+
+		.newComment {
+			min-height: 100%;
+			height: 100%;
+			height: auto !important;
+			margin-bottom: 1.15rem !important;
+		}
+	</style>
+	<title></title>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" id="back"><span class="bar-title">评论回复</span></a>
+		</header>
+		<div v-cloak class="mui-content mui-scroll-wrapper" id="comment">
+			<div class="mui-scroll">
+				<div class="mui-table-view-cell mui-media">
+					<div class="mui-pull-right" style="display: inline-flex;">
+						<img @tap="reply(comment)" src="../images/pub_ico_comment_nor.png" class="icon1" />
+						<div @tap="replylikemain(comment)">
+							<img src="../../image/pub_ico_good_sel.png" class="icon2" alt="icon2" v-if="banner.myLike" />
+							<img src="../../image/pub_ico_good_nor.png" class="icon2" alt="icon2" v-else />
+							<span class="likenumber">{{banner.like}}</span>
+						</div>
+					</div>
+					<img class="comment-head-portrait" src="../images/tree_ico_ywk1.png">
+					<div class="mui-media-body">
+						<p class="comment-title  mui-ellipsis-1">{{banner.user.nickname}}</p>
+						<span class='comment-span'>{{banner.time}}</span>
+
+						<div style="margin-left: 1.05rem;">
+							<p class="comment-body ">{{banner.content}}</p>
+							<div class="photogroup">
+								<img :src="image" v-for="image in banner.imageUrlList" alt="图片" />
+							</div>
+							<div class="addlocation" v-if="banner.location">
+								<img src="../images/pub_ico_listaddressblus.png" class="loc-ico" />
+								<span style="font-size: 0.27rem;">{{banner.location}}</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--主评论-->
+
+				<ul class="mui-table-view newComment">
+					<li class="mui-table-view-cell mui-media" v-for="(reply,index) in contents">
+						<img class="comment-head-portrait-min" src="../images/tree_ico_ywk1.png">
+						<div class="mui-media-body">
+							<div class="mui-pull-right" style="display: inline-flex;">
+								<div @tap="replylike(reply)">
+									<img src="../../image/pub_ico_good_sel.png" class="icon2" alt="icon2" v-if="reply.myLike" />
+									<img src="../../image/pub_ico_good_nor.png" class="icon2" alt="icon2" v-else />
+
+									<span class="likenumber">{{reply.like}}</span>
+								</div>
+							</div>
+							<p class="comment-title-min  mui-ellipsis-1">{{reply.user.nickname}}</p>
+							<div style="line-height: 0.15rem;">
+								<span class='comment-span-min'>{{reply.time}}</span>
+							</div>
+
+							<div>
+								<p class="comment-body-min">{{reply.content}}</p>
+								<div class="photogroup-min">
+									<img :src="image" v-for="image in reply.imageUrlList" alt="图片" />
+								</div>
+								<div class="addlocation" v-if="reply.location">
+									<img src="../images/pub_ico_listaddressblus.png" class="loc-ico" />
+									<span style="font-size: 0.27rem;">{{reply.location}}</span>
+								</div>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+
+		<nav class="bottom-select" id="commentarea">
+			<div class="commentarea">回复评论</div>
+		</nav>
+
+		<script src="../../js/mui.js"></script>
+		<script src="../../js/wishingTree.js"></script>
+		<script src="../../js/native_wishtree.js"></script>
+		<script src="../../js/vue.min.js"></script>
+		<script src="../../js/commonFunction.js" ></script>
+		<script type="text/javascript">
+			mui.init({
+				longtap: true,
+				swipeBack: false,
+			});
+			var realuser = null;
+
+			var item = null;
+			var token = null;
+			var commentList = null;
+			console.log(document.styleSheets[1].cssRules[17].style.textDecoration = 'none');
+			var comment = new Vue({
+				el: '#comment',
+				data: {
+					contents: [],
+					banner: {
+						id: '',
+						user: {},
+						location: '',
+						like: '',
+						myLike: false,
+						content: '',
+						time: '',
+						imageUrlList: []
+					}
+				},
+			});
+
+			window.onload = function() {
+				// alert(resId);
+				commentList = JSON.parse(localStorage.getItem('comment'));
+				item = JSON.parse(localStorage.getItem('wish'));
+				//					 alert(JSON.stringify(item.res.id));
+				//				token = localStorage.getItem('token');
+				//					 alert(JSON.stringify(commentList));
+
+				token = getToken();
+				realuser = getRequestUser();
+
+				comment.banner.content = commentList.content;
+				comment.banner.id = commentList.id;
+				comment.banner.user = commentList.user;
+				comment.banner.location = commentList.location;
+				comment.banner.like = commentList.like;
+				comment.banner.myLike = commentList.myLike;
+
+				comment.banner.time = commentList.time;
+				comment.banner.imageUrlList = commentList.imageUrlList;
+				// alert(JSON.stringify(comment.banner));
+				// 				
+				comment1001(item.res.id, 0, 0, function(type, data) {
+					if (type == 0) {
+						//									alert(JSON.stringify(data));
+						//									alert(wish.res.id);
+						newComment.comments = data.data.content;
+						count.commentCount = data.data.totalCount;
+						//									alert(JSON.stringify(newComment.comments));
+					} else {
+						console.log('获取评论失败' + data);
+					}
+				});
+
+
+				comment1001(item.res.id, commentList.id, 0, function(type, data) {
+					if (type == 0) {
+//						alert(JSON.stringify(data));
+						comment.contents = data.data.content;
+					} else {
+						mui.toast('获取列表失败' + data)
+					}
+				})
+			}
+
+			//主界面评论回复
+			document.getElementById('commentarea').addEventListener('tap', function() {
+				window.JsInterface.showCommentsInputDialog('回复评论');
+				onCommentsInputComplete(txt, imgs);
+			});
+
+			//回复函数
+			function reply(comment) {
+				rescomment = comment.id;
+				window.JsInterface.showCommentsInputDialog('回复评论');
+				onCommentsInputComplete(txt, imgs);
+			}
+
+			//评论回调函数
+			function onCommentsInputComplete(txt, imgs) {
+				comment1002(item.res.id, txt, imgs, comment.banner.id, function(type, data) {
+					if (type == 0) {
+						var reqcom = new Object();
+						reqcom = data.data;
+						comment.contents.unshift(reqcom);
+					} else {
+						alert('主题评论失败失败' + data);
+					}
+				});
+			}
+
+			//主评点赞
+			function replylikemain(comment) {
+				//					 alert(JSON.stringify(comment.banner.myLike));
+				if (comment.banner.myLike == false) {
+					comment1005(item.res.id, comment.banner.id, function(type, data) {
+						if (type == 0) {
+							mui.toast('点赞成功' + JSON.stringify(data));
+							comment.banner.myLike = true;
+							comment.banner.like += 1;
+							//		document.getElementsByName('icon2')[index].src = '../images/pub_ico_love_sel.png';
+							//	islike = true;
+						} else {
+							console.log('给爱心失败' + data);
+						}
+					})
+				} else {
+					comment1007(item.res.id, comment.banner.id, function(type, data) {
+						if (type == 0) {
+							mui.toast('取消成功');
+							comment.banner.myLike = false;
+							comment.banner.like -= 1;
+							//										document.getElementsByName('icon2')[index].src = '../images/pub_ico_love_nor.png';
+							//										islike = false;
+						} else {
+							console.log('给爱心失败' + data);
+						}
+					})
+				}
+			}
+
+			//回评点赞
+			function replylike(reply) {
+				// alert(JSON.stringify(reply.id)+ 'comment banner id  ' +comment.banner.id);
+				if (reply.myLike == false) {
+					comment1005(comment.banner.id, reply.id, function(type, data) {
+						if (type == 0) {
+							mui.toast('点赞成功' + JSON.stringify(data));
+							reply.myLike = true;
+							reply.like += 1;
+							//		document.getElementsByName('icon2')[index].src = '../images/pub_ico_love_sel.png';
+							//	islike = true;
+						} else {
+							console.log('点赞失败' + data);
+						}
+					})
+				} else {
+					comment1007(comment.banner.id, reply.id, function(type, data) {
+						if (type == 0) {
+							mui.toast('取消成功' + JSON.stringify(data));
+							reply.myLike = false;
+							reply.like -= 1;
+							//										document.getElementsByName('icon2')[index].src = '../images/pub_ico_love_nor.png';
+							//										islike = false;
+						} else {
+							console.log('点赞失败' + data);
+						}
+					})
+				}
+			}
+
+			document.getElementById('back').addEventListener('tap', function() {
+				localStorage.removeItem('comment');
+				if(close()==true){
+					window.JsInterface.closeWindow();
+				}else if(close()==false){
+					window.webkit.messageHandlers.closeWindow.postMessage({});
+				}
+			});
+
+			(function($) {
+				$('.mui-scroll-wrapper').scroll({
+					indicators: true //是否显示滚动条
+				});
+			})(mui);
+		</script>
+	</body>
+
+</html>

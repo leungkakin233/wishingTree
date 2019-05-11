@@ -1,0 +1,40 @@
+<body>
+		<div style="width: 100px;height: 100px;border: 1px solid #000000;"></div>
+		<style>
+			@keyframes mykeyframe{
+				from{border: 10px solid #000000;}
+				to{border: 10px solid #fff;}
+			}
+			.mydiv {
+				width: 100px;
+				height: 100px;
+				border: 1px solid #000000;
+				margin-top: 20px;
+				animation: mykeyframe 5s infinite;
+			}
+		</style>
+		<div class="mydiv"></div>
+		<script type="text/javascript">
+			var mycssstyles = document.styleSheets[0].rules;
+			console.log(mycssstyles)
+			//判断是否支持DOM2级样式表。
+//			if(document.implementation.hasFeature("StyleSheets", "2.0")) {
+//				for(var i = 0; i < document.styleSheets.length; i++) {
+//					if(document.styleSheets[i].type == "text/css") {
+//						mycssstyles = document.styleSheets[i];
+//					}
+//				}
+//				//ie不存在cssrules。 firefox不存在rules
+//				if(mycssstyles.cssRules) {
+//					mycssstyles = mycssstyles.cssRules;
+//				} else {
+//					//火狐浏览器没有rules
+//					if(mycssstyles.rules) {
+//						mycssstyles = mycssstyles.rules;
+//					}
+//				}
+				console.log(mycssstyles[0].cssRules[0].style.background="yellow");
+				console.log(mycssstyles[0].cssRules[1].style.background="green");
+//			}
+		</script>
+	</body>

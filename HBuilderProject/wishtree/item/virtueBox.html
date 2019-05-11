@@ -1,0 +1,203 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta name="flexible" content="initial-dpr=2" />
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link href="../css/mui.css" rel="stylesheet" />
+		<script src="http://g.tbcdn.cn/mtb/lib-flexible/0.3.4/??flexible_css.js,flexible.js"></script>
+		<style>
+			html,
+			body {
+				background-color: #efeff4;
+			}
+			
+			.mui-bar {
+				height: 1.17rem;
+			}
+			
+			.mui-bar-nav~.mui-content {
+				padding-top: 1.17rem;
+			}
+			
+			.mui-bar .mui-icon {
+				padding-top: 0.21rem;
+				font-size: 0.8rem;
+				color: black;
+			}
+			
+			.bar-title {
+				display: inline-block;
+				vertical-align: middle;
+				line-height: 1.17rem;
+				font-size: 0.43rem;
+			}
+			
+			.mui-bar .mui-btn-link {
+				display: inline-block;
+				line-height: 1.2rem;
+				font-size: 0.43rem;
+			}
+			
+			p {
+				margin-bottom: 0;
+			}
+			
+			.ico-fx {
+				margin-top: .81rem;
+				width: 5.35rem;
+				height: 5.35rem;
+			}
+			
+			.fx {
+				height: 8.35rem;
+				width: 100%;
+				text-align: center;
+			}
+			
+			.p-blue {
+				line-height: .33rem;
+				font-size: .24rem;
+				color: #007AFF;
+			}
+			
+			.button-fx {
+				width: 2.03rem;
+				height: .55rem;
+				margin-top: .39rem;
+				font-size: .29rem;
+				background-color: #F57F00;
+				color: #FAFAFA;
+				text-align: center;
+			}
+			
+			.span-first {
+				font-size: .37rem;
+				font-weight: 500;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+				width: 100%;
+			}
+			
+			.span-second {
+				color: #FF0000;
+				display: inline-block;
+				font-size: .37rem;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+				width: 100%;
+				
+			}
+			
+			.span-third {
+				text-align: right;
+				color: #007AFF;
+				font-size: .29rem;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+				display: inline-block;
+				
+			}
+			
+			.donation {
+				margin-top: .3rem;
+				margin-left: 1rem;
+				background-color: #3298FF;
+				color: #FAFAFA;
+				font-size: 16px;
+				width: 8rem;
+				height: 1.1rem;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<div id="back" style="display: inline-block;">
+				<img src="../images/pub_ico_goback.png" style="width: .51rem; height: .51rem;margin-top: .33rem; float: left;" />
+				<span class="bar-title">捐款箱</span>
+			</div>
+		</header>
+		<div class="mui-content">
+			<div class="fx">
+				<img src="../images/tree_ico_fx.png" class="ico-fx" />
+				<p style=" font-size: .24rem; line-height: .33rem;">捐款仅用于许愿树上的愿望实现</p>
+				<p class="p-blue">(智+、支付宝、微信扫一扫直接捐款)</p>
+				<button class="button-fx">分享二维码</button>
+			</div>
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<div class="mui-row">
+						<div class="mui-table-cell mui-col-sm-4 mui-col-xs-4 mui-text-left">
+							<span class="span-first">捐款箱余额<span>
+							</div>
+							<div class="mui-table-cell mui-col-sm-8 mui-col-xs-8 mui-text-left">
+								<span class="span-second">￥4830.00</span>
+						</div>
+					</div>
+				</li>
+				<li class="mui-table-view-cell">
+					<div class="mui-row">
+						<div class="mui-table-cell mui-col-sm-4 mui-col-xs-4 mui-text-left">
+							<span class="span-first">捐款总数<span>
+							</div>
+							<div class="mui-table-cell mui-col-sm-4 mui-col-xs-4 mui-text-left">
+								<span class="span-second">￥10000.00</span>
+						</div>
+						<div class="mui-table-cell mui-col-sm-4 mui-col-xs-4 mui-text-right">
+							<span class="span-third "></span></a>
+						</div>
+					</div>
+				</li>
+				<li class="mui-table-view-cell">
+					<div class="mui-row">
+						<div class="mui-table-cell mui-col-sm-4 mui-col-xs-4 mui-text-left">
+							<span class="span-first">捐款支出 <span>
+							</div>
+							<div class="mui-table-cell mui-col-sm-4 mui-col-xs-4 mui-text-left">
+								<span class="span-second">￥5170.00</span>
+						</div>
+						<div class="mui-table-cell mui-col-sm-4 mui-col-xs-4 mui-text-right">
+							<a href="payments.html"><span class="span-third ">查看清单>></span></a>
+						</div>
+					</div>
+				</li>
+
+				<li class="mui-table-view-cell">
+					<div class="mui-row">
+						<div class="mui-table-cell mui-col-sm-4 mui-col-xs-4 mui-text-left">
+							<span class="span-first">实现愿望数<span>
+							</div>
+							<div class="mui-table-cell mui-col-sm-4 mui-col-xs-4 mui-text-left">
+								<span class="span-second">13</span>
+						</div>
+						<div class="mui-table-cell mui-col-sm-4 mui-col-xs-4 mui-text-right">
+							<a href=""><span class="span-third ">查看清单>></span></a>
+						</div>
+					</div>
+				</li>
+			</ul>
+			<button class="donation">
+					我要捐款
+				</button>
+		</div>
+		<script src="../js/mui.js"></script>
+		<script src="../js/wishingTree.js"></script>
+
+		<script type="text/javascript">
+			mui.init()
+			console.log(document.documentElement.clientWidth + "px");
+			document.getElementById('back').addEventListener('tap', function() {
+				window.JsInterface.closeWindow();
+			})
+		</script>
+	</body>
+
+</html>

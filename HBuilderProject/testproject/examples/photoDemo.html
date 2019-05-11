@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+	<meta charset="utf-8">
+	<title></title>
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<meta name="flexible" content="initial-dpr=2" />
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<link href="../css/mui.css" rel="stylesheet" />
+
+	<style type="text/css">
+		.photo {
+			background-color: red;
+			width: 50px;
+			height: 50px;
+			position: absolute;
+			top: 7rem;
+			left: 4.4rem;
+			bottom: 0;
+			right: 0;
+			z-index: 5;
+		}
+
+		.photo-group {
+			/* width: 325px;
+			height: 325px; */
+			width: 1.5rem;
+			height: 1.5rem;
+			background-color: red;
+			z-index: 5;
+			border-radius: 0.75em;
+			position: absolute;
+			top: 7rem;
+			left: 4.4rem;
+			bottom: 0;
+			right: 0;
+			/* font-size: 0; */
+			/* line-height: 0; */
+		}
+
+		.img-1 {
+			height: 100%;
+			width: 100%;
+			border-radius: 0.75em 0.75em 0.75em 0.75em;
+		}
+
+		.img-2 {
+			height: 100%;
+			width: 50%;
+			display：block;
+			float: left;
+		}
+
+		.img-2-left-radius {
+			border-radius: 0.75em 0 0 0.75em;
+			padding-right: 1px;
+		}
+
+		.img-2-right-radius {
+			border-radius: 0 0.75em 0.75em 0;
+			padding-left: 1px;
+		}
+
+		.img-4 {
+			width: 50%;
+			height: 50%;
+			display：block;
+			float: left;
+		}
+
+		.img-4-top-left-radius {
+			border-radius: 0.75em 0 0 0;
+			padding-right: 1px;
+			padding-bottom: 1px;
+		}
+
+		.img-4-top-right-radius {
+			border-radius: 0 0.75em 0 0;
+			padding-left: 1px;
+			padding-bottom: 1px;
+		}
+
+		.img-4-bottom-left-radius {
+			border-radius: 0 0 0 0.75em;
+			padding-top: 1px;
+			padding-right: 1px;
+		}
+
+		.img-4-bottom-right-radius {
+			border-radius: 0 0 0.75em 0;
+			padding-left: 1px;
+			padding-top: 1px;
+		}
+
+		.img-9 {
+			height: 33.33333%;
+			width: 33.33333%;
+			display：block;
+			float: left;
+		}
+
+		.img-9-top-mid-raidus {
+			padding-bottom: 1px;
+		}
+
+		.img-9-bottom-mid-raidus {
+			padding-top: 1px;
+		}
+
+		.img-9-left-mid-raidus {
+			padding-right: 1px;
+		}
+
+		.img-9-right-mid-raidus {
+			padding-left: 1px;
+		}
+	</style>
+	<head>
+
+	</head>
+	<body>
+		<div class="mui-content" id="content">
+		<!-- <img src="" class="photo" id="photo"> -->
+		<div class="photo-group" id="photogroup">
+			<img :src="image" v-for="(image,index) in imageList"  :id="index" :class="imgClass(index)" v-if="index < 4"/>
+			<!-- class="img-9" -->
+			<!-- <img src="../images/add.png" class="img-2 img-2-left-radius"/>
+			<img src="../images/add.png" class="img-2 img-2-right-radius"/> -->
+			<!-- <img src="../images/add.png" class="img-4 img-4-top-left-radius" />
+			<img src="../images/add.png" class="img-4 img-4-top-right-radius" />
+			<img src="../images/add.png" class="img-4 img-4-bobottomttom-left-radius" />
+			<img src="../images/add.png" class="img-4 img-4-bottom-right-radius" /> -->
+			<!-- <img src="../images/add.png" class="img-9 img-4-top-left-radius" />
+			<img src="../images/add.png" class="img-9 "/>
+			<img src="../images/add.png" class="img-9 img-4-top-right-radius"/>
+			<img src="../images/add.png" class="img-9" />
+			<img src="" class="img-9"/>
+			<img src="../images/add.png" class="img-9 "/>
+			<img src="../images/add.png" class="img-9 img-4-bottom-left-radius" />
+			<img src="../images/add.png" class="img-9"/>
+			<img src="../images/add.png" class="img-9 img-4-bottom-right-radius"/> -->
+		</div>
+		</div>
+
+
+		<script src="../js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/vue.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="http://g.tbcdn.cn/mtb/lib-flexible/0.3.4/??flexible_css.js,flexible.js"></script>
+		<script type="text/javascript">
+			var wish = new Vue({
+				el: '#content',
+				data: {
+					tempalte: {
+						"id": ""
+					},
+					title: "",
+					content: "",
+					coordinate: "80,80",
+					points: 2000,
+					imageList: [
+						'../images/add.png',
+						'../images/add.png',
+						'../images/add.png',
+						'../images/add.png',
+						'../images/add.png',
+						'../images/add.png',
+						'../images/add.png',
+						'../images/add.png'
+					]
+				},
+				methods: {
+					imgClass:function(index){
+						if(this.imageList.length == 1){
+							return "img-1";
+						}else if(this.imageList.length == 2){
+							if(index == 0){
+								return "img-2 img-2-left-radius";
+							}else{
+								return "img-2 img-2-right-radius";
+							}
+						}else if(this.imageList.length == 3){
+							if(index == 0){
+								return "img-2 img-2-left-radius";
+							}else if(index ==1){
+								return "img-4 img-4-top-right-radius";
+							}else{
+								return "img-4 img-4-bottom-right-radius";
+							}
+						}else{
+							if(index == 0){
+								return "img-4 img-4-top-left-radius";
+							}else if(index ==1){
+								return "img-4 img-4-top-right-radius";
+							}else if(index ==2){
+								return "img-4 img-4-bottom-left-radius";
+							}else{
+								return "img-4 img-4-bottom-right-radius";
+							}
+						}
+						
+					}
+				}
+			});
+
+			mui.init();
+			mui.ajax('http://node1.xiuhuahui.xyz:8080/platform/api/comment/v1/list', {
+				data: {
+					"res": {
+						// "id": wish.res.id,
+						"id": "ff808081680cfdc101680e3b48fd02ea"
+					},
+					// 					"user": {
+					// 						"userId": "308",
+					// 						"nickname": "李田所",
+					// 						"roleId": "308",
+					// 						"viewType": "ALL"
+					// 					}
+				},
+				dataType: 'json',
+				type: 'post', //HTTP请求类型
+				timeout: 10000, //超时时间设置为10秒；
+				headers: {
+					'Content-Type': 'application/json;charset=UTF-8',
+					// "Authorization": token,
+					'token': "Token 8dde4f4d11d33c6365af56eca54ab3d0e23c979e"
+					// "token": "Token 8dde4f4d11d33c6365af56eca54ab3d0e23c979e"
+				},
+				success: function(data) {
+					// alert(JSON.stringify(data));
+					// 					newComment.comments = data.data.content;
+					// 					count.commentCount = data.data.totalCount;
+				},
+				error: function(xhr, type, errorThrown) {
+					alert('获取评论失败');
+				}
+			});
+		</script>
+	</body>
+</html>

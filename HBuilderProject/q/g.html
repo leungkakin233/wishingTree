@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta name="flexible" content="initial-dpr=2" />
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<title></title>
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<script src="http://g.tbcdn.cn/mtb/lib-flexible/0.3.4/??flexible_css.js,flexible.js"></script>
+		<style type="text/css">
+			[v-cloak] {
+				display: none
+			}
+			
+			html,
+			body {
+				/*background-color: #efeff4;*/
+			}
+			
+			.mui-bar {
+				height: 1.17rem;
+			}
+			
+			.mui-bar .mui-icon {
+				padding-top: 0.21rem;
+				font-size: 0.8rem;
+				color: black;
+			}
+			
+			.bar-title {
+				display: inline-block;
+				vertical-align: middle;
+				padding-top: .21rem;
+				font-size: 0.43rem;
+			}
+			
+			.mui-bar-nav~.mui-content {
+				padding-top: 1.17rem;
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<script src="js/mui.js"></script>
+		<script src="js/native.js"></script>
+		<script src="js/vue.min.js"></script>
+		<script type="text/javascript" src="js/shareH5.js"></script>
+		<script src="js/base64.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			window.onload = function() {
+				var search = location.search;
+
+//								var str = '?emhpd3U6MzMyMw==';
+				var base = new Base64();
+				var code = base.decode(search);
+				
+								console.log(code);
+				
+//				var code2 = base.encode('id=197&name=0')
+//				console.log(code2);
+				
+				if(code.slice(0, 6) === 'zhiwu:') {
+					var id = code.replace("zhiwu:", "");
+					//					console.log(localurl + 'item/zhiwu.html?zhiwu=' + id);
+					//					window.location.replace(localurl + 'item/zhiwu.html?zhiwu=' + id);
+					window.location.href = './item/zhiwu.html?zhiwu=' + id;
+
+				} else if(code.slice(0, 8) === "company:") {
+					var id = code.replace("company:", "");
+				} else if(code.slice(0, 7) === "family:") {
+					var id = code.replace("family:", "");
+				} else if(code.slice(0, 9) === "contract:") {
+					var id = code.replace("contract:", "");
+				} else if(code.slice(0, 9) === "wishtree:") {
+					var id = code.replace("wishtree:", "");
+				} else if(code.slice(0, 8) === "edrawer:") {
+					var id = code.replace("edrawer:", "");
+				} else if(code.slice(0, 10) === "zhiwugroup:") {
+					var id = code.replace("zhiwugroup:", "");
+
+				}
+
+			}
+		</script>
+	</body>
+
+</html>

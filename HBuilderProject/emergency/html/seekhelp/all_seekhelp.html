@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<link href="../../css/mui.css" rel="stylesheet" />
+		<link href=".././css/mui.min.css" rel="stylesheet">
+		<link href="../../css/mui.indexedlist.css" rel="stylesheet" />
+		<style type="text/css">
+			.mui-bar,
+			.mui-bar-nav {
+				background-color: #3298ff;
+				height: 4rem;
+				display: flex;
+				color: #FFFFFF;
+			}
+			
+			.range {
+				/*color: #3a90f3;*/
+				width: 15%;
+				height: 4rem;
+				padding-top: 0.6rem;
+			}
+			
+			.range img {
+				height: 0.3rem;
+				margin-bottom: 0.3rem;
+				margin-left: 0.1rem;
+			}
+			
+			.range h6 {
+				color: #FFFFFF;
+				padding-left: 9%;
+			}
+			
+			input {
+				position: relative;
+				width: 48% !important;
+				height: 70% !important;
+				margin-top: 0.6rem;
+				border-right-style: none !important;
+				border-radius: 25px 0 0 25px !important;
+				background-image: url(../../image/pub_ico_soulan@2x.png);
+				background-repeat: no-repeat;
+				background-size: auto 60%;
+				background-position: 0.5rem;
+				background-color: #64AAFF !important;
+				padding-left: 2.1rem !important;
+				padding-right: 0 !important;
+				border: 1px solid #64aaff !important;
+			}
+			
+			.label {
+				width: 24%;
+				height: 70%;
+				border-left: none !important;
+				border: 1px solid #64aaff;
+				background-color: #64aaff;
+				margin-top: 0.6rem;
+				border-radius: 0 25px 25px 0;
+				padding-top: 0.7rem;
+				text-align: center;
+				font-size: 0.8rem;
+			}
+			
+			.back {
+				/*color: #3397f9;*/
+				width: 13%;
+				text-align: center;
+				line-height: 4rem;
+			}
+			
+			.mui-content {
+				margin-top: 1.3rem;
+			}
+			
+			.navigation_bar.mui-bar-tab {
+				width: 100%;
+				height: 4rem;
+				background-color: #EBEBEB;
+				border-style: none !important;
+				display: flex;
+				position: fixed;
+				top: 4rem;
+				z-index: 99;
+			}
+			
+			.mui-tab-item {
+				margin-top: 0.8rem !important;
+				width: 23% !important;
+				height: 60% !important;
+				line-height: 2.4rem;
+				text-align: center;
+				background-color: #FFFFFF;
+				margin-left: 1%;
+				margin-right: 1%;
+				border-radius: 20px;
+				color: #000000 !important;
+			}
+			
+			.mui-tab-item.mui-active {
+				background-color: #3298ff !important;
+				color: #FFFFFF !important;
+			}
+			
+			.mui-tab-item.emergency.mui-active {
+				background-color: #FF0000 !important;
+				color: #FFFFFF !important;
+			}
+			
+			.tips {
+				background-color: #d5eaff;
+				text-align: center;
+				color: #6cb0ff;
+				margin-top: 3.95rem;
+				font-size: 0.8rem;
+			}
+			
+			.mui-slider-item.mui-control-content {
+				height: auto;
+				margin-top: 8rem;
+			}
+			
+			.list {
+				background-color: #FFF;
+				border-bottom: 1px solid #ebebeb;
+				height: 5rem;
+				display: flex;
+				padding-right: 0.2rem;
+			}
+			
+			.icon {
+				height: 100%;
+				width: 5rem;
+				text-align: center;
+			}
+			
+			.icon img {
+				height: 59%;
+				width: 68%;
+				margin-top: 24%;
+			}
+			
+			.text {
+				width: 100%;
+				padding-top: 0.4rem;
+			}
+			
+			.text p {
+				color: #000000;
+				font-size: 1rem;
+				margin-top: 0.4rem;
+				margin-bottom: 0.8rem;
+			}
+			
+			.text span {
+				font-size: 0.7rem;
+				margin-right: 0.5rem;
+			}
+			
+			.text img {
+				height: 0.7rem;
+			}
+			
+			.status {
+				color: #3298ff;
+			}
+			
+			.distance {
+				float: right;
+				margin-right: 1rem !important;
+				padding-top: 0.1rem;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<div class="range">
+				珠海<img src="../../image/lan@2x.png" />
+				<h6>2km</h6>
+			</div>
+			<input type="text" id="search" value="" />
+			<div class="label">
+				[有人要帮忙]
+			</div>
+			<div id="back" class="back">返回</div>
+		</header>
+
+		<div class="mui-content">
+			<div class="navigation_bar mui-bar-tab">
+				<a class="mui-tab-item mui-active" href="#item1mobile">所有</a>
+				<a class="mui-tab-item" href="#item2mobile">公益求助</a>
+				<a class="mui-tab-item emergency" href="#item3mobile">紧急求助</a>
+				<a class="mui-tab-item" href="#item4mobile">求助完成</a>
+			</div>
+			<!--<div class='tips'>范围内搜索结果有<span>xxx</span>个目标</div>-->
+
+			<div class="pullrefresh  mui-scroll-wrapper">
+				<div class="mui-scroll">
+					<div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
+						<div class="totallist">
+
+						</div>
+					</div>
+					<div id="item2mobile" class="mui-slider-item mui-control-content">
+						<div class="totallist">
+
+						</div>
+					</div>
+					<div id="item3mobile" class="mui-slider-item mui-control-content">
+						<div class="totallist">
+
+						</div>
+					</div>
+					<div id="item4mobile" class="mui-slider-item mui-control-content">
+						<div class="totallist">
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		</div>
+
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/getuser.js"></script>
+		<script src="../../js/http.js"></script>
+		<script src="../../js/native.js"></script>
+		<script src="../../js/commonFunction.js"></script>
+		<script type="text/javascript">
+
+			window.onload = function() {
+				var totalpages;
+			}
+			mui.init({
+				pullRefresh: {
+					container: '.pullrefresh',
+					down: {
+						style: 'circle',
+						callback: pulldownRefresh
+					},
+					up: {
+						auto: true,
+						contentrefresh: '正在加载...',
+						callback: pullupRefresh
+					}
+				},
+				gestureConfig: {
+					longtap: true,
+					hold: true,
+					release: true
+				}
+			})
+
+			//时间换算
+			function addZero(num) {
+				if(parseInt(num) < 10) {
+					num = '0' + num;
+				}
+				return num;
+			}
+
+			function getMyDate(str) {    
+				var oDate = new Date(str),
+					    oYear = oDate.getFullYear(),
+					    oMonth = oDate.getMonth() + 1,
+					    oDay = oDate.getDate(),
+					    oHour = oDate.getHours(),
+					    oMin = oDate.getMinutes(),
+					    oSen = oDate.getSeconds(),
+					    oTime = oYear + '-' + addZero(oMonth) + '-' + addZero(oDay) + ' ' + addZero(oHour) + ':' +
+					addZero(oMin) + ':' + addZero(oSen);    
+				return oTime;
+			}
+
+			//			列表跳转到详情
+			mui('.totallist').on('tap', '.list', function() {
+				var id = this.id;
+				var res_id = this.getAttribute('data-res_id');
+				window.JsInterface.openWindow(localurl + "/html/seekhelp/helpdetail.html?id=" + id + '&res_id=' + res_id);
+			})
+
+			//			求助首次加载
+			document.getElementsByClassName("navigation_bar mui-bar-tab")[0].children[1].addEventListener('tap', function() {
+				if(!document.getElementById('item2mobile').children[0].children[0]) {
+					for(var i = 0; i < 2; i++) {
+						get_AllseekHelp();
+						count++;
+					}
+				}
+			})
+
+			//			加载dom元素
+			function createDomElements() {
+				var list = document.createElement('div');
+				var totallist = document.getElementsByClassName('mui-slider-item mui-control-content mui-active')[0].children[0];
+				list.setAttribute('class', 'list');
+				list.setAttribute('id', copydata.data.content[i].id);
+				list.setAttribute('data-res_id', copydata.data.content[i].res.id);
+				totallist.appendChild(list);
+
+				var icon = document.createElement('div');
+				icon.setAttribute('class', 'icon');
+				if(copydata.data.content[i].imageUrlList[0]) {
+					icon.innerHTML = '<img src=' + copydata.data.content[i].imageUrlList[0] + '>';
+				} else {
+					switch(copydata.data.content[i].category.name) {
+						case "110求助":
+							icon.innerHTML = '<img class=\'icon\' src=\'../../image/110@2x.png\' style="background-color:#EB334D;">';
+							break;
+						case '120求助':
+							icon.innerHTML = '<img class=\'icon\' src=\'../../image/120@2x.png\' style="background-color:#F75B5C;">';
+							break;
+						case '家庭求助':
+							icon.innerHTML = '<img class=\'icon\' src=\'../../image/callfamily@2x.png\' style="background-color:#D97A4E;">';
+							break;
+						case '社会求助':
+							icon.innerHTML = '<img class=\'icon\' src=\'../../image/clique@2x.png\' style="background-color:#F59F30;">';
+							break;
+						case '公益求助':
+							icon.innerHTML = '<img class=\'icon\' src=\'../../image/sos_label_zjgy.png\'>';
+							break;
+					}
+				}
+				list.appendChild(icon);
+
+				var text = document.createElement('div');
+				text.setAttribute('class', 'text');
+				list.appendChild(text);
+
+				var p = document.createElement('p');
+				if(copydata.data.content[i].title.length > 18) {
+					p.innerHTML = copydata.data.content[i].title.slice(0, 18) + '...'
+				} else {
+					p.innerHTML = copydata.data.content[i].title;
+				}
+				text.appendChild(p);
+
+				var location = document.createElement('span');
+				text.appendChild(location);
+				location.setAttribute('class', 'location');
+				location.innerHTML = '<img src="../../image/surrounding@2x.png" >' + copydata.data.content[i].location.province + copydata.data.content[i].location.city;
+
+				var time = document.createElement('span');
+				text.appendChild(time);
+				time.setAttribute('class', 'time');
+				var k = new Date().getTime();
+				var howlong = Math.floor((k - copydata.data.content[i].createTime) / 3600000);
+				if((k - copydata.data.content[i].createTime) / 60000 < 60) {
+					time.innerHTML = '[' + Math.floor((k - copydata.data.content[i].createTime) / 60000) + '分钟前' + ']';
+				} else if(howlong < 24) {
+					time.innerHTML = '[' + howlong + '小时前' + ']';
+				} else if(howlong < 720) {
+					time.innerHTML = '[' + Math.floor(howlong / 24) + '天前' + ']';
+				} else if(howlong > 720) {
+					time.innerHTML = '[' + getMyDate(copydata.data.content[i].createTime) + ']';
+				}
+
+				var status = document.createElement('span');
+				text.appendChild(status);
+				status.setAttribute('class', 'status');
+				if(copydata.data.content[i].status.opening == true && copydata.data.content[i].total == 0) {
+					status.innerHTML = '[等待帮助]';
+				} else if(copydata.data.content[i].status.opening == true && copydata.data.content[i].total > 0) {
+					status.innerHTML = '[求助中]';
+				} else {
+					status.innerHTML = '[已完成]';
+				}
+
+				var distance = document.createElement('span');
+				text.appendChild(distance);
+				distance.setAttribute('class', 'distance');
+				var lat1=Number(getLocation().latitude);
+							var lng1=Number(getLocation().longitude);
+							var lat2=Number(copydata.data.content[i].location.latitude);
+							var lng2=Number(copydata.data.content[i].location.longitude);
+							distance.innerHTML = '距离'+Math.floor(getFlatternDistance(lat1,lng1,lat2,lng2))+'m';
+			};
+
+			//			获取所有求助
+			function get_AllseekHelp() {
+				mui.ajax('http://139.159.148.149:8081/platform/api/activity/v1/data/list/help?pageNo=' + count, {
+					data: {
+						"user": {
+							"userId": userid,
+							"nickname": nickname,
+							"roleId": roleId,
+							"token": token,
+							"viewType": "ALL"
+						}
+					},
+					headers: {
+						'Content-Type': 'application/json;charset=UTF-8',
+						"token": token
+					},
+					dataType: "json",
+					type: "post",
+					Timeout: 10000,
+					success: function(data) {
+						//						alert(JSON.stringify(data))
+						totalpages = data.data.totalPages;
+						var len = data.data.content.length;
+						copydata = data;
+						for(i = 0; i < len; i++) {
+							if(document.getElementsByClassName('mui-tab-item mui-active')[0].innerHTML == '所有') {
+								createDomElements();
+							} else if(document.getElementsByClassName('mui-tab-item mui-active')[0].innerHTML == '求助') {
+								if(copydata.data.content[i].category.name != '110求助' && copydata.data.content[i].category.name != '120求助') {
+									createDomElements();
+								}
+							}
+
+						}
+						//						mui.toast('更新成功')
+					},
+					error: function(xhr, type, errorThrown) {
+						mui.toast('更新失败')
+					}
+				})
+			}
+
+			//			页面关闭或搜索关键词
+			document.getElementById("back").addEventListener("tap", function() {
+				if(this.innerHTML == '返回') {
+					if(close()==true){
+					window.JsInterface.closeWindow();
+				}else if(close()==false){
+					window.webkit.messageHandlers.closeWindow.postMessage({});
+				}
+				} else {
+
+				}
+			});
+			//          搜索按钮监听
+			document.getElementById("search").addEventListener("input", function() {
+				if(this.value != '') {
+					document.getElementById('back').innerHTML = '搜索';
+				} else {
+					document.getElementById('back').innerHTML = '返回';
+				}
+			});
+
+			//			get_AllseekHelp();
+
+			var totalpages;
+			var count = 0;
+
+			function pullupRefresh() {
+				setTimeout(function() {
+					mui('.pullrefresh').pullRefresh().endPullupToRefresh((count == totalpages - 1)); //参数为true代表没有更多数据了。
+					get_AllseekHelp();
+					count++;
+				}, 1500);
+			}
+
+			function addData() {
+				document.getElementsByClassName('mui-slider-item mui-control-content mui-active')[0].children[0].innerHTML = '';
+				get_AllseekHelp();
+				count++;
+			}
+			/**
+			 * 下拉刷新具体业务实现
+			 */
+			function pulldownRefresh() {
+				count = 0;
+				setTimeout(function() {
+					addData();
+					mui('.pullrefresh').pullRefresh().endPulldownToRefresh();
+				}, 1500);
+			}
+		</script>
+	</body>
+
+</html>

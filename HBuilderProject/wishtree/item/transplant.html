@@ -1,0 +1,105 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link href="../css/mui.css" rel="stylesheet" />
+		<style type="text/css">
+			body {
+				background-color: #FFFFFF;
+			}
+
+			.mui-content>.mui-table-view:first-child {
+				margin-top: 0;
+			}
+
+			.tp-img1 {
+				height: 80px;
+				width: 80px;
+				margin-top: 20px;
+
+			}
+
+			.mui-table-view {
+				border-bottom: #FFFFFF;
+			}
+
+			.tp-div1 {
+				margin-top: 40px;
+				height: 150px;
+				background-color: #FFFFFF;
+				border-right: solid #D2D2D2 1px;
+				text-align: center;
+			}
+
+			.tp-div2 {
+				margin-top: 40px;
+				height: 150px;
+				background-color: #FFFFFF;
+				border-right: solid #D2D2D2 1px;
+				text-align: center;
+			}
+
+			.mui-row {
+				background-color: #FFFFFF;
+			}
+
+			.span-first {
+				margin: 0 auto;
+				width: 80px;
+				color: #0A0A0A;
+				font-weight: 500;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" id="back"></a>
+			<h1 class="mui-title">移植</h1>
+		</header>
+		<div class="mui-content">
+			<div class="mui-row">
+				<div class="mui-col-sm-6 mui-col-xs-6 tp-div1"  id="transplantMy">
+					<a href="transplantMy.html">
+						<img src="../images/tree_ico_yzh1.png" class="tp-img1" />
+						<p class="span-first">移植到自己的个性树</p>
+					</a>
+				</div>
+				<div class="mui-col-sm-6 mui-col-xs-6 tp-div2" id="transplantSelect">
+						<img src="../images/tree_ico_yzh2.png" class="tp-img1" />
+						<p class="span-first">选择已有树种移植</p>
+				</div>
+			</div>
+
+		</div>
+		<script src="../js/mui.js"></script>
+		<script type="text/javascript">
+			mui.init();
+			var localurl = 'http://192.168.1.95:8020/wishingTreeMuiRem';
+			// var localurl = 'http://139.159.148.149:8090';
+			
+			//移植跳转事件
+			document.getElementById('transplantMy').addEventListener('tap', function() {
+				window.JsInterface.openWindow(localurl + '/item/transplantMy.html');
+			});
+			
+			//移植跳转事件
+			document.getElementById('transplantSelect').addEventListener('tap', function() {
+				window.JsInterface.openWindow(localurl + '/item/transplantSelect.html');
+			});
+			
+			document.getElementById('back').addEventListener('tap', function() {
+								//				alert('111');
+								localStorage.clear();
+								window.JsInterface.closeWindow();
+			
+							});
+		</script>
+	</body>
+
+</html>

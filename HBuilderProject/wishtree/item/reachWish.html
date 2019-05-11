@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta name="flexible" content="initial-dpr=2" />
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link href="../css/mui.css" rel="stylesheet" />
+		<script src="http://g.tbcdn.cn/mtb/lib-flexible/0.3.4/??flexible_css.js,flexible.js"></script>
+
+		<style type="text/css">
+			html,
+			body {
+				background-color: #EFEFF4;
+				height: 100%;
+			}
+			
+			.mui-bar {
+				height: 1.17rem;
+			}
+			
+			.mui-bar .mui-icon {
+				padding-top: 0.21rem;
+				font-size: 0.8rem;
+				color: black;
+			}
+			
+			.bar-title {
+				display: inline-block;
+				vertical-align: middle;
+				line-height: 1.17rem;
+				font-size: 0.43rem;
+			}
+			
+			.mui-bar .mui-btn-link {
+				display: inline-block;
+				line-height: 1.2rem;
+				font-size: 0.43rem;
+			}
+			
+			.mui-bar-nav~.mui-content {
+				padding-top: 1.17rem;
+			}
+			
+			.mui-content>.mui-table-view:first-child {
+				margin-top: 0;
+			}
+			
+			.wish-p {
+				height: 0.7rem;
+				font-size: 0.35rem;
+				line-height: 0.675rem;
+				color: #3298FF;
+				background-color: #D6EAFF;
+				text-align: center;
+				margin-bottom: 0;
+			}
+			
+			.b-select {
+				margin: 16px 4px;
+				font-size: 16px;
+				font-weight: 500;
+				height: 40px;
+				width: 90px;
+				border-radius: 5em;
+			}
+			
+			.wish-span {
+				font-size: 0.275rem;
+				color: #8f8f94;
+			}
+			
+			.wish-span-time {
+				font-size: 9px;
+				margin-top: 25px;
+				color: #8f8f94;
+				word-break: break-all;
+				word-break: normal;
+			}
+			
+			.wish-img {
+				max-width: 1.75rem;
+				height: 1.75rem;
+				float: left;
+				border: 0;
+				margin-right: 10px;
+				outline: none;
+				white-space: nowrap;
+				-webkit-tap-highlight-color: transparent;
+			}
+			
+			.wish-title {
+				font-size: 0.375rem;
+				line-height: 0.5rem;
+				color: #000000;
+				font-weight: 600;
+				word-wrap: break-word;
+				word-break: break-all;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+				width: 100%;
+				height: 1.1rem;
+			}
+			
+			.blue {
+				color: #0062CC;
+			}
+			
+			.mui-input-group {
+				margin-top: 0.275rem;
+			}
+			
+			.rw-input {
+				text-align: right;
+				padding-right: 50px;
+			}
+			
+			.rw-button {
+				background-color: #3298FF;
+				color: #FAFAFA;
+				font-size: 16px;
+				width: 80%;
+				height: 45px;
+			}
+			
+			.rw-p {
+				margin-top: 10px;
+				font-size: 0.275rem;
+			}
+			
+			.rw-label {
+				font-size: 0.375rem;
+			}
+			
+			.button-div {
+				text-align: center;
+			}
+			
+			input::-webkit-input-placeholder {
+				text-align: right;
+				color: #CCCCCC;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+				<div id="back" style="display: inline-block;">
+				<img src="../images/pub_ico_goback.png" style="width: .51rem; height: .51rem;margin-top: .33rem; float: left;" />
+				<span class="bar-title" >达成愿望</span>
+			</div>
+		</header>
+		<div class="mui-content">
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell mui-media" id="reachWish">
+					<img class="wish-img" src="../images/tree_ico_ywk1.png">
+					<div class="mui-media-body">
+						<p class="mui-ellipsis-2  wish-title ">{{title}}</p>
+						<span class=" wish-span blue">{{user.nickname}}</span>
+						<span class=" wish-span">2018.02.10 19:50</span>
+						<span class=" wish-span mui-pull-right blue">实现值:{{points}}</span>
+					</div>
+
+				</li>
+
+			</ul>
+
+			<form class="mui-input-group">
+				<div class="mui-input-row">
+					<label class="rw-label">购物单号</label>
+					<input id="orderNo" type="text" class="mui-input-clear" style="text-align: right; padding-right: 30px;" placeholder="输入赠送的购物单号">
+				</div>
+				<div class="mui-input-row input-style">
+					<label class="rw-label">物流单号</label>
+					<input id="caseNo" type="text" class="mui-input-clear" style="text-align: right; padding-right: 30px;" placeholder="输入已寄出的快递单号">
+				</div>
+			</form>
+			<div class="button-div">
+				<p class="rw-p">做愿望天使，达成该愿望，您将获得与该愿望的实现值25300K相等的公益值！</p>
+				<button id="rwButton" class="rw-button">确认赠送</button>
+
+			</div>
+		</div>
+		<script src="../js/mui.js"></script>
+		<script src="../js/vue.min.js"></script>
+		<script src="../js/wishingTree.js"></script>
+		<script src="../js/native.js" ></script>
+		<script type="text/javascript">
+			mui.init({
+				swipeBack: false,
+			});
+			var roleid;
+			var realuser = null;
+			var wish = new Vue({
+				el: '#reachWish',
+				data: {
+					id: '',
+					title: '',
+					user: {},
+					points: null,
+				}
+			});
+			//调整样式
+			var mycssstyles;
+			mycssstyles = document.styleSheets[1];
+			mycssstyles.cssRules[17].style.textDecoration = 'none';
+
+			var orderNumber = document.getElementById('orderNo');
+			var caseNumber = document.getElementById('caseNo');
+
+			window.onload = function() {
+				var item = JSON.parse(localStorage.getItem('wish'));
+				realuser = getRequestUser();
+				var token = getToken();
+				// alert(JSON.stringify(realuser));
+
+				wish.id = item.id;
+				wish.title = item.title;
+				wish.user = item.user;
+				wish.points = item.points;
+				roleid = realuser.role_id.toString();
+				// alert(roleid);
+				// alert(JSON.stringify(wish.id));
+				// alert(realuser.id + ',' + realuser.role_id + ',' + realuser.uid + ',' + realuser.nickname);
+
+			}
+
+			document.getElementById("rwButton").addEventListener('tap', function() {
+
+				var btnArray = ['否', '是'];
+				mui.confirm('确定达成愿望吗？', '确认达愿', btnArray, function(e) {
+					if(e.index == 1) {
+						// alert('success');
+						if(orderNumber.value == '' || caseNumber.value == '') {
+							return mui.toast('信息不能为空');
+						} else if(orderNumber.value.search(/^[A-Za-z0-9]+$/) != 0 || caseNumber.value.search(/^[A-Za-z0-9]+$/) != 0) {
+							return mui.toast('信息填写不符合规范');
+						} else if(orderNumber.value.length > 14 || caseNumber.value.length > 14) {
+							return mui.toast('信息超长,请重新填写~')
+						} else {
+							var wishreq = new Object();
+							wishreq.id = wish.id;
+							wishreq.orderNo = orderNumber.value;
+							wishreq.caseNo = orderNumber.value;
+							
+							tree3003(wishreq, function(type, data){
+								if(type == 0){
+									mui.toast('达愿成功');
+									window.JsInterface.closeWindow();
+								}else{
+									alert('上传失败'+data);
+								}
+							})
+						}
+					} else {
+
+					}
+				})
+			});
+			document.getElementById('back').addEventListener('tap', function() {
+				window.JsInterface.closeWindow();
+			})
+		</script>
+	</body>
+
+</html>

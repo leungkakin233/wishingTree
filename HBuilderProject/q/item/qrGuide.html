@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta name="flexible" content="initial-dpr=2" />
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<title></title>
+		<script src="http://g.tbcdn.cn/mtb/lib-flexible/0.3.4/??flexible_css.js,flexible.js"></script>
+		<link href="../css/mui.css" rel="stylesheet" />
+		<style type="text/css">
+			/*body img {
+      display: block;
+    }*/
+			
+			html,
+			body {
+				/* background-color: #FFFFFF; */
+			}
+			
+			.mui-bar {
+				height: 1.17rem;
+			}
+			
+			.mui-bar .mui-icon {
+				padding-top: 0.21rem;
+				font-size: 0.8rem;
+				color: black;
+			}
+			
+			.bar-title {
+				display: inline-block;
+				vertical-align: middle;
+				padding-top: .21rem;
+				font-size: 0.43rem;
+			}
+			
+			.mui-bar-nav~.mui-content {
+				padding-top: 1.17rem;
+			}
+			
+			.mui-content>.mui-table-view:first-child {
+				margin-top: 0px;
+			}
+			
+			.mui-table-view-cell:after {
+				left: 0px;
+			}
+			.guide-p{
+				font-size:0.37rem;
+			}
+			.gameCanvas{
+				width: 100%; background-color: blue;
+			}
+		</style>
+	</head>
+
+	<body style="background-color: red; ">
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" id="back">
+				<span class="bar-title">标识码使用指引</span>
+			</a>
+		</header>
+			
+			<!--<canvas id="gameCanvas" class="gameCanvas" ></canvas>-->
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell" id="photo">
+					<p class="guide-p">
+						[B]新书通报[/B] 本系统为读者提供了查询到馆新书的信息，使读者能第一时间获得新书信息，方便读者及时借阅新书。提供两种检索方式：分类检索和题名检索。 [B]分类检索[/B] 显示的是《中图法》的22个大类，提供最近1－12月以及全部（默认1月）编目入库的图书以及在编图书。选择相应时间限制，在下面的中图法 分类栏，读者只需单击任一大类，就可看到本大类的下位类目，点击即可检索出本段时间的图书编目以及馆藏情况。如：查找外国语方面的新书信息，应在H语言、文字大类中找，点击H语言、文字大类，看起下位类，选择H3常用外国语，就可看到有关外国语方面的新书通报了。 若有该类新书，即可弹出本类目下的相关新书信息，如：索书号、题名、责任者、版本、出版社、出版期等。若没有该类新书，则显示"没有命中记录"。 1 [B]题名检索[/B]： 读者如果要查具体的某一本新书的信息，可以采取题名检索方式。点击新书通报界面的题名检索，进入题名检索界面。在界面上可以选择中文图书检索或是西文图书检索。填写有关内容，如果有所填新书，则会显示有关信息。如没有所填写新书，则显示没有"命中记录"。 在题名检索中，在题目栏中输入需要检索的题名，点击检索，即可获得相应的图书编目以及馆藏情况。 检索结果包括以下几个信息点：索取号，正题名，作者，出版社，出版日期，文献类型以及图书状态。索取号是此图书按中图法分类在本馆的代码，可以按据此来查询到此本图书。正题名即书名，点击此链接，弹出本书的卡片、表格、专业MARC标识格式以及此书的复本情况，大家可以根据此信息提供的相关链接进行2次检索。作者、出版社、出版时间以及图书类型暂不累述。图书状态的标识有3种，“入库”表示本书已上架提供借阅，“编目”表示本书已编目等待分配馆藏，“馆藏”表示本书已划拨等待上架（此操作可合并）。 1 [B]随书光盘[/B]：显示的是《中图法》的22个大类，提供最近1－12月以及全部（默认1月）制作完成的最新光盘，使用方法同分类检索，随书光盘检索方法在下面介绍图书检索时有简述。 4.[B]馆藏图书检索[/B] 是系统提供用来检索馆藏（中央）数据库中数据的功能。提供题名、作者、主题、分类、出版社、分类引导检索、组合检索、二次文献检索、中文期刊检索、西文期刊检索十种检索方式，结果以列表形式在窗口显示。若想查看文献的馆藏信息，可点击“馆藏”按钮。下面分别介绍： [B]题名检索[/B]： 是按书刊正题名为检索点进行匹配的，支持模糊检索，输入任何关键词及组合可以把题名包含你所输入的内容都检索出来。 例如：在题内关键词输入“当代小说”，点击“查找”按钮，可以把题名包含当代小说的信息全查出来。比如：《中国小说提要：当代部分》。 但前面不要留空格或其它字符，否则不能检出。如图，输入" 计算机"则无法检出。 例：在题名检索界面输入"计算机"，读者可通过控制"最大纪录数"来改变检索结果的多少，此时我们把该数值设为"500"检索结果如图 1
+					</p>
+				</li>
+
+			</ul>
+		<script src="../js/jquery.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			document.styleSheets[0].cssRules[17].style.textDecoration = 'none';
+//			$('#gameCanvas').attr("height", $(window).get(0).innerHeight);
+		</script>
+	</body>
+
+</html>

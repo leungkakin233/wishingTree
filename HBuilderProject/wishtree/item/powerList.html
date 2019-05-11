@@ -1,0 +1,374 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta name="flexible" content="initial-dpr=2" />
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<title></title>
+		<link href="../css/mui.css" rel="stylesheet" />
+		<script src="http://g.tbcdn.cn/mtb/lib-flexible/0.3.4/??flexible_css.js,flexible.js"></script>
+
+		<style type="text/css">
+			[v-cloak] {
+				display: none
+			}
+			
+			.mui-bar {
+				height: 1.17rem;
+			}
+			
+			.mui-bar .mui-icon {
+				padding-top: 0.21rem;
+				font-size: 0.8rem;
+				color: black;
+			}
+			
+			.bar-title {
+				display: inline-block;
+				vertical-align: middle;
+				line-height: 1.17rem;
+				font-size: 0.43rem;
+			}
+			
+			.mui-bar .mui-btn-link {
+				display: inline-block;
+				line-height: 1.2rem;
+				font-size: 0.43rem;
+			}
+			
+			.mui-bar-nav~.mui-content {
+				padding-top: 1.17rem;
+			}
+			
+			.power-head {
+				height: 1.73rem;
+				height: 1.73rem;
+				float: left;
+				border: 0;
+				margin: 0.47rem 0.25rem 0.47rem 0.39rem;
+				outline: none;
+				white-space: nowrap;
+				-webkit-tap-highlight-color: transparent;
+			}
+			
+			.pl-title {
+				font-size: 0.43rem;
+				margin-top: 0.68rem;
+				margin-bottom: 0.25rem;
+			}
+			
+			.mui-content>.mui-table-view:first-child {
+				margin-top: 0;
+			}
+			
+			.mui-table-view-cell {
+				padding: 0px;
+			}
+			
+			.pl-span-title {
+				font-size: .32rem;
+				color: red;
+			}
+			
+			.collection-top {
+				display: inline-block;
+				margin-left: 0.2rem;
+				margin-top: 0.27rem;
+				width: 3rem;
+				height: 0.67rem;
+				border-radius: 1em;
+				text-align: center;
+				font-size: 0.32rem;
+				color: white;
+			}
+			
+			.collection-bottom {
+				display: inline-block;
+				margin-left: 0.2rem;
+				margin: 0.27rem 0 0.27rem 0.2rem;
+				width: 3rem;
+				height: 0.67rem;
+				border-radius: 1em;
+				text-align: center;
+				font-size: 0.32rem;
+				color: white;
+			}
+			
+			.pl-p {
+				margin-left: 0.25rem;
+				font-size: 0.27rem;
+			}
+			
+			.pl-img {
+				max-width: 0.6rem;
+				height: 0.6rem;
+				float: left;
+				border: 0;
+				margin: 0.3rem 0.28rem 0.33rem 0.36rem;
+				outline: none;
+				white-space: nowrap;
+				-webkit-tap-highlight-color: transparent;
+			}
+			
+			.pl-span {
+				display: inline-block;
+				padding-top: 0.35rem;
+				font-size: 0.35rem;
+			}
+			
+			.span-second {
+				padding-top: 0.37rem;
+				font-size: .27rem;
+			}
+			
+			.span-third {
+				display: inline-block;
+				padding-top: 0.35rem;
+				padding-right: 0.35rem;
+				font-size: 0.35rem;
+				color: #014393;
+			}
+			
+			.mui-table-view-cell:after {
+				left: 0px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<div id="back" style="display: inline-block;">
+				<img src="../images/pub_ico_goback.png" style="width: .51rem; height: .51rem;margin-top: .33rem; float: left;" />
+				<span class="bar-title" >公益值清单</span>
+			</div>
+		</header>
+
+		<div class="mui-content" id="powerlist">
+			<ul class="mui-table-view" id="top-ul">
+				<li class="mui-table-view-cell mui-media">
+					<img class="power-head" src="../images/tree_ico_ywk1.png">
+					<div class="mui-media-body ">
+						<h4 class="pl-title" v-cloak>{{banner.name}}</h4>
+						<span class="mui-ellipsis pl-span-title" v-cloak>公益总值:{{banner.points}}</span>
+					</div>
+				</li>
+			</ul>
+			<p class="pl-p">公益值收集统计:</p>
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<!-- 					<div class="mui-table-cell div-collection"><span>收藏 6592</span></div>
+					<div class="mui-table-cell div-release"><span>发布登记 4862</span></div>
+					<div class="mui-table-cell div-Comment"><span>点评 6589</span></div>
+					<div class="mui-table-cell div-get"><span>收取 58920</span></div>
+					<div class="mui-table-cell div-commonweal"><span>公益 68953</span></div>
+					<div class="mui-table-cell div-walk"><span>步行 6589 </span></div> -->
+					<div>
+						<div class="collection-top" style="background-color: #EC16A3;"><span>收藏 6592</span></div>
+						<div class="collection-top" style="background-color: #FB9A00;"><span>发布登记 4862</span></div>
+						<div class="collection-top" style="background-color: #3779BD;"><span>收藏 6592</span></div>
+						<div class="collection-bottom" style="background-color: #3298FF;"><span>收取 58920</span></div>
+						<div class="collection-bottom" style="background-color: #FF3232;"><span>公益 68953</span></div>
+						<div class="collection-bottom" style="background-color: #0DA129;"><span>步行 6589 </span></div>
+					</div>
+				</li>
+				<!-- 				<li class="mui-table-view-cell">
+
+					<div class="mui-row">
+						<div class="mui-table-cell mui-col-sm-5 mui-col-xs-5 mui-text-left">
+							<img src="../images/tree_label_01shc.png" class="pl-img" />
+							<span class="pl-span">收藏获取</span>
+						</div>
+						<div class="mui-table-cell mui-col-sm-5 mui-col-xs-5">
+							<p class="span-second">今天13:30</p>
+						</div>
+						<div class="mui-table-cell mui-col-sm-2 mui-col-xs-2">
+							<span class="span-third">45k</span>
+						</div>
+					</div>
+				</li>
+				<li class="mui-table-view-cell">
+					<div class="mui-row">
+						<div class="mui-table-cell mui-col-sm-5  mui-col-xs-5 mui-text-left">
+							<img src="../images/tree_label_02gy.png" class="pl-img" />
+							<span class="pl-span">做公益获取</span>
+						</div>
+						<div class="mui-table-cell mui-col-sm-5  mui-col-xs-5">
+							<p class="span-second">今天12:30</p>
+						</div>
+						<div class="mui-table-cell mui-col-sm-2 mui-col-xs-2 mui-text-right">
+							<span class="span-third">21k</span>
+						</div>
+					</div>
+
+				</li>
+				<li class="mui-table-view-cell">
+					<div class="mui-row">
+						<div class="mui-table-cell mui-col-sm-6 mui-col-xs-6 mui-text-left">
+							<img src="../images/tree_label_04fb.png" class="pl-img" />
+							<span class="pl-span">发布技能需求获取</span>
+						</div>
+						<div class="mui-table-cell mui-col-sm-4 mui-col-xs-4 ">
+							<p class="span-second">今天8:01</p>
+						</div>
+						<div class="mui-table-cell mui-col-sm-2 mui-col-xs-2">
+							<span class="span-third">5149k</span>
+						</div>
+					</div>
+				</li>
+				<li class="mui-table-view-cell">
+					<div class="mui-row">
+						<div class="mui-table-cell mui-col-sm-5 mui-col-xs-5 mui-text-left">
+							<img src="../images/tree_label_03yy.png" class="pl-img" />
+							<span class="pl-span">摇一摇</span>
+						</div>
+						<div class="mui-table-cell mui-col-sm-5 mui-col-xs-5 ">
+							<p class="span-second">昨天22:00</p>
+						</div>
+						<div class="mui-table-cell mui-col-sm-2 mui-col-xs-2 mui-text-right">
+							<span class="span-third">45k</span>
+						</div>
+					</div>
+				</li>
+				<li class="mui-table-view-cell">
+					<div class="mui-row">
+						<div class="mui-table-cell mui-col-sm-5 mui-col-xs-5 mui-text-left">
+							<img src="../images/tree_label_06bx.png" class="pl-img" />
+							<span class="pl-span">步行获取</span>
+						</div>
+						<div class="mui-table-cell mui-col-sm-5 mui-col-xs-5">
+							<p class="span-second">昨天13:00</p>
+						</div>
+						<div class="mui-table-cell mui-col-sm-2 mui-col-xs-2 mui-text-right">
+							<span class="span-third">45k</span>
+						</div>
+					</div>
+				</li>
+				<li class="mui-table-view-cell">
+					<div class="mui-row">
+						<div class="mui-table-cell mui-col-sm-5 mui-col-xs-5 mui-text-left">
+							<img src="../images/tree_label_05ly.png" class="pl-img" />
+							<span class="pl-span">点评获取</span>
+						</div>
+						<div class="mui-table-cell mui-col-sm-5 mui-col-xs-5">
+							<p class="span-second">2018.09.08 10:50</p>
+						</div>
+						<div class="mui-table-cell mui-col-sm-2 mui-col-xs-2 mui-text-right">
+							<span class="span-third">45k</span>
+						</div>
+					</div>
+				</li>
+				<li class="mui-table-view-cell">
+					<div class="mui-row">
+						<div class="mui-table-cell mui-col-sm-5 mui-col-xs-5 mui-text-left">
+							<img src="../images/tree_label_07shq.png" class="pl-img" />
+							<span class="pl-span">获取好友</span>
+						</div>
+						<div class="mui-table-cell mui-col-sm-5 mui-col-xs-5 ">
+							<p class="span-second">2018.09.05 19:50</p>
+						</div>
+						<div class="mui-table-cell mui-col-sm-2 mui-col-xs-2 mui-text-right">
+							<span class="span-third">45k</span>
+						</div>
+					</div>
+				</li>
+				<li class="mui-table-view-cell">
+					<div class="mui-row">
+						<div class="mui-table-cell mui-col-sm-5 mui-col-xs-5 mui-text-left">
+							<img src="../images/tree_label_01shc.png" class="pl-img" />
+							<span class="pl-span">收藏获取</span>
+						</div>
+						<div class="mui-table-cell mui-col-sm-5 mui-col-xs-5">
+							<p class="span-second">2018.09.03 19:50</p>
+						</div>
+						<div class="mui-table-cell mui-col-sm-2 mui-col-xs-2 mui-text-right">
+							<span class="span-third">213k</span>
+						</div>
+					</div>
+				</li> -->
+
+				<!-- vue循环从这里开始 -->
+				<li class="mui-table-view-cell" v-for="log in logs">
+					<div class="mui-row" v-cloak>
+						<div class="mui-table-cell mui-col-sm-5 mui-col-xs-5 mui-text-left">
+							<img src="../images/tree_label_05ly.png" class="pl-img" />
+
+							<span class="pl-span">{{log.description}}</span>
+						</div>
+						<div class="mui-table-cell mui-col-sm-5 mui-col-xs-5">
+							<p class="span-second">{{log.time}}</p>
+						</div>
+						<div class="mui-table-cell mui-col-sm-2 mui-col-xs-2t">
+							<span class="span-third">{{log.point}}</span>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<script src="../js/mui.js"></script>
+		<script src="../js/vue.min.js"></script>
+		<script src="../js/wishingTree.js"></script>
+		<script type="text/javascript" src="../js/native.js"></script>
+		<script type="text/javascript">
+			mui.init();
+			var treeid = null;
+
+			var powerlist = new Vue({
+				el: '#powerlist',
+				data: {
+					logs: [], //列表信息流数据,
+					banner: {
+						name: '',
+						points: '',
+					},
+					totalCount: 1,
+					pageNumber: 0,
+					pageSize: 20,
+					last: true,
+					totalPages: 1,
+					totalElements: 1,
+					number: 0,
+					size: 20,
+					sort: null,
+					numberOfElements: 1,
+					first: true
+				},
+
+			})
+			//			console.log(document.styleSheets)
+			document.styleSheets[1].cssRules[17].style.textDecoration = 'none';
+
+			window.onload = function() {
+				var Storage = localStorage;
+				treeid = Storage.getItem("treeid");
+				token = localStorage.getItem('token');
+				// alert(treeid);
+				tree1001(treeid, function(type, data) {
+					if(type == 0) {
+						powerlist.banner = {
+							name: data.data.item.name,
+							points: data.data.item.points,
+						};
+					} else {
+						console.log("获取许愿树失败" + data)
+					}
+				})
+
+				tree2003(treeid, function(type, data) {
+					if(type == 0) {
+						powerlist.logs = data.data.content;
+					} else {
+						console.log("获取活动记录列表失败" + data)
+					}
+				})
+
+			}
+			document.getElementById('back').addEventListener('tap', function() {
+				window.JsInterface.closeWindow();
+			})
+		</script>
+	</body>
+
+</html>

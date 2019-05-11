@@ -1,0 +1,1229 @@
+<!DOCTYPE html>
+<html>
+	<meta charset="utf-8">
+	<title></title>
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<meta name="flexible" content="initial-dpr=2" />
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<link href="../css/mui.css" rel="stylesheet" />
+	<link rel="stylesheet" href="../css/photoswipe.css" />
+	<link rel="stylesheet" type="text/css" href="../css/default-skin.css" />
+	<script src="http://g.tbcdn.cn/mtb/lib-flexible/0.3.4/??flexible_css.js,flexible.js"></script>
+	<style type="text/css">
+		[v-cloak] {
+			display: none
+		}
+		
+		html,
+		body {
+			height: 100%;
+			width: 100%;
+			margin: 0;
+			padding: 0;
+		}
+		
+		.mui-bar {
+			height: 1.17rem;
+		}
+		
+		.mui-bar .mui-icon {
+			padding-top: 0.21rem;
+			font-size: 0.8rem;
+			color: black;
+		}
+		
+		.bar-title {
+			display: inline-block;
+			vertical-align: middle;
+			padding-top: .21rem;
+			font-size: 0.43rem;
+		}
+		
+		.mui-bar .mui-btn-link {
+			display: inline-block;
+			line-height: 1.2rem;
+			font-size: 0.43rem;
+		}
+		
+		.mui-bar-nav~.mui-content {
+			padding-top: 1.17rem;
+		}
+		
+		.body-bg {
+			background: url(../images/tree_bg_xyk2bg.png) no-repeat;
+			width: 100%;
+			height: 13.13rem;
+			background-size: 100% 100%;
+		}
+		
+		.body-bg-2 {
+			background: url(../images/tree_bg_ywk1bg.png) no-repeat;
+			width: 100%;
+			height: 13.13rem;
+			background-size: 100% 100%;
+		}
+		
+		.wish-ywk1 {
+			position: absolute;
+			margin: 0 auto;
+			top: 0;
+			left: 0;
+			bottom: 0;
+			right: 0;
+			height: 12.73rem;
+			width: 100%;
+			overflow: hidden;
+			resize: none;
+			border-style: none;
+			z-index: 1;
+		}
+		
+		.wish-ywk2 {
+			position: absolute;
+			margin: 0 auto;
+			top: 0rem;
+			left: -0.2rem;
+			bottom: 0;
+			right: 0;
+			height: 12.73rem;
+			width: 100%;
+			overflow: hidden;
+			resize: none;
+			border-style: none;
+			z-index: 1;
+		}
+		
+		.wish-p1 {
+			position: absolute;
+			top: 3.86rem;
+			left: 1.6rem;
+			bottom: 0;
+			right: 0;
+			width: 6.71rem;
+			height: 1.2rem;
+			z-index: 105;
+			border: 0;
+			background-color: transparent;
+			overflow-y: auto;
+			resize: none;
+			border-style: none;
+			color: #FAFAFA;
+			font-weight: 500;
+			font-size: 0.37rem;
+			text-align: center;
+		}
+		
+		.wish-p2 {
+			position: absolute;
+			top: 5.1rem;
+			left: 1.6rem;
+			bottom: 0;
+			right: 0;
+			width: 6.71rem;
+			height: 1.2rem;
+			z-index: 105;
+			background-color: transparent;
+			word-wrap: break-word;
+			overflow-y: auto;
+			color: #FAFAFA;
+			font-weight: 500;
+			font-size: 0.32rem;
+			line-height: 0.4rem;
+		}
+		
+		.head-img {
+			position: absolute;
+			top: 2.81rem;
+			left: 4.5rem;
+			right: 0;
+			bottom: 0;
+			width: 1rem;
+			height: 1rem;
+			z-index: 5;
+		}
+		
+		.power-button {
+			position: absolute;
+			right: 0.21rem;
+			top: 0.41rem;
+			width: 3.33rem;
+			height: 0.85rem;
+			font-size: 0.32rem;
+			border-radius: 2em;
+			text-align: center;
+			background-color: #FF0000;
+			color: white;
+		}
+		
+		.wish-form {
+			position: absolute;
+			margin: 0 auto;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			top: 0;
+			width: 100%;
+			height: 80%;
+		}
+		
+		#topPopover {
+			position: fixed;
+			top: 16px;
+			right: 6px;
+		}
+		
+		#topPopover .mui-popover-arrow {
+			left: auto;
+			right: 6px;
+		}
+		
+		.mui-popover {
+			width: 120px;
+			height: 140px;
+		}
+		
+		.img-group {
+			width: 35px;
+			height: 35px;
+		}
+		
+		.p-title {
+			margin: 10px 10px 0px 10px;
+			font-size: 16px;
+		}
+		
+		.img-group-control {
+			margin: 5px 5px 0 5px;
+			border: 0;
+		}
+		
+		.comment-head-portrait {
+			/*line-height: 44px;*/
+			width: 35px;
+			height: 35px;
+			/*width: .7rem;
+			height: .7rem;*/
+			float: left;
+			border: 0;
+			margin-right: 11px;
+			outline: none;
+			white-space: nowrap;
+			border-radius: 100%;
+		}
+		
+		.love-ico {
+			line-height: 37px;
+			max-width: 24px;
+			height: 18px;
+			float: left;
+			border: 0;
+			margin-right: 11px;
+			outline: none;
+			white-space: nowrap;
+		}
+		
+		.comment-title {
+			font-weight: 600;
+			color: #102F75;
+		}
+		
+		.comment-body {
+			font-weight: 500;
+			color: #282828;
+			width: 100%;
+			height: auto;
+			word-wrap: break-word;
+			word-break: break-all;
+			overflow: hidden;
+		}
+		
+		.time-span {
+			font-size: 14px;
+			color: #909090;
+		}
+		
+		.mui-segmented-control .mui-control-item {
+			line-height: 33px;
+			display: table-cell;
+			overflow: hidden;
+			width: 1%;
+			-webkit-transition: background-color .1s linear;
+			transition: background-color .1s linear;
+			white-space: nowrap;
+			text-overflow: ellipsis;
+		}
+		
+		.control-item1 {
+			color: #0062CC;
+		}
+		
+		.control-item2 {
+			text-align: right;
+		}
+		
+		.mui-control-content {
+			background-color: white;
+			height: 100%;
+		}
+		
+		.mui-control-content .mui-loading {
+			margin-top: 50px;
+		}
+		
+		.bottom-select {
+			position: fixed;
+			width: 100%;
+			left: 0px;
+			z-index: 105;
+			bottom: 0px;
+		}
+		
+		.bottom-select-left {
+			text-align: center;
+			font-size: 0.40rem;
+			background-color: #EFEFF4;
+		}
+		
+		.bottom-select-left:before {
+			content: '';
+			position: absolute;
+			left: auto;
+			top: 15%;
+			bottom: auto;
+			right: 0;
+			height: 70%;
+			width: 1px;
+			background-color: #a89d9e;
+		}
+		
+		.bottom-select-right {
+			text-align: center;
+			font-size: 0.40rem;
+			background-color: #EFEFF4;
+		}
+		
+		.bottom-select-right:before {
+			content: '';
+			position: absolute;
+			left: -1px;
+			top: 15%;
+			bottom: auto;
+			right: auto;
+			height: 70%;
+			width: 1px;
+			background-color: #a89d9e;
+		}
+		
+		.photo {
+			width: 1.44rem;
+			height: 1.44rem;
+			border-radius: 0.5em;
+			position: absolute;
+			top: 6.9rem;
+			left: 4.28rem;
+			bottom: 0;
+			right: 0;
+			z-index: 50;
+			/* background-color: red; */
+		}
+		
+		.photogroup {
+			padding-top: 7px;
+		}
+		
+		.photogroup>img {
+			padding: 5px 5px 0 5px;
+			width: 1.8rem;
+			height: 1.8rem;
+		}
+		
+		.addlocation {
+			display: flex;
+		}
+		
+		.triangle {
+			width: 10px;
+			height: 10px;
+			border-width: 0 10px 10px;
+			border-style: solid;
+			border-color: transparent transparent #F3F3F3;
+			margin-left: 20px;
+		}
+		
+		.rectangle {
+			height: auto;
+			padding: 10px;
+			background-color: #F3F3F3;
+		}
+		
+		.rectangle p {
+			color: #102F75;
+			font-size: 0.3rem;
+		}
+		
+		.reachWish {
+			background-color: rgba(161, 51, 208, 0.8);
+			position: fixed;
+			bottom: 3.6rem;
+			right: 10px;
+			width: 1.5rem;
+			height: 1.5rem;
+			border-radius: 100%;
+			z-index: 105;
+		}
+		
+		.addpoint {
+			background-color: rgba(255, 51, 51, 0.8);
+			position: fixed;
+			bottom: 1.8rem;
+			right: 10px;
+			width: 1.5rem;
+			height: 1.5rem;
+			border-radius: 100%;
+			z-index: 105;
+		}
+		
+		.gongyizhi {
+			margin-left: 0.43rem;
+			margin-top: 0.1rem;
+			width: 0.6rem;
+			height: 0.6rem;
+		}
+		
+		.icon1 {
+			height: 0.45rem;
+			width: 0.45rem;
+			margin-right: 20px;
+			margin-top: 4px;
+		}
+		
+		.icon2 {
+			height: 0.45rem;
+			width: 0.45rem;
+			margin-top: 3px;
+		}
+		
+		.mui-popover {
+			background-color: white;
+			width: 100%;
+			height: 158px;
+			position: fixed;
+		}
+		
+		.mui-popover.mui-popover-action {
+			bottom: 0;
+			width: 100%;
+			-webkit-transition: -webkit-transform .3s, opacity .3s;
+			transition: transform .3s, opacity .3s;
+			-webkit-transform: translate3d(0, 100%, 0);
+			transform: translate3d(0, 100%, 0);
+			border-radius: 0;
+			background: white;
+			-webkit-box-shadow: none;
+			box-shadow: none;
+		}
+		
+		.commentarea {
+			margin: 10px 5% 2px 5%;
+			height: 100px;
+			width: 90%;
+			font-size: 16px;
+		}
+		
+		.comment-button {
+			margin-right: 5%;
+		}
+		
+		.newComment {
+			min-height: 100%;
+			height: 100%;
+			height: auto !important;
+			margin-bottom: 44px !important;
+		}
+		
+		.comment-span {
+			margin-top: 4px;
+			color: #8f8f94;
+			display: inline-block;
+		}
+		
+		.likenumber {
+			color: #8f8f94;
+			display: inline-block;
+		}
+		
+		.mui-list-unstyled .mui-table-view-cell {
+			position: relative;
+			overflow: hidden;
+			padding: 0px 0px;
+			-webkit-touch-callout: none;
+		}
+		
+		.mui-list-unstyled .mui-table-view-cell:after {
+			width: 0;
+		}
+		
+		.img-1 {
+			height: 100%;
+			width: 100%;
+			border-radius: 0.75em 0.75em 0.75em 0.75em;
+		}
+		
+		.img-2 {
+			height: 100%;
+			width: 50%;
+			display：block;
+			float: left;
+		}
+		
+		.img-2-left-radius {
+			border-radius: 0.75em 0 0 0.75em;
+			padding-right: 1px;
+		}
+		
+		.img-2-right-radius {
+			border-radius: 0 0.75em 0.75em 0;
+			padding-left: 1px;
+		}
+		
+		.img-4 {
+			width: 50%;
+			height: 50%;
+			display：block;
+			float: left;
+		}
+		
+		.img-4-top-left-radius {
+			border-radius: 0.75em 0 0 0;
+			padding-right: 1px;
+			padding-bottom: 1px;
+		}
+		
+		.img-4-top-right-radius {
+			border-radius: 0 0.75em 0 0;
+			padding-left: 1px;
+			padding-bottom: 1px;
+		}
+		
+		.img-4-bottom-left-radius {
+			border-radius: 0 0 0 0.75em;
+			padding-top: 1px;
+			padding-right: 1px;
+		}
+		
+		.img-4-bottom-right-radius {
+			border-radius: 0 0 0.75em 0;
+			padding-left: 1px;
+			padding-top: 1px;
+		}
+	</style>
+	</head>
+
+	<body>
+
+		<body>
+			<header class="mui-bar mui-bar-nav">
+				<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" id="back"><span class="bar-title">愿望详情</span></a>
+				<a id="menu" class="mui-action-menu mui-icon mui-icon-bars mui-pull-right" href="#topPopover"></a>
+			</header>
+			<div class="mui-content mui-scroll-wrapper">
+				<div class="mui-scroll ">
+					<!--<div class="mui-content">-->
+					<!-- 愿望详情 start1 -->
+					<div class="body-bg-2" id="watchwish" v-cloak>
+						<button class="power-button">
+							愿望实现值:{{points}}
+						</button>
+
+						<img src="../images/tree_bg_ywk1_back@2x.png" class="wish-ywk1" id="wish-ywk" />
+						<!--<img src="../images/tree_bg_xyk2_positive.png" class="wish-ywk2" id="wish-ywk" />-->
+						<!--<img class="head-img" src="../images/logo.png" id="head-img" />-->
+						<img class="head-img" :src="user.avatar" id="head-img" v-cloak />
+						<div class="wish-p1" id="p1" v-cloak>{{title}}</div>
+
+						<div class="wish-p2" id="p2" v-cloak>{{content}}</div>
+
+						<div class="photo" id="photo">
+							<img :src="image" v-for="(image,index) in imageList" :id="index" :class="imgClass(index)" v-if="index < 4" />
+						</div>
+					</div>
+					<!-- 愿望详情 结束 end1 -->
+
+					<!-- 评论部分 comment start2 -->
+					<div id="sliderSegmentedControl" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted " v-cloak>
+						<a class="mui-control-item mui-active" href="#item1">
+							评论({{commentCount}})
+						</a>
+						<a class="mui-control-item" href="#item2">
+							给爱心
+						</a>
+					</div>
+
+					<div id="item1" class="mui-control-content mui-active">
+						<ul class="mui-table-view " id="hotComment" v-cloak>
+							<li>
+								<div style="padding-bottom: 5px; padding-top: 5px;">
+									<img src="../images/shareshop_label_new.png" style="height: 0.5rem; width: 1rem; margin-left: 10px;  vertical-align: middle; " />
+									<span style="font-size: .375rem;">最热评论</span>
+								</div>
+							</li>
+
+							<li class="mui-table-view-cell mui-media" v-for="(hotcomment, index) in hotcomments">
+								<img class="comment-head-portrait" :src="hotcomment.user.avatar">
+								<div class="mui-media-body">
+									<p class="comment-title  mui-ellipsis-2">{{hotcomment.user.nickname}}</p>
+									<p class="comment-body ">{{hotcomment.content}}</p>
+									<div class="photogroup">
+										<img :src="image" v-for="image in hotcomment.imageUrlList" />
+									</div>
+									<div class="addlocation" v-if="hotcomment.location">
+										<img src="../images/tree_share_location.png" style="height: 15px;">
+										<h5 style="margin-top: 1.5px;">{{hotcomment.location}}</h5>
+									</div>
+
+									<div class="chat" v-if="hotcomment.replys">
+										<div class="triangle"></div>
+										<div class="rectangle">
+											<ul class="mui-list-unstyled">
+												<li class="mui-table-view-cell" v-for="(reply,innerIndex) in hotcomment.replys.content" v-if="innerIndex < 2">
+													<p>
+														{{reply.user.nickname}}：
+														<span style="color: #000000;">
+															{{reply.content}}
+														</span>
+														<span style="margin-left: 10px;" @tap="deleteOne(index,innerIndex,reply.id,hotcomment.id)" v-if="reply.user.userId == realuser.userId">删除</span>
+													</p>
+												</li>
+												<li class="mui-table-view-cell" v-if="comment.replys.content.length > 2" @tap="goDetail(hotcomment)">
+													<p>查看全部{{hotcomment.replys.content.length}}条回复>>
+													</p>
+												</li>
+											</ul>
+										</div>
+									</div>
+									<div style="line-height: 16px;">
+										<span class='mui-ellipsis comment-span'>{{hotcomment.time}}</span>
+										<div class="mui-pull-right" style="display: inline-flex;">
+											<img @tap="reply(hotcomment, index)" src="../images/pub_ico_comment_nor.png" class="icon1" />
+											<div @tap="replylike(hotcomment, index, 'hc')">
+												<img src="../images/pub_ico_good_sel.png" class="icon2" v-if="hotcomment.myLike" />
+												<img src="../images/pub_ico_good_nor.png" class="icon2" v-else />
+												<p class="likenumber">{{hotcomment.like}}</p>
+											</div>
+										</div>
+									</div>
+								</div>
+							</li>
+
+						</ul>
+						<ul class="mui-table-view newComment" id="newComment" v-cloak>
+							<li>
+								<div style="padding-bottom: 5px; padding-top: 5px;">
+									<img src="../images/shareshop_label_new.png" style="height: 0.5rem; width: 1rem;margin-left: 10px;  vertical-align: middle; " />
+									<span style="font-size: .375rem;">最新评论</span>
+								</div>
+							</li>
+
+							<li class="mui-table-view-cell mui-media" v-for="(comment, index) in comments">
+								<!--<img class="comment-head-portrait" src="../images/tree_ico_ywk1.png">-->
+								<img class="comment-head-portrait" :src="comment.user.avatar">
+								<div class="mui-media-body">
+									<p class="comment-title  mui-ellipsis-2">{{comment.user.nickname}}</p>
+									<p class="comment-body ">{{comment.content}}</p>
+									<div class="photogroup">
+										<img :src="image" v-for="image in comment.imageUrlList" />
+									</div>
+									<div class="addlocation" v-if="comment.location">
+										<img src="../images/tree_share_location.png" style="height: 15px;">
+										<h5 style="margin-top: 1.5px;">{{comment.location}}</h5>
+									</div>
+
+									<div class="chat" v-if="comment.replys">
+										<div class="triangle"></div>
+										<div class="rectangle">
+											<ul class="mui-list-unstyled">
+												<li class="mui-table-view-cell" v-for="(reply,innerIndex) in comment.replys.content" v-if="innerIndex < 2">
+													<p>
+														{{reply.user.nickname}}：
+														<span style="color: #000000;">
+															{{reply.content}}
+														</span>
+														<span style="margin-left: 10px;" @tap="deleteOne(index,innerIndex,reply.id,comment.id)" v-if="reply.user.userId == realuser.userId">删除</span>
+													</p>
+												</li>
+												<li class="mui-table-view-cell" v-if="comment.replys.content.length > 2" @tap="goDetail(comment)">
+													<p>查看全部{{comment.replys.content.length}}条回复>>
+													</p>
+												</li>
+											</ul>
+										</div>
+									</div>
+									<div style="line-height: 16px;">
+										<span class='mui-ellipsis comment-span'>{{comment.time}}</span>
+										<div class="mui-pull-right" style="display: inline-flex;">
+											<img @tap="reply(comment, index)" src="../images/pub_ico_comment_nor.png" class="icon1" />
+											<div @tap="replylike(comment, index, 'nc')">
+												<img src="../images/pub_ico_good_sel.png" class="icon2" v-if="comment.myLike" />
+												<img src="../images/pub_ico_good_nor.png" class="icon2" v-else />
+												<p class="likenumber">{{comment.like}}</p>
+											</div>
+										</div>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+
+					<div id="item2" class="mui-control-content">
+						<button id="test">button1</button>
+					</div>
+
+				</div>
+			</div>
+
+			<!-- reachwish -->
+			<div class="addpoint" id="addpoint">
+				<img src="../images/pub_ioc_gongyizhi.png" class="gongyizhi">
+				<p style="color: #FAFAFA; font-size: 0.25rem; text-align: center; line-height: 0.25rem;">为他加油</p>
+			</div>
+			<div class="reachWish" id="reachWish" v-if="!finished" v-cloak>
+				<img src="../images/pub_ioc_gongyizhi.png" class="gongyizhi">
+				<p style="color: #FAFAFA; font-size: 0.25rem; text-align: center; line-height: 0.25rem;">帮他达愿</p>
+			</div>
+			<!-- reachwish -->
+
+			<!-- nav bottom -->
+			<nav class="bottom-select">
+				<ul class="mui-table-view">
+					<div class="mui-row">
+						<div class="mui-col-sm-6 mui-col-xs-6 bottom-select-left">
+							<li class="mui-table-view-cell" id="addComment">
+								<img src="../images/pub_ico_comment_nor.png" style="width: 0.375rem;" />
+								<span>评论</span>
+							</li>
+						</div>
+						<div class="mui-col-sm-6 mui-col-xs-6 bottom-select-right">
+							<li class="mui-table-view-cell" id="like">
+								<img src="../images/pub_ico_love_nor.png" style="width: 0.375rem;" id="loveico" />
+								<span>爱心</span>
+							</li>
+						</div>
+					</div>
+				</ul>
+			</nav>
+			<!-- nav bottom -->
+
+			<!-- Root element of PhotoSwipe. Must have class pswp. -->
+			<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+				<!-- Background of PhotoSwipe. 
+         It's a separate element, as animating opacity is faster than rgba(). -->
+				<div class="pswp__bg"></div>
+
+				<!-- Slides wrapper with overflow:hidden. -->
+				<div class="pswp__scroll-wrap">
+
+					<!-- Container that holds slides. PhotoSwipe keeps only 3 slides in DOM to save memory. -->
+					<div class="pswp__container">
+						<!-- don't modify these 3 pswp__item elements, data is added later on -->
+						<div class="pswp__item"></div>
+						<div class="pswp__item"></div>
+						<div class="pswp__item"></div>
+					</div>
+
+					<!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+					<div class="pswp__ui pswp__ui--hidden">
+
+						<div class="pswp__top-bar">
+
+							<!--  Controls are self-explanatory. Order can be changed. -->
+
+							<div class="pswp__counter"></div>
+
+							<button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+							<button class="pswp__button pswp__button--share" title="Share"></button>
+
+							<!--<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>-->
+
+							<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+							<!-- Preloader demo https://codepen.io/dimsemenov/pen/yyBWoR -->
+							<!-- element will get class pswp__preloader--active when preloader is running -->
+							<div class="pswp__preloader">
+								<div class="pswp__preloader__icn">
+									<div class="pswp__preloader__cut">
+										<div class="pswp__preloader__donut"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+							<div class="pswp__share-tooltip"></div>
+						</div>
+
+						<button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+						</button>
+
+						<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+						</button>
+
+						<div class="pswp__caption">
+							<div class="pswp__caption__center"></div>
+						</div>
+
+					</div>
+
+				</div>
+			</div>
+
+			<script src="../js/mui.js"></script>
+			<script src="../js/wishingTree.js"></script>
+			<script src="../js/native.js"></script>
+			<script src="../js/vue.min.js"></script>
+			<script type="text/javascript" src="../js/photoswipe-ui-default.js"></script>
+			<script type="text/javascript" src="../js/photoswipe.js"></script>
+			<script type="text/javascript">
+				var realuser = null;
+				var item = null;
+				var token = null;
+				var resindex = null;
+				var wish = new Vue({
+					el: '#watchwish',
+					data: {
+						res: {},
+						id: '',
+						title: '',
+						content: '',
+						user: {},
+						points: null,
+						imageList: [],
+						finished: false,
+					},
+					methods: {
+						imgClass: function(index) {
+							if(this.imageList.length == 1) {
+								if(index == 0) {
+									return "img-1";
+								}
+							} else if(this.imageList.length == 2) {
+								if(index == 0) {
+									return "img-2 img-2-left-radius";
+								} else {
+									return "img-2 img-2-right-radius";
+								}
+							} else if(this.imageList.length == 3) {
+								if(index == 0) {
+									return "img-2 img-2-left-radius";
+								} else if(index == 1) {
+									return "img-4 img-4-top-right-radius";
+								} else {
+									return "img-4 img-4-bottom-right-radius";
+								}
+							} else {
+								if(index == 0) {
+									return "img-4 img-4-top-left-radius";
+								} else if(index == 1) {
+									return "img-4 img-4-top-right-radius";
+								} else if(index == 2) {
+									return "img-4 img-4-bottom-left-radius";
+								} else {
+									return "img-4 img-4-bottom-right-radius";
+								}
+							}
+
+						}
+					}
+				});
+				var rescomment = null;
+				var islike = false;
+				var imgGroup = [];
+				//最热评论
+				var hotComment = new Vue({
+					el: '#hotComment',
+					data: {
+						hotcomments: [],
+					}
+				});
+
+				//最新评论
+				var newComment = new Vue({
+					el: '#newComment',
+					data: {
+						comments: [],
+					},
+					methods: {}
+				});
+				//计数
+				var count = new Vue({
+					el: '#sliderSegmentedControl',
+					data: {
+						commentCount: '',
+						likeCount: '',
+					}
+				});
+
+				var reachWish = new Vue({
+					el: '#reachWish',
+					data: {
+						finished: false,
+					}
+				})
+				mui.init({
+					gestureConfig: {
+						longtap: true,
+					},
+					//					pullRefresh: {
+					//						container: '#content',
+					//						down: {
+					//							style: 'circle',
+					//							offset: '0px',
+					//							auto: true,
+					//							callback: pulldownRefresh
+					//						},
+					//						up: {
+					//							contentrefresh: '正在加载...',
+					//							callback: pullupRefresh
+					//						}
+					//					},
+					swipeBack: false //启用右滑关闭功能
+				});
+				console.log(document.styleSheets[1].cssRules[17].style.textDecoration = 'none'); // 选项卡滚动置顶
+				// 				window.onscroll = function() {
+				// 					var topScroll = document.body.scrollTop; //滚动的距离,距离顶部的距离
+				// 					var bignav = document.getElementById("slider"); //获取到导航栏id
+				// 					if (topScroll > 250) { //当滚动距离大于250px时执行下面的东西
+				// 						bignav.style.position = 'fixed';
+				// 						bignav.style.top = '0';
+				// 						bignav.style.zIndex = '9999';
+				// 					} else { //当滚动距离小于250的时候执行下面的内容，也就是让导航栏恢复原状
+				// 						bignav.style.position = 'static';
+				// 					}
+				// 				}
+
+				window.onload = function() {
+
+					item = JSON.parse(localStorage.getItem('wish'));
+					token = localStorage.getItem('token');
+
+					//					alert(JSON.stringify(item));
+					realuser = getRequestUser();
+
+					//					 alert(JSON.stringify(realuser));
+					// alert(token);
+					wish.res = item.res;
+					wish.id = item.id;
+					wish.title = item.title;
+					wish.content = item.content;
+					wish.user = item.user;
+
+					// alert(wish.res.id);
+					wish.points = item.points;
+					if(item.imageList != null) {
+						for(var i = 0; i < item.imageList.length; i++) {
+							wish.imageList.push(item.imageList[i]);
+
+							(function(i) {
+								var start_time = new Date().getTime()
+								var img = new Image();
+								img.src = item.imageList[i];
+								var check = function() {
+									// 只要任何一方大于0
+									// 表示已经服务器已经返回宽高
+									if(img.width > 0 || img.height > 0) {
+										var temp = new Object();
+										temp.src = item.imageList[i];
+										temp.w = img.width;
+										temp.h = img.height;
+										imgGroup.push(temp);
+										console.log(i + 'w:' + img.width + 'h:' + img.height);
+										clearInterval(set);
+									}
+								}
+								var set = setInterval(check, 40)
+							})(i);
+
+						}
+					}
+
+					reachWish.finished = item.finished;
+					// alert(JSON.stringify(wish.res));
+					//获取列表信息
+					;
+					getlist();
+					mui(document.body).on('longtap', '.photo', openPhotoSwipe);
+					// alert('onload');
+					// alert(wish.imagelist[0]);
+
+				}
+				//window.onload结束
+
+				//获取列表函数
+				function getlist() {
+					//							alert(JSON.stringify(getRequestUser()));
+					comment1001(wish.res.id, 0, 1, function(type, data) {
+						if(type == 0) {
+							//						alert(JSON.stringify(data));
+							//									alert(wish.res.id);
+
+							//							alert(data.data.content.length);
+							if(data.data.content.length >= 3) {
+								for(var i = 0; i < 3; i++) {
+
+									hotComment.$data.hotcomments.push(data.data.content[i]);
+								}
+							} else {
+								for(var i = 0; i < data.data.content.length; i++) {
+
+									hotComment.$data.hotcomments.push(data.data.content[i]);
+								}
+							}
+
+							//							alert('hotcoment:' + JSON.stringify(hotComment.hotcomments));
+						} else {
+							console.log('获取热评失败' + data);
+							alert('获取热评失败' + data);
+						}
+					});
+
+					comment1001(wish.res.id, 0, 0, function(type, data) {
+						if(type == 0) {
+							alert(JSON.stringify(data));
+							//									alert(wish.res.id);
+							newComment.comments = data.data.content;
+							//							alert(data.data.content);
+							count.commentCount = data.data.totalCount;
+							//							alert('newC:' + JSON.stringify(newComment.comments));
+						} else {
+							console.log('获取评论失败' + data);
+							alert('获取评论失败' + data);
+						}
+					});
+				}
+
+				//回复函数
+				function reply(comment, index) {
+					rescomment = comment.id;
+					resindex = index;
+					//					alert(resindex);
+					window.JsInterface.showCommentsInputDialog('说一说');
+					onCommentsInputComplete(txt, imgs);
+				}
+
+				function pulldownRefresh() {
+					//					alert(111);
+				}
+
+				function pullupRefresh() {
+					//					alert(222);
+				}
+
+				//评论回调函数
+				function onCommentsInputComplete(txt, imgs) {
+					comment1002(wish.res.id, txt, imgs, rescomment, function(type, data) {
+						if(type == 0) {
+							var reqcom = new Object();
+							reqcom = data.data;
+							// alert(JSON.stringify(reqcom));
+							if(rescomment == 0) {
+								newComment.comments.unshift(reqcom);
+								// alert(JSON.stringify(newComment.comments[resindex]));
+							} else {
+								//										alert(JSON.stringify(reqcom));
+								if(newComment.comments[resindex].replys == null) {
+									newComment.comments[resindex].replys = {};
+									Vue.set(newComment.comments[resindex].replys, 'content', []);
+									newComment.comments[resindex].replys.content.push(reqcom);
+								} else {
+									newComment.comments[resindex].replys.content.unshift(reqcom);
+								}
+							}
+						} else {
+							//							console.log('发表评论失败' + data);
+							alert('发表评论失败' + data);
+						}
+					});
+				}
+
+				//删除评论函数
+				function deleteOne(index, innerIndex, replyId, commentId) {
+					// alert('commentId:' + commentId + 'replyId' + replyId);
+
+					var btnArray = ['取消', '删除'];
+					mui.confirm('确定删除吗？', '提示', btnArray, function(e) {
+						if(e.index == 1) {
+
+							comment1004(commentId, replyId, function(type, data) {
+								if(type == 0) {
+									mui.toast('删除成功');
+									newComment.comments[index].replys.content.splice(innerIndex, 1);
+								} else {
+									alert('删除失败' + data);
+								}
+							});
+						} else {
+
+						}
+					});
+
+				}
+
+				//点赞回复函数
+				function replylike(comment, index, ctype) {
+					//										alert(type);
+					// alert(JSON.stringify(wish.res.id +'  ' + comment.id));
+					// alert(token);
+					if(comment.myLike == false) {
+						comment1005(wish.res.id, comment.id, function(type, data) {
+							if(type == 0) {
+								mui.toast('点赞成功');
+
+								if(ctype == 'hc') {
+									for(var i = 0; i < newComment.comments.length; i++) {
+										if(comment.id == newComment.comments[i].id) {
+											hotComment.hotcomments[index].myLike = true;
+											hotComment.hotcomments[index].like += 1;
+											newComment.comments[i].myLike = true;
+											newComment.comments[i].like += 1;
+										}
+									}
+								} else if(ctype == 'nc') {
+
+									for(var i = 0; i < hotComment.hotcomments.length; i++) {
+										if(comment.id == hotComment.hotcomments[i].id) {
+											//											alert('i=' + i);
+											newComment.comments[index].myLike = true;
+											newComment.comments[index].like += 1;
+											hotComment.hotcomments[i].myLike = true;
+											hotComment.hotcomments[i].like += 1;
+										}
+									}
+								}
+								//						 				document.getElementsByName('icon2')[index].src = '../images/pub_ico_love_sel.png';
+								//										islike = true;
+							} else {
+								console.log('给爱心失败' + data);
+							}
+						})
+					} else {
+						comment1007(wish.res.id, comment.id, function(type, data) {
+							if(type == 0) {
+								mui.toast('取消成功');
+
+								if(ctype == 'hc') {
+									for(var i = 0; i < newComment.comments.length; i++) {
+										if(comment.id == newComment.comments[i].id) {
+											hotComment.hotcomments[index].myLike = false;
+											hotComment.hotcomments[index].like -= 1;
+											newComment.comments[i].myLike = false;
+											newComment.comments[i].like -= 1;
+										}
+									}
+								} else if(ctype == 'nc') {
+
+									for(var i = 0; i < hotComment.hotcomments.length; i++) {
+										if(comment.id == hotComment.hotcomments[i].id) {
+											newComment.comments[index].myLike = false;
+											newComment.comments[index].like -= 1;
+											hotComment.hotcomments[i].myLike = false;
+											hotComment.hotcomments[i].like -= 1;
+										}
+									}
+								}
+
+								//										document.getElementsByName('icon2')[index].src = '../images/pub_ico_love_nor.png';
+								//										islike = false;
+							} else {
+								console.log('给爱心失败' + data);
+							}
+						})
+					}
+				}
+
+				//打开评论回复
+				function goDetail(comment) {
+					// alert(JSON.stringify(comment));
+					localStorage.setItem('comment', JSON.stringify(comment));
+					openWindow('item/commentMain.html');
+
+				}
+
+				function openPhotoSwipe() {
+					var pswpElement = document.querySelectorAll('.pswp')[0];
+					var items = imgGroup;
+
+					console.log(imgGroup)
+
+					// build items array
+
+					// define options (if needed)
+					var options = {
+						// history & focus options are disabled on CodePen        
+						history: false,
+						focus: false,
+
+						showAnimationDuration: 0,
+						hideAnimationDuration: 0
+
+					};
+
+					var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, options);
+					gallery.init();
+				};
+
+				//给爱心事件
+				document.getElementById('like').addEventListener('tap', function() {
+					if(islike == false) {
+						comment1005(wish.res.id, 0, function(type, data) {
+							if(type == 0) {
+								mui.toast('给爱心成功');
+								document.getElementById('loveico').src = '../images/pub_ico_love_sel.png';
+								islike = true;
+							} else {
+								console.log('给爱心失败' + data);
+							}
+						})
+					} else {
+						comment1007(wish.res.id, 0, function(type, data) {
+							if(type == 0) {
+								mui.toast('取消成功');
+								document.getElementById('loveico').src = '../images/pub_ico_love_nor.png';
+								islike = false;
+							} else {
+								console.log('给爱心失败' + data);
+							}
+						})
+					}
+				});
+
+				//达愿事件
+				document.getElementById('reachWish').addEventListener('tap', function() {
+					window.JsInterface.openWindow(localurl + '/item/reachWish.html');
+				})
+
+				//新增评论事件
+				document.getElementById('addComment').addEventListener('tap', function() {
+					rescomment = 0;
+					window.JsInterface.showCommentsInputDialog('说一说');
+					onCommentsInputComplete(txt, imgs);
+
+				});
+
+				document.getElementById('back').addEventListener('tap', function() {
+					localStorage.removeItem('wish');
+					window.JsInterface.closeWindow();
+				});
+
+
+
+				(function($) {
+					$('.mui-scroll-wrapper').scroll({
+						indicators: true //是否显示滚动条
+					});
+				})(mui);
+			</script>
+		</body>
+
+</html>

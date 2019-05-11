@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title></title>
+	<link rel="stylesheet" href="../../css/mui.min.css">
+	<link rel="stylesheet" type="text/css" href="../../css/app.css"/>
+	<!--<script type="text/javascript"> 
+		// 扩展API是否准备好，如果没有则监听“plusready"事件
+		if(window.plus){
+			plusReady();
+		}else{ 
+			document.addEventListener( "plusready", plusReady, false );
+		}
+		// 扩展API准备完成后要执行的操作
+		function plusReady(){
+			var ws = plus.webview.currentWebview(); //pw回车可输出plus.webview
+			// ... code
+		}
+    </script> -->
+	<style>
+		.mui-content{
+			background-color: #EBEBEB;
+			margin-top: 16px;
+		}
+		.mui-bar.mui-bar-nav{
+			background-color: #F3F3F3;
+			height: 50px;
+		}
+		.mui-btn{
+			border-style:none ;
+			color: #007AFF;
+			background-color: #FFFFFF;
+		}
+		body{background-color: #EBEBEB ;}
+		div{
+			 padding-top: 22px;
+		}
+		.mui-bar.mui-bar-nav a{
+			color: black;
+			font-size: 18px;
+			padding-top: 17px;
+		}
+		span{
+			padding-left: 130px;
+		}
+	</style>
+	
+</head>
+<body>
+	<header id="header" class="mui-bar mui-bar-nav">
+		<a id="back" class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left">设置</a>
+	</header>
+	<div class="mui-content">
+		<ul class="mui-table-view">
+			<li id="SelectSPpattern" class="mui-table-view-cell">
+				<a >选择周边感知模式</a>
+				<span id="info" class="mui-btn" href="html/SelectSPpattern.html">
+					
+				</span>		
+			</li>
+			<li class="mui-table-view-cell">
+				自动接入商家设定 
+				<div class="mui-switch mui-switch-blue mui-active mui-switch-mini">
+					<div class="mui-switch-handle"></div>
+				</div>
+			</li>
+		</ul>
+	</div>
+	<div>
+		<ul class="mui-table-view">
+			<li class="mui-table-view-cell">
+				隐私设置
+			</li>
+			<li class="mui-table-view-cell">
+				<a id='setting-password'>密码设置</a>
+			</li>
+		</ul>
+	</div>
+	<div>
+		<ul class="mui-table-view">
+			<li class="mui-table-view-cell">
+				消息免打扰：
+				<div class="mui-switch mui-switch-blue mui-switch-mini">
+					<div class="mui-switch-handle"></div>
+				</div>
+			</li>
+			<li class="mui-table-view-cell">
+				<a>下载本地地图</a>
+			</li>
+			<li class="mui-table-view-cell">
+				清空聊天记录
+			</li>
+			<li class="mui-table-view-cell">
+				清空浏览缓存
+			</li>
+		</ul>
+	</div>
+	<div>
+		<ul class="mui-table-view">
+			<li class="mui-table-view-cell">
+				<a class="mui-navigate-right">我的默认社团<span>珠海一中联谊会</span></a>
+			</li>
+		</ul>
+	</div>
+	<div>
+		<ul class="mui-table-view">
+			<li class="mui-table-view-cell">
+				<a id="Feedback">求助反馈</a>
+			</li>
+			<li class="mui-table-view-cell">
+				<a id="About">关于</a>
+			</li>
+		</ul>
+	</div>
+	<div>
+		<ul class="mui-table-view">
+			<li id="logout" class="mui-table-view-cell">
+				<a>注销登陆</a>
+			</li>
+		</ul>
+	</div>
+</body>
+<script src="../../js/mui.min.js"></script>
+<script src="../../js/commonFunction.js"></script>
+<script type="text/javascript">
+	
+//	获取扫描模式
+	var Model=window.JsInterface.getScanModel();
+	var name;
+	if(Model=="0"){
+		name='赚积分模式';
+	}else if(Model=='1'){
+		name='一般模式';
+	}else if(Model=='2'){
+		name='省电模式';
+	}else{
+		name='智能模式';
+	}
+    document.getElementById("info").innerHTML="["+name+"]"; 
+	
+//	页面跳转及关闭
+	document.getElementById("back").addEventListener("tap",function(){
+			if(close()==true){
+					window.JsInterface.closeWindow();
+				}else if(close()==false){
+					window.webkit.messageHandlers.closeWindow.postMessage({});
+				}
+		});
+    document.getElementById("SelectSPpattern").addEventListener("tap",function(){
+			window.JsInterface.openWindow(localurl+"/html/NewSetting/SelectSPpattern.html");
+		});
+	document.getElementById("setting-password").addEventListener("tap",function(){
+				window.JsInterface.openWindow(localurl+"/html/NewSetting/setting-password.html");
+		});
+	document.getElementById("Feedback").addEventListener("tap",function(){
+			window.JsInterface.openWindow(localurl+"/html/NewSetting/Feedback.html");
+		});
+	document.getElementById("About").addEventListener("tap",function(){
+			window.JsInterface.openWindow(localurl+"/html/NewSetting/About.html");
+		});
+		
+//	注销登陆	
+	document.getElementById("logout").addEventListener("tap",function(){
+			window.JsInterface.logout();
+			mui.toast('退出成功')
+		});
+	
+</script>
+</html>

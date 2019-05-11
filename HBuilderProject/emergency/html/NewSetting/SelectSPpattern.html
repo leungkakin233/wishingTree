@@ -1,0 +1,120 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../../css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="../../css/app.css" />
+		<link rel="stylesheet" href="../../css/icons-extra.css">
+		<script type="text/javascript" src="../../js/Rem.js"></script>
+	<style type="text/css">
+		.mui-bar.mui-bar-nav{
+			background-color: #F3F3F3;
+			height: 50px;
+		}
+		.mui-bar.mui-bar-nav a{
+			color: black;
+			font-size: 18px;
+			padding-top: 17px;
+		}
+		.mui-content{
+			background-color: #EBEBEB ;
+		}
+		body {
+			background-color: #EBEBEB;
+		}
+		.mui-table-view,
+		.mui-table-view-radio {
+			height: 251px;
+			background-color: #EBEBEB;
+		}
+		.other>p{
+			padding-top: 30px;
+			padding-left: 16px;
+			color: #242424;
+			font-size: 15px;
+		}
+
+		div>p{
+			font-size: 13px;
+			padding-left: 11px;
+			padding-right: 11px;
+			color: #AAAAAA;
+            padding-top: 13px;
+		}
+
+		.second {
+			font-size: 9px;
+			color: #919191;
+		}
+
+		li {
+			margin-bottom: 22px;
+			background-color: #FFFFFF;
+		}
+	</style>
+	</head>
+	
+	<body>
+		<div id="header" class="mui-bar mui-bar-nav ">
+			<a id="back" class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left">选择周边感知模式</a>
+		</div>
+		<div class="mui-content">
+			<div>
+				<p>开启周边感知模式，打开您的第三只眼睛，感知身边物品及时了解身边事，赚取您的公益分享积分</p>
+			</div>
+			<ul class="mui-table-view mui-table-view-radio">
+				<li class="mui-table-view-cell">
+					<a id="0" class="mui-navigate-right">
+						<span class="first">赚积分模式</span><span class="second">即时追踪物品，每分钟感知周边一次（较耗电）</span>
+					</a>
+				</li>
+				<li class="mui-table-view-cell" >
+					<a id="1" class="mui-navigate-right">
+						<span class="first">一般模式</span><span class="second">每15分钟感知周边一次</span>
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a id="2" class="mui-navigate-right">
+						<span class="first">省电模式</span><span class="second">每30分钟感知周边一次</span>
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a id="3" class="mui-navigate-right">
+						<span class="first">智能模式</span><span class="second">活动时，每3分钟感知一次；静止时，每30分钟感知周边一次</span>
+					</a>
+				</li>
+			</ul>
+			<div class="other">
+				<p>恭喜您，已为2558个物品实现物联；赚取了4584个公益积分</p>
+			</div>
+		</div>
+
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/commonFunction.js" ></script>
+		<script type="text/javascript">
+			mui.init();
+			
+//			页面关闭
+			document.getElementById("back").addEventListener("tap", function() {
+			if(close()==true){
+					window.JsInterface.closeWindow(true);
+				}else if(close()==false){
+					window.webkit.messageHandlers.closeWindow.postMessage({});
+				}
+			});
+			
+			mui("li").on("tap","a",function (){
+			var model=this.getAttribute("id");
+			window.JsInterface.setScanModel(Number(model));
+			});
+			var Model=window.JsInterface.getScanModel();
+			document.getElementById(Model).parentNode.setAttribute('class',"mui-table-view-cell mui-selected");
+			
+		</script>
+	</body>
+
+</html>

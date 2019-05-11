@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta name="flexible" content="initial-dpr=2" />
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link href="../css/mui.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../css/wishing.css" />
+		<link rel="stylesheet" href="../css/photoswipe.css" />
+		<link rel="stylesheet" type="text/css" href="../css/default-skin.css" />
+		<script src="http://g.tbcdn.cn/mtb/lib-flexible/0.3.4/??flexible_css.js,flexible.js"></script>
+
+		<!-- 		<link rel="prefetch" href="../images/tree_bg_xyk2bg.png" />
+		<link rel="prefetch" href="../images/tree_bg_ywk1bg.png" />
+		<link rel="prefetch" href="../images/tree_bg_xyk2_back.png" />
+		<link rel="prefetch" href="../images/tree_bg_ywk1_back@2x.png" /> -->
+
+		<style type="text/css">
+			html,
+			body {
+				height: 100%;
+				width: 100%;
+			}
+			
+			.mui-bar {
+				height: 1.17rem;
+			}
+			
+			.mui-bar .mui-icon {
+				padding-top: 0.21rem;
+				font-size: 0.8rem;
+				color: black;
+			}
+			
+			.mui-bar .mui-btn-link {
+				display: inline-block;
+				font-size: 0.43rem;
+				line-height: 1rem;
+			}
+			
+			.mui-bar-nav~.mui-content {
+				padding-top: 0px;
+			}
+			
+			input[type='number'] {
+				line-height: 21px;
+				width: 0;
+				height: 0;
+				margin-bottom: 0;
+				padding: 0;
+				-webkit-user-select: text;
+				border: 1px solid rgba(0, 0, 0, .2);
+				border-radius: 3px;
+				outline: none;
+				background-color: #fff;
+				-webkit-appearance: none;
+			}
+		</style>
+	</head>
+
+	<body class="body-bg-2" id="body" style="visibility: hidden;">
+		<header class="mui-bar mui-bar-nav">
+			<div id="back" style="display: inline-block;">
+				<img src="../images/pub_ico_goback.png" style="width: .51rem; height: .51rem;margin-top: .33rem; float: left;" />
+				<span class="bar-title">许愿</span>
+			</div>
+
+			<!--<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="height: 1.17rem;" id="back"><span class="bar-title">许愿</span></a>-->
+			<button id="submit" class="mui-btn  mui-btn-link mui-pull-right bar-button" style="height: 1.17rem; line-height: 1.17rem;">发布</button>
+		</header>
+		<div class="mui-content" id="content">
+			<div class="power-button" id="pointSet">
+				<span>愿望实现值:</span>
+				<span id="pointSpan">{{points}}</span>
+			</div>
+			<img src="../images/tree_bg_ywk1_back@2x.png" class="wish-ywk1" id="wish-ywk" />
+			<!-- <img src="../images/tree_bg_xyk2_back.png" class="wish-ywk2"  /> -->
+
+			<img class="head-img" :src="headImg" id="headImg" />
+			<textarea class="wish-textarea1" id="textarea1" placeholder="请在这里输入愿望(三十个字以内)"></textarea>
+			<textarea class="wish-textarea2" id="textarea2" placeholder="输入您想说的话(三十个字以内)"></textarea>
+
+			<img src="../images/tree_ico_photo_ser.png" class="photo" id="getPhoto" v-if="imageList.length" />
+			<img src="../images/tree_ico_photo_nor.png" class="photo" id="photo" v-else />
+			<div class="wishing-photogroup" id="photogroup">
+				<img :src="image" v-for="(image,index) in imageList" :id="index" :class="imgClass(index)" v-if="index < 4" />
+			</div>
+
+			<div class="bottom-select">
+				<span>选择模板</span>
+				<button class="button-select1" id="button1"></button>
+				<button class="button-select2" id="button2"></button>
+			</div>
+
+			<div id="namepopover" class="mui-popover input-popover">
+				<div class="pop-top">
+					<span>愿望实现值</span>
+				</div>
+				<div class="pop-middle">
+					<input id="nameInput" type='number' pattern="[0-9]*" style="border: 0px;height: 1rem; width: 100%; text-indent:20px;" />
+				</div>
+				<div style="height: 1rem; display: table; width: 100%;">
+					<div id="close" class="pop-bot-left">取消</div>
+					<div id="set" class="pop-bot-right">确认</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Root element of PhotoSwipe. Must have class pswp. -->
+		<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+			<!-- Background of PhotoSwipe. 
+         It's a separate element, as animating opacity is faster than rgba(). -->
+			<div class="pswp__bg"></div>
+
+			<!-- Slides wrapper with overflow:hidden. -->
+			<div class="pswp__scroll-wrap">
+
+				<!-- Container that holds slides. PhotoSwipe keeps only 3 slides in DOM to save memory. -->
+				<div class="pswp__container">
+					<!-- don't modify these 3 pswp__item elements, data is added later on -->
+					<div class="pswp__item"></div>
+					<div class="pswp__item"></div>
+					<div class="pswp__item"></div>
+				</div>
+
+				<!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+				<div class="pswp__ui pswp__ui--hidden">
+
+					<div class="pswp__top-bar">
+
+						<!--  Controls are self-explanatory. Order can be changed. -->
+
+						<div class="pswp__counter"></div>
+
+						<button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+						<button class="pswp__button pswp__button--share" title="Share"></button>
+
+						<!--<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>-->
+
+						<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+						<!-- Preloader demo https://codepen.io/dimsemenov/pen/yyBWoR -->
+						<!-- element will get class pswp__preloader--active when preloader is running -->
+						<div class="pswp__preloader">
+							<div class="pswp__preloader__icn">
+								<div class="pswp__preloader__cut">
+									<div class="pswp__preloader__donut"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+						<div class="pswp__share-tooltip"></div>
+					</div>
+
+					<button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+					<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+					<div class="pswp__caption">
+						<div class="pswp__caption__center"></div>
+					</div>
+
+				</div>
+
+			</div>
+		</div>
+
+		<script src="../js/mui.js"></script>
+		<script src="../js/vue.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" src="../js/photoswipe-ui-default.js"></script>
+		<script type="text/javascript" src="../js/photoswipe.js"></script>
+		<script src="//res.wx.qq.com/open/js/jweixin-1.3.1.js"></script>
+		<script src="../js/wishingTree.js"></script>
+		<script src="../js/native.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			document.getElementById('body').style.visibility = "visible";
+			document.styleSheets[2].cssRules[17].style.textDecoration = 'none';
+			var imgsrc = [];
+			var realuser = null;
+			var token = null;
+			var tempalte = "4028836a6750be06016750be2c4d0002";
+			var treeid = "";
+
+			var imgtest = [
+				'https://farm2.staticflickr.com/1043/5186867718_06b2e9e551_b.jpg',
+				'http://139.159.148.149:8081/platform/file/ff80808168a7422a0168da64829d1139.jpg',
+				'https://farm7.staticflickr.com/6175/6176698785_7dee72237e_b.jpg',
+			]
+
+			var imgGroup = [];
+			var wish = new Vue({
+				el: '#content',
+				data: {
+					tempalte: {
+						"id": ""
+					},
+					title: "",
+					content: "",
+					headImg: '',
+					coordinate: null,
+					points: 2000,
+					imageList: [
+
+					]
+				},
+				methods: {
+					imgClass: function(index) {
+						if(this.imageList.length == 1) {
+							if(index == 0) {
+								return "img-1";
+							}
+
+						} else if(this.imageList.length == 2) {
+							if(index == 0) {
+								return "img-2 img-2-left-radius";
+							} else {
+								return "img-2 img-2-right-radius";
+							}
+						} else if(this.imageList.length == 3) {
+							if(index == 0) {
+								return "img-2 img-2-left-radius";
+							} else if(index == 1) {
+								return "img-4 img-4-top-right-radius";
+							} else {
+								return "img-4 img-4-bottom-right-radius";
+							}
+						} else {
+							if(index == 0) {
+								return "img-4 img-4-top-left-radius";
+							} else if(index == 1) {
+								return "img-4 img-4-top-right-radius";
+							} else if(index == 2) {
+								return "img-4 img-4-bottom-left-radius";
+							} else {
+								return "img-4 img-4-bottom-right-radius";
+							}
+						}
+
+					}
+				}
+			});
+			mui.init({
+				gestureConfig: {
+					longtap: true,
+				},
+				swipeBack: true //启用右滑关闭功能
+			});
+
+			var pop = document.getElementById("namepopover");
+			var mask = mui.createMask(function() {
+				pop.classList.remove('mui-active');
+			});
+
+			window.onload = function() {
+				var search = location.search;
+				var request = GetRequest(search);
+				treeid = request['treeId'];
+				realuser = JSON.parse(localStorage.getItem('user'));
+				//				token = localStorage.getItem('token');
+				//				token = getToken();
+
+				//获取当前角色
+				getCurrentCharacter(function(type, data) {
+					if(type == 0) {
+						//													console.log(data)
+						wish.headImg = data.photo;
+						//						console.log(characterPop.curCharacter)
+
+					} else {
+						console.log('获取当前角色失败' + data);
+					}
+				});
+
+				//				 				alert(treeid);
+				// 				alert(JSON.stringify(token));
+				// 				alert(JSON.stringify(realuser));
+				//				for(var i = 0; i < imgtest.length; i++) {
+				//					(function(i) {
+				//						var start_time = new Date().getTime()
+				//						var img = new Image();
+				//						img.src = imgtest[i];
+				//						var check = function() {
+				//							// 只要任何一方大于0
+				//							// 表示已经服务器已经返回宽高
+				//							if(img.width > 0 || img.height > 0) {
+				//								var temp = new Object();
+				//								temp.src = imgtest[i];
+				//								temp.w = img.width;
+				//								temp.h = img.height;
+				//								imgGroup.push(temp);
+				//								console.log(i + 'w:' + img.width + 'h:' + img.height);
+				//								clearInterval(set);
+				//							}
+				//						}
+				//						var set = setInterval(check, 40)
+				//					})(i);
+				//				}
+
+				document.getElementById('pointSet').addEventListener('tap', function() {
+
+					document.getElementById('nameInput').value = document.getElementById('pointSpan').innerText;
+					mask.show(); //显示遮罩  
+					pop.classList.add('mui-active');
+				})
+				document.getElementById('set').addEventListener('tap', function() {
+
+					//					document.getElementById('pointSpan').innerText = document.getElementById('nameInput').value
+					wish.points = document.getElementById('nameInput').value;
+					mask.close();
+				})
+
+				mui(document.body).on('longtap', '.photo', openPhotoSwipe);
+
+				mui(document.body).on('tap', '.photo', function() {
+					if(wish.imageList.length == 0) {
+						window.JsInterface.selectImages(8);
+
+						picUploadComplete(data);
+					} else {
+						window.JsInterface.selectImages(8 - wish.imageList.length);
+
+						picUploadComplete(data);
+
+					}
+				});
+			}
+
+			function openPhotoSwipe() {
+				var pswpElement = document.querySelectorAll('.pswp')[0];
+				var items = imgGroup;
+
+				console.log(imgGroup)
+
+				// build items array
+
+				// define options (if needed)
+				var options = {
+					// history & focus options are disabled on CodePen        
+					history: false,
+					focus: false,
+					shareButtons: [{
+							id: 'send',
+							label: '发送给朋友',
+							url: '{{raw_image_url}}',
+							send: true,
+						},
+						{
+							id: 'delete',
+							label: '删除',
+							url: '#'
+						},
+						{
+							id: 'download',
+							label: '图片下载',
+							url: '{{raw_image_url}}',
+							download: true
+						}
+					],
+					showAnimationDuration: 0,
+					hideAnimationDuration: 0
+
+				};
+
+				var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, options);
+				gallery.init();
+			};
+
+			//获取图片接口
+			function picUploadComplete(data) {
+				//				alert(JSON.stringify(data));
+				for(var i = 0; i < data.length; i++) {
+					// imgsrc.push(data[i].url);
+					wish.imageList.push(data[i].url);
+					(function(i) {
+						var start_time = new Date().getTime()
+						var img = new Image();
+						img.src = data[i].url;
+						var check = function() {
+							// 只要任何一方大于0
+							// 表示已经服务器已经返回宽高
+							if(img.width > 0 || img.height > 0) {
+								var temp = new Object();
+								temp.src = data[i].url;
+								temp.w = img.width;
+								temp.h = img.height;
+								imgGroup.push(temp);
+								console.log(i + 'w:' + img.width + 'h:' + img.height);
+								clearInterval(set);
+							}
+						}
+						var set = setInterval(check, 40)
+					})(i);
+				}
+				// alert(wish.imageList);
+				// 				var photogroup = document.getElementById('photogroup');
+			}
+
+			mui(document.body).on('tap', '#button1', function() {
+				// document.body.style.backgroundImage = "url(../images/tree_bg_xyk2bg.png)";
+				document.getElementById('body').classList.remove('body-bg-2');
+				document.getElementById('body').classList.add('body-bg')
+				document.getElementById('wish-ywk').src = "../images/tree_bg_xyk2_back.png";
+				document.getElementById('wish-ywk').classList.remove('wish-ywk1');
+				// 				document.getElementById('image-list').classList.remove('image-list1');
+				// 				document.getElementById('image-list').classList.add('image-list2');
+				document.getElementById('wish-ywk').classList.add('wish-ywk2');
+				tempalte = "4028836a6750be06016750be2c4d0001";
+
+			});
+			mui(document.body).on('tap', '#button2', function() {
+				// document.body.style.backgroundImage = "url(../images/tree_bg_ywk1bg.png)";
+				document.getElementById('body').classList.add('body-bg-2');
+				document.getElementById('body').classList.remove('body-bg')
+				document.getElementById('wish-ywk').src = "../images/tree_bg_ywk1_back@2x.png";
+				document.getElementById('wish-ywk').classList.remove('wish-ywk2');
+				// 				document.getElementById('image-list').classList.remove('image-list2');
+				// 				document.getElementById('image-list').classList.add('image-list1');
+				document.getElementById('wish-ywk').classList.add('wish-ywk1');
+				tempalte = "4028836a6750be06016750be2c4d0002";
+
+			});
+
+			document.getElementById('submit').addEventListener('tap', function() {
+				var title = document.getElementById('textarea1').value;
+				var content = document.getElementById('textarea2').value;
+
+				// wish.imageList = JSON.parse(JSON.stringify(imgsrc));
+				// alert(JSON.stringify(wish));
+				// alert(typeof(wish.imageList));
+				var wishObj = new Object();
+				var temp = new Object();
+
+				temp.id = tempalte;
+				wishObj.title = title;
+				wishObj.content = content;
+				wishObj.coordinate = Math.random() * 200 + ',' + Math.random() * 200;
+				wishObj.points = wish.points;
+				wishObj.imageList = wish.imageList;
+				wishObj.tempalte = temp;
+
+				alert(JSON.stringify(wishObj));
+
+				if(title == "" || content == "") {
+					return mui.toast('信息不能为空');
+				} else {
+					// alert(1111);
+					tree3002(treeid, wishObj, function(type, data) {
+						if(type == 0) {
+							window.JsInterface.closeWindow(true);
+							mui.toast('许愿成功');
+						} else {
+							console.log('许愿失败' + data);
+							alert(data)
+							mui.toast('许愿失败');
+						}
+					});
+				}
+			});
+
+			document.getElementById('back').addEventListener('tap', function() {
+				window.JsInterface.closeWindow();
+			})
+		</script>
+	</body>
+
+</html>

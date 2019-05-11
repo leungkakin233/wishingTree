@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta name="flexible" content="initial-dpr=2" />
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<title></title>
+		<script src="http://g.tbcdn.cn/mtb/lib-flexible/0.3.4/??flexible_css.js,flexible.js"></script>
+		<link href="../css/mui.css" rel="stylesheet" />
+		<style type="text/css">
+			.mui-bar {
+				height: 1.17rem;
+			}
+
+			.mui-bar .mui-icon {
+				padding-top: 0.21rem;
+				font-size: 0.8rem;
+				color: black;
+			}
+
+			.bar-title {
+				display: inline-block;
+				vertical-align: middle;
+				padding-top: .21rem;
+				font-size: 0.43rem;
+			}
+
+			.mui-bar-nav~.mui-content {
+				padding-top: 1.17rem;
+			}
+
+			.mui-content>.mui-table-view:first-child {
+				margin-top: 0px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" id="back">
+				<span class="bar-title">智加物联网识别标签预览</span>
+			</a>
+		</header>
+		<div class="mui-content">
+			<div id="qrcode"></div>
+			<hr />
+			<canvas id="myCanvas" width="200" height="200"></canvas>
+			<hr />
+			<img id="canvasImg" alt="" width="200" height="200">
+
+			<div id="qrcodeid"></div>
+		</div>
+		<script type="text/javascript" src="../js/mui.js"></script>
+		<script type="text/javascript" src="../js/vue.min.js"></script>
+		<script type="text/javascript" src="../js/native.js"></script>
+		<script type="text/javascript" src="../js/jquery.js"></script>
+		<script type="text/javascript" src="../js/utf.js"></script>
+		<script type="text/javascript" src="../js/qrcode.js"></script>
+		<script type="text/javascript">
+			function utf16to8(str) { //解决中文乱码
+				var out, i, len, c;
+				out = "";
+				len = str.length;
+				for (i = 0; i < len; i++) {
+					c = str.charCodeAt(i);
+					if ((c >= 0x0001) && (c <= 0x007F)) {
+						out += str.charAt(i);
+					} else if (c > 0x07FF) {
+						out += String.fromCharCode(0xE0 | ((c >> 12) & 0x0F));
+						out += String.fromCharCode(0x80 | ((c >> 6) & 0x3F));
+						out += String.fromCharCode(0x80 | ((c >> 0) & 0x3F));
+					} else {
+						out += String.fromCharCode(0xC0 | ((c >> 6) & 0x1F));
+						out += String.fromCharCode(0x80 | ((c >> 0) & 0x3F));
+					}
+				}
+				return out;
+			}
+			
+			
+			$(document).ready(function() {
+				//此处生成名片二维码（如要生成普通链接二维码 则 “text”参数值 直接替换成普通链接即可）
+				var the_text =
+					"BEGIN:VCARD \r\nFN:姓名 \r\nTEL;CELL,VOICE:15000000000 \r\nTITLE:职称 \r\nORG:公司（组织） \r\nEMAIL;INTERNET,HOME:123@qq.com \r\nADR;WORK,POSTAL:地球中国山东... \r\nURL:http://leerd.cn \r\nEND:VCARD";
+				the_text = utf16to8(the_text);
+				//alert(the_text);
+				jQuery('#qrcodeid').qrcode({
+					width: 140,
+					height: 140,
+					render: "canvas", //设置渲染方式 table canvas
+					typeNumber: -1, //计算模式 
+					correctLevel: 0, //纠错等级 
+					background: "#ffffff", //背景颜色 
+					foreground: "#000000", //前景颜色 
+					text: the_text
+				});
+
+				
+
+				function creatEwm(base64, canvas, callback) {
+					var ctx = canvas.getContext("2d");
+					var img = document.createElement('img');
+					// img.setAttribute("crossOrigin",'Anonymous')
+					img.src = '../images/qr_head_img_xx.png'
+					img.onload = function() {
+						var imgUpload = new Image();
+						imgUpload.src = base64();
+						imgUpload.onload = function() {
+							// 绘制
+							ctx.drawImage(imgUpload, 0, 0, 200, 200);
+							ctx.drawImage(img, 78, 80, 40, 40);
+							callback(canvas.toDataURL("image/jpeg"))
+						};
+					}
+				}
+
+				function convertCanvasToImage() {
+					var canvas = $("#qrcode canvas")[0].toDataURL("image/jpeg")
+					return canvas
+				}
+
+				creatEwm(convertCanvasToImage, document.getElementById('myCanvas'), function(dataUrl) {
+					document.getElementById("canvasImg").src = dataUrl;
+				})
+			});
+		</script>
+	</body>
+
+</html>

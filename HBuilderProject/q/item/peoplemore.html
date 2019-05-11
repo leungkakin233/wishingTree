@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta name="flexible" content="initial-dpr=2" />
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<title></title>
+		<link href="../css/mui.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../css/photoswipe.css" />
+		<link rel="stylesheet" type="text/css" href="../css/default-skin.css" />
+		<script src="http://g.tbcdn.cn/mtb/lib-flexible/0.3.4/??flexible_css.js,flexible.js"></script>
+		<style type="text/css">
+			[v-cloak] {
+				display: none
+			}
+			
+			html,
+			body {
+				background-color: #efeff4;
+			}
+			
+			a:hover {
+				text-decoration: none;
+			}
+			
+			.ss_head {
+				width: 100%;
+				padding-top: 10px;
+				background-color: rgba(255, 255, 255, 0);
+				position: absolute;
+				top: .24rem;
+				left: 0;
+				z-index: 999;
+			}
+			
+			.ss_head_left,
+			.ss_head_right {
+				display: inline-block;
+				position: relative;
+			}
+			
+			.ss_head_left img {
+				width: .67rem;
+				height: .67rem;
+				margin-left: .27rem;
+			}
+			
+			.ss_head_right {
+				float: right;
+			}
+			
+			.ss_head_right img {
+				width: .67rem;
+				height: .67rem;
+				margin-right: .27rem;
+			}
+			
+			.ss_head_img_group {
+				background-color: red;
+				width: 100%;
+				height: 7rem;
+			}
+			
+			.ss_self_info {
+				background-color: white;
+				height: 2.07rem;
+				width: 100%;
+				padding: .35rem .41rem 0rem .41rem;
+			}
+			
+			.ss_self_info img {
+				width: .667rem;
+				margin-top: .35rem;
+			}
+			
+			.ss_info_name {
+				font-family: MicrosoftYaHei;
+				font-size: .43rem;
+				color: #000000;
+			}
+			
+			.ss_info_nickname {
+				font-family: MicrosoftYaHei;
+				font-size: .32rem;
+				line-height: 1.32rem;
+			}
+			
+			.ss_info_group {
+				margin-top: .4rem;
+				font-size: .37rem;
+			}
+			
+			.ss_info_group img {
+				height: 1rem;
+				width: 1rem;
+				vertical-align: middle;
+			}
+			
+			.ss_button {
+				width: 90%;
+				height: 1.3rem;
+				text-align: center;
+				margin: 0.8rem 5%;
+				font-size: .43rem;
+				color: #3298FF;
+			}
+			
+			.zhi {
+				position: fixed;
+				right: 0.30rem;
+				bottom: .73rem;
+			}
+			
+			.zhi img {
+				width: 1.33rem;
+			}
+			
+			.saveToContacts {
+				position: fixed;
+				right: 0.30rem;
+				bottom: 2.53rem;
+			}
+			
+			.saveToContacts img {
+				width: 1.33rem;
+			}
+			
+			.ss_head_more_img {
+				width: 22px;
+				height: 22px;
+				vertical-align: middle;
+				margin-right: 2px;
+			}
+			
+			.ss_info_number {
+				display: inline-block;
+				float: right;
+				position: absolute;
+				top: 50%;
+				right: 35px;
+				-webkit-transform: translateY(-50%);
+				transform: translateY(-50%);		
+			}
+		</style>
+	</head>
+
+	<body>
+		<!--<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" id="back"><span class="bar-title">愿望列表</span></a>
+		</header>-->
+		<div class="mui-content">
+			<div class="ss_head">
+				<div class="ss_head_left" @click="pageBack()">
+					<img src="../img/shopIndex/shop_icon_back.png" />
+				</div>
+				<div class="ss_head_right">
+					<a href="#popover" id="showMore">
+						<img src="../img/shopIndex/shop_icon_more.png" />
+					</a>
+				</div>
+			</div>
+
+			<div class="ss_head_img_group">
+
+			</div>
+
+			<div class="ss_self_info  mui-media">
+				<img class="mui-media-object mui-pull-right" src="../img/ability/ewm.png">
+				<div class="mui-media-body">
+					<p class="ss_info_name mui-ellipsis">{{name}}</p>
+					<p class="ss_info_nickname mui-ellipsis">昵称:{{nickname}}</p>
+				</div>
+			</div>
+
+			<div class="ss_info_group" id="ssInfoGroup">
+				<ul class="mui-table-view">
+					<li class="mui-table-view-cell mui-collapse" id="phonebook">
+						<a class="mui-navigate-right" href="#">
+							<img src="../img/ability/function_ico_phonebook.png" />
+							<span>手机</span>
+							<span class="ss_info_number">3</span>
+						</a>
+						<div class="mui-collapse-content">
+							<ul class="mui-table-view">
+								<li class="mui-table-view-cell">
+									办公
+								</li>
+								<li class="mui-table-view-cell">
+									主宰
+								</li>
+								<li class="mui-table-view-cell">
+									1111
+								</li>
+							</ul>
+						</div>
+					</li>
+					<li class="mui-table-view-cell mui-collapse" id="company">
+						<a class="mui-navigate-right" href="#">
+							<img src="../img/ability/function_ico_company.png" />
+							<span>单位团体</span>
+						</a>
+						<div class="mui-collapse-content">
+						</div>
+					</li>
+					<li class="mui-table-view-cell mui-collapse" id="jineng">
+						<a class="mui-navigate-right" href="#">
+							<img src="../img/ability/function_ico_jineng.png" />
+							<span>职位技能</span>
+						</a>
+						<div class="mui-collapse-content">
+						</div>
+					</li>
+					<!--<li class="mui-table-view-cell mui-collapse" id="address">
+						<a class="mui-navigate-right" href="#">
+							<img src="../img/ability/function_ico_address.png" />
+							<span>地址信息</span>
+						</a>
+						<div class="mui-collapse-content">
+						</div>
+					</li>-->
+					<li class="mui-table-view-cell mui-collapse" id="currentaddress">
+						<a class="mui-navigate-right" href="#">
+							<img src="../img/ability/function_ico_currentaddress.png" />
+							<span>移动定位</span>
+						</a>
+						<div class="mui-collapse-content">
+						</div>
+					</li>
+					<li class="mui-table-view-cell mui-collapse" id="family">
+						<a class="mui-navigate-right" href="#">
+							<img src="../img/ability/function_ico_family.png" />
+							<span>家庭</span>
+						</a>
+						<div class="mui-collapse-content">
+						</div>
+					</li>
+					<li class="mui-table-view-cell mui-collapse" id="notebook">
+						<a class="mui-navigate-right" href="#">
+							<img src="../img/ability/function_ico_notebook.png" />
+							<span>记事本</span>
+						</a>
+						<div class="mui-collapse-content">
+						</div>
+					</li>
+					<li class="mui-table-view-cell mui-collapse" id="eilocker">
+						<a class="mui-navigate-right" href="#">
+							<img src="../img/ability/function_ico_eilocker.png" />
+							<span>电子抽屉</span>
+						</a>
+						<div class="mui-collapse-content">
+						</div>
+					</li>
+					<li class="mui-table-view-cell mui-collapse" id="together">
+						<a class="mui-navigate-right" href="#">
+							<img src="../img/ability/function_ico_together.png" />
+							<span>和谁在一起</span>
+						</a>
+						<div class="mui-collapse-content">
+						</div>
+					</li>
+					<li class="mui-table-view-cell mui-collapse" id="guard">
+						<a class="mui-navigate-right" href="#">
+							<img src="../img/ability/function_ico_guard.png" />
+							<span>安全守护</span>
+						</a>
+						<div class="mui-collapse-content">
+						</div>
+					</li>
+					<li class="mui-table-view-cell mui-collapse" id="lose">
+						<a class="mui-navigate-right" href="#">
+							<img src="../img/ability/function_ico_lose.png" />
+							<span>遗失找寻</span>
+						</a>
+						<div class="mui-collapse-content">
+						</div>
+					</li>
+					<li class="mui-table-view-cell mui-collapse" id="warn">
+						<a class="mui-navigate-right" href="#">
+							<img src="../img/ability/function_ico_warn.png" />
+							<span>日程提醒</span>
+						</a>
+						<div class="mui-collapse-content">
+						</div>
+					</li>
+					<li class="mui-table-view-cell mui-collapse" id="zhinengpipei">
+						<a class="mui-navigate-right" href="#">
+							<img src="../img/ability/function_icon_zhinengpipei.png" />
+							<span>智能匹配</span>
+						</a>
+						<div class="mui-collapse-content">
+						</div>
+					</li>
+					<li class="mui-table-view-cell mui-collapse" id="wuliantiaokon">
+						<a class="mui-navigate-right" href="#">
+							<img src="../img/ability/function_ico_wuliantiaokon.png" />
+							<span>物联调控</span>
+						</a>
+						<div class="mui-collapse-content">
+						</div>
+					</li>
+					<li class="mui-table-view-cell mui-collapse" id="shangpinshuxing">
+						<a class="mui-navigate-right" href="#">
+							<img src="../img/ability/function_ico_shangpinshuxing.png" />
+							<span>商品属性</span>
+						</a>
+						<div class="mui-collapse-content">
+						</div>
+					</li>
+					<li class="mui-table-view-cell mui-collapse" id="shareshop">
+						<a class="mui-navigate-right" href="#">
+							<img src="../img/ability/function_ico_shareshop.png" />
+							<span>分享店</span>
+						</a>
+						<div class="mui-collapse-content">
+						</div>
+					</li>
+					<li class="mui-table-view-cell mui-collapse" id="sharesp">
+						<a class="mui-navigate-right" href="#">
+							<img src="../img/ability/function_ico_sharesp.png" />
+							<span>分享商品</span>
+						</a>
+						<div class="mui-collapse-content">
+						</div>
+					</li>
+					<li class="mui-table-view-cell mui-collapse" id="tuding">
+						<a class="mui-navigate-right" href="#">
+							<img src="../img/ability/function_ico_tuding.png" />
+							<span>地图故事</span>
+						</a>
+						<div class="mui-collapse-content">
+						</div>
+					</li>
+					<li class="mui-table-view-cell mui-collapse" id="advertising">
+						<a class="mui-navigate-right" href="#">
+							<img src="../img/ability/function_ico_advertising.png" />
+							<span>广告宣传</span>
+						</a>
+						<div class="mui-collapse-content">
+						</div>
+					</li>
+					<li class="mui-table-view-cell mui-collapse" id="wishtree">
+						<a class="mui-navigate-right" href="#">
+							<img src="../img/ability/function_ico_wishtree.png" />
+							<span>许愿树</span>
+						</a>
+						<div class="mui-collapse-content">
+						</div>
+					</li>
+					<li class="mui-table-view-cell mui-collapse" id="jinengrenzheng">
+						<a class="mui-navigate-right" href="#">
+							<img src="../img/ability/function_ico_jinengrenzheng.png" />
+							<span>技能认证</span>
+						</a>
+						<div class="mui-collapse-content">
+						</div>
+					</li>
+					<li class="mui-table-view-cell mui-collapse" id="zhaozuzhichengyuan">
+						<a class="mui-navigate-right" href="#">
+							<img src="../img/ability/function_ico_zhaozuzhichengyuan.png" />
+							<span>成员组</span>
+						</a>
+						<div class="mui-collapse-content">
+						</div>
+					</li>
+					<li class="mui-table-view-cell mui-collapse" id="fanweiqian">
+						<a class="mui-navigate-right" href="#">
+							<img src="../img/ability/function_ico_fanweiqian.png" />
+							<span>范围圈</span>
+						</a>
+						<div class="mui-collapse-content">
+						</div>
+					</li>
+					<li class="mui-table-view-cell mui-collapse" id="zhaolinju">
+						<a class="mui-navigate-right" href="#">
+							<img src="../img/ability/function_ico_zhaolinju.png" />
+							<span>找邻居</span>
+						</a>
+						<div class="mui-collapse-content">
+						</div>
+					</li>
+					<li class="mui-table-view-cell mui-collapse" id="zhaoqinqi">
+						<a class="mui-navigate-right" href="#">
+							<img src="../img/ability/function_ico_zhaoqinqi.png" />
+							<span>找亲戚</span>
+						</a>
+						<div class="mui-collapse-content">
+						</div>
+					</li>
+					<li class="mui-table-view-cell mui-collapse" id="zhaozuzhichengyuan">
+						<a class="mui-navigate-right" href="#">
+							<img src="../img/ability/function_ico_zhaozuzhichengyuan.png" />
+							<span>找组织成员</span>
+						</a>
+						<div class="mui-collapse-content">
+						</div>
+					</li>
+				</ul>
+			</div>
+
+			<button class="ss_button mui-btn">打招呼</button>
+
+			<div class="zhi" id="zhi">
+				<img src="../img/ability/function_zhi_share_in.png" />
+			</div>
+			<div class="saveToContacts" id="saveToContacts">
+				<img src="../img/ability/function_icon_saveToContacts_in.png" />
+			</div>
+
+			<div id="popover" class="mui-popover">
+				<ul class="mui-table-view">
+					<li class="mui-table-view-cell">
+						<img class="ss_head_more_img" src="../img/shopDetail/pub_ico_share.png" />
+						<span>分享</span>
+					</li>
+					<li class="mui-table-view-cell">
+						<img class="ss_head_more_img" src="../img/pub/pub_ico_collect_nor.png" />
+						<span>收藏</span>
+					</li>
+				</ul>
+			</div>
+
+			<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+				<!-- Background of PhotoSwipe. 
+         It's a separate element, as animating opacity is faster than rgba(). -->
+				<div class="pswp__bg"></div>
+
+				<!-- Slides wrapper with overflow:hidden. -->
+				<div class="pswp__scroll-wrap">
+
+					<!-- Container that holds slides. PhotoSwipe keeps only 3 slides in DOM to save memory. -->
+					<div class="pswp__container">
+						<!-- don't modify these 3 pswp__item elements, data is added later on -->
+						<div class="pswp__item"></div>
+						<div class="pswp__item"></div>
+						<div class="pswp__item"></div>
+					</div>
+
+					<!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+					<div class="pswp__ui pswp__ui--hidden">
+
+						<div class="pswp__top-bar">
+
+							<!--  Controls are self-explanatory. Order can be changed. -->
+
+							<div class="pswp__counter"></div>
+
+							<button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+							<button class="pswp__button pswp__button--share" title="Share"></button>
+
+							<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+							<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+							<!-- Preloader demo https://codepen.io/dimsemenov/pen/yyBWoR -->
+							<!-- element will get class pswp__preloader--active when preloader is running -->
+							<div class="pswp__preloader">
+								<div class="pswp__preloader__icn">
+									<div class="pswp__preloader__cut">
+										<div class="pswp__preloader__donut"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+							<div class="pswp__share-tooltip"></div>
+						</div>
+
+						<button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+						<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+						<div class="pswp__caption">
+							<div class="pswp__caption__center"></div>
+						</div>
+
+					</div>
+
+				</div>
+			</div>
+
+		</div>
+
+		<script src="../js/mui.js"></script>
+		<script src="../js/native.js"></script>
+		<script src="../js/vue.min.js"></script>
+		<script type="text/javascript" src="../js/photoswipe-ui-default.js"></script>
+		<script type="text/javascript" src="../js/photoswipe.js"></script>
+		<script type="text/javascript">
+			var ssInfoGroup = new Vue({
+				el: '#ssInfoGroup',
+				data: {
+
+				},
+			})
+
+			window.onload = function() {
+				document.styleSheets[0].cssRules[17].style.textDecoration = 'none';
+
+			}
+		</script>
+	</body>
+
+</html>

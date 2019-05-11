@@ -1,0 +1,1498 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../../css/mui.min.css">
+		<link href="../../css/preview.css" rel="stylesheet" />
+		<style type="text/css">
+			.mui-bar,
+			.mui-bar-nav {
+				background-color: #F3F3F3;
+				height: 50px;
+			}
+			
+			.mui-bar.mui-bar-nav a {
+				color: black;
+				font-size: 18px;
+				padding-top: 17px;
+			}
+			
+			.mui-btn.mui-btn-blue.mui-btn-link.mui-pull-right {
+				height: 100%;
+			}
+			
+			.mui-btn.mui-btn-blue.mui-btn-link.mui-pull-right>img {
+				height: 35px;
+				margin: 7.5px auto;
+			}
+			
+			.mui-content {
+				margin-top: 0.1rem;
+				background-color: #ebebeb;
+			}
+			
+			.bgc {
+				background-color: #FFFFFF;
+			}
+			
+			.title {
+				height: auto;
+				padding-top: 1rem;
+				padding-bottom: 1rem;
+				border-bottom: 1px solid #ebebeb;
+			}
+			
+			.title h5 {
+				line-height: 1.5rem;
+				font-size: 1.1rem;
+				font-weight: bold;
+				color: #282828;
+				padding-left: 1rem;
+			}
+			
+			.mui-table-view-cell {
+				border-bottom: none;
+				font-size: 1rem;
+				color: #909090;
+			}
+			
+			.kind {
+				height: 3rem;
+				line-height: 3rem;
+				border-bottom: 1px solid #ebebeb;
+				padding-left: 1rem;
+			}
+			
+			.kind>a {
+				color: #909090;
+			}
+			
+			.photowall {
+				padding-left: 0.9rem;
+			}
+			
+			.photowall p {
+				line-height: 2rem;
+				font-size: 1rem;
+				color: #909090;
+			}
+			
+			.photowall h5 {
+				font-size: 1rem;
+				padding-right: 0.9rem;
+				color: #282828;
+			}
+			
+			.photo {
+				padding-top: 1rem;
+			}
+			
+			.photo img {
+				height: 4.2rem;
+				width: 4.2rem;
+				margin-right: 0.5rem;
+			}
+			
+			.information {
+				margin-top: 1rem;
+			}
+			
+			.information div {
+				height: 3rem;
+				padding-left: 1rem;
+				line-height: 3rem;
+				color: #909090;
+				border-bottom: 1px solid #ebebeb;
+			}
+			
+			.information span {
+				float: right;
+				padding-right: 4%;
+				color: #282828;
+			}
+			
+			.information img {
+				float: right;
+				height: 80%;
+				margin-top: 1.5%;
+				margin-right: 4%;
+			}
+			
+			.remindsomebody>img{
+				margin-right: 1%;
+				height: 2.4rem;
+				width: 2.4rem;
+			}
+			
+			.awardnumber img {
+				height: 50%;
+				padding-top: 1%;
+			}
+			
+			.awardnumber span {
+				padding-right: 2%;
+				color: #ff0000;
+			}
+			
+			.occupyposition {
+				margin-top: 1rem;
+				height: auto;
+			}
+			
+			.occupyposition p {
+				color: #565656;
+				line-height: 2rem;
+				font-size: 1rem;
+				padding-left: 1rem;
+			}
+			
+			.supplementary-insruction {
+				margin-top: 1rem;
+			}
+			
+			.mui-slider-indicator.mui-segmented-control.mui-segmented-control-inverted {
+				margin-top: 1rem;
+				height: 3rem;
+				border-bottom: 1px solid #ebebeb;
+			}
+			
+			.left {
+				padding-left: 1rem !important;
+				text-align: left !important;
+				line-height: 3rem !important;
+			}
+			
+			.right {
+				padding-right: 1rem !important;
+				text-align: right !important;
+				line-height: 3rem !important;
+			}
+			
+			.head-portrait {
+				height: auto !important;
+				/*height: 40rem;*/
+				min-height: 10rem;
+			}
+			
+			.mui-control-content.mui-active.comment {
+				height: auto;
+				min-height: 10rem;
+			}
+			
+			.addlocation {
+				display: flex;
+				height: 1.5rem;
+			}
+			
+			.addlocation img {
+				height: 70%;
+				margin-top: 1%;
+			}
+			
+			.addtime {
+				font-size: 0.8rem;
+				color: #a7a7a7;
+			}
+			
+			.promulgator img {
+				width: 2.4rem;
+			}
+			
+			.like {
+				width: 90%;
+				padding-top: 1rem;
+				margin: auto;
+			}
+			
+			.like img {
+				height: 35px;
+				width: 40px;
+				padding-left: 1.5%;
+			}
+			
+			li {
+				width: 98% !important;
+				height: auto !important;
+				margin: auto;
+				display: flex;
+				padding-right: 0px !important;
+			}
+			
+			.comment-head-portrait {
+				width: 15%;
+				height: 100%;
+				border-radius: 50%;
+			}
+			
+			.comment-head-portrait img {
+				width: 2.5rem;
+				height: 2.5rem;
+				border-radius: 50%;
+			}
+			
+			.commenttext {
+				width: 100%;
+				height: auto;
+			}
+			
+			.commenttext h4 {
+				color: #102F75;
+			}
+			
+			.commenttext h5 {
+				color: #282828;
+			}
+			
+			.triangle {
+				width: 1rem;
+				height: 1rem;
+				border: solid 0.5rem;
+				border-color: #FFFFFF #FFFFFF #ebebeb #FFFFFF;
+				margin-left: 1rem;
+			}
+			
+			.rectangle {
+				width: 97%;
+				height: auto;
+				padding: 0.5rem;
+				background-color: #ebebeb;
+			}
+			
+			.rectangle p {
+				color: #102F75;
+			}
+			
+			.rectangle span {
+				color: #282828;
+			}
+			
+			.comment_delete {
+				color: #3298FF !important;
+				margin-left: 0.8rem;
+			}
+			
+			#second-comment-enter {
+				color: #3298FF;
+			}
+			
+			.comment-time {
+				width: 100%;
+				height: 1.5rem;
+				margin-top: 0.6rem;
+				display: inherit;
+			}
+			
+			.icon {
+				margin-right: 0.5rem;
+				display: flex;
+				height: 1.5rem;
+				width: 35%;
+				float: right !important;
+			}
+			
+			.icon img {
+				height: 85%;
+				margin-left: 25%;
+				display: flex;
+				float: right;
+			}
+			
+			.footer {
+				position: fixed;
+				bottom: 0px;
+				z-index: 9;
+				width: 100%;
+				height: 4rem;
+				display: flex;
+				border-top-style: none;
+			}
+			
+			.footer button {
+				border-style: none;
+				border-radius: 0px;
+				width: 100%;
+				color: #3298ff;
+				font-size: 1.3rem;
+			}
+			
+			.footer>img {
+				height: 2.85rem;
+				width: 2.85rem;
+				position: absolute;
+				z-index: 50;
+				margin-top: 0.575rem;
+				margin-left: 1rem;
+				border-radius: 50%;
+			}
+			
+			.button1 {
+				background-color: #F3F3F3;
+				border-right: 1px solid #FFFFFF;
+			}
+			
+			.popover2 {
+				position: fixed;
+				height: auto;
+				width: 60% !important;
+				left: 20% !important;
+				top: 40% !important;
+			}
+			
+			.popover3 {
+				position: fixed;
+				height: auto;
+				width: 100% !important;
+				bottom: 0% !important;
+			}
+			
+			.popover3>div {
+				text-align: center;
+				height: 3.5rem;
+				line-height: 3.5rem;
+			}
+			
+			.numberpopover {
+				position: fixed;
+				height: 35%;
+				width: 85% !important;
+				left: 7.5% !important;
+				top: 30% !important;
+				overflow: hidden;
+			}
+			
+			.popoverbutton1 {
+				width: 50% !important;
+				margin-left: 0 !important;
+				border-radius: 0 !important;
+				border-left: none;
+			}
+			
+			.popoverbottom_operation_cancel {
+				width: 50% !important;
+				margin-left: 0 !important;
+				border-radius: 0 !important;
+				border-left: none;
+				border-right: none;
+			}
+			
+			.mui-numbox {
+				width: 100%;
+				height: 45%;
+				border-style: none;
+			}
+			
+			.mui-btn-numbox-minus,
+			.mui-btn-numbox-plus {
+				width: 30% !important;
+			}
+			
+			.mui-input-numbox {
+				width: 40% !important;
+			}
+			
+			.mui-btn-numbox-minus {
+				margin-left: 0 !important;
+			}
+			
+			.tips {
+				border: none;
+				padding-top: 4rem;
+				text-align: center;
+				font-size: 1rem;
+				display: none;
+			}
+			
+			.mui-popover.mui-popover-action.mui-popover-bottom {
+				width: 100% !important;
+				margin: 0 !important;
+				border-radius: 0 !important;
+				border-left: none;
+				border-right: none;
+			}
+			
+			.mui-popover.mui-popover-action.mui-popover-bottom>ul {
+				margin: 0 !important;
+				display: flex;
+				border-radius: 0;
+				background-color: #F3F3F3;
+			}
+			
+			.switchover{
+				width: 100%;
+				min-height: 25% !important;
+				max-height: 50% !important;
+				height: auto;
+				bottom: 0px !important;
+			}
+			
+			.cPop-bottom{
+				height: 3rem;
+				width: 100%;
+				display: flex;
+				position: absolute;
+				bottom: 0px;
+				background-color: #DD524D;
+			}
+			
+			#bottom_operation>li {
+				height: 8.5rem !important;
+				width: 20% !important;
+				border-radius: 0;
+				margin: 0 !important;
+				padding: 0 !important;
+				display: initial;
+			}
+			
+			#bottom_operation>li>img {
+				height: 3.3rem;
+				margin: 1.5rem 0.7rem auto 0.7rem;
+			}
+			
+			.bottom_operation_text {
+				font-size: 1rem;
+				color: #282828;
+			}
+			
+			.bottom_operation_back {
+				height: 3rem;
+				width: 100%;
+				text-align: center;
+				line-height: 3rem;
+				background-color: #F3F3F3;
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<header class="mui-bar mui-bar-nav">
+			<a id="back" class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left">求助信息详情</a>
+			<button id="submit" class="mui-btn mui-btn-blue mui-btn-link mui-pull-right"><img src="../../image/share1@3x.png" ></button>
+		</header>
+
+		<div class="mui-content mui-scroll-wrapper">
+			<div class="mui-scroll">
+				<div class="bgc">
+					<div class="title">
+						<h5 id="title"></h5>
+					</div>
+					<div class="kind">
+						<a>类别<span style="float: right;margin-right:4%;" id="etype"></span></a>
+					</div>
+					<div class="photowall">
+						<p>内容说明</p>
+						<h5 id="content"></h5>
+						<div id="first-photo" class="photo">
+
+						</div>
+					</div>
+				</div>
+				<div class="bgc">
+					<div class="information">
+						<div class="time">
+							求助时间<span id="seekhelp-time"></span>
+						</div>
+						<div class="location">
+							求助地址<span id="getlocation"></span>
+						</div>
+						<div class="promulgator">
+							发布者
+							<span id="promulgator"></span>
+							<img id='avatar'>
+						</div>
+					</div>
+				</div>
+				<div class="bgc">
+					<div class="information">
+						<div class="awardnumber">
+							打赏
+							<img src="../../image/pub_ioc_gongyizhi.png">
+							<span id="integral"></span>
+						</div>
+
+						<div class="remindsomebody">
+							@提醒谁看
+							<span></span>
+							<!--<img src="../../image/6.jpg">
+							<img src="../../image/6.jpg">-->
+						</div>
+					</div>
+				</div>
+				<!--<div id="occupyposition" class="occupyposition bgc">
+					<p>补充说明:</p>
+					<div class="supplementary-insruction photowall">
+					<h5 class='supplementary-insruction'>假如生活欺骗了你，不要悲伤，不要哭泣 相信吧 美好的日子即将来临</h5>
+					<div class="photo">
+						<img src="../../image/6.jpg" >
+						<img src="../../image/6.jpg" >
+						<img src="../../image/6.jpg" >
+						<img src="../../image/6.jpg" >
+					</div>
+					<div class="addlocation">
+						<img src="../../image/surrounding@2x.png">
+						<h5>珠海市情侣路</h5>
+					</div>
+					<span class="addtime">2018年12月12日&emsp;9：00</span>
+					</div>
+					</div>-->
+
+				<div id="sliderSegmentedControl" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted bgc">
+					<a class="mui-control-item left mui-active" href="#item1mobile">
+						谁帮助过（<span id='likelist_length'></span>）
+					</a>
+					<a class="mui-control-item right" href="#item2mobile">
+						爱心（<span id='total_length'></span>）
+					</a>
+				</div>
+				<div id="refresh" class="mui-slider-group">
+					<div id="item1mobile" class="mui-control-content mui-active comment">
+						<ul class="mui-table-view mui-table-view-chevron">
+							<!--<li class="mui-table-view-cell">
+										<div class="comment-head-portrait">
+											<img src="../../image/1.jpg">
+										</div>
+										<div class="commenttext">
+											<h4>北园新村村草</h4>
+											<h5>假如生活欺骗了你，不要悲伤，不要哭泣，相信吧 美好的日子即将来临</h5>
+											<div class="photo">
+												<img src="../../image/6.jpg">
+												<img src="../../image/6.jpg">
+												<img src="../../image/6.jpg">
+												<img src="../../image/6.jpg">
+											</div>
+											<div class="addlocation">
+												<img src="../../image/surrounding@2x.png">
+												<h5>珠海市情侣路</h5>
+											</div>
+											<div class="comment">
+												<div class="triangle"></div>
+												<div class="rectangle">
+													<p id="">
+														热心市民：
+														<span>
+															落花有意，流水无情
+														</span>
+													</p>
+													<p id="">
+														翠香街最靓的仔：
+														<span>
+															落花有意，流水无情
+														</span>
+													</p>
+													<p id="">
+														Micheal：
+														<span>
+															落花有意，流水无情落花有意，流水无情落花有意，流水无情落花有意，流水无情
+														</span>
+													</p>
+													<p id="">
+														kkk：
+														<span>
+															落花有意，流水无情
+														</span>
+													</p>
+													<p class="second-comment-enter">共X条回复></p>
+												</div>
+											</div>
+
+											<div class="comment-time">
+												2018年12月12日&ensp;9：00
+												<div class="icon">
+													<img class="Iwannercomment" src="../../image/comment@3x.png">
+													<img class="comment_like" data-status='false' src="../../image/pub_ico_good_nor.png"><span></span>
+												</div>
+											</div>
+										</div>
+									</li>-->
+						</ul>
+						<p class="tips">还没有谁帮过他，赶紧去帮帮他吧！</p>
+					</div>
+					<div id="item2mobile" class="mui-slider-item mui-control-content head-portrait">
+						<div class="like">
+						</div>
+					</div>
+				</div>
+				<div style="width: 100%;height: 1rem;"></div>
+			</div>
+		</div>
+
+		<div class="mui-popover mui-popover-action mui-popover-bottom">
+			<ul id='bottom_operation' class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<img id='bottom_operation_modify' src="../../image/pub_ico_fbcz_bqgx_nor.png">
+					<p class="bottom_operation_text">修改/补充</p>
+				</li>
+				<li class="mui-table-view-cell">
+					<img id='bottom_operation_cancel' src="../../image/pub_ico_fbcz_cx_nor.png">
+					<p class="bottom_operation_text">撤消</p>
+				</li>
+				<li class="mui-table-view-cell">
+					<img class="addaward" src="../../image/pub_ico_fbcz_zjds_sel.png">
+					<p class="bottom_operation_text">增加打赏</p>
+				</li>
+				<li class="mui-table-view-cell">
+					<img id="like-help" src="../../image/pub_ico_fbcz_aix_nor.png">
+					<p class="bottom_operation_text">给爱心</p>
+				</li>
+				<li class="mui-table-view-cell">
+					<img src="../../image/pub_ico_fbcz_fx_sel.png">
+					<p class="bottom_operation_text">分享</p>
+				</li>
+			</ul>
+			<div class="bottom_operation_back">返回</div>
+		</div>
+
+		<div class="footer">
+			<img id="current_Role">
+			<button id="button1" class="button1" type="button"></button>
+		</div>
+
+		<!--弹出框popover-->
+		<div id="saveAndShare" class="mui-popover popover3">
+			<div id="saveimg">保存到本地</div>
+			<div id="sharetofriends">发送给朋友</div>
+		</div>
+
+		<div id="otherPopover" class="numberpopover mui-popover">
+			<div style="width: 100%;height: 20%;line-height: 100%;text-align: center;">
+				<h4 style="padding-top: 5%;">为他加油！我要增加打赏</h4>
+			</div>
+			<div class="mui-numbox" data-numbox-min='0'>
+				<button class="mui-btn mui-btn-numbox-minus" type="button">-</button>
+				<input class="mui-input-numbox" value="50" type="number" />
+				<button class="mui-btn mui-btn-numbox-plus" type="button">+</button>
+			</div>
+			<div class="mui-input-row mui-checkbox mui-left" style="width: 100%;height: 15%;">
+				<label>我要匿名，做好事不留名!</label><input class="subcheck" type="checkbox">
+			</div>
+			<div style="display: flex;width: 100%;height: 20%;">
+				<button class="popoverbutton1">取消</button>
+				<button class="popoverbottom_operation_cancel">确认</button>
+			</div>
+		</div>
+		
+		
+		<div id="characterPop" class="mui-popover switchover" style="height: auto;">
+				<div style="height: 1.5rem; width: 100%; background-color: #EBEBEB; padding: 0 .24em;">
+					<span style="font-size: .27rem; ">您最近参与过愿望的角色如下，可快速切换角色</span>
+				</div>
+				<div style="height: 5rem;">
+					<div class="mui-scroll-wrapper" style=" height: 5rem; top: .80rem;">
+						<div class="mui-scroll">
+							<div>等待陈朝新接口</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="cPop-bottom">
+					<div class="characterPop-bottom-left mui-table-view-cell mui-media" style="padding: 0px !important;width: 70%; background-color: #1AAD19;">
+						<img id="role_avatar" style="height: 2.4rem;width: 2.4rem; vertical-align: 5%;line-height: 3rem;margin: 0 0 1% 1rem ;"/>
+						<div class="mui-media-body" style="display: inline-block; width: 50%;">
+							<p class='mui-ellipsis' style="color: #3298FF; font-size: 0.8rem; line-height: 1.5rem;">当前角色</p>
+							<p class='mui-ellipsis' style="font-size: 0.8rem; line-height: 1.5rem; color: #000000;">{{character.name}}</p>
+						</div>
+					</div>
+					<a href="#moreCharacter" style="width: 30%;background-color: #058FE7;">
+						<div class="characterPop-bottom-right">
+							<p style="line-height: 3rem; color: #282828; font-size: 0.8rem;text-align: center;">切换角色</p>
+						</div>
+					</a>
+
+				</div>
+			</div>
+
+			<div id="moreCharacter" class="mui-popover switchover" style="left:5px;">
+				<div>
+					<span style="font-size: 1rem; line-height: 1rem;">选择当前聊一聊角色</span>
+				</div>
+				<div style="height: 5rem;">
+					<div class="mui-scroll-wrapper" style=" height: 5rem; top: 1.4rem; ">
+						<div class="mui-scroll">
+							<div class="morePop-character-select">
+								<img style="width: 1rem; height: 1rem;" />
+								<span style="color: #000000; font-size: .27rem;">{{character.name}}</span>
+
+								<img src="../images/money_label_txtj_nor.png" class="morePop-check-ico"/>
+
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="cPop-bottom">
+					<div class="moreCPop-bottom-left">
+						<p style="line-height: 1.44rem; color: #282828; font-size: .37rem; text-align: center;">更多角色>></p>
+					</div>
+					<div class="moreCPop-bottom-right">
+						<p style="line-height: 1.44rem; color: #3298FF; font-size: .37rem;">确定</p>
+					</div>
+
+				</div>
+			</div>
+		
+		
+		
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/mui.zoom.js"></script>
+		<script src="../../js/saveAndshare.js"></script>
+		<script src="../../js/getuser.js"></script>
+		<script src="../../js/commonFunction.js"></script>
+		<script>
+
+			window.onload = function() {
+				mui('.mui-content').slider().stopped = true;
+				mui('.mui-scroll-wrapper').scroll().scrollTo(0, 0);
+				var res_id;
+				var standard;
+				var whichgroup;
+			}
+
+			mui.previewImage();
+			mui.init({
+				pullRefresh: {
+					container: '.mui-content',
+					down: {
+						style: 'circle',
+						callback: pulldownRefresh
+					},
+					up: {
+						auto: true,
+						contentrefresh: '正在加载...',
+						callback: pullupRefresh
+					}
+				},
+				gestureConfig: {
+					longtap: true,
+					hold: true,
+					release: true
+				}
+			})
+
+			//时间换算
+			function addZero(num) {
+				if(parseInt(num) < 10) {
+					num = '0' + num;
+				}
+				return num;
+			}
+
+			function getMyDate(str) {    
+				var oDate = new Date(str),
+					    oYear = oDate.getFullYear(),
+					    oMonth = oDate.getMonth() + 1,
+					    oDay = oDate.getDate(),
+					    oHour = oDate.getHours(),
+					    oMin = oDate.getMinutes(),
+					    oSen = oDate.getSeconds(),
+					    oTime = oYear + '年' + addZero(oMonth) + '月' + addZero(oDay) + '日' + ' ' + addZero(oHour) + ':' + addZero(oMin);    
+				return oTime;
+			}
+
+			//			页面关闭
+			document.getElementById("back").addEventListener("tap", function() {
+				if(close()==true){
+					window.JsInterface.closeWindow();
+				}else if(close()==false){
+					window.webkit.messageHandlers.closeWindow.postMessage({});
+				}
+			});
+
+			//			查看打赏清单
+			mui("body").on('tap', ".awardnumber", function() {
+				window.JsInterface.openWindow(localurl + "/html/seekhelp/rewardlist.html");
+			})
+
+			//			获取当前照片所在预览群组
+			mui('body').on('tap', ".preview", function() {
+				//				whichgroup=this.getAttribute('data-preview-group');
+				whichgroup = this.parentNode;
+			})
+			
+			//          切换角色弹出popever
+			document.getElementById('current_Role').addEventListener('tap',function(){
+				mui('#characterPop').popover('show'); //显示
+				mui('#characterPop').popover('hide'); //隐藏
+				mui('#characterPop').popover('toggle'); //自动识别处理显示隐藏状态
+			})
+			
+
+			//删除评论
+			mui('body').on('tap', ".comment_delete", function() {
+				var This = this;
+				var firstid = This.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.getAttribute('id');
+				var secondid = This.parentNode.getAttribute('id');
+				mui.ajax('http://139.159.148.149:8081/platform/api/comment/v1/delete', {
+					data: {
+						'res': {
+							"id": firstid
+						},
+						'comment': {
+							"id": secondid
+						}
+					},
+					headers: {
+						'Content-Type': 'application/json;charset=UTF-8',
+						"token": token
+					},
+					    dataType: 'json', //服务器返回json格式数据
+					    type: 'post', //HTTP请求类型
+					    timeout: 10000, //超时时间设置为10秒；
+					    success: function(data) {
+						var a = This.parentNode.parentNode.parentNode;
+						var b = This.parentNode.parentNode;
+						a.removeChild(b);
+						if(a.getElementsByClassName('second-comment-enter')[0]) {
+							var m = a.getElementsByClassName('second-comment-enter')[0].innerHTML.slice(1, -7);
+							var x = Number(m) - 1;
+							if(x > 0) {
+								a.getElementsByClassName('second-comment-enter')[0].innerHTML = '共' + x + '条回复>';
+							} else {
+								a.getElementsByClassName('second-comment-enter')[0].style.display = 'none';
+							}
+						}
+						if(a.childNodes.length < 1) {
+							a.parentNode.style.display = 'none';
+						}
+					},
+					    error: function(xhr, type, errorThrown) {        
+						mui.toast('啊哦，出问题了');    
+					}
+				});
+			});
+
+			//			跟评
+			mui('.comment').on('tap', ".Iwannercomment", function() {
+				window.JsInterface.showCommentsInputDialog('说点什么...');
+				standard = this;
+			})
+			//			回调
+			function onCommentsInputComplete(txt, imgs) {
+				var content_id = standard.getAttribute('data-Iwannercomment_id');
+				mui.ajax('http://139.159.148.149:8081/platform/api/comment/v1/reply', {
+					data: {
+						'res': {
+							"id": res_id
+						},
+						'comment': {
+							"id": content_id,
+							"content": txt,
+							"imageUrlList": imgs
+						}
+					},
+					headers: {
+						'Content-Type': 'application/json;charset=UTF-8',
+						"token": token
+					},
+					    dataType: 'json', //服务器返回json格式数据
+					    type: 'post', //HTTP请求类型
+					    timeout: 10000, //超时时间设置为10秒；
+					    success: function(data) {
+						participate_in_activities();
+						if(!standard.parentNode.parentNode.parentNode.getElementsByClassName('comment')[0]) {
+							var comment = document.createElement('div');
+							comment.setAttribute('class', 'comment');
+							standard.parentNode.parentNode.parentNode.insertBefore(comment, standard.parentNode.parentNode);
+							var triangle = document.createElement('div');
+							triangle.setAttribute('class', 'triangle');
+							comment.appendChild(triangle);
+							var rectangle = document.createElement('div');
+							rectangle.setAttribute('class', 'rectangle');
+							comment.appendChild(rectangle);
+						}
+						var comment = standard.parentNode.parentNode.parentNode.getElementsByClassName('comment')[0];
+						var rectangle = comment.getElementsByClassName('rectangle')[0];
+						var p = document.createElement('p');
+						p.innerHTML = nickname + ':';
+						if(comment.getElementsByClassName('second-comment-enter')[0]) {
+							rectangle.insertBefore(p, comment.getElementsByClassName('second-comment-enter')[0])
+							var m = standard.parentNode.parentNode.parentNode.getElementsByClassName('second-comment-enter')[0].innerHTML.slice(1, -7);
+							var x = Number(m) + 1;
+							standard.parentNode.parentNode.parentNode.getElementsByClassName('second-comment-enter')[0].innerHTML = '共' + x + '条回复>';
+						} else {
+							rectangle.appendChild(p);
+						}
+						var span = document.createElement('span');
+						span.innerHTML = txt;
+						p.appendChild(span); 
+						var comment_delete = document.createElement('span');
+						comment_delete.setAttribute('class', 'comment_delete');
+						comment_delete.innerHTML = '删除';
+						span.appendChild(comment_delete);
+					},
+					    error: function(xhr, type, errorThrown) {        
+						mui.toast('啊哦，出问题了');    
+					}
+				});
+			}
+
+			//			评论点赞函数
+			function commentLikeOrDislike(url, getcomment_id, whichobject) {
+				mui.ajax('http://139.159.148.149:8081/platform/' + url, {
+					data: {
+						"res": {
+							"id": res_id
+						},
+						"comment": {
+							'id': getcomment_id
+						}
+					},
+					headers: {
+						'Content-Type': 'application/json;charset=UTF-8',
+						"token": token
+					},
+					dataType: 'json', //服务器返回json格式数据
+					type: 'post', //HTTP请求类型
+					timeout: 10000, //超时时间设置为10秒;
+					success: function(data) { //服务器返回响应，根据响应结果，分析是否登录成功；
+						if(whichobject.getAttribute('data-status') == 'false') {
+							var likenumber = Number(whichobject.parentNode.children[2].innerHTML);
+							whichobject.src = '../../image/pub_ico_good_sel.png';
+							whichobject.parentNode.children[2].innerHTML = likenumber + 1;
+							whichobject.setAttribute('data-status', 'true');
+						} else if(whichobject.getAttribute('data-status') == 'true') {
+							var likenumber = Number(whichobject.parentNode.children[2].innerHTML);
+							whichobject.src = '../../image/pub_ico_good_nor.png';
+							whichobject.parentNode.children[2].innerHTML = likenumber - 1;
+							if(whichobject.parentNode.children[2].innerHTML < 1) {
+								whichobject.parentNode.children[2].innerHTML = '';
+							}
+							whichobject.setAttribute('data-status', 'false');
+						}
+					},
+					error: function(xhr, type, errorThrown) { //异常处理；
+						alert(xhr.responseText);
+					}
+				});
+			}
+
+			//			                           点赞评论
+			mui(".comment").on('tap', ".comment_like", function() {
+				var whichobject = this;
+				var getcomment_id = this.parentNode.parentNode.parentNode.parentNode.id;
+				if(this.getAttribute('data-status') == 'false') {
+					var url = 'api/comment/v1/like/add';
+					commentLikeOrDislike(url, getcomment_id, whichobject);
+				} else if(this.getAttribute('data-status') == 'true') {
+					var url = 'api/comment/v1/like/cancel';
+					commentLikeOrDislike(url, getcomment_id, whichobject);
+				}
+			})
+
+			function donate_like(url, reqdata, whichobject, ServerURl) {
+				mui.ajax(ServerURl + url, {    
+					data: reqdata,
+					headers: {
+						'Content-Type': 'application/json;charset=UTF-8',
+						"token": token
+					},
+					    dataType: 'json', //服务器返回json格式数据
+					    type: 'post', //HTTP请求类型
+					    timeout: 10000, //超时时间设置为10秒；
+					    success: function(data) {
+						if(whichobject.getAttribute('data-status') == 'false') {
+							whichobject.src = '../../image/pub_ico_fbcz_aix_sel.png';
+							whichobject.setAttribute('data-status', 'true');
+						} else if(whichobject.getAttribute('data-status') == 'true') {
+							whichobject.src = "../../image/pub_ico_fbcz_aix_nor.png";
+							whichobject.setAttribute('data-status', 'false');
+						}
+						participate_in_activities();
+					},
+					    error: function(xhr, type, errorThrown) { //异常处理；
+						alert(xhr.responseText);
+					}
+				});
+			}
+
+			//						给爱心
+			document.getElementById("like-help").addEventListener("tap", function() {
+				var whichobject = this;
+				var ServerURl = "http://139.159.148.149:8081/platform/api/";
+				var obj = new Object;
+				var res = new Object;
+				obj.res = {
+					'id': res_id
+				};
+				if(this.getAttribute('data-status') == 'false') {
+					var url = 'comment/v1/like/add';
+					donate_like(url, obj, whichobject, ServerURl)
+				} else if(this.getAttribute('data-status') == 'true') {
+					var url = 'comment/v1/like/cancel';
+					donate_like(url, obj, whichobject, ServerURl)
+				}
+			});
+
+			//				跳转评论二级页面
+			mui("body").on('tap', ".second-comment-enter", function() {
+				var comment = new Object();
+				var wish = new Object();
+				wish.res = new Object();
+				wish.res.id = res_id;
+				comment.user = new Object();
+				comment.imageUrlList = new Array;
+				comment.content = this.parentNode.parentNode.parentNode.getElementsByTagName('h5')[0].innerHTML;
+				comment.id = this.parentNode.parentNode.parentNode.parentNode.getAttribute('id');
+				comment.user.nickname = this.parentNode.parentNode.parentNode.getElementsByTagName('h4')[0].innerHTML;
+				comment.location = this.parentNode.parentNode.parentNode.getElementsByClassName('addlocation')[0].getElementsByTagName('h5')[0].innerHTML;
+				comment.like = this.parentNode.parentNode.parentNode.parentNode.getElementsByClassName('comment-time')[0].getElementsByClassName('icon')[0].children[2].innerHTML;
+				comment.myLike = this.parentNode.parentNode.parentNode.parentNode.getElementsByClassName('comment-time')[0].getElementsByClassName('icon')[0].children[1].getAttribute('data-status');
+				comment.time = this.parentNode.parentNode.parentNode.parentNode.getElementsByClassName('comment-time')[0].getElementsByTagName('span')[0].innerText;
+				if(this.parentNode.parentNode.parentNode.getElementsByClassName('photo')[0]) {
+					var url = this.parentNode.parentNode.parentNode.getElementsByClassName('photo')[0].childNodes;
+					for(var i = 0; i < url.length; i++) {
+						comment.imageUrlList.push(url[i].src);
+					}
+				} else {
+					comment.imageUrlList == [];
+				}
+				localStorage.setItem('comment', JSON.stringify(comment));
+				localStorage.setItem('wish', JSON.stringify(wish));
+				window.JsInterface.openWindow(localurl + "/html/seekhelp/commentMain.html");
+			})
+
+			function GetRequest() {
+				var url = location.search; //获取url中"?"符后的字串
+				var request = new Object();
+				if(url.indexOf("?") != -1) {
+					var str = url.substr(1);
+					strs = str.split("&");
+					for(var i = 0; i < strs.length; i++) {
+						request[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1]);
+					}
+				}
+				id = request.id;
+				res_id = request.res_id;
+			}
+			GetRequest();
+
+			document.getElementsByClassName("addaward")[0].addEventListener("tap", function() {
+				mui('.numberpopover').popover('show'); //显示
+				mui('.numberpopover').popover('hide'); //隐藏
+				mui('.numberpopover').popover('toggle'); //自动识别处理显示隐藏状态
+			})
+
+			document.getElementById("button1").addEventListener("tap", function() {
+				mui('.mui-popover-action.mui-popover-bottom').popover('show'); //显示
+				mui('.mui-popover-action.mui-popover-bottom').popover('hide'); //隐藏
+				mui('.mui-popover-action.mui-popover-bottom').popover('toggle'); //自动识别处理显示隐藏状态
+			});
+
+			document.getElementById("bottom_operation_modify").addEventListener("tap", function() {
+				if(this.nextElementSibling.innerHTML == '修改/补充') {
+					window.JsInterface.openWindow(localurl + "/html/seekhelp/addhelp.html?id=" + id);
+					mui('.mui-popover-action.mui-popover-bottom').popover('hide'); //隐藏
+				} else if(this.nextElementSibling.innerHTML == '联系他') {
+					window.JsInterface.SelectChatRoleAndChat(Number(author_roleId));
+					mui('.mui-popover-action.mui-popover-bottom').popover('hide'); //隐藏
+				}
+			})
+
+			document.getElementsByClassName('bottom_operation_back')[0].addEventListener('tap', function() {
+				mui('.mui-popover-action.mui-popover-bottom').popover('hide'); //隐藏
+			})
+
+			//			关闭求助
+			function closehelp() {
+				mui.ajax('http://139.159.148.149:8081/platform/api/activity/v1/close/help', {
+					data: {
+						'item': {
+							'id': id
+						}
+					},
+					headers: {
+						'Content-Type': 'application/json;charset=UTF-8',
+						"token": token
+					},
+					dataType: "json",
+					type: "post",
+					Timeout: 5000,
+					success: function(data) {
+						mui.toast('删除成功')
+						if(document.getElementById("bottom_operation_cancel").nextElementSibling.innerHTML == '撤销') {
+							window.JsInterface.closeWindow(true);
+						} else if(document.getElementById("bottom_operation_cancel").nextElementSibling.innerHTML == '完成求助') {
+							window.JsInterface.openWindow(localurl + "/html/seekhelp/thanks-goodman.html");
+						}
+					},
+					error: function(xhr, type, errorThrown) {
+						mui.toast('删除失败')
+					}
+				})
+			}
+
+			//关闭求助事件监听
+			document.getElementById("bottom_operation_cancel").addEventListener("tap", function() {
+				if(this.nextElementSibling.innerHTML == '撤销') {
+					mui.confirm('您确定要撤销这个' + document.getElementById('etype').innerHTML + '吗？', function(e) {
+						if(e.index == 1) {
+							closehelp();
+						} else {
+
+						}
+					})
+				} else if(this.nextElementSibling.innerHTML == '完成求助') {
+					mui('.mui-popover-action.mui-popover-bottom').popover('hide'); //隐藏
+					mui.confirm('您确定这个' + document.getElementById('etype').innerHTML + '已经完成？', function(e) {
+						if(e.index == 1) {
+							closehelp();
+						} else {
+
+						}
+					})
+				} else if(this.nextElementSibling.innerHTML == '去打赏') {
+					window.JsInterface.openWindow(localurl + "/html/seekhelp/thanks-goodman.html");
+				} else if(this.nextElementSibling.innerHTML == '更新求助信息') {
+					window.JsInterface.openWindow(localurl + "/html/seekhelp/helphim.html?res_id=" + res_id + "&id=" + id);
+					mui('.mui-popover-action.mui-popover-bottom').popover('hide'); //隐藏
+				}
+			});
+
+			//			获取求助信息
+			mui.ajax('http://139.159.148.149:8081/platform/api/activity/v1/data/get/help', {
+				data: {
+					"res": {
+						"id": res_id
+					},
+					"item": {
+						"id": id
+					}
+				},
+				headers: {
+					'Content-Type': 'application/json;charset=UTF-8',
+					"token": token
+				},
+				dataType: "json",
+				type: "post",
+				Timeout: 10000,
+				success: function(data) {
+
+//					alert(JSON.stringify(data))
+					var photo_len = data.data.imageUrlList.length;
+					author_roleId = data.data.user.roleId;
+					document.getElementById('seekhelp-time').innerHTML = getMyDate(data.data.createTime);
+					document.getElementById('getlocation').innerHTML = data.data.location.city + data.data.location.district + data.data.location.street;
+					document.getElementById('integral').innerHTML = '暂无字段';
+					document.getElementById('content').innerHTML = data.data.contet;
+					document.getElementById('title').innerHTML = data.data.title;
+					if(data.data.title == '') {
+						document.getElementById('title').innerHTML = '默认标题'
+					}
+					document.getElementById('etype').innerHTML = data.data.category.name;
+					document.getElementById('promulgator').innerHTML = data.data.user.nickname;
+					document.getElementById('avatar').src = data.data.user.avatar;
+//					//提醒好友名单
+					var remindsomebody=document.getElementsByClassName('remindsomebody')[0];
+					var remindList_length=remindsomebody.getElementsByTagName('span')[0];
+					remindsomebody.appendChild(remindList_length);
+					remindList_length.innerHTML='('+data.data.reminderList.length+')';
+					var len=data.data.reminderList.length>5?5:len=data.data.reminderList.length;
+					for(var x=0;x<len;x++){
+						var remind_avatar=new Image();
+						remind_avatar.src=data.data.reminderList[x].sysUser.avatar;
+						remindsomebody.appendChild(remind_avatar);
+					}
+					//加载补充说明
+					if(data.data.remarkList.length > 0) {
+						var sliderSegmentedControl = document.getElementById('sliderSegmentedControl');
+						var mui_scroll = document.getElementsByClassName('mui-scroll')[0];
+						var occupyposition = document.createElement('div');
+						occupyposition.setAttribute('id', 'occupyposition');
+						occupyposition.setAttribute('class', 'occupyposition bgc');
+						mui_scroll.insertBefore(occupyposition, sliderSegmentedControl);
+
+						var p = document.createElement('p');
+						p.innerHTML = '补充说明:';
+						occupyposition.appendChild(p);
+
+						var supplementary_insruction = document.createElement('div');
+						supplementary_insruction.setAttribute('class', 'supplementary-insruction photowall');
+						occupyposition.appendChild(supplementary_insruction);
+
+						var supplementary_h5 = document.createElement('h5');
+						supplementary_h5.setAttribute('class', 'supplementary_insruction');
+						supplementary_h5.innerHTML = data.data.remarkList[0];
+						supplementary_insruction.appendChild(supplementary_h5);
+
+						var photo = document.createElement('div');
+						photo.setAttribute('class', 'photo');
+						supplementary_insruction.appendChild(photo);
+
+						var addlocation = document.createElement('div');
+						addlocation.setAttribute('class', 'addlocation');
+						supplementary_insruction.appendChild(addlocation);
+
+						var addlocation_img = new Image;
+						addlocation_img.src = "../../image/surrounding@2x.png";
+						addlocation.appendChild(addlocation_img);
+
+						var addlocation_h5 = document.createElement('h5');
+						addlocation_h5.innerHTML = '暂无位置字段';
+						addlocation.appendChild(addlocation_h5);
+
+						var addtime = document.createElement('span');
+						addtime.innerHTML = '暂无时间字段';
+						addtime.setAttribute('class', 'addtime');
+						supplementary_insruction.appendChild(addtime);
+					}
+					document.getElementById('likelist_length').innerHTML=data.data.comments;
+					document.getElementById('total_length').innerHTML = data.data.total;
+
+					document.getElementById('like-help').setAttribute('data-status', data.data.like);
+					if(data.data.like == false) {
+						document.getElementById('like-help').src = "../../image/pub_ico_fbcz_aix_nor.png";
+					} else if(data.data.like == true) {
+						document.getElementById('like-help').src = '../../image/pub_ico_fbcz_aix_sel.png';
+					}
+
+					//					var user = window.JsInterface.getUser();
+					if(userid == data.data.user.userId) {
+						document.getElementById('button1').innerHTML = '补充求助说明';
+						if(data.data.total > 0) {
+							if(data.data.status.key == 'publish') {
+								document.getElementById('bottom_operation_cancel').nextElementSibling.innerHTML = '完成求助';
+							} else if(data.data.status.key == 'closed') {
+								document.getElementById('bottom_operation_cancel').nextElementSibling.innerHTML = '去打赏';
+							}
+
+						} else {
+							if(data.data.status.key == 'closed') {
+								document.getElementById('bottom_operation_cancel').nextElementSibling.innerHTML = '此求助已完成';
+							} else {
+								document.getElementById('bottom_operation_cancel').nextElementSibling.innerHTML = '撤销';
+							}
+						}
+					} else {
+						document.getElementById('button1').innerHTML = '去帮他';
+						document.getElementById('bottom_operation_cancel').src = '../../image/pub_ico_fbcz_bqgx_nor.png';
+						document.getElementById('bottom_operation_cancel').nextElementSibling.innerHTML = '更新求助信息';
+						document.getElementById('bottom_operation_modify').src = '../../image/pub_ico_fbcz_lxt_nor.png';
+						document.getElementById('bottom_operation_modify').nextElementSibling.innerHTML = '联系他';
+					}
+					for(var i = 0; i < photo_len; i++) {
+						var one = data.data.imageUrlList[i];
+						var img = new Image();
+						img.src = one;
+						img.setAttribute('class', 'preview');
+						img.setAttribute('data-preview-group', '1');
+						img.setAttribute('data-preview-src', '');
+						document.getElementById("first-photo").appendChild(img);
+					}
+
+					for(var i = 0; i < data.data.likeList.length; i++) {
+						var one = data.data.likeList[i].avatar;
+						var img = new Image();
+						img.src = one;
+						document.getElementsByClassName("like")[0].appendChild(img);
+					}
+					mui.toast('更新成功')
+				},
+				error: function(xhr, type, errorThrown) {
+					mui.toast('更新失败')
+				}
+			})
+
+			//获取当前角色
+			mui.ajax('http://139.159.149.232/zhi/szrole/current/', {
+				headers: {
+					'Content-Type': 'application/json;charset=UTF-8',
+					"Authorization": token
+				},
+				    dataType: 'json', //服务器返回json格式数据
+				    type: 'GET', //HTTP请求类型
+				    timeout: 10000, //超时时间设置为10秒；
+				    success: function(data) {
+					document.getElementById('current_Role').src = data.photo;
+				},
+				    error: function(xhr, type, errorThrown) {        
+					mui.toast('获取当前角色异常');
+				}
+			});
+
+			//获取评论列表
+			function getCommentList() {
+				mui.ajax('http://139.159.148.149:8081/platform/api/comment/v1/list?pageNo=' + count, {
+					data: {
+						"res": {
+							"id": res_id,
+						},
+						"comment": {
+							//						"id": ''
+						}
+					},
+					headers: {
+						'Content-Type': 'application/json;charset=UTF-8',
+						"token": token
+					},
+					dataType: "json",
+					type: "post",
+					Timeout: 10000,
+					success: function(data) {
+//												alert(JSON.stringify(data))
+						if(data.data.content[0] || data.data.totalPages > 0) {
+							totalpages = data.data.totalPages;
+							var ul = document.getElementById('item1mobile').children[0];
+							var len = data.data.content.length;
+							for(i = 0; i < len; i++) {
+								var li = document.createElement('li');
+								li.setAttribute('class', 'mui-table-view-cell');
+								li.setAttribute('id', data.data.content[i].id)
+								ul.appendChild(li);
+
+								var head_portrait = document.createElement('div');
+								head_portrait.setAttribute('class', 'comment-head-portrait');
+								li.appendChild(head_portrait);
+								var head_portrait_img = new Image;
+								head_portrait_img.src = "../../image/1.jpg";
+								head_portrait.appendChild(head_portrait_img);
+
+								var commenttext = document.createElement('div');
+								commenttext.setAttribute('class', 'commenttext');
+								li.appendChild(commenttext);
+
+								var h4 = document.createElement('h4');
+								h4.innerHTML = data.data.content[i].user.nickname;
+								commenttext.appendChild(h4);
+
+								var h5 = document.createElement('h5');
+								h5.innerHTML = data.data.content[i].content;
+								commenttext.appendChild(h5);
+
+								if(data.data.content[i].imageUrlList.length > 0) {
+									var photo = document.createElement('div');
+									photo.setAttribute('class', 'photo');
+									commenttext.appendChild(photo);
+									for(var x = 0; x < data.data.content[i].imageUrlList.length; x++) {
+										var url = data.data.content[i].imageUrlList[x];
+										var img = new Image;
+										img.src = url;
+										img.setAttribute('class', 'preview');
+										img.setAttribute('data-preview-group', data.data.content[i].user.userId + data.data.content[i].id);
+										img.setAttribute('data-preview-src', '');
+										photo.appendChild(img);
+									}
+								}
+
+								var addlocation = document.createElement('div');
+								addlocation.setAttribute('class', 'addlocation');
+								commenttext.appendChild(addlocation);
+								var address_icon = new Image;
+								address_icon.src = '../../image/surrounding@2x.png';
+								var address_h5 = document.createElement('h5');
+								//							address_h5.innerHTML=data.data.content[i].user.location;
+								address_h5.innerHTML = '暂无位置字段';
+								addlocation.appendChild(address_icon);
+								addlocation.appendChild(address_h5);
+
+								if(data.data.content[i].replys != null) {
+									var comment = document.createElement('div');
+									comment.setAttribute('class', 'comment');
+									commenttext.appendChild(comment);
+									var triangle = document.createElement('div');
+									triangle.setAttribute('class', 'triangle');
+									comment.appendChild(triangle);
+									rectangle = document.createElement('div');
+									rectangle.setAttribute('class', 'rectangle');
+									comment.appendChild(rectangle);
+									var times = data.data.content[i].replys.content.length < 3 ? data.data.content[i].replys.content.length : 3;
+									for(var x = 0; x < times; x++) {
+										var p = document.createElement('p');
+										p.innerHTML = data.data.content[i].replys.content[x].user.nickname + ':';
+										rectangle.appendChild(p);
+										var span = document.createElement('span');
+										span.setAttribute('id', data.data.content[i].replys.content[x].id);
+										span.innerHTML = data.data.content[i].replys.content[x].content;
+										p.appendChild(span);
+										if(userid == data.data.content[i].replys.content[x].user.userId) {
+											var comment_delete = document.createElement('span');
+											comment_delete.setAttribute('class', 'comment_delete');
+											comment_delete.innerHTML = '删除';
+											span.appendChild(comment_delete);
+										}
+
+									}
+									if(data.data.content[i].replys.content.length > 3) {
+										var second_comment_enter = document.createElement('p');
+										second_comment_enter.setAttribute('class', 'second-comment-enter');
+										second_comment_enter.innerHTML = '共' + data.data.content[i].replys.totalCount + '条回复>';
+										rectangle.appendChild(second_comment_enter);
+									}
+								}
+
+								var comment_time = document.createElement('div');
+								comment_time.setAttribute('class', 'comment-time');
+								commenttext.appendChild(comment_time)
+								var realtime = document.createElement('span');
+								realtime.innerHTML = getMyDate(data.data.content[i].time);
+								comment_time.appendChild(realtime);
+								var icon = document.createElement('div');
+								icon.setAttribute('class', 'icon');
+								comment_time.appendChild(icon);
+								var Iwannercomment = new Image;
+								Iwannercomment.src = '../../image/comment@3x.png';
+								Iwannercomment.setAttribute('class', 'Iwannercomment');
+								Iwannercomment.setAttribute('data-Iwannercomment_id', data.data.content[i].id);
+								icon.appendChild(Iwannercomment);
+								var comment_like = new Image;
+								if(data.data.content[i].myLike == false) {
+									comment_like.src = '../../image/pub_ico_good_nor.png';
+								} else if(data.data.content[i].myLike == true) {
+									comment_like.src = '../../image/pub_ico_good_sel.png';
+								}
+								comment_like.setAttribute('class', 'comment_like');
+								comment_like.setAttribute('data-status', data.data.content[i].myLike);
+								icon.appendChild(comment_like);
+								var number = document.createElement('span');
+								if(data.data.content[i].like > 0) {
+									number.innerHTML = data.data.content[i].like;
+								} else {
+									number.innerHTML = '';
+								}
+								icon.appendChild(number);
+							}
+						} else {
+							document.getElementsByClassName('tips')[0].style.display = 'block';
+						}
+
+					},
+					error: function(xhr, type, errorThrown) {
+						mui.toast('更新失败')
+					}
+				})
+			}
+
+			var totalpages;
+			var count = 0;
+
+			function pullupRefresh() {
+				setTimeout(function() {
+					mui('.mui-content').pullRefresh().endPullupToRefresh((count == totalpages - 1)); //参数为true代表没有更多数据了。
+					getCommentList();
+					count++;
+				}, 1500);
+			}
+
+			function addData() {
+				document.getElementById('item1mobile').children[0].innerHTML = '';
+				getCommentList();
+				count++;
+			}
+			/**
+			 * 下拉刷新具体业务实现
+			 */
+			function pulldownRefresh() {
+				count = 0;
+				setTimeout(function() {
+					addData();
+					mui('.mui-content').pullRefresh().endPulldownToRefresh();
+					mui.toast("刷新成功");
+
+				}, 1500);
+			}
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,139 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../../css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="../../css/app.css"/>
+
+		<style type="text/css">
+			.mui-content{
+				background-color: #EBEBEB;
+				padding-top: 60px;
+			}
+			body{
+				background-color: #EBEBEB;
+			}
+			.mui-bar.mui-bar-nav{
+				background-color: #F3F3F3;
+				height: 50px;
+			}
+			.mui-bar.mui-bar-nav a{
+				color: black;
+				font-size: 18px;
+				padding-top: 17px;
+			}
+			.icon{
+				height: 130px;
+				padding-top: 9%;
+			}
+			.real-icon{
+				height: 54px;
+				width: 54px;
+				background-image: url(../../image/zhijia_icon.png);
+				background-color: skyblue;
+				background-size: 100% 100%;
+				margin:auto;
+				border-radius: 11px;
+			}
+			p{
+				text-align: center;
+				color: black;	
+			}
+			img{
+				height: 54px;
+			}
+			span{
+				float: right;
+				padding-right: 13px;
+			}
+		</style>
+		
+	</head>
+
+	<body>
+		
+		<header id="header" class="mui-bar mui-bar-nav">
+			<a id="back" class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left ">关于</a>
+		</header>
+		
+		<div class="mui-content">
+			<div class="icon">
+				<div class="real-icon">
+					
+				</div>
+				<p>版本号10.1.8</p>
+			</div>
+			
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					检测更新<span style="padding-right: 0;">已是最新版</span>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right">版本说明</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right">去评分</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a id="apk-btn" class="mui-navigate-right">自动下载智加分享安装包<span id="info"></span></a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right">版本信息</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right">服务协议</a>
+				</li>
+			</ul>
+		</div>
+		<script src="../../js/mui.js"></script>
+		<script src="../../js/commonFunction.js" ></script>
+		<script type="text/javascript">
+			mui('body').on('tap','a',function(){
+			window.top.location.href=this.href;});
+			mui.init({
+				swipeBack:true //启用右滑关闭功能
+			});
+			
+//			页面关闭
+			document.getElementById("back").addEventListener("tap",function(){
+			if(close()==true){
+					window.JsInterface.closeWindow();
+				}else if(close()==false){
+					window.webkit.messageHandlers.closeWindow.postMessage({});
+				}
+			});
+			
+			
+			var info = document.getElementById("info");
+			document.getElementById("apk-btn").addEventListener('tap',function () {
+				var btnArray = [{title:"仅WiFi网络"},{title:"从不"},{title:"有更新时通知我"}];
+				plus.nativeUI.actionSheet( {
+					title:"选择安装包下载模式",
+					cancel:"取消",
+					buttons:btnArray
+					},	function(e){
+						var index = e.index;
+						var text="";
+						switch (index){
+							case 0:
+								text += "仅WiFi网络";
+								break;
+							case 1:
+								text += "从不";
+								break;
+							case 2:
+								text += '有更新时通知我';
+								break;
+						}
+						info.innerHTML(text);
+					});
+				});
+			
+		</script>
+	</body>
+
+</html>

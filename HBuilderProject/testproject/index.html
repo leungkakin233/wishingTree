@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta name="flexible" content="initial-dpr=2" />
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link href="css/mui.css" rel="stylesheet" />
+		<script src="http://g.tbcdn.cn/mtb/lib-flexible/0.3.4/??flexible_css.js,flexible.js"></script>
+		<style type="text/css">
+			.bubble {
+				width: 30px;
+				/* 定义泡沫的宽高 */
+				height: 30px;
+
+				top: 80px;
+
+				box-shadow: inset -2px -2px 10px rgba(0, 0, 0, .2),
+					/* 淡灰色渐变背景，光源位于左上方 */
+
+					inset 0px 0px 5px rgba(0, 0, 0, .5),
+					/* 泡沫内部深灰色边界 */
+
+					inset 0px 0px 25px rgba(255, 255, 255, .5),
+					/* 泡沫内部白色渐变效果 */
+
+					inset -1px -1px 3px rgba(0, 0, 0, .2),
+					/* 颜色稍深的右下边缘阴影效果 */
+
+					0 0 50px rgba(255, 255, 255, .7);
+				/* 泡沫周围的白色发光效果，以更好地突显边缘 */
+
+				border-radius: 50%;
+				/* 50%的边界弧度，使其成为一个圆 */
+
+				background: rgba(255, 255, 255, .4);
+				/* 使我们的泡沫和背景色相比略浅 */
+
+				position: absolute;
+				/* 使得伪元素可以据此绝对定位 */
+
+				animation: myfirst 2s infinite;
+				animation-direction: alternate;
+			}
+
+			.bubble:before {
+				/* 在泡沫的左上角加上白色的亮点，形成光斑效果 */
+
+				content: "";
+				display: block;
+				position: absolute;
+				width: 6px;
+				height: 6px;
+				top: 6px;
+				left: 6px;
+				border-radius: 75px 25px;
+				box-shadow: inset 5px 5px 25px rgba(255, 255, 255, .6);
+			}
+
+			.bubble:after {
+				/* 使用:after伪元素构造泡沫内壁，形成薄薄的泡沫膜 */
+
+				content: "";
+				display: block;
+				position: absolute;
+				width: 28px;
+				height: 28px;
+				border-radius: 50%;
+				left: 1px;
+				top: 1px;
+				box-shadow: inset 0px -5px 5px rgba(0, 0, 0, .07);
+			}
+
+
+			@keyframes myfirst {
+				0% {
+					top: 50px;
+				}
+
+				100% {
+					top: 90px;
+				}
+			}
+
+
+			@keyframes mysecond {
+				0% {
+					top: 0px;
+				}
+
+				100% {
+					top: 100px;
+				}
+			}
+
+			.wish-p2 {
+				/* position: absolute;
+				top: 5.1rem;
+				left: 1.6rem;
+				bottom: 0;
+				right: 0; */
+				width: 6.71rem;
+				height: 1.2rem;
+				z-index: 5;
+
+				background-color: red;
+				word-wrap: break-word;
+				overflow: auto;
+
+				color: #FAFAFA;
+				font-weight: 500;
+				font-size: 0.32rem;
+				line-height: 0.4rem;
+			}
+		</style>
+
+	</head>
+	<body>
+		<div class="mui-content mui-scroll-wrapper">
+			<div class="mui-scroll ">
+				<!-- <div id="bubble-group">
+
+			</div> -->
+
+							<a href="examples/onloadDemo.html">onloadDemo</a><br />
+			<a href="examples/popoverDemo.html">popoverDemo</a><br />
+			<a href="examples/wishingcardDemo.html">wishingcardDemo</a><br />
+			<a href="examples/wishingcardDemo2.html">wishingcardDemo2</a><br />
+			<a href="examples/tabViewDemo.html">tabViewDemo</a><br />
+			<a href="examples/fenxiangDemo.html">分享</a><br />
+			<a href="examples/ajaxDemo.html">ajaxdemo</a><br />
+			<a href="examples/jiaoshui.html">浇水</a><br />
+			<a href="examples/wishDemo.html">许愿</a><br />
+			<a href="examples/tab-webview-demo.html">评论</a><br />
+			<a href="examples/vueDemo.html">vuedemo</a><br />
+			<a href="examples/vueDemo2.html">vuedemo2</a><br />
+				<a href="examples/photoDemo.html">photoDemo</a><br />
+				<a href="examples/photoDemo2.html">photoDemo2</a><br />
+<!-- 				<div class="wish-p2">1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111</div> -->
+				<!-- 			<a href="examples/addComment.html">addComment</a><br />
+			<a href="examples/wishingcardDemo3.html">wishingcardDemo3</a><br />
+			<a href="examples/wishingcardDemo4.html">wishingcardDemo4</a><br />
+			<a href="examples/wishingcardDemo5.html">wishingcardDemo5</a><br />
+			<a href="examples/bubbleDemo.html">bubbledemo</a><br />
+			<a href="examples/watchwishdemo.html">watchwishdemo</a><br /> -->
+			</div>
+		</div>
+		<!-- <div class="bubble"></div> -->
+
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript" charset="utf-8">
+			mui.init();
+			var user = {
+				"userId": "56",
+				"nickname": "13168686186",
+				"roleId": "13168686186",
+				"viewType": "HIDE",
+				"location": null,
+				"avatar": null
+			}
+			// 			var bubblegroup = document.getElementById('bubble-group');
+			// 			var bubblesLeft = [];
+			// 			var bubblesTop = [];
+			// 			
+			// 			console.log(document.documentElement.clientWidth);
+			// 			for (let i = 0; i < 6; i++) {
+			// 				var temp = 10;
+			// 				if (i == 0) {
+			// 					bubblesLeft[0] = 10;
+			// 					bubblesTop[0] = 75 + Math.random() * 30;
+			// 					console.log(bubblesLeft[0]);
+			// 				} else {
+			// 					temp += bubblesLeft[i - 1];
+			// 					bubblesLeft[i] = temp + Math.random() * 20 + 20;
+			// 					bubblesTop[i] = 75 + Math.random() * 30;
+			// 					console.log(bubblesLeft[i]);
+			// 				}
+			// 			}
+			// 
+			// 						for(let i =0;i<6;i++){
+			// 							var b1 = document.createElement('div');
+			// 							b1.setAttribute('class', 'bubble');
+			// 							console.log(bubblesLeft[i]+"px");
+			// 							b1.style.left = bubblesLeft[i]+"px";
+			// 							b1.style.top = bubblesTop[i]+"px";
+			// 							b1.innerText = 10;
+			// 							bubblegroup.appendChild(b1);
+			// 						}
+
+			var reqcom = new Object();
+			reqcom.user = user;
+			reqcom.user.location = '1111';
+			console.log(JSON.stringify(reqcom));
+
+// 			{
+// 				"id": "ff808081680f64220168186c337211a4",
+// 				"user": {
+// 					"userId": "308",
+// 					"nickname": "13750014922",
+// 					"roleId": "308",
+// 					"viewType": "ALL",
+// 					"location": null,
+// 					"avatar": null
+// 				},
+// 				"location": null,
+// 				"type": "COMMENT",
+// 				"level": 0,
+// 				"total": 0,
+// 				"like": 0,
+// 				"dislike": 0,
+// 				"content": "代码重构",
+// 				"time": 1546597971000,
+// 				"imageUrlList": ["http://139.159.148.149:8081/platform/file/ff808081680f64220168186c32d311a3.png"],
+// 				"myLike": false,
+// 				"replys": null
+// 			}
+
+// 			{
+// 				"success": true,
+// 				"code": "",
+// 				"message": "",
+// 				"data": {
+// 					"content": [{
+// 						"id": "ff808081680f64220168186c337211a4",
+// 						"user": {
+// 							"userId": "308",
+// 							"nickname": "13750014922",
+// 							"roleId": "308",
+// 							"viewType": "ALL",
+// 							"location": null,
+// 							"avatar": null
+// 						},
+// 						"location": null,
+// 						"type": "COMMENT",
+// 						"level": 0,
+// 						"total": 0,
+// 						"like": 0,
+// 						"dislike": 0,
+// 						"content": "代码重构",
+// 						"time": 1546597971000,
+// 						"imageUrlList": ["http://139.159.148.149:8081/platform/file/ff808081680f64220168186c32d311a3.png"],
+// 						"myLike": false,
+// 						"replys": null
+// 					}, {
+// 						"id": "ff808081680f642201681847a064112c",
+// 						"user": {
+// 							"userId": "308",
+// 							"nickname": "13750014922",
+// 							"roleId": "308",
+// 							"viewType": "ALL",
+// 							"location": null,
+// 							"avatar": null
+// 						},
+// 						"location": null,
+// 						"type": "COMMENT",
+// 						"level": 0,
+// 						"total": 0,
+// 						"like": 0,
+// 						"dislike": 0,
+// 						"content": "新评论一条",
+// 						"time": 1546595574000,
+// 						"imageUrlList": ["http://139.159.148.149:8081/platform/file/ff808081680f6422016818479fcf112b.png"],
+// 						"myLike": false,
+// 						"replys": null
+// 					}, {
+// 						"id": "ff808081680f64220168120aa6ab02d9",
+// 						"user": {
+// 							"userId": "308",
+// 							"nickname": "13750014922",
+// 							"roleId": "308",
+// 							"viewType": "ALL",
+// 							"location": null,
+// 							"avatar": null
+// 						},
+// 						"location": null,
+// 						"type": "COMMENT",
+// 						"level": 0,
+// 						"total": 5,
+// 						"like": 1,
+// 						"dislike": 0,
+// 						"content": "abcd1234",
+// 						"time": 1546490914000,
+// 						"imageUrlList": [],
+// 						"myLike": false,
+// 						"replys": {
+// 							"content": [{
+// 								"id": "ff808081680f642201681319986005b1",
+// 								"user": {
+// 									"userId": "308",
+// 									"nickname": "13750014922",
+// 									"roleId": "308",
+// 									"viewType": "ALL",
+// 									"location": null,
+// 									"avatar": null
+// 								},
+// 								"location": null,
+// 								"type": "COMMENT",
+// 								"level": 0,
+// 								"total": 0,
+// 								"like": 0,
+// 								"dislike": 0,
+// 								"content": "评论2",
+// 								"time": 1546508671000,
+// 								"imageUrlList": [],
+// 								"myLike": false,
+// 								"replys": null
+// 							}, {
+// 								"id": "ff808081680f642201681319ad6a05b2",
+// 								"user": {
+// 									"userId": "308",
+// 									"nickname": "13750014922",
+// 									"roleId": "308",
+// 									"viewType": "ALL",
+// 									"location": null,
+// 									"avatar": null
+// 								},
+// 								"location": null,
+// 								"type": "COMMENT",
+// 								"level": 0,
+// 								"total": 0,
+// 								"like": 0,
+// 								"dislike": 0,
+// 								"content": "评论33",
+// 								"time": 1546508676000,
+// 								"imageUrlList": [],
+// 								"myLike": false,
+// 								"replys": null
+// 							}, {
+// 								"id": "ff808081680f6422016817f9620b0d6a",
+// 								"user": {
+// 									"userId": "65",
+// 									"nickname": "13927413830",
+// 									"roleId": "65",
+// 									"viewType": "ALL",
+// 									"location": null,
+// 									"avatar": null
+// 								},
+// 								"location": null,
+// 								"type": "COMMENT",
+// 								"level": 0,
+// 								"total": 0,
+// 								"like": 0,
+// 								"dislike": 0,
+// 								"content": "评论4 20190104",
+// 								"time": 1546590446000,
+// 								"imageUrlList": ["http://139.159.148.149:8081/platform/file/ff808081680f6422016817f960100d65.jpg",
+// 									"http://139.159.148.149:8081/platform/file/ff808081680f6422016817f960de0d67.png",
+// 									"http://139.159.148.149:8081/platform/file/ff808081680f6422016817f961600d69.png"
+// 								],
+// 								"myLike": false,
+// 								"replys": null
+// 							}, {
+// 								"id": "ff808081680f6422016817fa5ffc0d74",
+// 								"user": {
+// 									"userId": "65",
+// 									"nickname": "13927413830",
+// 									"roleId": "65",
+// 									"viewType": "ALL",
+// 									"location": null,
+// 									"avatar": null
+// 								},
+// 								"location": null,
+// 								"type": "COMMENT",
+// 								"level": 0,
+// 								"total": 0,
+// 								"like": 0,
+// 								"dislike": 0,
+// 								"content": "右上角评论测试",
+// 								"time": 1546590511000,
+// 								"imageUrlList": ["http://139.159.148.149:8081/platform/file/ff808081680f6422016817fa5dbc0d6f.jpg",
+// 									"http://139.159.148.149:8081/platform/file/ff808081680f6422016817fa5ef90d71.jpg",
+// 									"http://139.159.148.149:8081/platform/file/ff808081680f6422016817fa5f5c0d73.png"
+// 								],
+// 								"myLike": false,
+// 								"replys": null
+// 							}],
+// 							"totalCount": 4,
+// 							"pageNumber": 0,
+// 							"pageSize": 6,
+// 							"totalPages": 1,
+// 							"totalElements": 4,
+// 							"last": true,
+// 							"sort": [{
+// 								"direction": "ASC",
+// 								"property": "operation.createTime",
+// 								"ignoreCase": false,
+// 								"nullHandling": "NATIVE",
+// 								"descending": false,
+// 								"ascending": true
+// 							}],
+// 							"numberOfElements": 4,
+// 							"first": true,
+// 							"size": 6,
+// 							"number": 0
+// 						}
+// 					}, {
+// 						"id": "ff808081680f6422016811beb8750286",
+// 						"user": {
+// 							"userId": "308",
+// 							"nickname": "13750014922",
+// 							"roleId": "308",
+// 							"viewType": "ALL",
+// 							"location": null,
+// 							"avatar": null
+// 						},
+// 						"location": null,
+// 						"type": "COMMENT",
+// 						"level": 0,
+// 						"total": 3,
+// 						"like": 1,
+// 						"dislike": 0,
+// 						"content": "新年快乐",
+// 						"time": 1546485938000,
+// 						"imageUrlList": ["http://139.159.148.149:8081/platform/file/ff808081680f6422016811beb7680283.jpg",
+// 							"http://139.159.148.149:8081/platform/file/ff808081680f6422016811beb7c00285.png"
+// 						],
+// 						"myLike": false,
+// 						"replys": {
+// 							"content": [{
+// 								"id": "ff808081680f64220168128b55240410",
+// 								"user": {
+// 									"userId": "308",
+// 									"nickname": "13750014922",
+// 									"roleId": "308",
+// 									"viewType": "ALL",
+// 									"location": null,
+// 									"avatar": null
+// 								},
+// 								"location": null,
+// 								"type": "COMMENT",
+// 								"level": 0,
+// 								"total": 0,
+// 								"like": 0,
+// 								"dislike": 0,
+// 								"content": "新年快乐",
+// 								"time": 1546499348000,
+// 								"imageUrlList": [],
+// 								"myLike": false,
+// 								"replys": null
+// 							}, {
+// 								"id": "ff808081680f642201681374503505d2",
+// 								"user": {
+// 									"userId": "308",
+// 									"nickname": "13750014922",
+// 									"roleId": "308",
+// 									"viewType": "ALL",
+// 									"location": null,
+// 									"avatar": null
+// 								},
+// 								"location": null,
+// 								"type": "COMMENT",
+// 								"level": 0,
+// 								"total": 0,
+// 								"like": 0,
+// 								"dislike": 0,
+// 								"content": "11111",
+// 								"time": 1546514616000,
+// 								"imageUrlList": [],
+// 								"myLike": false,
+// 								"replys": null
+// 							}, {
+// 								"id": "ff808081680f64220168137461fc05d3",
+// 								"user": {
+// 									"userId": "308",
+// 									"nickname": "13750014922",
+// 									"roleId": "308",
+// 									"viewType": "ALL",
+// 									"location": null,
+// 									"avatar": null
+// 								},
+// 								"location": null,
+// 								"type": "COMMENT",
+// 								"level": 0,
+// 								"total": 0,
+// 								"like": 0,
+// 								"dislike": 0,
+// 								"content": "222222",
+// 								"time": 1546514621000,
+// 								"imageUrlList": [],
+// 								"myLike": false,
+// 								"replys": null
+// 							}],
+// 							"totalCount": 3,
+// 							"pageNumber": 0,
+// 							"pageSize": 6,
+// 							"totalPages": 1,
+// 							"totalElements": 3,
+// 							"last": true,
+// 							"sort": [{
+// 								"direction": "ASC",
+// 								"property": "operation.createTime",
+// 								"ignoreCase": false,
+// 								"nullHandling": "NATIVE",
+// 								"descending": false,
+// 								"ascending": true
+// 							}],
+// 							"numberOfElements": 3,
+// 							"first": true,
+// 							"size": 6,
+// 							"number": 0
+// 						}
+// 					}],
+// 					"totalCount": 4,
+// 					"pageNumber": 0,
+// 					"pageSize": 20,
+// 					"totalPages": 1,
+// 					"totalElements": 4,
+// 					"last": true,
+// 					"sort": [{
+// 						"direction": "DESC",
+// 						"property": "operation.createTime",
+// 						"ignoreCase": false,
+// 						"nullHandling": "NATIVE",
+// 						"descending": true,
+// 						"ascending": false
+// 					}],
+// 					"numberOfElements": 4,
+// 					"first": true,
+// 					"size": 20,
+// 					"number": 0
+// 				}
+// 			}
+// 
+// 
+// 
+// 			[{
+// 				"res": {
+// 					"id": "4028834c67840a590167840b79720000",
+// 					"url": null,
+// 					"type": "res.type.treeWish",
+// 					"title": "愿望的Title",
+// 					"spider": false,
+// 					"viewType": "ALL"
+// 				},
+// 				"id": "4028834c67840a590167840b798f0002",
+// 				"title": "愿望的Title",
+// 				"content": "我想要一辆特斯啦",
+// 				"coordinate": "20,20",
+// 				"location": null,
+// 				"user": {
+// 					"userId": "56",
+// 					"nickname": "13168686186",
+// 					"roleId": "13168686186",
+// 					"viewType": "HIDE",
+// 					"location": null,
+// 					"avatar": null
+// 				},
+// 				"points": 2000,
+// 				"template": null,
+// 				"imageList": ["http://node1.xiuhuahui.xyz:8080/platform/file/2c9034a0661e139a01661e147d5f0001.jpg",
+// 					"http://node1.xiuhuahui.xyz:8080/platform/file/2c9034a0661e139a01661e147d5f0001.jpg",
+// 					"http://node1.xiuhuahui.xyz:8080/platform/file/2c9034a0661e139a01661e147d5f0001.jpg"
+// 				],
+// 				"finished": false,
+// 				"finishTime": null,
+// 				"orderNo": null,
+// 				"caseNo": null
+// 			}, {
+// 				"res": {
+// 					"id": "4028834c6784037a01678406cc540006",
+// 					"url": null,
+// 					"type": "res.type.treeWish",
+// 					"title": "愿望的Title",
+// 					"spider": false,
+// 					"viewType": "ALL"
+// 				},
+// 				"id": "4028834c6784037a01678406cc5f0008",
+// 				"title": "愿望的Title",
+// 				"content": "我想要一辆特斯啦",
+// 				"coordinate": "20,20",
+// 				"location": null,
+// 				"user": {
+// 					"userId": "56",
+// 					"nickname": "13168686186",
+// 					"roleId": "13168686186",
+// 					"viewType": "HIDE",
+// 					"location": null,
+// 					"avatar": null
+// 				},
+// 				"points": 2000,
+// 				"template": null,
+// 				"imageList": ["http://node1.xiuhuahui.xyz:8080/platform/file/2c9034a0661e139a01661e147d5f0001.jpg",
+// 					"http://node1.xiuhuahui.xyz:8080/platform/file/2c9034a0661e139a01661e147d5f0001.jpg",
+// 					"http://node1.xiuhuahui.xyz:8080/platform/file/2c9034a0661e139a01661e147d5f0001.jpg"
+// 				],
+// 				"finished": false,
+// 				"finishTime": null,
+// 				"orderNo": null,
+// 				"caseNo": null
+// 			}, {
+// 				"res": {
+// 					"id": "4028834c6784037a01678404c1190000",
+// 					"url": null,
+// 					"type": "res.type.treeWish",
+// 					"title": "愿望的Title",
+// 					"spider": false,
+// 					"viewType": "ALL"
+// 				},
+// 				"id": "4028834c6784037a01678404c13b0002",
+// 				"title": "愿望的Title",
+// 				"content": "我想要一辆特斯啦",
+// 				"coordinate": "20,20",
+// 				"location": null,
+// 				"user": {
+// 					"userId": "56",
+// 					"nickname": "13168686186",
+// 					"roleId": "13168686186",
+// 					"viewType": "HIDE",
+// 					"location": null,
+// 					"avatar": null
+// 				},
+// 				"points": 2000,
+// 				"template": null,
+// 				"imageList": ["http://node1.xiuhuahui.xyz:8080/platform/file/2c9034a0661e139a01661e147d5f0001.jpg",
+// 					"http://node1.xiuhuahui.xyz:8080/platform/file/2c9034a0661e139a01661e147d5f0001.jpg",
+// 					"http://node1.xiuhuahui.xyz:8080/platform/file/2c9034a0661e139a01661e147d5f0001.jpg"
+// 				],
+// 				"finished": false,
+// 				"finishTime": null,
+// 				"orderNo": null,
+// 				"caseNo": null
+// 			}, {
+// 				"res": {
+// 					"id": "4028834c676fc6cf01676fc731570000",
+// 					"url": null,
+// 					"type": "res.type.treeWish",
+// 					"title": "13168686186许愿",
+// 					"spider": false,
+// 					"viewType": "ALL"
+// 				},
+// 				"id": "4028834c676fc6cf01676fc7316e0002",
+// 				"title": "13168686186许愿",
+// 				"content": "我想要一辆特斯啦",
+// 				"coordinate": "20,20",
+// 				"location": null,
+// 				"user": {
+// 					"userId": "56",
+// 					"nickname": "13168686186",
+// 					"roleId": "13168686186",
+// 					"viewType": "HIDE",
+// 					"location": null,
+// 					"avatar": null
+// 				},
+// 				"points": 2000,
+// 				"template": null,
+// 				"imageList": null,
+// 				"finished": true,
+// 				"finishTime": 1543768859000,
+// 				"orderNo": null,
+// 				"caseNo": "98b6d5da-104e-4b99-a78d-93d93a7b1b51"
+// 			}]
+
+			// Math.random()*document.documentElement.clientWidth + 1
+			;
+		</script>
+	</body>
+</html>

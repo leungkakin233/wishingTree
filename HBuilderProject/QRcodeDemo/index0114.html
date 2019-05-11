@@ -1,0 +1,86 @@
+<!--<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>Document</title>
+		<style>
+			body img {
+				display: block;
+			}
+		</style>
+	</head>
+
+	<body>
+		<canvas id="aa" width="200" height="200"></canvas>
+
+		<script type="text/javascript" src="js/jquery.js"></script>
+		<script type="text/javascript" src="js/utf.js"></script>
+		<script type="text/javascript" src="js/qrcode.js"></script>
+		<script>
+			var aa = document.getElementById('aa');
+			var bb = aa.getContext('2d');
+
+//			bb.fillStyle = '#99f'; //   填充颜色
+//			bb.fillRect(0, 0, 500, 500);
+
+			var img = new Image;
+			img.src = 'img/photo.jpg';
+
+			img.onload = function() {
+				bb.drawImage(img, 50, 50, 50, 50);
+			}
+
+			bb.fillStyle = 'black'; // 文字填充颜色
+			bb.font = '33px Adobe Ming Std';
+			bb.fillText('怎么得到你想要的?', 50, 50);
+
+			bb.fillStyle = '#fff';
+			bb.font = '66px Adobe Ming Std';
+			bb.fillText('让自己配得上!', 50, 100);
+
+			bb.stroke();
+			
+			var imgAsDataURL = aa.toDataURL('image/png');
+			document.body.appendChild(imgAsDataURL)
+		</script>
+
+	</body>
+
+</html>-->
+	
+	<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <input type="text" name="picUrl">
+    <button onclick="test()">测试</button>
+</body>
+<script>
+    function test(){
+        var url = document.getElementsByName("picUrl")[0].value;
+        var canvas = document.createElement("canvas");
+        var ctx = canvas.getContext('2d');
+ 
+        canvas.width = 100;
+        canvas.height = 100;
+        var img = new Image();
+        //设置图片跨域访问
+        img.crossOrigin = 'anonymous';
+        //加时间戳解决跨域问题
+        img.src = url+"?timeStamp="+new Date();  
+//      document.body.appendChild(img);
+        img.onload = function () {
+            ctx.drawImage(this,0,0,100,100);
+            var base64 = canvas.toDataURL('image/jpg', 1);
+            console.log(base64)
+            document.body.appendChild(canvas);
+        };
+    }
+</script>
+</html>

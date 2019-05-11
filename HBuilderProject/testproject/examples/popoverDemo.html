@@ -1,0 +1,44 @@
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<style type="text/css">
+			#div {
+				width: 0px;
+				height: 0px;
+				background: red;
+				position: absolute;
+				top: 70%;
+				left: 50%;
+			}
+			/*移除底部或顶部三角,需要在删除此代码*/
+			.mui-popover .mui-popover-arrow:after {
+				width: 0px;
+			}
+		</style>
+	</head>
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">自定义位置弹出层</h1>
+		</header>
+		<div class="mui-content">
+			<a id="test">点击此打开中间的弹出层</a>
+		</div>
+		<div id="div"></div>
+		<div id="popover" class="mui-popover" style="height: 250px;">
+			<div class="mui-popover-arrow"></div>
+			<div>我是自定义位置弹出层</div>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+			document.getElementById("test").addEventListener("tap", function() {
+				//调用隐藏/显示弹出层
+				mui("#popover").popover('toggle', document.getElementById("div"));
+			})
+		</script>
+	</body>
+</html>

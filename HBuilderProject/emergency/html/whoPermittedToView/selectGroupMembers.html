@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.css" rel="stylesheet" />
+		<link href="../../css/mui.indexedlist.css" rel="stylesheet" />
+		<style>
+			html,
+			body {
+				height: 100%;
+				overflow: hidden;
+			}
+			
+			.mui-bar,
+			.mui-bar-nav {
+				background-color: #F3F3F3;
+				height: 50px;
+			}
+			
+			.mui-bar.mui-bar-nav a {
+				color: black;
+				font-size: 18px;
+				padding-top: 17px;
+			}
+			
+			.mui-btn.mui-btn-blue.mui-btn-link.mui-pull-right {
+				line-height: 50px;
+			}
+			
+			.mui-bar {
+				-webkit-box-shadow: none;
+				box-shadow: none;
+			}
+			
+			.mui-table-view-cell {
+				height: 3rem;
+				padding-top: 0 !important;
+				display: flex;
+				padding-right: 0 !important;
+			}
+			
+			.mui-table-view-cell>a {
+				width: 100%;
+			}
+			
+			.mui-table-view-cell.mui-indexed-list-item.mui-checkbox.mui-right {
+				line-height: 3rem;
+				vertical-align: -20% !important;
+			}
+			
+			.mui-table-view-cell.mui-indexed-list-item.mui-checkbox.mui-right>input {
+				border-radius: 0 !important;
+			}
+			
+			.mui-table-view-cell.mui-indexed-list-item.mui-checkbox.mui-right>img {
+				height: 2.1rem;
+				margin-top: 0.4rem;
+				vertical-align: -20% !important;
+			}
+			
+			.mui-table-view-cell>a>img {
+				height: 2.1rem;
+				margin-top: 1.05rem;
+			}
+			
+			.mui-table-view-cell>a>span {
+				vertical-align: 50%;
+			}
+			
+			#done.mui-disabled {
+				color: gray;
+			}
+			
+			.mui-indexed-list-bar {
+				height: 90%;
+				background-color: rgba(255, 255, 255, 0) !important;
+			}
+			
+			input::-webkit-input-placeholder {
+        		text-align: left;
+     		}
+			
+			.mui-indexed-list-search.mui-input-row {
+				height: 3rem;
+				width: auto;
+				max-width: 100% !important;
+				margin-top: 0.4rem;
+				display: flex;
+				background-color: #FFFFFF;
+			}
+			
+			.icon_wall {
+				height: 3rem;
+				width: auto;
+				max-width: 70%;
+				border: none;
+				background-color: #FFFFFF;
+				display: flex;
+				margin-left: 1rem;
+				/*overflow: hidden;*/
+				overflow-x: scroll;
+			}
+			
+			.icon_wall>img {
+				height: 2.1rem;
+				width: 2.1rem;
+				vertical-align: text-top;
+				margin-top: 0.45rem;
+				margin-right: 0.4rem;
+			}
+			
+			.mui-indexed-list-search-input {
+				padding-right: 0 !important;
+				padding-left: 0 !important;
+				margin-left: 0 !important;
+				height: 3rem !important;
+				width: 100% !important;
+				/*width: auto !important;*/
+				background-color: #FFFFFF !important;
+				min-width: 10% !important;
+			}
+			
+			.icon {
+				height: 2.4rem;
+				width: 2.4rem;
+				vertical-align: -20%;
+				margin-top: 0.25rem;
+				line-height: 3rem;
+				/*border: solid 1px blue;*/
+			}
+			
+			.mui-table-view-cell.select_list {
+				line-height: 3rem;
+				vertical-align: -20% !important;
+			}
+			
+			.midpart {
+				width: 75%;
+				line-height: 1.3rem;
+				padding-top: 0.2rem;
+			}
+			
+			.select {
+				float: right;
+				height: 1.2rem;
+				width: 1.2rem;
+				margin-top: 0.9rem;
+			}
+			.NameTips{
+				height: 2rem;
+				padding-left: 1rem;
+				background-color: #ebebeb;
+				line-height: 2rem;
+				margin-top: 0 !important;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a id="back" class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left">选择成员</a>
+			<button id="done" class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">确认</button>
+		</header>
+		<div class="mui-content">
+			<div id='list' class="mui-indexed-list">
+				<div class="mui-indexed-list-search mui-input-row">
+					<div class="icon_wall">
+						<!--<img src="../../image/2.jpg"/>
+						<img src="../../image/2.jpg"/>
+						<img src="../../image/2.jpg"/>
+						<img src="../../image/2.jpg"/>
+						<img src="../../image/2.jpg"/>
+						<img src="../../image/2.jpg"/>
+						<img src="../../image/2.jpg"/>-->
+					</div>
+					<input type="search" style="width: 30% !important;min-width: 10% !important;" class="mui-indexed-list-search-input" placeholder="搜索">
+				</div>
+				<div class="mui-indexed-list-bar">
+					<!--<a>↑</a>
+					<a>收藏</a>
+					<a>A</a>
+					<a>B</a>
+					<a>C</a>
+					<a>D</a>
+					<a>E</a>
+					<a>F</a>
+					<a>G</a>
+					<a>H</a>
+					<a>I</a>
+					<a>J</a>
+					<a>K</a>
+					<a>L</a>
+					<a>M</a>
+					<a>N</a>
+					<a>O</a>
+					<a>P</a>
+					<a>Q</a>
+					<a>R</a>
+					<a>S</a>
+					<a>T</a>
+					<a>U</a>
+					<a>V</a>
+					<a>W</a>
+					<a>X</a>
+					<a>Y</a>
+					<a>Z</a>
+					<a>#</a>-->
+				</div>
+				<div class="mui-indexed-list-alert"></div>
+				<div class="mui-indexed-list-inner">
+					<div class="NameTips">
+						<p class="NameTips-P"></p>
+					</div>
+					<div class="mui-indexed-list-empty-alert">没有数据</div>
+					<ul id='group_list' class="mui-table-view">
+						<!--<li data-value="AKU" data-tags="AKeSu" class="mui-table-view-cell mui-indexed-list-item mui-checkbox mui-right">
+							<img src="../../image/zhijia_icon.png"/>
+							<input type="checkbox" /><span>张三</span></li>-->
+					</ul>
+				</div>
+			</div>
+		</div>
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/mui.indexedlist.js"></script>
+		<script src="../../js/getuser.js"></script>
+		<script src="../../js/Chinese_charactersTopinyin.js"></script>
+		<script src="../../js/commonFunction.js"></script>
+		<!--<script src="../js/mui.grouplist.testdata.js"></script>-->
+		<script type="text/javascript" charset="utf-8">
+		
+			var groupName;
+			var members;
+			var whiteListKind;
+			var thisGroupId;
+			
+			
+			if(localStorage.getItem('fakecheckedValues')){
+				var fakecheckedValues=JSON.parse(localStorage.getItem('fakecheckedValues'));
+			}
+			else{
+				var fakecheckedValues=[];
+			}
+		
+			document.getElementById('back').addEventListener('tap',function(){
+				if(close()==true){
+					window.JsInterface.closeWindow();
+				}else if(close()==false){
+					window.webkit.messageHandlers.closeWindow.postMessage({});
+				}
+			})
+			
+			function GetRequest() {
+				var url = decodeURI(location.search); //获取url中"?"符后的字串
+				var request = new Object();
+				if(url.indexOf("?") != -1) {
+					var str = url.substr(1);
+					strs = str.split("&");
+					for(var i = 0; i < strs.length; i++) {
+						request[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1]);
+					}
+				}
+				whiteListKind = request.whiteListKind;
+				groupName = request.groupName;
+				thisGroupId=request.thisGroupId;
+				members = request.members.split(',');
+				document.getElementsByClassName('NameTips-P')[0].innerText = groupName +'成员';
+			}
+			GetRequest();
+			
+				
+			mui.init();
+			mui.ready(function() {
+				var header = document.querySelector('header.mui-bar');
+				var list = document.getElementById('list');
+				var done = document.getElementById('done');
+				//calc hieght
+				list.style.height = (document.body.offsetHeight - header.offsetHeight) + 'px';
+				//create
+				window.indexedList = new mui.IndexedList(list);
+				//done event
+				done.addEventListener('tap', function() {
+					var checkboxArray = [].slice.call(list.querySelectorAll('input[type="checkbox"]'));
+//					if(!fakecheckedValues){
+////						var checkedValues = [];
+//						
+//						alert('kkk')
+//					}
+					checkboxArray.forEach(function(box) {
+						if (box.checked) {
+//							var obj=new Object();
+//							obj.user=new Object();
+//							obj.user.userId=box.parentNode.getAttribute('data-userid');
+//							obj.user.nickname=box.parentNode.getElementsByTagName('span')[0].innerText;
+//							obj.user.roleId=box.parentNode.children[0].getAttribute('id');
+//							obj.whiteList = whiteListKind;
+//							checkedValues.push(obj);
+							
+							var fakeObj=new Object();
+							fakeObj.user=new Object();
+							fakeObj.user.userId=box.parentNode.getAttribute('data-userid');
+							fakeObj.user.nickname=box.parentNode.getElementsByTagName('span')[0].innerText;
+							fakeObj.user.roleId=box.parentNode.children[0].getAttribute('id');
+							fakeObj.user.icon=box.parentNode.children[0].src;
+							fakeObj.user.groupid=thisGroupId;
+							if(whiteListKind=='true'){
+								fakeObj.whiteList = true;
+							}else if(whiteListKind=='false'){
+								fakeObj.whiteList = false;
+							}
+							if(fakecheckedValues.length>0){
+							for(var i=0;i<fakecheckedValues.length;i++){
+								if(fakecheckedValues[i].user.roleId!=fakeObj.user.roleId&&i==fakecheckedValues.length-1){
+										fakecheckedValues.push(fakeObj);
+								}else if(fakecheckedValues[i].user.roleId==fakeObj.user.roleId){
+									break;
+								}
+							}
+							}else{
+								fakecheckedValues.push(fakeObj);
+							}
+						}
+					});
+//					localStorage.setItem('IwantYou',JSON.stringify(checkedValues));
+						localStorage.setItem('fakecheckedValues',JSON.stringify(fakecheckedValues));
+//					if (checkedValues.length > 0) {
+////						
+//					} else {
+//					}
+					window.JsInterface.closeWindow(true);
+				}, false);
+				mui('.mui-indexed-list-inner').on('change', 'input', function() {
+//					alert(this.parentElement.getElementsByTagName('img')[0].getAttribute('id'));
+					var count = list.querySelectorAll('input[type="checkbox"]:checked').length;
+					var value = count ? "确认(" + count + ")" : "确认";
+					done.innerHTML = value;
+					if (count) {
+						if (done.classList.contains("mui-disabled")) {
+							done.classList.remove("mui-disabled");
+						}
+					} else {
+						if (!done.classList.contains("mui-disabled")) {
+							done.classList.add("mui-disabled");
+						}
+					}
+					var className = this.parentNode.children[0].getAttribute('id');
+					if(this.checked == true) {
+						var url = this.parentNode.children[0].src;
+						var img = new Image();
+						img.src = url;
+						img.setAttribute('class', className);
+						document.getElementsByClassName('icon_wall')[0].appendChild(img);
+					} else if(this.checked == false) {
+						document.getElementsByClassName('icon_wall')[0].removeChild(document.getElementsByClassName(className)[0]);
+						var count = list.querySelectorAll('input[type="checkbox"]:checked').length;
+					var value = count ? "确认(" + count + ")" : "确认";
+					done.innerHTML = value;
+					
+					if(fakecheckedValues.length>0){
+						for(var i=0;i<fakecheckedValues.length;i++){
+							if(fakecheckedValues[i].user.roleId==className){
+								fakecheckedValues.splice(i,1);
+								break;
+							}
+						}
+					}
+					}
+				});
+				mui('.icon_wall').on('tap', 'img', function() {
+					document.getElementsByClassName('icon_wall')[0].removeChild(this);
+					document.getElementById(this.getAttribute('class')).parentNode.getElementsByTagName('input')[0].checked = false;
+					var count = list.querySelectorAll('input[type="checkbox"]:checked').length;
+					var value = count ? "确认(" + count + ")" : "确认";
+					done.innerHTML = value;
+					if(fakecheckedValues.length>0){
+						var changeArray=new Array;
+						changeArray=fakecheckedValues;
+						for(var i=0;i<fakecheckedValues.length;i++){
+							if(fakecheckedValues[i].user.roleId==this.getAttribute('class')){
+								fakecheckedValues.splice(i,1);
+								break;
+							}
+						}
+					}
+				});
+			});
+			
+			    function getGroupMembers(){
+			    	
+				for(var i=0;i<members.length;i++){
+					groupUserId=Number(members[i]);
+					mui.ajax('http://139.159.149.232:8000/zhi/szrole/role/getrole/?userid='+groupUserId,{
+//				data:{
+//					'userid':groupUserId
+//				},
+				headers:{
+					'Content-Type': 'application/json;charset=UTF-8',
+					"Authorization": token
+				},
+				dataType: "json",
+				type: "GET",
+				Timeout: 5000,
+				success: function(data) {
+//					alert(JSON.stringify(data))
+						var group_list=document.getElementById('group_list');
+						var li = document.createElement('li');
+							li.setAttribute('data-tags', ConvertPinyin(data.name));
+							li.setAttribute('data-userid',data.id);
+							li.setAttribute('class', 'mui-table-view-cell mui-indexed-list-item');
+							group_list.appendChild(li);
+							var icon = new Image();
+							icon.src = data.photo;
+							icon.setAttribute('id', data.rid);
+							icon.setAttribute('class', 'icon');
+							li.appendChild(icon);
+							var midpart = document.createElement('div');
+							midpart.setAttribute('class', 'midpart');
+							li.appendChild(midpart);
+							var name = document.createElement('span');
+							name.innerHTML = data.name;
+							midpart.appendChild(name);
+							var location = document.createElement('p');
+							location.innerHTML = '无位置信息';
+							midpart.appendChild(location);
+							var input = document.createElement('input');
+							input.setAttribute('class', 'select');
+							input.setAttribute('type', 'checkbox');
+							li.appendChild(input);
+							if(fakecheckedValues.length>0){
+					for( var y=0;y<fakecheckedValues.length;y++){
+					var same=fakecheckedValues[y].user.roleId;
+					if(data.rid==same){
+						input.checked=true;
+						var url = data.photo;
+						var img = new Image();
+						img.src = url;
+						img.setAttribute('class', data.rid);
+						document.getElementsByClassName('icon_wall')[0].appendChild(img);
+						var count = list.querySelectorAll('input[type="checkbox"]:checked').length;
+					var value = count ? "确认(" + count + ")" : "确认";
+					done.innerHTML = value;
+					}
+				}
+			}
+				},
+				error: function(xhr, type, errorThrown) {
+					alert(xhr.responseText)
+				}
+			})
+				}
+			}
+			getGroupMembers();
+			
+				
+				
+		</script>
+	</body>
+
+</html>
+

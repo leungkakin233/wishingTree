@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<style>
+			a {
+				text-decoration: none !important;
+				color: #FFF !important;
+			}
+			
+			.mui-bar.mui-bar-nav {
+				background-color: #F3F3F3;
+				height: 50px;
+			}
+			
+			.mui-bar.mui-bar-nav a {
+				color: black !important;
+				font-size: 18px;
+				padding-top: 17px;
+			}
+			
+			a>span {
+				font-size: 14px;
+			}
+			
+			button>a {
+				position: absolute;
+				color: #FFFFFF;
+				line-height: 4.0rem;
+			}
+			
+			button {
+				width: 94%;
+				color: #FFFFFF;
+				height: 4.7rem;
+				margin-bottom: 17px;
+				text-align: inherit;
+				border-radius: 8px;
+				margin-left: 3%;
+				font-family: "microsoft yahei";
+				border: none;
+				font-size: 20px;
+			}
+			
+			.button-callPolice {
+				background-color: #EB334D;
+				margin-top: 6%;
+			}
+			
+			.button-callHospital {
+				background-color: #F75B5C;
+			}
+			
+			.button-callFamily {
+				background-color: #D97A4E;
+			}
+			
+			.button-callEnthusiast {
+				background-color: #F59F30;
+			}
+			
+			.button-callForOne {
+				background-color: #E2BE70;
+			}
+			.button-callForOne.emergencylist{
+				background-color: #E2BE70;
+			}
+			.button-callForOne.emergencylist>p{
+				position: absolute;
+				color: #FFFFFF;
+				left: 4.3rem;
+				line-height: 1.0rem !important;
+				top: 1rem;
+			}
+			.button-callForOne.emergencylist>a{
+				position: absolute;
+				color: #FFFFFF;
+				line-height: 1.0rem !important;
+				top: 2.6rem !important;
+			}
+			.hasdata>a{
+				position: absolute;
+				color: #FFFFFF;
+				left: 4.3rem;
+				line-height: 1.0rem !important;
+				top: 1rem;
+			}
+			.hasdata>p{
+				position: absolute;
+				color: #FFFFFF;
+				line-height: 1.0rem !important;
+				left: 4.3rem;
+				top: 2.6rem !important;
+			}
+			.button-add {
+				border-radius: 50%;
+				height: 3.5rem;
+				width: 3.5rem;
+				margin-top: 1.5rem;
+				margin-left: 43.5%;
+				background-image: url(image/add@2x.png);
+				background-size: 100%;
+				border: none;
+			}
+			
+			.mui-popover {
+				position: fixed;
+				height: 100px;
+				width: 60% !important;
+				left: 20% !important;
+				top: 40% !important;
+			}
+			
+			.mui-table-view {
+				text-align: center;
+			}
+			
+			.mui-table-view a {
+				color: #000000 !important;
+			}
+			
+			img {
+				height: 90%;
+				margin-top: 1%;
+			}
+			
+			@media only screen and (max-width: 390px) {
+				button {
+					font-size: 15px;
+				}
+				a>span {
+					font-size: 10px;
+				}
+			}
+		</style>
+
+	</head>
+
+	<body>
+
+		<header class="mui-bar mui-bar-nav">
+			<a id="back" class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left">紧急求助</a>
+			<!--<button id="submit" class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">三</button>-->
+		</header>
+
+		<div class="mui-content">
+			<div class="page-body">
+				<div class="btn-area" id="btngroup">
+					<button id="callPolice" class="button-callPolice"><img src="image/110@2x.png"/><a>紧急电话110<span>·我有困难请求帮助</span></a></button>
+					<button id="callHospital" class="button-callHospital"><img src="image/120@2x.png"/><a>紧急电话120<span>·生病受伤</span></a></button>
+					<button id="callFamily" class="button-callFamily"><img src="image/callfamily@2x.png"/><a>联系家人<span>·我有急事快速联系我的家人</span></a></button>
+					<button id='callEnthusiast' class="button-callEnthusiast"><img src="image/clique@2x.png"/><a>社会救助<span>·我有急事快速联系社会热心人</span></a></button>
+					<button id="callForOne" class="button-callForOne"><img src="image/emergencyphone@2x.png"/><a>紧急电话<span>·有紧急事快速联系第1联系人</span></a></button>
+				</div>
+				<button id="add" class="button-add"></button>
+				<div style="width: 100%;height: 3rem;"></div>
+			</div>
+			<div id="middlePopover" class="mui-popover">
+				<div class="mui-scroll-wrapper">
+					<div class="mui-scroll">
+						<ul class="mui-table-view">
+							<li id="amend" class="mui-table-view-cell">
+								<a href="#">修改</a>
+							</li>
+							<li id="delete" class="mui-table-view-cell">
+								<a href="#">删除</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<script src="js/mui.min.js"></script>
+		<script src="js/commonFunction.js"></script>
+		<script src="js/getuser.js"></script>
+		<script type="text/javascript">
+			var index;
+			var id;
+			var localName;
+			var localPhone;
+			mui.init({
+				gestureConfig: {
+					longtap: true,
+					hold: true,
+					release: true
+				}
+			})
+			
+			//		处理页面跳转
+			document.getElementById("back").addEventListener("tap", function() {
+				if(close()==true){
+					window.JsInterface.closeWindow();
+				}else if(close()==false){
+					window.webkit.messageHandlers.closeWindow.postMessage({});
+				}
+			});
+			
+			document.getElementById("callPolice").addEventListener("tap", function() {
+				var helpid = this.id;
+				if(close()==true){
+					window.JsInterface.openWindow(localurl + "/html/help/callHospitalORpolice.html?helpid=" + helpid);
+				}else if(close()==false){
+					window.webkit.messageHandlers.openWindow.postMessage({url:localurl + "/html/help/callHospitalORpolice.html?helpid=" + helpid});  
+				}
+			});
+			document.getElementById("callHospital").addEventListener("tap", function() {
+				var helpid = this.id;
+				window.JsInterface.openWindow(localurl + "/html/help/callHospitalORpolice.html?helpid=" + helpid);
+			});
+			document.getElementById("callFamily").addEventListener("tap", function() {
+				window.JsInterface.openWindow(localurl + "/html/help/callFamily.html");
+			});
+			document.getElementById("callEnthusiast").addEventListener("tap", function() {
+				window.JsInterface.openWindow(localurl + "/html/help/callEnthusiast.html");
+			});
+			document.getElementById("callForOne").addEventListener("tap", function() {
+				window.JsInterface.openWindow(localurl + "/html/help/callForone.html");
+			});
+			document.getElementById("add").addEventListener("tap", function() {
+				window.JsInterface.openWindow(localurl + "/html/help/callForone.html");
+			});
+
+			//		长按事件
+			mui("body").on('longtap', ".emergencylist", function() {
+				mui('.mui-popover').popover('show'); //显示
+				mui('.mui-popover').popover('hide'); //隐藏
+				mui('.mui-popover').popover('toggle'); //自动识别处理显示隐藏状态
+				id = this.id;
+				index = this.getAttribute('data-index');
+				localName = this.getElementsByTagName('span')[0].innerHTML;
+				localPhone = this.getElementsByTagName('span')[1].innerHTML;
+			})
+			//		删除紧急联系人
+			mui("body").on('tap', "#delete", function() {
+				mui('.mui-popover').popover('hide'); //隐藏
+				mui.confirm('您确定要删除此联系人吗？', function(e) {
+						if(e.index == 1) {
+							mui.ajax('http://139.159.149.232:8000/zhi/contact/person/emergency/', {    
+					data: { 
+						"personid": id,
+						"person": {
+							"first_name": "T_first_name3",
+							"last_name": "the last name",
+							"phones": [{
+								"phone_number": "ss",
+								"name": "test"
+							}],
+							"emails": [{
+								"email_address": "aa@qq.com",
+								"name": "12312"
+							}],
+							"functionitems": [{
+								"name": "123123",
+								"data": "2222"
+							}],
+							"emergency": true
+						}
+					},
+					headers: {
+						'Content-Type': 'application/json;charset=UTF-8',
+						"Authorization": token
+					},
+					    dataType: 'json', //服务器返回json格式数据
+					    type: 'PUT', //HTTP请求类型
+					    timeout: 4000, //超时时间设置为4秒；
+					    success: function(data) {
+						var f = document.getElementById('btngroup');
+						var p = document.getElementById(id);
+						f.removeChild(p);
+						if(document.getElementsByClassName('button-callForOne').length<2) {
+						document.getElementById('callForOne').style.display = 'inline';
+						}
+						mui.toast('删除成功')
+					},
+					    error: function(xhr, type, errorThrown) {         //异常处理；
+						alert(xhr.responseText); 
+					}
+				});
+						} else {
+
+						}
+					})
+			})
+			//		编辑紧急联系人
+			mui("body").on('tap', "#amend", function() {
+				mui('.mui-popover').popover('hide'); //隐藏
+				window.JsInterface.openWindow(encodeURI(localurl + "/html/help/amend.html?id=" + id+'&localName='+localName+'&localPhone='+localPhone+'&index='+index));
+			})
+
+			//		紧急联系人拨号事件
+			mui("body").on('tap', ".button-callForOne", function() {
+				if(this.id != 'callForOne') {
+					var tel = this.getElementsByTagName('span')[1].innerHTML;
+					window.JsInterface.telephoneCall(tel);
+				};
+			})
+
+			//		获取已添加紧急联系人
+			mui.ajax('http://139.159.149.232:8000/zhi/contact/person/?emergency=True',{
+//				data:{},
+				headers:{
+					'Content-Type': 'application/json;charset=UTF-8',
+					"Authorization": token
+				},
+				dataType: "json",
+				type: "GET",
+				Timeout: 5000,
+				success: function(data) {
+//					alert(JSON.stringify(data))
+					var len = data.length;
+					for(var i = 0; i < len; i++) {
+						var btn = document.createElement('button');
+						var btngroup = document.getElementById('btngroup');
+						btn.setAttribute('class', 'button-callForOne emergencylist');
+						btn.setAttribute('id', data[i].id);
+						btn.setAttribute('data-index',i);
+						btngroup.appendChild(btn);
+						btn.innerHTML = '<img src="image/emergencyphone@2x.png"/>' +'<p>紧急联系人&nbsp&nbsp'+'<span style="font-size: 1.1rem;">'+data[i].first_name+'</span>·'+'<span style="font-size: 1.1rem;">'+data[i].phones[0].phone_number+'</span></p>'+'<a><p class="Alist" style="color:white";></p></a>';
+						if(data[i].reminder.length>0){
+							data[i].reminder.length=data[i].reminder.length>3?3:data[i].reminder.length;
+							for(var y=0;y<data[i].reminder.length;y++){
+								var Alist=document.createTextNode('@'+data[i].reminder[y].rolename+' ');
+								btn.getElementsByClassName('Alist')[0].appendChild(Alist);
+							}
+						}
+					}
+					if(document.getElementsByClassName('button-callForOne').length > 1) {
+						var p = document.getElementById('callForOne');
+						p.style.display = 'none';
+					}
+					mui.toast('更新成功')
+				},
+				error: function(xhr, type, errorThrown) {
+					mui.toast('更新失败')
+				}
+			})
+			
+			//		获取家庭联系人
+			mui.ajax('http://139.159.149.232:8000/zhi/contact/person/?family=True',{
+//				data:{},
+				headers:{
+					'Content-Type': 'application/json;charset=UTF-8',
+					"Authorization": token
+				},
+				dataType: "json",
+				type: "GET",
+				Timeout: 5000,
+				success: function(data) {
+//					alert(JSON.stringify(data))
+					if(data.length>0){
+						var callfamily=document.getElementById('callFamily');
+						callfamily.setAttribute('class','button-callFamily hasdata');
+						callfamily.getElementsByTagName('span')[0].innerHTML='		'+data[0].first_name+'·'+data[0].phones[0].phone_number;
+						var p=document.createElement('p');
+						callfamily.appendChild(p);
+						for(var i=0;i<data[0].reminder.length;i++){
+							var Alist=document.createTextNode('@'+data[0].reminder[i].rolename+' ');
+							p.appendChild(Alist);
+						}
+					}
+					
+				},
+				error: function(xhr, type, errorThrown) {
+					mui.toast('更新失败')
+				}
+			})
+			
+			//		获取@列表
+//			mui.ajax('http://139.159.149.232:8000/zhi/contact/reminder/',{
+////				data:{},
+//				headers:{
+//					'Content-Type': 'application/json;charset=UTF-8',
+//					"Authorization": token
+//				},
+//				dataType: "json",
+//				type: "GET",
+//				Timeout: 5000,
+//				success: function(data) {
+////					alert(JSON.stringify(data))
+//					var callPolice=document.getElementById('callPolice');
+//					var p1=document.createElement('p');
+//					var callHospital=document.getElementById('callHospital');
+//					var p2=document.createElement('p');
+//					var callEnthusiast=document.getElementById('callEnthusiast');
+//					var p3=document.createElement('p');
+//					for(var i=0;i<data.length;i++){
+//						if(data[i].rtype==1){
+//							callPolice.setAttribute('class','button-callPolice hasdata');
+//							callPolice.appendChild(p1);
+//							p1.appendChild(document.createTextNode('@'+data[i].rolename+' '));
+//						}
+//						else if(data[i].rtype==2){
+//							callHospital.setAttribute('class','button-callHospital hasdata');
+//							callHospital.appendChild(p2);
+//							p2.appendChild(document.createTextNode('@'+data[i].rolename+' '));
+//						}
+//						else if(data[i].rtype==3){
+//							callEnthusiast.setAttribute('class','button-callEnthusiast hasdata');
+//							callEnthusiast.appendChild(p3);
+//							p3.appendChild(document.createTextNode('@'+data[i].rolename+' '));
+//						}
+//					}
+//				},
+//				error: function(xhr, type, errorThrown) {
+//					mui.toast('更新失败')
+//				}
+//			})
+		</script>
+	</body>
+
+</html>

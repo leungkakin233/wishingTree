@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta name="flexible" content="initial-dpr=2" />
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<title></title>
+		<link href="css/mui.css" rel="stylesheet" />
+		<link href="css/index.css" rel="stylesheet" />
+		<link href="css/loading.css" rel="stylesheet" />
+		<script src="http://g.tbcdn.cn/mtb/lib-flexible/0.3.4/??flexible_css.js,flexible.js"></script>
+		<style type="text/css">
+			[v-cloak] {
+				display: none
+			}
+			
+			html,
+			body {
+				background-color: #efeff4;
+			}
+			/* 指正在点的链接*/
+			
+			.mui-bar {
+				height: 1.12rem;
+			}
+			
+			.mui-bar .mui-icon {
+				padding-top: 0.21rem;
+				font-size: 0.667rem;
+			}
+			
+			.mui-bar .mui-pull-left .mui-icon {
+				padding-right: 5px;
+			}
+			
+			.mui-bar .mui-btn {
+				font-weight: normal;
+				font-size: 17px;
+			}
+			
+			.mui-bar .mui-btn-link {
+				top: 1px;
+			}
+			
+			.mui-segmented-control.mui-scroll-wrapper {
+				height: 1.8rem;
+			}
+			
+			.mui-segmented-control .mui-control-item {
+				line-height: 15px;
+			}
+			
+			.mui-popover.mui-popover-action .mui-table-view {
+				margin: 0px;
+				text-align: center;
+				color: #007aff;
+				border-radius: 4px;
+			}
+			
+			.mui-grid-view.mui-grid-9 .mui-table-view-cell {
+				margin: 0;
+				padding: 11px 0px;
+				vertical-align: top;
+				border-right: 0px;
+				border-bottom: 0px;
+			}
+			
+			.bubble-move1 {}
+			
+			.bubble-move2 {}
+			
+			.bubble-move3 {}
+			
+			.bubble-move4 {}
+			
+			.bubble-move5 {}
+			
+			.bubble-move6 {}
+			
+			@keyframes bmove1 {
+				0% {}
+				100% {
+					top: 1.5rem;
+				}
+			}
+			
+			@keyframes bmove2 {
+				0% {}
+				100% {
+					top: 1.5rem;
+				}
+			}
+			
+			@keyframes bmove3 {
+				0% {}
+				100% {
+					top: 1.5rem;
+				}
+			}
+			
+			@keyframes bmove4 {
+				0% {}
+				100% {
+					top: 1.5rem;
+				}
+			}
+			
+			@keyframes bmove5 {
+				0% {}
+				100% {
+					top: 1.5rem;
+				}
+			}
+			
+			@keyframes bmove6 {
+				0% {}
+				100% {
+					top: 1.5rem;
+				}
+			}
+			
+			@keyframes bubbleclear {
+				from {}
+				to {
+					left: 5rem;
+					top: 6rem;
+					opacity: 0;
+					width: 0;
+					height: 0;
+				}
+			}
+			/* w */
+		</style>
+
+	</head>
+
+	<body>
+
+		<!-- 		<div class="mui-inner-wrap"> -->
+		<header id="header" class="mui-bar  mui-bar-transparent" data-transparent=".mui-content" v-cloak>
+			<!--<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" id="back"></a>-->
+			<div id="back"style="display: inline-block; width: 4.5rem;" >
+				<img id="headImg" src="images/pub_ico_goback_white.png" style="width: .51rem; height: .51rem;margin-top: .31rem; float: left;" />
+			<span class="nav-title" id="headerTitle">{{banner.name}}的许愿树</span>
+			</div>
+			
+			<a id="menu" class="mui-pull-right" href="#topPopover">
+				<img src="images/pub_ico_more_white.png" style="width: .8rem; height: .8rem; display: inline-block; margin-top: .17rem;" id="menuImg" />
+			</a>
+
+			<div class="power-div ">
+				<!-- <a href="item/powerList.html"> -->
+
+				<img :src="banner.img" class="head-img" id="powerlist" v-if="banner.img != null" />
+				<img src="images/qr_head_img_xx.png" class="head-img" id="powerlist" v-else/>
+				<!-- </a> -->
+
+				<p class="power-span" id="points">{{banner.points}}</p>
+
+				<button class="transplant-button" id="transplant">移植</button>
+
+			</div>
+		</header>
+		<div class="mui-content  mui-scroll-wrapper" id="content" v-cloak>
+			<div class="mui-scroll">
+				<ul class="mui-table-view" id="ul">
+					<li>
+						<div class="bg" id="bg">
+							<img src="images/tree_ico_htbg.png" class="htbg" />
+							<img src="images/tree-tree-03.png" class="tree-img" />
+
+							<div class="sun-shadow">
+								<img src="images/tree_ico_ty.png" class="sun" id="sun" />
+							</div>
+							<div class="xsh-shadow">
+								<img src="images/tree_ico_xsh@2x.png" class="xsh" id="xsh" />
+							</div>
+
+							<img src="images/tree_ico_hope@2x.png" class="hope" id="hope" />
+							<img src="images/tree_ico_gdx@2x.png" class="VirtueBox" id="virtueBox" />
+
+							<img src="images/tree_ico_xy@2x.png" class="wish" id="wishing" />
+
+							<!-- <a href="item/map.html"> -->
+							<img src="images/tree_ico_address.png" class="address" id="address" />
+							<!-- 	</a> -->
+							<a href="item/wish.html">
+								<img src="images/tree_ico_shareshop.png" class="shareshop" id="shareshop" />
+							</a>
+							<div id="bubblegroup" class="bubble-group"></div>
+							<div id="ywkgroup" class="ywkgroup">
+								<!-- <div class="label-ywk" id="ywk"></div> -->
+							</div>
+
+						</div>
+					</li>
+
+					<li class="mui-table-view-cell li-title">
+						最新动态
+					</li>
+					<li class="mui-table-view-cell">
+						用来装载收取人的头像和数量
+					</li>
+					<li class="mui-table-view-cell" v-for="log in logList">
+						<div class="mui-row">
+							<div class="mui-table-cell mui-col-xs-4 mui-text-left">
+								<span class="log-name">{{log.user.nickname}}<span>
+							</div>
+							<div class="mui-table-cell mui-col-xs-4 mui-text-left">
+								<span class="log-point">{{log.point}}</span>
+							</div>
+							<div class="mui-table-cell mui-col-xs-4  mui-text-right">
+								<span class="log-time">{{log.time}}</span>
+							</div>
+						</div>
+					</li>
+					
+				</ul>
+			</div>
+		</div>
+		<!-- 		</div> -->
+		<!-- 右上角弹出框 topview -->
+		<div id="topPopover" class="mui-popover top-popover" v-cloak>
+			<div class="mui-popover-arrow"></div>
+			<ul class="mui-table-view" style="margin-top: -8px;">
+				<li class="mui-table-view-cell" id="share">
+					<img src="images/pub_ico_share.png" class="top-popover-icon" style="vertical-align: middle;" />
+					<span class="top-popover-span">分享</span>
+
+				</li>
+				<li class="mui-table-view-cell" id="setting">
+					<img src="images/pub_ico_shezhi.png" class="top-popover-icon" style="vertical-align: middle;" />
+					<span class="top-popover-span">设置</span>
+
+				</li>
+				<li class="mui-table-view-cell" id="favorite">
+					<img src="images/pub_ico_collect_sel.png" class="top-popover-icon" style="vertical-align: middle;" v-if="favoriteFlag" />
+					<img src="images/pub_ico_collect_nor.png" class="top-popover-icon" style="vertical-align: middle;" v-else />
+					<span class="top-popover-span" v-if="favoriteFlag">取消关注</span>
+					<span class="top-popover-span" v-else>关注</span>
+				</li>
+				<li class="mui-table-view-cell">
+					<a href="#" style="margin: 0px; padding: 0px;">
+						<img src="images/pub_ico_gonglue.png" class="top-popover-icon" style="vertical-align: middle;" />
+						<span class="top-popover-span">攻略</span>
+					</a>
+				</li>
+			</ul>
+
+		</div>
+		<!-- 右上角弹出框 -->
+
+		<!-- 分享 -->
+		<div id="forward" class="mui-popover mui-popover-action mui-popover-bottom">
+			<ul class="mui-table-view mui-grid-view mui-grid-9">
+				<li class="mui-table-view-cell mui-media mui-col-xs-3">
+					<a href="javascript:;"><img src="images/share_ico_01who.png" class="img-share" /><br />
+						<p class="share-p">提醒谁看</p>
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-media mui-col-xs-3">
+					<a href="javascript:;"><img src="images/share_ico_02them.png" class="img-share" />
+						<p class="share-p">指定到群组</p>
+					</a>
+
+				</li>
+				<li class="mui-table-view-cell mui-media mui-col-xs-3">
+					<a href="javascript:;"><img src="images/share_ico_03link.png" class="img-share" />
+						<p class="share-p">浏览历史</p>
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-media mui-col-xs-3">
+					<a href="#share"><img src="images/share_ico_04app.png" class="img-share" />
+						<p class="share-p">分享到…</p>
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-col-xs-12">
+					<b>取消</b>
+				</li>
+			</ul>
+		</div>
+		<!-- 分享 -->
+
+		<!-- 分享外部 -->
+		<div id="share" class="mui-popover mui-popover-action mui-popover-bottom">
+			<ul class="mui-table-view mui-grid-view mui-grid-9">
+				<li class="mui-table-view-cell mui-col-xs-12">
+					<div class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control  mui-segmented-control-inverted" style="height: 1.8rem;">
+						<div class="mui-scroll">
+							<a class="mui-control-item"><img src="images/share_ico_02them.png" class="img-share" />
+								<p>指定到群组</p>
+							</a>
+							<a class="mui-control-item"><img src="images/share_ico_02them.png" class="img-share" />
+								<p>指定到群组</p>
+							</a>
+							<a class="mui-control-item"><img src="images/share_ico_03link.png" class="img-share" />
+								<p>指定到群组</p>
+							</a>
+							<a class="mui-control-item"><img src="images/share_ico_02them.png" class="img-share" />
+								<p>指定到群组</p>
+							</a>
+							<a class="mui-control-item"><img src="images/share_ico_02them.png" class="img-share" />
+								<p>指定到群组</p>
+							</a>
+						</div>
+					</div>
+				</li>
+
+				<li class="mui-table-view-cell mui-col-xs-12">
+					<a href="#forward"><b>取消</b></a>
+				</li>
+			</ul>
+		</div>
+		<!-- 分享外部 -->
+
+		<script src="js/mui.js"></script>
+		<script src="js/vue.min.js"></script>
+		<script src="js/wishingTree.js"></script>
+		<script src="js/index.js"></script>
+		<script src="js/native.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" charset="utf-8">
+			var treeUser = null;
+			var user = null;
+			var treeid = null;
+			var token = null;
+			var request = null;
+			//头部所需要资料
+			var header = new Vue({
+				el: '#header',
+				data: {
+					banner: {
+						name: '',
+						points: '',
+						img: ''
+					}, //顶部banner数据
+
+				}
+			});
+			//本体所需资料
+			var content = new Vue({
+				el: '#content',
+				data: {
+					item: {
+
+					},
+					bubbleList: {
+
+					},
+					wishList: {
+
+					},
+					logList: {
+
+					}
+				}
+			});
+			var topPopover = new Vue({
+				el: '#topPopover',
+				data: {
+					favoriteFlag: null,
+
+				}
+			});
+
+			mui.init({
+				swipeBack: false,
+			});
+
+			//让我恶心的a href hover下划线
+
+			//			document.styleSheets[2].cssRules[17].style.textDecoration = 'none';
+
+			//window.onload 结束
+
+			//			alert(location.href)
+
+			(function($) {
+				$('.mui-scroll-wrapper').scroll({
+					indicators: true //是否显示滚动条
+				});
+			})(mui);
+		</script>
+	</body>
+
+</html>

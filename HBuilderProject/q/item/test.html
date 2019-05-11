@@ -1,0 +1,96 @@
+<!doctype html>  
+<html>  
+
+    <head>  
+        <meta charset="UTF-8">  
+        <title></title>  
+        <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />  
+        <link href="../css/mui.css" rel="stylesheet" />  
+        <style type="text/css">  
+            .mui-popover{  
+                position: fixed;  
+                width: 80%;  
+                height: 70%;  
+                border-radius: 0;  
+                left: 50%;  
+                top: 50%;  
+                margin: 0 auto;  
+                z-index: 9999;  
+                background-color: #fff;  
+                -webkit-transform: translateX(-50%) translateY(-50%);  
+                -moz-transform: translateX(-50%) translateY(-50%);  
+                -ms-transform: translateX(-50%) translateY(-50%);  
+                transform: translateX(-50%) translateY(-50%);  
+            }  
+            .mui-popover-arrow{  
+                display: none;  
+            }  
+        </style>  
+    </head>  
+
+    <body>      
+        <div id="pop" class="mui-popover" >  
+            <ul class="mui-table-view">  
+                <li class="mui-table-view-cell"><a href="#">Item1</a></li>  
+                <li class="mui-table-view-cell"><a href="#">Item2</a></li>  
+                <li class="mui-table-view-cell"><a href="#">Item3</a></li>  
+                <li class="mui-table-view-cell"><a href="#">Item4</a></li>  
+                <li class="mui-table-view-cell"><a href="#">Item5</a></li>  
+            </ul>  
+        </div>  
+
+        <a id="openPopover" class="mui-btn mui-btn-primary">打开弹出菜单</a>  
+
+        <script src="../js/mui.js"></script>  
+        <script type="text/javascript">   
+            var pop = document.getElementById("pop");  
+            var mask = mui.createMask(function(){  
+                pop.classList.remove('mui-active');  
+            });  
+            
+            var ssInfoGroup = new Vue({
+				el: '#ssInfoGroup',
+				data: {
+					id: '',//智物id
+					name: '',//智物名称
+					address: '',//地址
+					phonebook: [],//电话
+					workunity: [],//工作单位
+					family : [],//家庭
+					notepad : [],//记事本
+					electronicDrawer : [],//电子抽屉
+					shareStore : [],//分享店
+					securityGuard : [],//安全守护
+					lostSearch : [],//遗失找寻
+					withWho : [],//和谁在一起
+					coupleRegulation : [],//物联调控
+					memberGroup : [],//成员组
+					jobSkill : [],//职位技能
+					scheduleRemind : [],//日程提醒
+					wishingTree : [],//许愿树
+					mobileLocation : [],//移动定位
+					skillMatch : [],//智能匹配
+					personalBelonging : [],//随身物品
+					thumbtack : [],//图钉
+					releaseNews : [],//新闻发布
+					seekHelp : [] ,//求助
+					myCollection : [],//我的收藏
+					menberGroup2 : [],//成员组2
+					companyGroup : [],//单位组
+					linkmanGroup : [],//通讯录组
+					
+				},
+			});
+
+            // 显示  
+            mui('#openPopover')[0].addEventListener('tap',function(){  
+                mask.show();//显示遮罩  
+                pop.classList.add('mui-active');  
+            })  
+            
+            window.onload = function(){
+            	console.log(unescape("\u624b\u673a"));
+            }
+        </script>  
+    </body>  
+</html>  

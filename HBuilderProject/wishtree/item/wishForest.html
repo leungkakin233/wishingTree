@@ -1,0 +1,322 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta name="flexible" content="initial-dpr=2" />
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<title></title>
+		<link href="../css/mui.css" rel="stylesheet" />
+		<script src="http://g.tbcdn.cn/mtb/lib-flexible/0.3.4/??flexible_css.js,flexible.js"></script>
+		<style type="text/css">
+			[v-cloak] {
+				display: none
+			}
+			
+			html,
+			body {
+				background-color: #EFEFF4;
+				height: 100%;
+			}
+			
+			.mui-bar {
+				height: 1.17rem;
+				/*background-color: #3298FF;*/
+				padding-left: 0px;
+			}
+			
+			.mui-bar .mui-icon {
+				padding-top: 0.21rem;
+				font-size: 0.8rem;
+				color: black;
+			}
+			
+			.bar-title {
+				display: inline-block;
+				/*vertical-align: middle;*/
+				/*padding-top: .1rem;*/
+				padding-top: .30rem;
+				font-size: 0.43rem;
+			}
+			
+			.mui-bar-nav~.mui-content {
+				padding-top: 1.17rem;
+			}
+			
+			.ss_info_name {
+				font-size: .27rem;
+				display: inline-block;
+				text-align: right;
+				width: 35%;
+				overflow: hidden;
+				white-space: nowrap;
+				text-overflow: ellipsis;
+				position: absolute;
+				top: 37%;
+				right: .6rem;
+				-webkit-transform: translateY(-50%);
+				transform: translateY(-50%);
+			}
+			
+			.ss_info_number {
+				font-size: .27rem;
+				color: red;
+				display: inline-block;
+				text-align: right;
+				width: 35%;
+				overflow: hidden;
+				white-space: nowrap;
+				text-overflow: ellipsis;
+				position: absolute;
+				top: 60%;
+				right: .48rem;
+				-webkit-transform: translateY(-50%);
+				transform: translateY(-50%);
+			}
+			
+			.ss_info_loc {
+				color: rgba(86, 86, 86, 1);
+				line-height: .75rem;
+				font-size: .27rem;
+			}
+			
+			.ss_info_title {
+				padding-left: .1rem;
+				width: 55%;
+				color: #000000;
+				line-height: .5rem;
+				font-size: .37rem;
+				font-weight: 400;
+			}
+			
+			.lw-p {
+				height: 0.7rem;
+				font-size: 0.35rem;
+				line-height: 0.675rem;
+				color: #3298FF;
+				background-color: #D6EAFF;
+				text-align: center;
+				margin-bottom: 0;
+			}
+			
+			.lw-span {
+				font-size: 0.24rem;
+				line-height: .24rem;
+				margin-top: 0;
+				color: #555555;
+			}
+			
+			.lw-span-right {
+				font-size: 0.24rem;
+				padding-right: 0.4rem;
+				color: #8f8f94;
+			}
+			
+			.lw-img {
+				max-width: 1.33rem;
+				height: 1.33rem;
+				float: left;
+				border: 0;
+				/*margin-left: .24rem;*/
+				margin-right: 0.13rem;
+				outline: none;
+				white-space: nowrap;
+				-webkit-tap-highlight-color: transparent;
+			}
+			
+			.lw-title {
+				font-size: 0.37rem;
+				line-height: 0.4rem;
+				color: #000000;
+				font-weight: 800;
+				word-wrap: break-word;
+				word-break: break-all;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+				width: 7.83rem;
+				height: 0.76rem;
+			}
+			
+			.blue {
+				color: #0062CC;
+			}
+			
+			.mui-segmented-control .mui-control-item.mui-active {
+				color: black;
+				background-color: rgba(255, 255, 255, 0);
+			}
+			
+			.mui-segmented-control {
+				font-size: 15px;
+				font-weight: 400;
+				position: relative;
+				display: table;
+				overflow: hidden;
+				width: 100%;
+				height;
+				table-layout: fixed;
+				border: 0px;
+				border-radius: 3px;
+				background-color: transparent;
+				-webkit-touch-callout: none;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<div style="width: 1.5rem;  float: left; margin-top: .25rem;text-align: center;">
+				<div style="line-height: .5rem;">
+					<span style="font-size: .37rem; ">珠海</span>
+					<img src="../images/lan@2x.png" style="vertical-align: middle; width: .2rem;" />
+					<p style="font-size: .23rem; line-height:.17rem; margin-left: -.35rem;">2km</p>
+				</div>
+
+			</div>
+			<div style="background-color: rgba(255, 255, 255, 0.6); width: 72%; height: .73rem; display: inline-block; margin-top: .226rem; border-radius: .5rem;">
+				<img src="../images/pub_ico_soulan.png" style="width: .4rem; margin-top: .17rem; margin-left: .25rem; margin-right: .15rem;" />
+				<input style="height: .6rem; width: 45%; position: absolute; top: .3rem; font-size: .42rem;" />
+				<!-- width: 4rem;-->
+				<span style="position: absolute; top: .31rem; right: 1.8rem; color: #3298FF; font-size: .27rem; line-height: .56rem;">[许愿树]</span>
+			</div>
+			<a class="mui-action-back  mui-pull-right" id="back"><span class="bar-title">返回</span></a>
+		</header>
+		<div class="mui-content" id="wishlist" v-cloak>
+			<div id="item" class="mui-control-content mui-active">
+				<p class="lw-p">范围内搜索结果有{{totalCount}}个目标</p>
+				<ul class="mui-table-view">
+					<!-- vue循环从这里开始 -->
+					<!--<li class="mui-table-view-cell mui-media">
+						<img class="lw-img" src="../images/tree_ico_ywk1.png">
+						<div class="mui-media-body" style="height: 1.03rem;">
+							<p class="mui-ellipsis ss_info_title">123123123aa</p>
+							<div style="padding-left: .1rem;">
+								<img src="../images/pub_ico_listaddressblus.png" style="width: .27rem; height: .27rem;" />
+								<span class='ss_info_loc mui-ellipsis'>珠海市人民东路585号  [1小时前]</span>
+							</div>
+							<span class="ss_info_name">生命值</span>
+							<span class="ss_info_number">635485k</span>
+						</div>
+					</li>-->
+					<li class="mui-table-view-cell mui-media">
+						
+							<img class="lw-img" src="../images/tree_ico_ywk1.png">
+							<!-- :src="wish.cover" -->
+							<div class="mui-media-body">
+								<p class="mui-h4 lw-title mui-ellipsis-2">1123333333333333333333333333333333333333333333333333333333333333333333333333</p>
+								<div style="line-height: .66rem;">
+									<span class='mui-ellipsis lw-span blue'>123123</span>
+									<span class='mui-ellipsis lw-span'>123123</span>
+									<span class="mui-ellipsis lw-span-right mui-pull-right blue"><span style="color: black;">实现值:</span>123123</span>
+								</div>
+								<div style="line-height: .24rem;">
+									<img src="../images/function_ico_wishtree.png" style="width: .24rem; height: .24rem; vertical-align: bottom;"/>
+									<span class='mui-ellipsis lw-span blue'>123123</span>
+									<img src="../images/pub_ico_mapdz.png" style="width: .24rem; height: .24rem; vertical-align: bottom; "/>
+									<span class='mui-ellipsis lw-span'>123123</span>
+								</div>
+							</div>
+						
+					</li>
+				</ul>
+			</div>
+
+		</div>
+		</div>
+		</div>
+
+		<script src="../js/mui.js"></script>
+		<script src="../js/wishingTree.js"></script>
+		<script src="../js/native.js"></script>
+		<script src="../js/vue.min.js"></script>
+		<script type="text/javascript">
+			var treeid;
+			var wishflag = null; //详情页webview
+			var token = null;
+			//调整样式
+			var mycssstyles;
+			mycssstyles = document.styleSheets[1];
+			mycssstyles.cssRules[17].style.textDecoration = 'none';
+
+			//
+			mui.init({
+				swipeBack: false,
+				// 				pullRefresh: {
+				// 					container: '#wishlist',
+				// 					down: {
+				// 						style: 'circle',
+				// 						offset: '0px',
+				// 						auto: true,
+				// 						callback: pulldownRefresh
+				// 					},
+				// 					up: {
+				// 						contentrefresh: '正在加载...',
+				// 						callback: pullupRefresh
+				// 					}
+				// 				}
+			});
+
+			// 			function pulldownRefresh(){
+			// 				if(window.plus && plus.networkinfo.getCurrentType() === plus.networkinfo.CONNECTION_NONE) {
+			// 					plus.nativeUI.toast('似乎已断开与互联网的连接', {
+			// 						verticalAlign: 'top'
+			// 					});
+			// 					return;
+			// 				}
+			// 			}
+
+			// 			function pullupRefresh(){
+			// 				
+			// 			}
+
+			//请求最新列表信息流
+			// 				mui.getJSON("http://spider.dcloud.net.cn/api/news", data, function(rsp) {
+			// 					mui('#list').pullRefresh().endPulldownToRefresh();
+			// 					if (rsp && rsp.length > 0) {
+			// 						lastId = rsp[0].id; //保存最新消息的id，方便下拉刷新时使用
+			// 
+			// 						if (!minId) { //首次拉取列表时保存最后一条消息的id，方便上拉加载时使用
+			// 							minId = rsp[rsp.length - 1].id;
+			// 						}
+			// 						news.items = convert(rsp).concat(news.items);
+			// 					}
+			// 				});
+			// 
+
+			var wishlist = new Vue({
+				el: '#wishlist',
+				data: {
+					wishes: [], //列表信息流数据,
+					totalCount: 1,
+					pageNumber: 0,
+					pageSize: 20,
+					last: true,
+					totalPages: 1,
+					totalElements: 1,
+					number: 0,
+					size: 20,
+					sort: null,
+					numberOfElements: 1,
+					first: true
+				},
+
+			})
+
+			window.onload = function() {};
+
+			document.getElementById('back').addEventListener('tap', function() {
+				window.JsInterface.closeWindow();
+			});
+
+			(function($) {
+				$('.mui-scroll-wrapper').scroll({
+					indicators: true, //是否显示滚动条
+				});
+			})(mui);
+		</script>
+	</body>
+
+</html>

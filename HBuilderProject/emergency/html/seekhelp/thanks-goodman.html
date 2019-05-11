@@ -1,0 +1,407 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" href="../../css/mui.min.css">
+		<link href="../../css/mui.css" rel="stylesheet" />
+		<style type="text/css">
+			.mui-bar, .mui-bar-nav{
+				background-color: #F3F3F3;
+				height: 50px;
+			}
+			.mui-bar.mui-bar-nav a{
+				color: black;
+				font-size: 18px;
+				padding-top: 17px;
+			}
+			.mui-pull-right{
+				font-size: 18px !important;
+				line-height:50px !important;
+			}
+			.text{
+				width: 92%;
+				margin: 2rem auto;
+			}
+			.text h5{
+				color: #707070;
+			}
+			.text .a2{
+				color: #fb5050;
+			}
+			.text .a1{
+					color: #3298FF;
+			}
+			.title{
+				color: #909090;
+				display: flex;
+				height: 3rem;
+				background-color: #FFFFFF;
+			}
+			.title h5{
+				line-height: 2rem;
+			}
+			.h51{
+				width: 11% !important;
+				
+			}
+			.h52{
+				width: 40%;
+			}
+			.h53{
+				width: 23%;
+			}
+			.h53 p{
+				margin:0;
+			}
+			.h54{
+				width: 23%;
+			}
+			.h51,.h52,.h53,.h54{
+				text-align: center;
+			}
+			.totallist{
+				border-top: 1px solid #ebebeb;
+			}
+			.list{
+				background-color: #FFF;
+				height: 3rem;
+				display: flex;
+				border-bottom: 1px solid #ebebeb;
+			}
+			.mui-input-row.mui-checkbox{
+				width: 11%;
+				height: 100%;
+			}
+			.mui-input-row.mui-checkbox input{
+				line-height: 3rem;
+				padding-left: 0.8rem;
+			}
+			.niceman{
+				display: flex;
+				width: 43%;
+			}
+			.niceman img{
+				height: 2.4rem;
+				margin-top: 0.3rem;
+				margin-left: 7%;
+			}
+			.niceman h5{
+				text-align: center;
+				line-height: 2.5rem;
+				color: #102f75;
+			}
+			.rewardnumber{
+				width:15% ;
+			}
+			.rewardnumber p{
+				color: #ff4242;
+				text-align: center;
+				line-height: 3rem;
+			}
+			.unknow{
+				width: 16%;
+				text-align: center;
+				padding-top: 0.8%;
+			}
+			.unknow img{
+				height: 30%;
+			}
+			.money{
+				width: 15%;
+				text-align: center;
+			}
+			.money h5{
+				color: #ff4242;
+			}
+			.thankslist{
+				width: 92%;
+				margin: 0 auto;
+			}
+			.numberpopover {
+			position:fixed;
+			height: 120px;
+			width: 60% !important;
+			left: 20% !important;
+			top: 40% !important;
+			overflow: hidden;
+			}
+			.button2{
+			width: 100% !important;
+			margin-left: 0 !important;
+			border-radius: 10% !important;
+			border: none;
+			}
+			.mui-numbox{
+			width: 100%;
+			height: 60%;
+			border-style: none;
+			}
+			.mui-btn-numbox-minus,.mui-btn-numbox-plus{
+			width: 30% !important;
+			}
+			.mui-input-numbox{
+			width: 40% !important;
+			}
+			.mui-btn-numbox-minus{
+			margin-left: 0 !important;
+			}
+		</style>
+	</head>
+
+	<body>
+		
+		<header class="mui-bar mui-bar-nav">
+			<a id="back" class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left">求助完成，答谢好心人</a>
+			<span id="submit" class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">提交</span>
+		</header>
+		
+		<div class="mui-content">
+			<div class="text">
+				<h5>提醒：</h5>
+				<h5>&emsp;&emsp;该次求助共有<a class="a1">100个</a>好心人参与帮忙，你有<a class="a2">3500公益打赏积分</a>可以答谢他们。</h5>
+				<h5>&emsp;&emsp;小智已经在规定时间内，将公益打赏积分平分给帮助过您的好心人。</h5>
+			</div>
+		<form class="input-group" action="" method="post">
+			<div class="thankslist">
+				<div class="title">
+					<div class="mui-input-row mui-checkbox h51"> 
+						<input id="selectall" type="checkbox">
+					</div>
+					<h5 class="h52">选择要打赏的好心人</h5>
+					<div class="h53">
+					<p>答谢</p>
+					<p>公益值</p>
+					</div>
+					<h5 class="h54">特别答谢</h5>
+				</div>
+			<div class="totallist">
+				<div class="list" id="5">
+							 <div class="mui-input-row mui-checkbox"> 
+								<input class="subcheck" name="subcheck" type="checkbox">
+							</div>
+							<div class="niceman">
+								<img src="../../image/6.jpg">
+								<h5>小李飞刀</h5>
+							</div>
+							<div class="rewardnumber">
+								<p class="equally">0</p>
+							</div>
+							<div class="unknow">
+								<img src="../../image/pub_ioc_gongyizhi.png" />
+								<p>0</p>
+							</div>
+							<div class="money">
+								<h5>￥</h5>
+								<p>0</p>
+							</div>
+						</div>
+						<div class="list" id="4">
+									<div class="mui-input-row mui-checkbox"> 
+										<input class="subcheck" name="subcheck" type="checkbox">
+									</div>
+									<div class="niceman">
+										<img src="../../image/6.jpg">
+										<h5>小李飞刀</h5>
+									</div>
+									<div class="rewardnumber">
+										<p class="equally">0</p>
+									</div>
+									<div class="unknow">
+										<img src="../../image/pub_ioc_gongyizhi.png" />
+										<p>0</p>
+									</div>
+									<div class="money">
+										<h5>￥</h5>
+										<p>0</p>
+									</div>
+								</div>
+								<div class="list" id="3">
+											<div class="mui-input-row mui-checkbox"> 
+												<input class="subcheck" name="subcheck" type="checkbox">
+											</div>
+											<div class="niceman">
+												<img src="../../image/6.jpg">
+												<h5>小李飞刀</h5>
+											</div>
+											<div class="rewardnumber">
+												<p class="equally">0</p>
+											</div>
+											<div class="unknow">
+												<img src="../../image/pub_ioc_gongyizhi.png" />
+												<p>0</p>
+											</div>
+											<div class="money">
+												<h5>￥</h5>
+												<p>0</p>
+											</div>
+										</div>
+										<div class="list"id="2">
+													<div class="mui-input-row mui-checkbox"> 
+														<input class="subcheck" name="subcheck" type="checkbox">
+													</div>
+													<div class="niceman">
+														<img src="../../image/6.jpg">
+														<h5>小李飞刀</h5>
+													</div>
+													<div class="rewardnumber">
+														<p class="equally">0</p>
+													</div>
+													<div class="unknow">
+														<img src="../../image/pub_ioc_gongyizhi.png" />
+														<p>0</p>
+													</div>
+													<div class="money">
+														<h5>￥</h5>
+														<p>0</p>
+													</div>
+												</div><div class="list" id="1">
+							 <div class="mui-input-row mui-checkbox"> 
+								<input class="subcheck" name="subcheck" type="checkbox">
+							</div>
+							<div class="niceman">
+								<img src="../../image/6.jpg">
+								<h5>小李飞刀</h5>
+							</div>
+							<div class="rewardnumber">
+								<p class="equally">0</p>
+							</div>
+							<div class="unknow">
+								<img src="../../image/pub_ioc_gongyizhi.png" />
+								<p>0</p>
+							</div>
+							<div class="money">
+								<h5>￥</h5>
+								<p>0</p>
+							</div>
+						</div>
+						<div class="list" id="0">
+									<div class="mui-input-row mui-checkbox"> 
+										<input class="subcheck" name="subcheck" type="checkbox">
+									</div>
+									<div class="niceman">
+										<img src="../../image/6.jpg">
+										<h5>小李飞刀</h5>
+									</div>
+									<div class="rewardnumber">
+										<p class="equally">0</p>
+									</div>
+									<div class="unknow">
+										<img src="../../image/pub_ioc_gongyizhi.png" />
+										<p id='extra_award'>0</p>
+									</div>
+									<div class="money">
+										<h5>￥</h5>
+										<p id="cash">0</p>
+									</div>
+								</div>
+					</div>
+				</div>
+			</form>
+			<div id="otherPopover" class="numberpopover mui-popover">
+				<div class="mui-numbox"  data-numbox-min='0'>
+					<button class="mui-btn mui-btn-numbox-minus" type="button">-</button>
+					<input class="mui-input-numbox" type="number" />
+					<button class="mui-btn mui-btn-numbox-plus" type="button">+</button>
+				</div>
+				<div style="display: flex;width: 100%;height: 40%;">
+				<button class="button2">确认</button>
+				</div>
+			</div>
+		</div>
+		
+		<script src="../../js/mui.js"></script>
+		<script src="../../js/commonFunction.js" ></script>
+		<script type="text/javascript">
+			mui.init()
+			
+//			页面关闭
+			document.getElementById("back").addEventListener("tap",function(){
+			if(close()==true){
+					window.JsInterface.closeWindow();
+				}else if(close()==false){
+					window.webkit.messageHandlers.closeWindow.postMessage({});
+				}
+			});
+			
+//			特别打赏
+   		mui("body").on('tap',".unknow,.money",function(){
+   			This=this.children[1];
+			mui('.numberpopover').popover('show');//显示
+			mui('.numberpopover').popover('hide');//隐藏
+			mui('.numberpopover').popover('toggle');//自动识别处理显示隐藏状态
+		})
+   			mui("body").on('tap',".button2",function(){
+			var extra_award=document.getElementsByClassName('mui-input-numbox')[0].value;
+			This.innerHTML=extra_award;
+			if(extra_award>0){
+				This.style.color='#ff0000';
+			}
+			mui('.numberpopover').popover('hide');//隐藏
+		})
+				
+// 			全选框
+      		var cbknum=document.getElementsByClassName('subcheck').length; 
+			var chknum=0; 
+			function checkall(){
+            var ch=document.getElementsByClassName("subcheck");
+            if(document.getElementById("selectall").checked==false){
+                for(var i=0;i<ch.length;i++){
+                    ch[i].checked=true;
+                    ch[i].parentNode.parentNode.children[2].children[0].innerHTML=Math.ceil(3500/cbknum);
+                }
+            }else{
+                for(var i=0;i<ch.length;i++){
+                ch[i].checked=false;
+                ch[i].parentNode.parentNode.children[2].children[0].innerHTML='0';
+                chknum=0;
+                }
+            }
+            }		
+//			全选
+			mui("body").on('tap',"#selectall",function(){
+			checkall();
+		})
+			
+//			单选取消,取消全选
+		mui(".input-group").on("change",".subcheck",function(){
+			getSelectedHelper();
+			if(document.getElementById("selectall").checked){
+				chknum=cbknum;
+			}else{}
+			if(this.checked) 
+			{  
+				chknum++; 
+			}else{ 
+				chknum--;
+				this.parentNode.parentNode.children[2].children[0].innerHTML='0';
+			} 
+			if(cbknum==chknum){ 
+				document.getElementById("selectall").checked=true; 
+			}else{ 
+				document.getElementById("selectall").checked=false; 
+			}
+			}); 
+			
+//			获取被勾选的帮助者
+			function getSelectedHelper() {
+				var arr=new Array;
+				var reqarr=new Array;
+				arr=document.getElementsByClassName('subcheck');
+				for(var i=0;i<arr.length;i++){
+					if(arr[i].checked==true){
+						reqarr.push(arr[i])
+					}
+				}
+				var len=reqarr.length;
+				avgnumber=Math.ceil(3500/len);
+				for(var p=0;p<len;p++){
+					reqarr[p].parentNode.parentNode.children[2].children[0].innerHTML=avgnumber;					
+				}
+			}
+		</script>
+	</body>
+
+</html>

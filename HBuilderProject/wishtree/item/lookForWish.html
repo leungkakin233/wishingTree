@@ -1,0 +1,411 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta name="flexible" content="initial-dpr=2" />
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<title></title>
+		<link href="../css/mui.css" rel="stylesheet" />
+		<script src="http://g.tbcdn.cn/mtb/lib-flexible/0.3.4/??flexible_css.js,flexible.js"></script>
+		<style type="text/css">
+			[v-cloak] {
+				display: none
+			}
+			
+			html,
+			body {
+				background-color: #EFEFF4;
+				height: 100%;
+			}
+			
+			.mui-bar {
+				height: 1.17rem;
+			}
+			
+			.mui-bar .mui-icon {
+				padding-top: 0.21rem;
+				font-size: 0.8rem;
+				color: black;
+			}
+			
+			.bar-title {
+				display: inline-block;
+				vertical-align: middle;
+				line-height: 1.17rem;
+				font-size: 0.43rem;
+			}
+			
+			.mui-bar-nav~.mui-content {
+				padding-top: 1.17rem;
+			}
+			
+			.lw-p {
+				height: 0.7rem;
+				font-size: 0.35rem;
+				line-height: 0.675rem;
+				color: #3298FF;
+				background-color: #D6EAFF;
+				text-align: center;
+				margin-bottom: 0;
+			}
+			
+			.b-select {
+				text-align: center;
+				margin: .15rem .05rem .15rem .1rem;
+				font-size: 0.37rem;
+				font-weight: 500;
+				height: 0.83rem;
+				width: 1.83rem;
+				border-radius: 1.5em;
+			}
+			
+			.lw-span {
+				font-size: 0.24rem;
+				margin-top: 0;
+				color: #8f8f94;
+			}
+			.lw-span-right{
+				font-size: 0.24rem;
+				padding-right: 0.4rem;
+				color: #8f8f94;
+			}
+			
+			.lw-img {
+				max-width: 1.33rem;
+				height:  1.33rem;
+				float: left;
+				border: 0;
+				margin-right: 0.29rem;
+				outline: none;
+				white-space: nowrap;
+				-webkit-tap-highlight-color: transparent;
+			}
+			
+			.lw-title {
+				font-size: 0.37rem;
+				line-height: 0.4rem;
+				color: #000000;
+				font-weight: 600;
+				word-wrap: break-word;
+				word-break: break-all;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+				width: 7.83rem;
+				height: 0.76rem;
+			}
+			
+			.blue {
+				color: #0062CC;
+			}
+			
+			.mui-segmented-control .mui-control-item.mui-active {
+				color: black;
+				background-color: rgba(255, 255, 255, 0);
+			}
+			
+			.mui-segmented-control {
+				font-size: 15px;
+				font-weight: 400;
+				position: relative;
+				display: table;
+				overflow: hidden;
+				width: 100%;
+				height;
+				table-layout: fixed;
+				border: 0px;
+				border-radius: 3px;
+				background-color: transparent;
+				-webkit-touch-callout: none;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<div id="back" style="display: inline-block;">
+				<img src="../images/pub_ico_goback.png" style="width: .51rem; height: .51rem;margin-top: .33rem; float: left;" />
+				<span class="bar-title" >愿望列表</span>
+			</div>
+		</header>
+		<div class="mui-content" id="wishlist" v-cloak>
+			<div id="scroll" class="mui-scroll-wrapper">
+				<div class="mui-scroll">
+					<div style="margin-top: 1.17rem;">
+						<div id="segmentedControl">
+							<button class="b-select" id="all">
+								全部
+							</button>
+							<button class="b-select" id="false">
+								未实现
+							</button>
+							<button class="b-select" id="true">
+								已实现
+							</button>
+						</div>
+					</div>
+
+					<div>
+						<div id="item" class="mui-control-content mui-active">
+							<p class="lw-p">共有{{totalCount}}个愿望</p>
+							<ul class="mui-table-view">
+								<!-- vue循环从这里开始 -->
+								<li class="mui-table-view-cell mui-media" v-for="wish in wishes">
+									<a href="javascript:;" @tap="open_detail(wish)">
+										<img class="lw-img" src="../images/tree_ico_ywk1.png">
+										<!-- :src="wish.cover" -->
+										<div class="mui-media-body">
+											<p class="mui-h4 lw-title mui-ellipsis-2">{{wish.title}}</p>
+											<span class='mui-ellipsis lw-span blue'>{{wish.user.nickname}}</span>
+											<span class='mui-ellipsis lw-span'>{{wish.createTime}}</span>
+											<span class="mui-ellipsis lw-span-right mui-pull-right blue">实现值:{{wish.points}}</span>
+										</div>
+									</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<script src="../js/mui.js"></script>
+		<script src="../js/wishingTree.js"></script>
+		<script src="../js/native.js"></script>
+		<script src="../js/vue.min.js"></script>
+		<script type="text/javascript">
+
+			var treeid = '';
+			var wishflag = null; //详情页webview
+			var token = null;
+			//调整样式
+			var mycssstyles;
+			mycssstyles = document.styleSheets[1];
+			mycssstyles.cssRules[17].style.textDecoration = 'none';
+
+			//
+			mui.init({
+				swipeBack: false,
+				// 				pullRefresh: {
+				// 					container: '#wishlist',
+				// 					down: {
+				// 						style: 'circle',
+				// 						offset: '0px',
+				// 						auto: true,
+				// 						callback: pulldownRefresh
+				// 					},
+				// 					up: {
+				// 						contentrefresh: '正在加载...',
+				// 						callback: pullupRefresh
+				// 					}
+				// 				}
+			});
+
+			// 			function pulldownRefresh(){
+			// 				if(window.plus && plus.networkinfo.getCurrentType() === plus.networkinfo.CONNECTION_NONE) {
+			// 					plus.nativeUI.toast('似乎已断开与互联网的连接', {
+			// 						verticalAlign: 'top'
+			// 					});
+			// 					return;
+			// 				}
+			// 			}
+
+			// 			function pullupRefresh(){
+			// 				
+			// 			}
+
+			//请求最新列表信息流
+			// 				mui.getJSON("http://spider.dcloud.net.cn/api/news", data, function(rsp) {
+			// 					mui('#list').pullRefresh().endPulldownToRefresh();
+			// 					if (rsp && rsp.length > 0) {
+			// 						lastId = rsp[0].id; //保存最新消息的id，方便下拉刷新时使用
+			// 
+			// 						if (!minId) { //首次拉取列表时保存最后一条消息的id，方便上拉加载时使用
+			// 							minId = rsp[rsp.length - 1].id;
+			// 						}
+			// 						news.items = convert(rsp).concat(news.items);
+			// 					}
+			// 				});
+			// 
+
+			var wishlist = new Vue({
+				el: '#wishlist',
+				data: {
+					wishes: [], //列表信息流数据,
+					totalCount: 1,
+					pageNumber: 0,
+					pageSize: 20,
+					last: true,
+					totalPages: 1,
+					totalElements: 1,
+					number: 0,
+					size: 20,
+					sort: null,
+					numberOfElements: 1,
+					first: true
+				},
+
+			})
+
+			
+
+			window.onload = function() {
+				var search = location.search;
+				request = GetRequest(search);
+//				alert(search);
+//				treeid = localStorage.getItem('treeid');
+				treeid = request['treeId'];
+//				alert(treeid)
+				token = getToken();
+				//获得事件参数
+				
+				document.getElementById('all').style.color = '#007aff';
+				
+				tree2002(treeid,2, function(type, data){
+					if(type == 0) {
+						 console.log(JSON.stringify(data.data));
+						 console.log(data.data);
+						wishlist.wishes = data.data.content;
+						for(var i = 0; i < data.data.content.length; i++){
+							wishlist.wishes[i].createTime = getMyDate(data.data.content[i].createTime);
+						}
+//						 alert(JSON.stringify(data.data));
+						// alert(JSON.stringify(wishlist.wishes));
+						wishlist.totalCount = data.data.totalCount;
+						wishlist.pageNumber = data.data.pageNumber;
+						wishlist.pageSize = data.data.pageSize;
+						wishlist.last = data.data.last;
+						wishlist.totalPages = data.data.totalPages;
+						wishlist.totalElements = data.data.totalElements;
+						wishlist.number = data.data.number;
+						wishlist.size = data.data.size;
+						wishlist.sort = data.data.sort;
+						wishlist.numberOfElements = data.data.numberOfElements;
+						wishlist.first = data.data.first;
+					} else {
+						console.log('愿望列表获取失败' + data);
+					}
+				});
+			};
+
+			document.getElementById('false').addEventListener('tap', function() {
+				document.getElementById('true').style.color = '#333';
+				document.getElementById('false').style.color = '#007aff';
+				document.getElementById('all').style.color = '#333';
+				
+				tree2002(treeid, 0, function(type, data){
+					if(type == 0) {
+						wishlist.wishes = data.data.content;
+						for(var i = 0; i < data.data.content.length; i++){
+							wishlist.wishes[i].createTime = getMyDate(data.data.content[i].createTime);
+						}
+						wishlist.totalCount = data.data.totalCount;
+						wishlist.pageNumber = data.data.pageNumber;
+						wishlist.pageSize = data.data.pageSize;
+						wishlist.last = data.data.last;
+						wishlist.totalPages = data.data.totalPages;
+						wishlist.totalElements = data.data.totalElements;
+						wishlist.number = data.data.number;
+						wishlist.size = data.data.size;
+						wishlist.sort = data.data.sort;
+						wishlist.numberOfElements = data.data.numberOfElements;
+						wishlist.first = data.data.first;
+					} else {
+						console.log('愿望列表获取失败' + data);
+					}
+				});
+				
+			});
+
+			document.getElementById('true').addEventListener('tap', function() {
+				document.getElementById('true').style.color = '#007aff';
+				document.getElementById('false').style.color = '#333';
+				document.getElementById('all').style.color = '#333';
+				
+				tree2002(treeid, 1, function(type, data){
+					if(type == 0) {
+//						 console.log(JSON.stringify(data.data));
+						wishlist.wishes = data.data.content;
+						for(var i = 0; i < data.data.content.length; i++){
+							wishlist.wishes[i].createTime = getMyDate(data.data.content[i].createTime);
+						}
+						// alert(JSON.stringify(data.data));
+						// alert(JSON.stringify(wishlist.wishes));
+						wishlist.totalCount = data.data.totalCount;
+						wishlist.pageNumber = data.data.pageNumber;
+						wishlist.pageSize = data.data.pageSize;
+						wishlist.last = data.data.last;
+						wishlist.totalPages = data.data.totalPages;
+						wishlist.totalElements = data.data.totalElements;
+						wishlist.number = data.data.number;
+						wishlist.size = data.data.size;
+						wishlist.sort = data.data.sort;
+						wishlist.numberOfElements = data.data.numberOfElements;
+						wishlist.first = data.data.first;
+					} else {
+						console.log('愿望列表获取失败' + data);
+					}
+				});
+				
+				
+			});
+
+			document.getElementById('all').addEventListener('tap', function() {
+				document.getElementById('true').style.color = '#333';
+				document.getElementById('false').style.color = '#333';
+				document.getElementById('all').style.color = '#007aff';
+				
+				tree2002(treeid,2, function(type, data){
+					if(type == 0) {
+//						 console.log(JSON.stringify(data.data));
+						wishlist.wishes = data.data.content;
+						for(var i = 0; i < data.data.content.length; i++){
+							wishlist.wishes[i].createTime = getMyDate(data.data.content[i].createTime);
+						}
+//						 alert(JSON.stringify(data.data));
+						// alert(JSON.stringify(wishlist.wishes));
+						wishlist.totalCount = data.data.totalCount;
+						wishlist.pageNumber = data.data.pageNumber;
+						wishlist.pageSize = data.data.pageSize;
+						wishlist.last = data.data.last;
+						wishlist.totalPages = data.data.totalPages;
+						wishlist.totalElements = data.data.totalElements;
+						wishlist.number = data.data.number;
+						wishlist.size = data.data.size;
+						wishlist.sort = data.data.sort;
+						wishlist.numberOfElements = data.data.numberOfElements;
+						wishlist.first = data.data.first;
+					} else {
+						console.log('愿望列表获取失败' + data);
+					}
+				});
+			});
+
+			function open_detail(item) {
+				//跳转到愿望详情界面
+//				 alert(JSON.stringify(item));
+				localStorage.setItem('wish', JSON.stringify(item));
+				// alert(localStorage.getItem('wish'));
+//				console.log(item.id);
+				window.JsInterface.openWindow(localurl + '/item/watchWish.html?wishId=' + item.id + '&resId=' + item.res.id);
+
+				// window.JsInterface.openWindow('http://192.168.1.95:8020/wishingTreeMuiRem/item/watchWish.html?treeId='+ treeid);	
+
+			}
+
+			document.getElementById('back').addEventListener('tap', function() {
+				window.JsInterface.closeWindow();
+			});
+
+			(function($) {
+				$('.mui-scroll-wrapper').scroll({
+					indicators: true, //是否显示滚动条
+				});
+			})(mui);
+		</script>
+	</body>
+
+</html>

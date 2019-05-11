@@ -1,0 +1,396 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.css" rel="stylesheet" />
+		<link href="../../css/mui.min.css" rel="stylesheet"/>
+		<link href="../../css/preview.css" rel="stylesheet"/>
+		<style type="text/css">
+				body{
+					background-color: #FFFFFF;
+				}
+				.mui-bar, .mui-bar-nav{
+				background-color: #F3F3F3;
+				height: 50px;
+				}
+				.mui-bar.mui-bar-nav a{
+				color: black;
+				font-size: 18px;
+				padding-top: 17px;
+				}
+				.head-title{
+					font-size: 33px;
+					text-align: center;
+					font-family: MicrosoftYaHei;
+					color: #FF0000;
+					margin-top: 110px;
+					margin-bottom: 50px;
+				}
+				.button1{
+					margin: 60px 1% 0 4%;
+					width: 44%;
+					height: 45px;
+					font-size: 20px;
+					text-align: center;
+					text-decoration: none;
+					display: inline-block;
+					background-color: #CECECE;
+					border-radius: 6px;
+					border: none;
+				}
+				.button2{
+					margin: 60px 0% 0 2%;
+					width: 44%;
+					height: 45px;
+					font-size: 20px;
+					text-align: center;	
+					text-decoration: none;
+					display: inline-block;
+					background-color: #FF0000;
+					color: #FFFFFF;
+					border-radius: 6px;
+					border: none;
+				}
+				.button-group{
+					width: 100%;
+					flex-direction: column;
+					justify-content: flex-start;
+					background-color: #FFFFFF;
+				}
+				.mui-input-row{
+					border-top:1px solid #d8d8d8 ;
+					border-bottom:1px solid #d8d8d8;
+					width: 100%;
+					height: 50px;
+					display: flex;
+					line-height: 100%;
+				}
+				.mui-content{
+					background-color: #FFFFFF;
+				}
+				.mui-input-clear{
+					height: 100% !important;
+					line-height: 50px;
+				}
+				.label{
+					height:100% !important;
+					width: 20% !important;
+					color: #b9b9b9;
+					padding: 0px !important;
+					margin-left: 1rem !important;
+					line-height:50px !important;
+				}
+				#inputlocation{
+					height: 100% !important;
+				}
+				
+				.mui-table-view{
+				height: 3rem !important;
+				line-height: 3rem !important;
+				padding-top: 0px !important;
+			}
+			
+			.mui-table-view>li{
+				height: 3rem;
+				display: flex;
+			}
+			.iconlist{
+				width: 75%;
+				display: flex;
+				height: 3rem;
+				margin-top: 0.3rem;
+				float: right;
+			}
+			.iconlist>img{
+				height: 2.4rem;
+				width: 2.4rem;
+				border-radius: 50%;
+			}
+				
+				.img{
+				line-height: 82%;
+				}
+				.imgbox{
+				margin-right:1.3% ;
+				margin-left:1.3% ;
+				margin-bottom: 3%;
+				height: 4rem;
+				width: 4rem;
+				border: none;
+				position: relative;
+				}
+				.imgbox>.close_icon{
+					position: absolute;
+					width: 0.8rem !important;
+					height: 0.8rem !important;
+					right:0;
+					top: 0;
+				}
+				.imgbox img{
+					height: 4rem;
+					width: 100% !important;
+				}
+				.photowall {
+					height:auto;
+					width: 100%;
+					padding:2.5%;
+					display: flex;
+					flex-wrap: wrap;
+				}	
+		</style>
+	</head>
+
+	<body style="background-color: #FFFFFF;">
+			
+			<header class="mui-bar mui-bar-nav">
+				<a id="back" class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left">紧急求助</a>
+			</header>
+			
+			<div class="mui-content">
+				<div class="content">
+					<div class="head-title">紧急求助热心人</div>	
+					<form @submit="formSubmit" @reset="formReset">			
+						<div>
+							<!-- <div class="description">简述：</div> -->
+							<div class="mui-input-row">
+								<label class="label">简述：</label>
+								<input type="text" class="mui-input-clear" placeholder="简单描述下情况">
+							</div>
+							<div class="mui-input-row" style="border-top:none;">
+								<label class="label">地址：</label>
+								<input id="inputlocation" type="text">
+								<button class="img" style="border-style: none;">
+									<img id="getlocation" src="../../image/location@3x.png">
+								</button>
+							</div>
+							
+							<ul class="mui-table-view" style="border-top:none;">
+								<li class="mui-table-view-cell" style="padding-top: 0px;">
+											<span style='width:20%;height: 3rem !important;line-height: 3rem;color: #909090;'>@谁</span>
+										<div id="friendslist" class="iconlist">
+										</div>
+										<span id="remind" class="mui-navigate-right"></span>
+								</li>
+							</ul>
+							
+							<div id="selectphoto" class="photowall">
+							
+							<div id="exam" class="imgbox">
+							<img id="choosephoto" src="../../image/pub_ico_takephoto.png"/>
+							</div>
+						</div>
+						</div>
+						<div class="button-group">						
+							<button  class="button1" formType="reset">取消</button>
+							<button id="go" class="button2" formType="submit">确定</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		<script src="../../js/mui.js"></script>
+		<script src="../../js/getCurrentLocation.js"></script>
+		<script src="../../js/getuser.js"></script>
+		<script src="../../js/mui.zoom.js"></script>
+		<script src="../../js/mui.previewimage.js"></script>
+		<script src="../../js/uploadphoto.js"></script>
+		<script src="../../js/commonFunction.js"></script>
+		<script src="../../js/http.js"></script>
+		<script type="text/javascript">
+			mui.init()
+			mui.previewImage();
+			var categoryid="4028834c6809d6c7016809d769810003";
+			var cacheArr=[];
+			var reminderList = [];
+			var operation=3;
+			var saveReminderList = [];
+			
+			function localData(){
+					if(localStorage.getItem('title')){
+						document.getElementsByTagName('input')[0].value=localStorage.getItem('title');
+					}
+					if(localStorage.getItem('cachelocation')){
+						document.getElementsByTagName('input')[1].value=localStorage.getItem('cachelocation');
+					}
+					if(localStorage.getItem('arr')){
+						arr=JSON.parse(localStorage.getItem('arr'));
+						function CachepicUploadComplete(data){
+				var len=data.length;
+				for(i=0;i<len;i++){
+					one=data[i];
+					if(arr.length>8){
+						C.style.display='none';
+					}
+					img=new Image();
+					img.src=one;
+					img.setAttribute('data-preview-group','1');
+					img.setAttribute('data-preview-src','');
+					var div=document.createElement('div');
+					div.setAttribute('class','imgbox');
+					var close=document.createElement('img');
+					close.setAttribute('class','close_icon');
+					close.setAttribute('src','../../image/pub_ico_close.png');
+					div.appendChild(close);
+					div.appendChild(img);
+					document.getElementById("selectphoto").insertBefore(div,C);
+				};
+			};
+					CachepicUploadComplete(arr);
+					}
+					
+					if(localStorage.getItem('reminderList')){
+						reminderList=JSON.parse(localStorage.getItem('reminderList'));
+					if(reminderList.length > 0) {
+		document.getElementById('friendslist').innerHTML = null;
+		for(var i = 0; i < reminderList.length; i++) {
+			var img = new Image();
+			var remindObj=new Object();
+			if(reminderList[i].user) {
+				img.src = reminderList[i].user.icon;
+				document.getElementById('friendslist').appendChild(img);
+				remindObj.rtype=operation;
+				remindObj.reminder=reminderList[i].user.userId;
+				remindObj.role=reminderList[i].user.roleId;
+				saveReminderList.push(remindObj)
+			} else if(reminderList[i].group) {
+				img.src = reminderList[i].group.icon;
+				document.getElementById('friendslist').appendChild(img);
+				remindObj.rtype=operation;
+				remindObj.reminder=reminderList[i].group.groupId;
+			}
+		}
+	}
+					}else{
+						//		获取@列表
+			mui.ajax('http://139.159.149.232:8000/zhi/contact/reminder/',{
+//				data:{},
+				headers:{
+					'Content-Type': 'application/json;charset=UTF-8',
+					"Authorization": getToken()
+				},
+				dataType: "json",
+				type: "GET",
+				Timeout: 5000,
+				success: function(data) {
+//					alert(JSON.stringify(data))
+					for(var i=0;i<data.length;i++){
+						var detailObj=new Object();
+						var img=new Image();
+						var Obj=new Object();
+						Obj.user=new Object();
+							if(data[i].rtype==operation){
+							img.src=data[i].roleheader;
+							document.getElementById('friendslist').appendChild(img);
+							Obj.user.roleId=data[i].role;
+							reminderList.push(Obj);
+							detailObj.rtype=operation;
+							detailObj.reminder=data[i].reminder;
+							detailObj.role=data[i].role;
+							saveReminderList.push(detailObj);
+						}
+				}
+					},
+				error: function(xhr, type, errorThrown) {
+					mui.toast('更新失败')
+				}
+			})
+			}
+
+					
+					localStorage.removeItem('title');
+					localStorage.removeItem('cachelocation');
+					localStorage.removeItem('arr');
+					localStorage.removeItem('reminderList');
+				}
+				localData();
+			
+			document.getElementById("back").addEventListener("tap",function(){
+			if(close()==true){
+					window.JsInterface.closeWindow();
+				}else if(close()==false){
+					window.webkit.messageHandlers.closeWindow.postMessage({});
+				}
+			});
+			
+			//获取当前位置
+			if(document.getElementById('inputlocation').value == ''){
+				document.getElementById('inputlocation').value = Address;
+			}
+			
+			//位置定位
+			document.getElementById('getlocation').addEventListener('tap', function() {
+				window.JsInterface.selectAddress();
+			})
+			function onSelectAddressComplete(data){
+//				alert(JSON.stringify(data))
+				longitude = data.longitude;
+				latitude = data.latitude;
+				Address = data.address;
+				document.getElementById("inputlocation").value = Address;
+				country = data.country;
+				province = data.province;
+				city = data.city;
+				county = data.county;
+				street = data.street;
+				hasSpeed = data.hasSpeed;
+				speed = data.speed;
+				hasRadius = data.hasRadius;
+				radius = data.radius;
+				circleRange = data.circleRange;
+			};
+
+			document.getElementsByClassName('button1')[0].addEventListener('tap', function(){
+				window.JsInterface.closeWindow();
+			})
+			
+			//@好友
+			document.getElementsByTagName("li")[0].addEventListener("tap", function() {
+				var title = document.getElementsByTagName('input')[0].value;
+				var cachelocation=document.getElementsByTagName('input')[1].value;
+				localStorage.setItem('title',title);
+				localStorage.setItem('cachelocation',cachelocation);
+				localStorage.setItem('arr',JSON.stringify(arr));
+				window.JsInterface.openWindow(localurl + "/html/whoPermittedToView/selectContactFriends.html");
+			});
+			
+			document.getElementById('go').addEventListener('tap', function(){
+				var item = new Object();
+				var title = document.getElementsByTagName('input')[0].value;
+				item.title = title;
+				item.content = title;
+				item.imageUrlList = arr;
+				if(item.title==""){
+					item.title='社会求助';
+				}
+			IndexsendHelpByCategory(categoryid, item, reminderList, null, function(type, data) {
+					if(type == 0) {
+						var id = data.data.id;
+						var res_id = data.data.res.id;
+//						保存@列表
+
+				SaveReminderListFunction(operation, saveReminderList, function(type, data){
+					if(type == 0) {
+					}
+					else{
+						alert(data);
+					}
+				})
+						
+						mui.confirm('求助信息已发送平台，请前往查看', function(e) {
+							if(e.index == 1) {
+								window.JsInterface.openWindow(localurl + "/html/seekhelp/helpdetail.html?id=" + id + '&res_id=' + res_id);
+							} else {
+
+							}
+						})
+					} else {
+						alert(data);
+					}
+				})
+		})
+		</script>
+	</body>
+
+</html>

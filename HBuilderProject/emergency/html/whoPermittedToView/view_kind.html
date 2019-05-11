@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" href="../../css/mui.min.css">
+		<style type="text/css">
+			.mui-bar, .mui-bar-nav{
+				background-color: #F3F3F3;
+				height: 50px;
+			}
+			.mui-bar.mui-bar-nav a{
+				color: black;
+				font-size: 18px;
+				padding-top: 17px;
+			}
+			.mui-btn.mui-btn-blue.mui-btn-link.mui-pull-right{
+				padding-top: 3px;
+				padding-right: 10px;
+				font-size: 18px;
+			}
+			.mui-table-view{
+				margin-top: 0 !important;
+			}
+			.mui-content {
+				margin-top: 0.4rem;
+				background-color: #FFFFFF;
+			}
+			.mui-collapse-content{
+				margin-top: 0 !important;
+				padding-top: 0 !important;
+				height: auto;
+			}
+			.mui-collapse-content>ul{
+				height: auto;
+				padding-bottom: 0.8rem;
+			}
+			.mui-collapse-content>ul>li{
+				height: 3rem;
+				line-height: 1.8rem;
+				/*display: flex;*/
+				padding-top: 0;
+			}
+			.address_list{
+				/*padding-top: 0.7rem !important;*/
+				line-height: 3rem !important;
+				color: #3298FF;
+			}
+			.mui-table-view-cell.mui-collapse{
+				min-height: 4rem !important;
+				height: auto;
+				padding-right: 0;
+				padding-bottom: 0 !important;
+			}
+			.mui-table-view-cell.mui-collapse>a{
+				height: 4rem;
+				width: 100%;
+				margin-bottom: 0 !important;
+			}
+			.mui-table-view-cell.mui-collapse>a>img{
+				height:50%;
+				float: right;
+				margin-top: 0.5rem;
+			}
+			.icon{
+				height: 2.4rem;
+				width: 2.4rem;
+				vertical-align: bottom;
+				margin-top: 0.3rem;
+				line-height: 3rem;
+			}
+			.nickname{
+				line-height: 0.5rem;
+				vertical-align:50%;
+			}
+			.select{
+				float: right;
+				height: 1.2rem;
+				width: 1.2rem;
+				margin-top: 0.9rem;
+				margin-right: 1.3rem;
+			}
+		</style>
+	</head>
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a id="back" class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left">谁可以看</a>
+			<button id="submit" class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">完成</button>
+		</header>
+		
+		<div class="mui-content">
+			<div id="public" class="mui-table-view-cell mui-collapse true">
+				<a><span>公开</span><img src="../../image/pub_ico_xianzey_dxzhong.png"/><p>所有人可见</p></a>
+			</div>
+			<div id="private" class="mui-table-view-cell mui-collapse true">
+				<a><span>私密</span><img src="../../image/pub_ico_xianzey_nor.png"/><p>仅自己可见</p></a>
+			</div>
+			<div id="GroupShare" class="mui-table-view-cell mui-collapse true">
+				<a><span>群分享</span><img src="../../image/pub_ico_xianzey_nor.png"/><p>选中的群朋友可见</p></a>
+				<div class="mui-collapse-content">
+					<ul id="group_list" class="mui-table-view">
+						
+					</ul>
+				</div>
+			</div>
+			<div id="Share" class="mui-table-view-cell mui-collapse true">
+				<a><span>部分可见</span><img src="../../image/pub_ico_xianzey_nor.png"/><p>选中的朋友可见</p></a>
+				<div class="mui-collapse-content">
+					<ul class="mui-table-view star">
+						<!--<li class="mui-table-view-cell select_list" data-status='true'>
+							<img class="icon" src="../../image/2.jpg"/>
+							<span class="nickname">范冰冰</span>
+							<img class="select" src="../../image/pub_ico_xienzef_sel.png"/>
+						</li>
+						<li class="mui-table-view-cell select_list" data-status='true'>
+							<img class="icon" src="../../image/2.jpg"/>
+							<span class="nickname">范冰冰</span>
+							<img class="select" src="../../image/pub_ico_xienzef_sel.png"/>
+						</li>-->
+						<li class="mui-table-view-cell address_list enter">从好友列表选择</li>
+					</ul>
+					
+				</div>
+			</div>
+			<div id="NotShare" class="mui-table-view-cell mui-collapse false">
+				<a><span>不给谁看</span><img src="../../image/pub_ico_xianzey_nor.png"/><p>选中的朋友不可见</p></a>
+				<div class="mui-collapse-content">
+					<ul class="mui-table-view star">
+						<li class="mui-table-view-cell address_list enter">从好友列表选择</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/getuser.js"></script>
+		<script src="../../js/commonFunction.js"></script>
+		<script type="text/javascript">
+			
+			var whiteListKind;
+			var title;
+			
+			if(localStorage.getItem('whichChoose')){
+				var whichChoose=localStorage.getItem('whichChoose');
+				var This=document.getElementById(whichChoose);
+				if(!This.classList.contains('mui-active')){
+					This.classList.add('mui-active');
+					var len=document.getElementsByClassName('mui-table-view-cell mui-collapse').length;
+					for(var i=0;i<len;i++){
+					document.getElementsByClassName('mui-table-view-cell mui-collapse')[i].getElementsByTagName('img')[0].src="../../image/pub_ico_xianzey_nor.png";
+				}
+				This.getElementsByTagName('img')[0].src='../../image/pub_ico_xianzey_dxzhong.png';
+				}
+				if(This.classList.contains('true')){
+					whiteListKind=true;
+				}else if(This.classList.contains('false')){
+					whiteListKind=false;
+				}
+			}else{
+				var whichChoose='public';
+				document.getElementById('public').classList.add('mui-active');
+				whiteListKind=true;
+			}
+			
+			if(!localStorage.getItem('fakecheckedValues')){
+				var fakecheckedValues=[];
+			}else{
+				var fakecheckedValues=JSON.parse(localStorage.getItem('fakecheckedValues'));
+//				alert(JSON.stringify(fakecheckedValues))
+			}
+			
+			if(localStorage.getItem('GroupArray')){
+				var GroupArray=JSON.parse(localStorage.getItem('GroupArray'));
+//				alert(JSON.stringify(GroupArray))
+			}else{
+				var GroupArray=[];
+			}
+			
+			
+			//			页面关闭
+			document.getElementById("back").addEventListener("tap",function(){
+			if(close()==true){
+					window.JsInterface.closeWindow();
+				}else if(close()==false){
+					window.webkit.messageHandlers.closeWindow.postMessage({});
+				}
+			});
+			
+			//			确认选择
+			document.getElementById("submit").addEventListener("tap",function() {
+//				把选中数据放入数组
+
+				if(whichChoose!=null){
+					if(whichChoose=='GroupShare'){
+						document.getElementById('GroupShare').querySelectorAll('li').forEach(function(item){
+							if(item.getAttribute('data-status')=='true'){
+							var fakeObj=new Object();
+							fakeObj.group=new Object();
+							fakeObj.group.userId=item.getAttribute('data-owner');
+							fakeObj.group.name=item.getElementsByTagName('span')[0].innerText;
+							fakeObj.group.groupId=item.getAttribute('data-groupid');
+							fakeObj.group.icon=item.getElementsByClassName('icon')[0].src;
+							if(whiteListKind=='true'){
+								fakeObj.whiteList = true;
+							}else{
+								fakeObj.whiteList = false;
+							}
+							GroupArray.push(fakeObj);
+							}
+						})
+						localStorage.setItem('GroupArray',JSON.stringify(GroupArray));
+					}else if(whichChoose=='Share'){
+						document.getElementById('Share').querySelectorAll('.friends').forEach(function(item){
+							if(item.getAttribute('data-status')=='true'){
+							var fakeObj=new Object();
+							fakeObj.user=new Object();
+							fakeObj.user.userId=item.getAttribute('data-userid');
+							fakeObj.user.nickname=item.getElementsByTagName('span')[0].innerText;
+							fakeObj.user.roleId=item.getAttribute('data-roleid');
+							fakeObj.user.icon=item.getElementsByClassName('icon')[0].src;
+							if(whiteListKind=='true'){
+								fakeObj.whiteList = true;
+							}else{
+								fakeObj.whiteList = false;
+							}
+							if(fakecheckedValues.length>0){
+							for(var i=0;i<fakecheckedValues.length;i++){
+								if(fakecheckedValues[i].user.roleId!=fakeObj.user.roleId&&i==fakecheckedValues.length-1){
+										fakecheckedValues.push(fakeObj);
+								}else if(fakecheckedValues[i].user.roleId==fakeObj.user.roleId){
+									break;
+								}
+							}
+							}else{
+								fakecheckedValues.push(fakeObj);
+							}
+							}
+						})
+						localStorage.setItem('fakecheckedValues',JSON.stringify(fakecheckedValues));
+						localStorage.setItem('GroupArray',JSON.stringify(GroupArray));
+					}else if(whichChoose=='NotShare'){
+						document.getElementById('NotShare').querySelectorAll('.friends').forEach(function(item){
+							if(item.getAttribute('data-status')=='true'){
+							var fakeObj=new Object();
+							fakeObj.user=new Object();
+							fakeObj.user.userId=item.getAttribute('data-userid');
+							fakeObj.user.nickname=item.getElementsByTagName('span')[0].innerText;
+							fakeObj.user.roleId=item.getAttribute('data-roleid');
+							fakeObj.user.icon=item.getElementsByClassName('icon')[0].src;
+							if(whiteListKind=='true'){
+								fakeObj.whiteList = true;
+							}else{
+								fakeObj.whiteList = false;
+							}
+							if(fakecheckedValues.length>0){
+							for(var i=0;i<fakecheckedValues.length;i++){
+								if(fakecheckedValues[i].user.roleId!=fakeObj.user.roleId&&i==fakecheckedValues.length-1){
+										fakecheckedValues.push(fakeObj);
+								}else if(fakecheckedValues[i].user.roleId==fakeObj.user.roleId){
+									break;
+								}
+							}
+							}else{
+								fakecheckedValues.push(fakeObj);
+							}
+							}
+						})
+						localStorage.setItem('fakecheckedValues',JSON.stringify(fakecheckedValues));
+						localStorage.setItem('GroupArray',JSON.stringify(GroupArray));
+					}
+				}else{
+					
+				}
+//				合并数组
+				var SecondArray1=new Array;
+				SecondArray1=fakecheckedValues;
+				if(GroupArray.length>0){
+					for(var i=0;i<GroupArray.length;i++){
+					SecondArray1.push(GroupArray[i]);
+				}
+				}
+				var SecondArray=new Object();
+				SecondArray.title=localStorage.getItem('title');
+				SecondArray.list=SecondArray1;
+//				alert(JSON.stringify(SecondArray))
+				localStorage.setItem('SecondArray',JSON.stringify(SecondArray));
+				localStorage.removeItem('fakecheckedValues');
+				localStorage.removeItem('GroupArray');
+				localStorage.removeItem('title');
+				window.JsInterface.onPrivacySelectComplete(JSON.stringify(SecondArray));
+//				window.JsInterface.closeWindow(true);
+			})
+			
+			//			通讯录选择
+			mui(".mui-content").on('tap',".mui-table-view-cell.address_list", function() {
+			window.JsInterface.openWindow(localurl+'/html/whoPermittedToView/selectContactFriends.html?whiteListKind='+whiteListKind);
+			});
+			
+			//			单选效果
+			mui(".mui-content").on('tap',".mui-collapse", function() {
+				title=this.getElementsByTagName('span')[0].innerHTML;
+				localStorage.setItem('title',title);
+				if(whichChoose!=null){
+					if(whichChoose==this.getAttribute('id')){
+						
+					}else{
+						fakecheckedValues=[];
+						GroupArray=[];
+						localStorage.removeItem('fakecheckedValues');
+						localStorage.removeItem('GroupArray');
+						document.querySelectorAll('.select').forEach(function(item){
+							item.parentNode.setAttribute('data-status', 'false');
+							item.src='../../image/pub_ico_xienzef_nor.png';
+						})
+					}
+					whichChoose=this.getAttribute('id');
+					localStorage.setItem('whichChoose',whichChoose);
+				}else{
+					whichChoose=this.getAttribute('id');
+					localStorage.setItem('whichChoose',whichChoose);
+				}
+				if(this.classList.contains('true')){
+					whiteListKind=true;
+				}else if(this.classList.contains('false')){
+					whiteListKind=false;
+				}
+				var len=document.getElementsByClassName('mui-table-view-cell mui-collapse').length;
+				for(var i=0;i<len;i++){
+					document.getElementsByClassName('mui-table-view-cell mui-collapse')[i].getElementsByTagName('img')[0].src="../../image/pub_ico_xianzey_nor.png";
+				}
+				this.getElementsByTagName('img')[0].src='../../image/pub_ico_xianzey_dxzhong.png';
+			})
+			
+			//			复选效果
+			
+			mui(".mui-collapse-content").on('tap',".select_list", function() {
+				if(this.getAttribute('data-status') == 'false') {
+							this.children[2].src = '../../image/pub_ico_xienzef_sel.png';
+							this.setAttribute('data-status', 'true');
+							if(this.classList.contains('selectCompelete_group')){
+								var fakeObj=new Object();
+							fakeObj.group=new Object();
+							fakeObj.group.userId=this.getAttribute('data-userid');
+							fakeObj.group.name=this.getElementsByTagName('span')[0].innerText;
+							fakeObj.group.groupId=this.getAttribute('data-groupid');
+							fakeObj.group.icon=this.getElementsByClassName('icon')[0].src;
+							if(whiteListKind=='true'){
+								fakeObj.whiteList = true;
+							}else{
+								fakeObj.whiteList = false;
+							}
+							if(GroupArray.length>0){
+							for(var i=0;i<GroupArray.length;i++){
+								if(GroupArray[i].group.groupId!=fakeObj.group.groupId&&i==GroupArray.length-1){
+										GroupArray.push(fakeObj);
+								}else if(GroupArray[i].group.groupId==fakeObj.group.groupId){
+									break;
+								}
+							}
+							}else{
+								GroupArray.push(fakeObj);
+							}
+							}
+						} else if(this.getAttribute('data-status') == 'true') {
+							this.children[2].src = '../../image/pub_ico_xienzef_nor.png';
+							this.setAttribute('data-status', 'false');
+							if(this.classList.contains('selectCompelete_friends')){
+								if(fakecheckedValues.length>0){
+						for(var i=0;i<fakecheckedValues.length;i++){
+							if(fakecheckedValues[i].user.roleId==this.getAttribute('data-roleid')){
+								fakecheckedValues.splice(i,1);
+								break;
+							}
+						}
+					}
+							}else if(this.classList.contains('selectCompelete_group')){
+								if(GroupArray.length>0){
+						for(var i=0;i<GroupArray.length;i++){
+							if(GroupArray[i].group.groupId==this.getAttribute('data-groupid')){
+								GroupArray.splice(i,1);
+								break;
+							}
+						}
+					}
+							}
+						}
+			})
+			
+			function getMyStar(){
+				mui.ajax('http://139.159.149.232:8000/zhi/friendship/friend/?star=True',{
+//				data:{},
+				headers:{
+					'Content-Type': 'application/json;charset=UTF-8',
+					"Authorization": token
+				},
+				dataType: "json",
+				type: "GET",
+				Timeout: 5000,
+				success: function(data) {
+//					alert(JSON.stringify(data))
+					if(data.length>0){
+						var ul=document.querySelectorAll('.mui-table-view.star');
+						for(var y=0;y<2;y++){
+							for(var i=0;i<data.length;i++){
+					var friendlist=ul[y].getElementsByClassName('mui-table-view-cell address_list enter')[0];
+					var li=document.createElement('li');
+					li.setAttribute('class','mui-table-view-cell select_list friends');
+					li.setAttribute('data-status','false');
+					li.setAttribute('data-userid',data[i].to_user);
+					li.setAttribute('data-roleid',data[i].touserrole);
+					ul[y].insertBefore(li,friendlist);
+					var img=new Image();
+					img.setAttribute('class','icon');
+					img.src=data[i].touserphoto;
+					li.appendChild(img);
+					var span=document.createElement('span');
+					span.setAttribute('class','nickname');
+					span.innerHTML=data[i].tousername;
+					li.appendChild(span);
+					var selectIcon=new Image();
+					selectIcon.setAttribute('class','select');
+					selectIcon.src='../../image/pub_ico_xienzef_nor.png';
+					li.appendChild(selectIcon);
+					}
+						}
+					}
+				},
+				error: function(xhr, type, errorThrown) {
+					mui.toast('更新失败')
+				}
+			})
+			}
+			
+			function getMyGroup(){
+				mui.ajax('http://139.159.149.232:8000/zhi/group/team/',{
+//				data:{},
+				headers:{
+					'Content-Type': 'application/json;charset=UTF-8',
+					"Authorization": token
+				},
+				dataType: "json",
+				type: "GET",
+				Timeout: 5000,
+				success: function(data) {
+//					alert(JSON.stringify(data))
+					for(var i=0;i<data.length;i++){
+						var group_list=document.getElementById('group_list');
+						var li=document.createElement('li');
+						li.setAttribute('class','mui-table-view-cell select_list Group');
+						li.setAttribute('data-status','false');
+						li.setAttribute('data-userid',data[i].id);
+						li.setAttribute('data-groupid',data[i].owner);
+						group_list.appendChild(li);
+						var avatar=new Image();
+						avatar.setAttribute('class','icon');
+						if(data[i].websites[0]){
+							avatar.src=data[i].websites[data[i].avatarIndex].url;
+						}else{
+							avatar.src='../../image/Group_defaultAvatar.png';
+						}
+						li.appendChild(avatar);
+						var name=document.createElement('span');
+						name.setAttribute('class','nickname');
+						name.innerHTML=data[i].name;
+						li.appendChild(name);
+						var select=new Image();
+						select.setAttribute('class','select');
+						select.src='../../image/pub_ico_xienzef_nor.png';
+						li.appendChild(select);
+					}
+					
+				},
+				error: function(xhr, type, errorThrown) {
+					mui.toast('更新失败')
+				}
+			})
+			}
+			
+			function selectedDisplay(){
+				if(fakecheckedValues.length>0){
+				for(var i=0;i<fakecheckedValues.length;i++){
+					if(!fakecheckedValues[i].group){
+						var li=document.createElement('li');
+					li.setAttribute('class','mui-table-view-cell select_list friends selectCompelete_friends');
+					li.setAttribute('data-status','true');
+					li.setAttribute('data-userid',fakecheckedValues[i].user.userId);
+					li.setAttribute('data-roleid',fakecheckedValues[i].user.roleId);
+					ul.appendChild(li);
+					var img=new Image();
+					img.setAttribute('class','icon');
+					img.src=fakecheckedValues[i].user.icon;
+					li.appendChild(img);
+					var span=document.createElement('span');
+					span.setAttribute('class','nickname');
+					span.innerHTML=fakecheckedValues[i].user.nickname;
+					li.appendChild(span);
+					var selectIcon=new Image();
+					selectIcon.setAttribute('class','select');
+					selectIcon.src='../../image/pub_ico_xienzef_sel.png';
+					li.appendChild(selectIcon);
+					}
+				}
+			}
+				if(GroupArray.length>0){
+					for(var i=0;i<GroupArray.length;i++){
+						var li=document.createElement('li');
+						li.setAttribute('class','mui-table-view-cell select_list Group selectCompelete_group');
+						li.setAttribute('data-status','true');
+						li.setAttribute('data-userid',GroupArray[i].group.userId);
+						li.setAttribute('data-groupid',GroupArray[i].group.groupId);
+						ul.appendChild(li);
+						var avatar=new Image();
+						avatar.setAttribute('class','icon');
+//						if(!GroupArray[i].group.icon==null){
+							avatar.src=GroupArray[i].group.icon;
+//						}else{
+//							avatar.src='../../image/Group_defaultAvatar.png';
+//						}
+						li.appendChild(avatar);
+						var name=document.createElement('span');
+						name.setAttribute('class','nickname');
+						name.innerHTML=GroupArray[i].group.name;
+						li.appendChild(name);
+						var select=new Image();
+						select.setAttribute('class','select');
+						select.src='../../image/pub_ico_xienzef_sel.png';
+						li.appendChild(select);
+					}
+				}
+			}
+			
+			getMyGroup();
+			getMyStar();
+			
+			if(whiteListKind==true){
+				var ul=document.getElementsByClassName('mui-table-view star')[0];
+				selectedDisplay();
+			}else if(whiteListKind==false){
+				var ul=document.getElementsByClassName('mui-table-view star')[1];
+				selectedDisplay();
+			}
+			
+			
+		</script>
+	</body>
+</html>

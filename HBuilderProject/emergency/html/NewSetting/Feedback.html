@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/feedback.css" />
+		<title></title>
+		<style type="text/css">
+			.mui-bar, .mui-bar-nav{
+				background-color: #F3F3F3;
+				height: 50px;
+			}
+			.mui-bar.mui-bar-nav a{
+				color: black;
+				font-size: 18px;
+				padding-top: 17px;
+			}
+			.mui-btn.mui-btn-blue.mui-btn-link.mui-pull-right{
+				padding-top: 3px;
+				padding-right: 10px;
+				font-size: 18px;
+			}
+			.Tips{
+				height: 40px;
+			}
+			div>p{
+				font-size: 17px;
+				padding-left: 18px;
+				color: #959595;
+				padding-top: 10px;
+			}
+			.mui-card{
+				width:100%;
+				margin-left:0px;
+			}
+			.mui-input-row.mui-checkbox.mui-left{
+				height: 53px;
+				padding-top: 9px;
+			}
+			.mui-card input{
+				padding-top: 9px;
+			}
+			.mui-input-clear.question{
+				height: 130px;
+			}
+			.selectphoto{
+				background-color: #ffffff;
+				margin-top: 20px;
+				height: 8rem;
+			}
+			.selectphoto p{
+				color: black;
+			}
+			.selectphoto img{
+				padding-left: 17px;
+				height: 4rem;
+				width: 19%;
+			}
+		
+		</style>
+	</head>
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a id="back" class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left">意见反馈</a>
+			<button id="submit" class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">提交</button>
+		</header>
+		<div class="mui-content">
+			<div class="placeholder">
+				<p style="padding-top: 23px;">（必选）您想反馈的问题类型</p>
+			</div>
+			<div class="mui-card">
+				<form class="mui-input-group">
+					<div id="dysfunction" class="mui-input-row mui-checkbox mui-left">
+						<label>功能异常：功能故障或不可用</label>
+						<input name="dysfunction" value="Item 1" type="checkbox">
+					</div>
+					<div id="suggestion" class="mui-input-row mui-checkbox mui-left">
+						<label>产品建议：用的不爽，我有建议</label>
+						<input name="suggestion" value="Item 2" type="checkbox">
+					</div>
+					<div id="other" class="mui-input-row mui-checkbox mui-left">
+						<label>其他问题</label>
+						<input name="other" value="Item 3" type="checkbox">
+					</div>
+				</form>
+			</div>
+			<div class="Tips">
+				<p style="padding-top:10px;">请补充详细问题和意见</p>
+			</div>
+			<div class="row mui-input-row">
+				<textarea id='question' class="mui-input-clear question" placeholder="请输入不少于十个字的描述" maxlength="240"></textarea>
+			</div>
+			<div id="selectphoto" class="selectphoto">
+				<p>请提供相关问题的截图或照片</p>
+				<img id="choosephoto" src="../../image/pub_ico_takephoto.png"/>
+			</div>
+		</div>
+		
+		
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/commonFunction.js" ></script>
+		<script type="text/javascript">
+			mui.init();
+			mui('.mui-scroll-wrapper').scroll();
+			
+//			页面关闭
+			document.getElementById("back").addEventListener("tap",function(){
+			if(close()==true){
+					window.JsInterface.closeWindow();
+				}else if(close()==false){
+					window.webkit.messageHandlers.closeWindow.postMessage({});
+				}
+			});
+			
+//			复选框选中事件
+			mui("form").on("tap",'#dysfunction',function (){
+				dy=this.children[1].checked;
+				if(dy==false){
+					dy=true;
+				}
+				else{
+					dy=false;
+				}
+			});
+			mui("form").on("tap",'#suggestion',function (){
+				su=this.children[1].checked;
+				if(su==false){
+					su=true;
+				}
+				else{
+					su=false;
+				}
+			});
+			mui("form").on("tap",'#other',function (){
+				ot=this.children[1].checked;
+				if(ot==false){
+					ot=true;
+				}
+				else{
+					ot=false;
+				}
+			});
+			
+//			选择照片
+			document.getElementById('choosephoto').addEventListener('tap', function() {
+				window.JsInterface.selectImages(4);
+			})
+			arr=new Array;
+			function picUploadComplete(data){
+				var len=data.length;
+				for(i=0;i<len;i++){
+					arr.push({"photo":data[i].data}); 
+					one=data[i].url;
+					var img=new Image();
+					img.src=one;
+					document.getElementById("selectphoto").appendChild(img);
+				};
+			};
+			
+			document.getElementById("submit").addEventListener("tap",function(){
+				var question=document.getElementById('question').value;
+				alert(dy+su+ot)
+				mui.ajax('http://111.230.54.111:8000/zhi/setup/feedback/',{
+			    data:{
+					'dysfunction':dy,
+					'suggestion':su,
+					'other':ot,
+					'supplement':question,
+					'photo':arr
+				},
+				headers:{
+					'Content-Type': 'application/json;charset=UTF-8',
+				"Authorization": 'token 8c64f8bfcbe64527dac2f502b1cd5f96483e1aa1'},
+				user:{"userId":"2"},
+			    dataType:'json',//服务器返回json格式数据
+			    type:'post',//HTTP请求类型
+			    timeout:4000,//超时时间设置为4秒；
+			    success:function(data){
+			        //服务器返回响应，根据响应结果，分析是否登录成功；
+					alert('成功！')
+					
+			    },
+			    error:function(xhr,type,errorThrown){
+			        //异常处理；
+			        alert ('上传失败');
+			    }
+			});
+			});
+		</script>
+	</body>
+</html>

@@ -1,0 +1,369 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.css" rel="stylesheet"/>
+		<link href="../../css/mui.min.css"  rel="stylesheet">
+		<link href="../../css/mui.indexedlist.css" rel="stylesheet" />
+		<style type="text/css">
+			.mui-bar, .mui-bar-nav{
+				background-color: #F3F3F3;
+				height: 50px;
+			}
+			.mui-bar.mui-bar-nav a{
+				color: black;
+				font-size: 18px;
+				padding-top: 17px;
+			}
+			.mui-slider-indicator.mui-segmented-control.mui-segmented-control-inverted{
+				background-color: #ffffff;
+				height: 3.5rem;
+				margin-top: 0.4rem;
+				padding-top: 0.5rem;
+				vertical-align: middle;
+			}
+			.display{
+				display: flex;
+				background-color: #FFF;
+				height:5rem;
+			}
+			.number1,.number2{
+				width: 50%;
+				text-align: center;
+				vertical-align: middle;
+				padding-top: 1rem;
+				border-top: 1px solid #c4c4c4;
+			}
+			.number1 p,.number2 p{
+				color: red;
+			}
+			.number2{
+				border-left: 1px solid #c4c4c4;
+			}
+			.title{
+				color: #909090;
+				display: flex;
+				height: 0.5rem;
+			}
+			.title h5{
+			/* 	padding-left: 4%;
+				padding-right: 3.2%; */
+			}
+			.h51{
+				width: 20%;
+			}
+			.h52{
+				width: 29%;
+			}
+			.h53{
+				width: 25%;
+			}
+			.h55{
+				width: 30%;
+				padding-left: 19%;
+			}
+			.h56{
+				width: 40%;
+			}
+			.h57{
+				width: 30%;
+			}
+			.h51,.h52,.h53,.h56,.h57{
+				text-align: center;
+			}
+			.totallist{
+				margin-top: 1rem;
+			}
+			.list{
+				background-color: #FFF;
+				height: 3rem;
+				display: flex;
+				border-bottom: 1px #ebebeb solid;
+			}
+			/* .list li{
+				height: 3rem;
+				width: 100%;
+				background-color: #000000;
+			} */
+			.time{
+				width: 20%;
+				height: 100%;
+			}
+			.time h5{
+				font-size: 0.7rem;
+				text-align: center;
+				padding-top: 0.3rem;
+			}
+			.time p{
+				color: #565656;
+				text-align: center;
+			}
+			.niceman{
+				display: flex;
+				width: 34%;
+			}
+			.niceman img{
+				height: 2.4rem;
+				margin-top: 0.3rem;
+				margin-left: 0.7rem;
+			}
+			.niceman h5{
+				text-align: center;
+				line-height: 2.5rem;
+				color: #102f75;
+			}
+			.rewardnumber{
+				width:15% ;
+			}
+			.rewardnumber p{
+				color: #ff4242;
+				text-align: center;
+				line-height: 3rem;
+			}
+			.unknow{
+				width: 16%;
+				text-align: center;
+				padding-top: 0.5%;
+			}
+			.unknow img{
+				height: 30%;
+			}
+			.money{
+				width: 15%;
+				text-align: center;
+			}
+			.money h5{
+				color: #ff4242;
+			}
+			.rank{
+				width: 13%;
+				text-align: center;
+				line-height: 3rem;
+			}
+			.niceman2{
+				display: flex;
+				width: 49%;
+			}
+			.niceman2 img{
+				height: 2.4rem;
+				margin-top: 0.3rem;
+				margin-left: 0.7rem;
+			}
+			.niceman2 h5{
+				text-align: center;
+				line-height: 2.5rem;
+				color: #102f75;
+			}
+			.addreward p{
+				color: #ff4242;
+				text-align: center;
+				line-height: 3rem;
+			}
+			.rank1{
+				background-color: #FF0000;
+				color: #FFFFFF;
+				height: 1.5rem;
+				width: 1.5rem;
+				padding-top:12% !important;
+				padding:0;
+				text-align: center;
+			}
+			.rank2{
+				background-color: #3298ff;
+				color: #FFFFFF;
+				height: 1.5rem;
+				width: 1.5rem;
+				padding-top:12% !important;
+				padding:0;
+				text-align: center;
+			}
+			.rank3{
+				background-color: #5db7f3;
+				color: #FFFFFF;
+				height: 1.5rem;
+				width: 1.5rem;
+				padding-top:12% !important;
+				padding:0;
+				text-align: center;
+			}
+			.rank4{
+				background-color: #d6eefe;
+				color: #7b7b7b;
+				height: 1.5rem;
+				width: 1.5rem;
+				padding-top:12% !important;
+				padding:0;
+				text-align: center;
+			}
+		</style>
+	</head>
+
+	<body>
+		
+		<header class="mui-bar mui-bar-nav">
+			<a id="back" class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left">公益打赏清单</a>
+		</header>
+		
+		<div class="mui-content">
+				<div id="sliderSegmentedControl" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+					<a class="mui-control-item mui-active" href="#item1mobile">
+					添加打赏的好心人清单
+					</a>
+					<a class="mui-control-item" href="#item2mobile">
+					被答谢的好心人清单
+					</a>
+				</div>
+				<div class="display">
+					<div class="number1">
+						<h5>参与帮助人数</h5>
+						<p>666</p>
+					</div>
+					<div class="number2">
+						<h5>总打赏公益值</h5>
+						<p>8888</p>
+					</div>
+				</div>
+		<div class="mui-slider-group">
+			<div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
+				<div class="title">
+					<h5 class="h55">时间</h5>
+					<h5 class="h56">添加打赏的好心人</h5>
+					<h5 class="h57">增加打赏值</h5>
+				</div>
+				<div class="totallist">
+					<div class="list">
+						<div class="rank">
+						</div>
+						<div class="time">
+							<h5>2018.11.11</h5>
+							<p>08:00</p>
+						</div>
+						<div class="niceman2">
+							<img src="../../image/zhijia_icon.png">
+							<h5>公益小智</h5>
+						</div>
+						<div class="addreward">
+							<p>500</p>
+						</div>
+					</div>
+					<div class="list" data-id='1'>
+						<div class="rank">
+							<span class="mui-badge rank1">1</span>
+						</div>
+						<div class="time">
+							<h5>2018.11.11</h5>
+							<p>08:00</p>
+						</div>
+						<div class="niceman2">
+							<img src="../../image/6.jpg">
+							<h5>11111</h5>
+						</div>
+						<div class="addreward">
+							<p>500</p>
+						</div>
+					</div>
+										<div class="list" data-id='2'>
+						<div class="rank">
+							<span class="mui-badge rank2">2</span>
+						</div>
+						<div class="time">
+							<h5>2018.11.11</h5>
+							<p>08:00</p>
+						</div>
+						<div class="niceman2">
+							<img src="../../image/6.jpg">
+							<h5>22222</h5>
+						</div>
+						<div class="addreward">
+							<p>500</p>
+						</div>
+					</div>
+										<div class="list" data-id='3'>
+						<div class="rank">
+							<span class="mui-badge rank3">3</span>
+						</div>
+						<div class="time">
+							<h5>2018.11.11</h5>
+							<p>08:00</p>
+						</div>
+						<div class="niceman2">
+							<img src="../../image/6.jpg">
+							<h5>33333</h5>
+						</div>
+						<div class="addreward">
+							<p>500</p>
+						</div>
+					</div>
+										<div class="list" data-id='4'>
+						<div class="rank">
+							<span class="mui-badge rank4">4</span>
+						</div>
+						<div class="time">
+							<h5>2018.11.11</h5>
+							<p>08:00</p>
+						</div>
+						<div class="niceman2">
+							<img src="../../image/6.jpg">
+							<h5>44444</h5>
+						</div>
+						<div class="addreward">
+							<p>500</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="item2mobile" class="mui-slider-item mui-control-content">		
+				<div class="title">
+					<h5 class="h51">时间</h5>
+					<h5 class="h52">参与帮助的好心人</h5>
+					<h5 class="h53">获得打赏</h5>
+					<h5 class="h54">获得特别答谢</h5>
+				</div>
+			<div class="totallist">
+				<div class="list">
+							<div class="time">
+								<h5>2018.11.11</h5>
+								<p>08:00</p>
+							</div>
+							<div class="niceman">
+								<img src="../../image/6.jpg">
+								<h5>小李飞刀</h5>
+							</div>
+							<div class="rewardnumber">
+								<p>44</p>
+							</div>
+							<div class="unknow">
+								<img src="../../image/pub_ioc_gongyizhi.png" />
+								<p>1000</p>
+							</div>
+							<div class="money">
+								<h5>￥</h5>
+								<p>300</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/mui.indexedlist.js"></script>
+		<script src="../../js/commonFunction.js" ></script>
+		<script type="text/javascript">
+			mui.init()
+			
+//			页面关闭
+			document.getElementById("back").addEventListener("tap",function(){
+			if(close()==true){
+					window.JsInterface.closeWindow();
+				}else if(close()==false){
+					window.webkit.messageHandlers.closeWindow.postMessage({});
+				}
+			});
+			
+		</script>
+	</body>
+
+</html>

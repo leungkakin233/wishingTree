@@ -1,0 +1,292 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.css" rel="stylesheet" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<style type="text/css">
+			body {
+				background-color: #FFFFFF;
+			}
+			
+			.mui-bar,
+			.mui-bar-nav {
+				background-color: #F3F3F3;
+				height: 50px;
+			}
+			
+			.mui-bar.mui-bar-nav a {
+				color: black;
+				font-size: 18px;
+				padding-top: 17px;
+			}
+			
+			.head-title {
+				font-size: 33px;
+				text-align: center;
+				font-family: MicrosoftYaHei;
+				color: #FF0000;
+				margin-top: 110px;
+				margin-bottom: 50px;
+			}
+			
+			.feedback .image-list {
+				width: 100%;
+				height: 160px;
+				background-size: cover;
+				padding: 10px 10px;
+				overflow: hidden;
+				padding-top: 20px;
+			}
+			
+			.button1 {
+				margin: 60px 1% 0 4%;
+				width: 44%;
+				height: 45px;
+				font-size: 20px;
+				text-align: center;
+				text-decoration: none;
+				display: inline-block;
+				background-color: #CECECE;
+				border-radius: 6px;
+				border: none;
+			}
+			
+			.button2 {
+				margin: 60px 0% 0 2%;
+				width: 44%;
+				height: 45px;
+				font-size: 20px;
+				text-align: center;
+				text-decoration: none;
+				display: inline-block;
+				background-color: #FF0000;
+				color: #FFFFFF;
+				border-radius: 6px;
+				border: none;
+			}
+			
+			.button-group {
+				width: 100%;
+				flex-direction: column;
+				justify-content: flex-start;
+				background-color: #FFFFFF;
+			}
+			
+			.mui-input-row {
+				border-top: 1px solid #d8d8d8;
+				border-bottom: 1px solid #d8d8d8;
+				width: 100%;
+				height: 50px;
+				display: flex;
+			}
+			
+			input {
+				margin-top: 1.5%;
+			}
+			
+			.mui-content {
+				background-color: #FFFFFF;
+			}
+			
+			.label {
+				width: 20%;
+				color: #b9b9b9;
+			}
+			.mui-table-view{
+				height: 3rem !important;
+				line-height: 3rem !important;
+				padding-top: 0px !important;
+			}
+			
+			.mui-table-view>li{
+				height: 3rem;
+				display: flex;
+			}
+			.iconlist{
+					width: 75%;
+					display: flex;
+					height: 3rem;
+					margin-top: 0.3rem;
+					float: right;
+			}
+			.iconlist>img{
+				height: 2.4rem;
+				width: 2.4rem;
+				border-radius: 50%;
+			}
+			
+			img {
+				width: 60%;
+			}
+		</style>
+	</head>
+
+	<body style="background-color: #FFFFFF;">
+
+		<header class="mui-bar mui-bar-nav">
+			<a id="back" class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left">紧急求助</a>
+		</header>
+
+		<div class="mui-content">
+			<div class="content">
+				<div class="head-title">添加紧急联系电话</div>
+				<div>
+					<div class="mui-input-row">
+						<label class="label" style="width: 20%;"><img src="../../image/sos_label_men.png"/></label>
+						<input id="name" type="text" class="mui-input-clear" placeholder="请输入联系人名称">
+					</div>
+					<div class="mui-input-row" style="border-top:none;">
+						<label class="label" style="width: 20%;"><img src="../../image/sos_label_manphone.png"/></label>
+						<input id="phone" type="text" class="" placeholder="请输入联系人电话">
+					</div>
+					<ul class="mui-table-view" style="border-top:none;">
+								<li class="mui-table-view-cell" style="padding-top: 0px;">
+											<span style='width:20%;height: 3rem !important;line-height: 3rem;color: #909090;'>@谁</span>
+										<div id="friendslist" class="iconlist">
+										</div>
+										<span id="remind" class="mui-navigate-right"></span>
+								</li>
+					</ul>
+				</div>
+				<div class="button-group">
+					<button class="button1">取消</button>
+					<button id="go" class="button2">确定</button>
+				</div>
+			</div>
+		</div>
+		<script src="../../js/mui.js"></script>
+		<script src="../../js/http.js"></script>
+		<script src="../../js/getuser.js"></script>
+		<script src="../../js/commonFunction.js"></script>
+		<script type="text/javascript">
+			mui.init()
+			var reminderList;
+			var operation=4;
+			var saveReminderList = [];
+			
+			function localData(){
+					if(localStorage.getItem('name')){
+						document.getElementsByTagName('input')[0].value=localStorage.getItem('name');
+					}
+					if(localStorage.getItem('phone')){
+						document.getElementsByTagName('input')[1].value=localStorage.getItem('phone');
+					}
+					
+					if(localStorage.getItem('reminderList')){
+						reminderList=JSON.parse(localStorage.getItem('reminderList'));
+					if(reminderList.length > 0) {
+		document.getElementById('friendslist').innerHTML = null;
+		for(var i = 0; i < reminderList.length; i++) {
+			var img = new Image();
+			var remindObj=new Object();
+			if(reminderList[i].user) {
+				img.src = reminderList[i].user.icon;
+				document.getElementById('friendslist').appendChild(img);
+				remindObj.rtype=operation;
+				remindObj.reminder=reminderList[i].user.userId;
+				remindObj.role=reminderList[i].user.roleId;
+				saveReminderList.push(remindObj)
+			} else if(reminderList[i].group) {
+				img.src = reminderList[i].group.icon;
+				document.getElementById('friendslist').appendChild(img);
+				remindObj.rtype=operation;
+				remindObj.reminder=reminderList[i].group.groupId;
+			}
+		}
+	}
+					}
+					localStorage.removeItem('name');
+					localStorage.removeItem('phone');
+					localStorage.removeItem('reminderList');
+				}
+				localData();
+
+			document.getElementById("back").addEventListener("tap", function() {
+				if(close()==true){
+					window.JsInterface.closeWindow();
+				}else if(close()==false){
+					window.webkit.messageHandlers.closeWindow.postMessage({});
+				}
+			});
+			
+			document.getElementsByClassName('button1')[0].addEventListener('tap', function(){
+				window.JsInterface.closeWindow();
+			})
+			
+			//		添加紧急联系人
+			function emergency(name,phone,operation, saveReminderList) {
+	if(!name==''&&!phone==''){
+		mui.ajax('http://139.159.149.232:8000/zhi/contact/person/emergency/', {    
+					data: { 
+						"personid": "",
+						"person": {
+							"first_name":  name,
+							"last_name": "the last name",
+							"phones": [{
+								"phone_number": phone,
+								"name": "test"
+							}],
+							"emails": [{
+								"email_address": "aa@qq.com",
+								"name": "12312"
+							}],
+							"functionitems": [{
+								"name": "123123",
+								"data": "2222"
+							}],
+							"emergency": true
+						}
+					},
+					headers: {
+						'Content-Type': 'application/json;charset=UTF-8',
+						"Authorization": token
+					},
+					    dataType: 'json', //服务器返回json格式数据
+					    type: 'PUT', //HTTP请求类型
+					    timeout: 4000, //超时时间设置为4秒；
+					    success: function(data) {
+						mui.toast('成功')
+						var emergencyId=data.id;
+						for(var i=0;i<saveReminderList.length;i++){
+							saveReminderList[i].person=emergencyId;
+						}
+						SaveReminderListFunction(operation, saveReminderList, function(type, data){
+						if(type == 0) {
+						}
+						else{
+							alert(data);
+						}
+					})
+						window.JsInterface.closeWindow(true);
+					},
+					    error: function(xhr, type, errorThrown) {         //异常处理；
+						alert('失败'); 
+					}
+				});
+	}else{
+		alert('您输入的信息不全,请输入正确信息')
+	}
+}
+
+			document.getElementById('go').addEventListener('tap', function() {
+				var name = document.getElementById("name").value;
+				var phone = document.getElementById("phone").value;
+				emergency(name,phone,operation, saveReminderList);
+			})
+			
+			//@好友
+			document.getElementsByTagName("li")[0].addEventListener("tap", function() {
+				var name = document.getElementsByTagName('input')[0].value;
+				var phone=document.getElementsByTagName('input')[1].value;
+				localStorage.setItem('name',name);
+				localStorage.setItem('phone',phone);
+				window.JsInterface.openWindow(localurl + "/html/whoPermittedToView/selectContactFriends.html");
+			});
+		</script>
+	</body>
+
+</html>

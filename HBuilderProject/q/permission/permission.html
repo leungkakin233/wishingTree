@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta name="flexible" content="initial-dpr=2" />
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<title></title>
+		<link href="../css/mui.css" rel="stylesheet" />
+		<script src="http://g.tbcdn.cn/mtb/lib-flexible/0.3.4/??flexible_css.js,flexible.js"></script>
+		<style type="text/css">
+			[v-cloak] {
+				display: none
+			}
+			
+			html,
+			body {
+				height: 100%;
+				width: 100%;
+				margin: 0;
+				padding: 0;
+			}
+			
+			.mui-bar {
+				height: 1.17rem;
+			}
+			
+			.mui-bar .mui-icon {
+				padding-top: 0.21rem;
+				font-size: 0.8rem;
+				color: black;
+			}
+			
+			.bar-title {
+				display: inline-block;
+				vertical-align: middle;
+				padding-top: .21rem;
+				font-size: 0.43rem;
+			}
+			
+			.mui-bar .mui-btn-link {
+				display: inline-block;
+				line-height: 1.2rem;
+				font-size: 0.43rem;
+			}
+			
+			.mui-bar-nav~.mui-content {
+				padding-top: 1.17rem;
+			}
+			
+			.mui-content>.mui-table-view:first-child {
+				margin-top: 0px;
+			}
+			
+			.mui-table-view-cell.mui-checkbox input[type=checkbox] {
+				top: .11rem;
+			}
+			
+			.mui-checkbox input[type='checkbox'] {
+				position: absolute;
+				top: 0px;
+				right: .65rem;
+				display: inline-block;
+				width: .81rem;
+				height: .80rem;
+				border: 0;
+				outline: 0 !important;
+				background-color: transparent;
+				-webkit-appearance: none;
+			}
+			
+			.mui-checkbox input[type='checkbox']:before {
+				font-family: Muiicons;
+				font-size: .80rem;
+				font-weight: normal;
+				line-height: 1;
+				text-decoration: none;
+				color: #aaa;
+				border-radius: 0;
+				background: none;
+				-webkit-font-smoothing: antialiased;
+			}
+			
+			.mui-table-view-cell.mui-checkbox.mui-left {
+				padding-left: .27rem;
+			}
+			
+			.ss_button_left {
+				width: 45%;
+				height: 1.3rem;
+				text-align: center;
+				margin: 0.3rem 2%;
+				font-size: .43rem;
+				color: #3298FF;
+			}
+			
+			.ss_button_right {
+				width: 45%;
+				height: 1.3rem;
+				text-align: center;
+				margin: 0.3rem 2%;
+				font-size: .43rem;
+				color: #08B060;
+			}
+			
+			#share .mui-grid-view.mui-grid-9 .mui-table-view-cell {
+				margin: 0;
+				padding: 0px 0px;
+				vertical-align: top;
+				border-right: 0;
+				border-bottom: 1px solid #eee;
+			}
+			
+			.share-bottom {
+				height: 1.44rem;
+				width: 100%;
+				text-align: center;
+				background-color: #F3F3F3;
+				/* border: 1px solid rgba(210, 210, 210, 1); */
+			}
+			
+			.mui-segmented-control.mui-scroll-wrapper .mui-scroll {
+				width: auto;
+				height: 2rem;
+				white-space: nowrap;
+			}
+			
+			.img-share {
+				margin-top: 0.6rem;
+				width: 1.2rem;
+				height: 1.2rem;
+			}
+			
+			.bottom-group{
+				width: 100%;
+				position: fixed;
+				bottom: 0;
+				background-color: #efeff4;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" id="back"><span class="bar-title">选择分享项</span></a>
+			<!--<a id="menu" class="mui-action-menu mui-icon mui-icon-bars mui-pull-right" href="#topPopover"></a>-->
+		</header>
+		<div class="mui-content" id="content">
+			<ul class="mui-table-view" style="margin-bottom: 1.9rem;" v-cloak>
+
+				<li class="mui-table-view-cell mui-indexed-list-item mui-checkbox mui-left" :key="key" :id="key" v-for="(value, key) in functionitems">
+
+					<p style="line-height: .7rem; color: #000000;" >{{value}}</p>
+					<input type="checkbox" checked v-if='key == 0'/>
+					<input type="checkbox" v-else/>
+				</li>
+				
+			</ul>
+			<div class="bottom-group">
+				<button id="shareTo" class="ss_button_left mui-btn open">分享到</button>
+				<button id="shareShow" class="ss_button_right mui-btn open">分享预览</button>
+			</div>
+		</div>
+
+		<script src="../js/mui.js"></script>
+		<script type="text/javascript" src="../js/jquery.js"></script>
+		<script type="text/javascript" src="../js/utf.js"></script>
+		<script type="text/javascript" src="../js/qrcode.js"></script>
+		<script src="../js/native.js"></script>
+		<script src="../js/vue.min.js"></script>
+		<script type="text/javascript" src="../js/shareH5.js"></script>
+		<script src="../js/base64.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" src="../js/permission.js"></script>
+		<script type="text/javascript">
+			var content = new Vue({
+				el: '#content',
+				data: {
+					functionitems: {
+						0: '基础信息',
+					},
+					name: '',
+					headImg: '',
+					numbers: [ 1, 2, 3, 4, 5 ,6,8,9,0,,12,11,2,23,6,8,9,0]
+				},
+				methods: {
+
+				}
+			})
+
+			window.onload = function() {
+				document.styleSheets[1].cssRules[17].style.textDecoration = 'none';
+
+				var search = location.search;
+				request = GetRequest(search);
+				var itemid = request['id'];
+				var id = '';
+				var flag = '';
+				//																alert(itemid);
+				//				itemid = 'zhiwu:197';
+				//				itemid = 'zhiwu:203';
+				if(itemid.slice(0, 6) === 'zhiwu:') {
+					id = itemid.replace("zhiwu:", "");
+				} else if(itemid.slice(0, 8) === "company:") {
+					id = itemid.replace("company:", "");
+				} else if(itemid.slice(0, 7) === "family:") {
+					id = itemid.replace("family:", "");
+				} else if(itemid.slice(0, 9) === "contract:") {
+					id = itemid.replace("contract:", "");
+				} else if(itemid.slice(0, 9) === "wishtree:") {
+					id = itemid.replace("wishtree:", "");
+				} else if(itemid.slice(0, 8) === "edrawer:") {
+					id = itemid.replace("edrawer:", "");
+				} else if(itemid.slice(0, 10) === "zhiwugroup:") {
+					id = code.replace("zhiwugroup:", "");
+				}
+				
+
+
+				shareCheck(id, function(type, data) {
+					if(type == 0) {
+						//						unescape(data);
+						console.log(data);
+						content.name = data.name;
+						content.headImg = data.header;
+						for(var i = 0; i < data.functionitems.length; i++) {
+							if(data.functionitems[i].data != '[]') {
+								switchCase(data.functionitems[i].name);
+								//								console.log(item)
+								//								item[data.functionitems[i].name] = data.functionitems[i].data;
+								//								content.functionitems.push(item);
+							} else {}
+						}
+					} else {
+						console.log('失败' + data);
+					}
+				})
+
+				document.getElementById('shareShow').addEventListener('tap', function() {
+					var checkboxArray = [].slice.call(document.getElementById('content').querySelectorAll('input[type="checkbox"]'));
+					var checkedValues = [];
+					//					console.log(checkboxArray)
+					checkboxArray.forEach(function(box) {
+						if(box.checked) {
+							//							console.log(box.parentNode.id)
+							checkedValues.push(box.parentNode.id);
+						}
+					});
+					if(checkedValues.length > 0) {
+						console.log('zhiwu.html?name=' + checkedValues + '')
+					} else {
+						mui.alert('请先选择至少一项分享项');
+					}
+				}, false);
+
+				document.getElementById('shareTo').addEventListener('tap', function() {
+					var checkboxArray = [].slice.call(document.getElementById('content').querySelectorAll('input[type="checkbox"]'));
+					var checkedValues = [];
+					checkboxArray.forEach(function(box) {
+						if(box.checked) {
+							checkedValues.push(box.parentNode.id);
+						}
+					});
+					if(checkedValues.length > 0) {
+						console.log(checkedValues)
+						var base = new Base64();
+						var code = base.encode('id=' + id + '&name=' + checkedValues, Base64.NO_PADDING)
+						console.log(code)
+//						shareLink('来自于智加的实物分享信息', content.name + '(点击查看详情--> http://zjfx.vip/i/...)',
+//							content.headImg, 'http://192.168.1.168:8020/q/item/zhiwu.html?share=' + code);
+
+												shareLink('来自于智加的实物分享信息',  content.name + '(点击查看详情--> http://zjfx.vip/i/...)',
+													content.headImg, permissionUrl + 'item/zhiwu.html?share=' + code);
+					} else {
+						mui.alert('请先选择至少一项分享项');
+					}
+				}, false)
+
+				document.getElementById('back').addEventListener('tap', function() {
+
+					window.JsInterface.closeWindow();
+				});
+
+			}
+
+			mui('.mui-scroll-wrapper').scroll({
+				//				scrollY: false, //是否竖向滚动
+				//				scrollX: true, //是否横向滚动
+				//				startX: 0, //初始化时滚动至x
+				//				startY: 0, //初始化时滚动至y
+				//				indicators: true, //是否显示滚动条
+				//				deceleration: 0.0006, //阻尼系数,系数越小滑动越灵敏
+				//				bounce: true //是否启用回弹
+			});
+		</script>
+	</body>
+
+</html>

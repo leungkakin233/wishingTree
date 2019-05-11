@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<!-- <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" /> -->
+		<!-- <meta name="flexible" content="initial-dpr=2" /> -->
+		<!-- <meta name="apple-mobile-web-app-capable" content="yes"> -->
+		<!-- <meta name="apple-mobile-web-app-status-bar-style" content="black"> -->
+		<title></title>
+		<script src="http://g.tbcdn.cn/mtb/lib-flexible/0.3.4/??flexible_css.js,flexible.js"></script>
+		<link href="../css/mui.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../css/qrcode.css" />
+		<style type="text/css">
+			html,
+			body {
+				background-color: white;
+				line-height: 0px;
+			}
+			
+			canvas {
+
+				/*display: inline-block;*/
+				position: relative;
+				/*----- qrA5-5 -------*/
+				/*padding: .265rem 0 0 0;
+				width: 3.38rem;
+				height: 3.645rem;*/
+				/*----- qrA5-3 -------*/
+				/*padding: .2rem 0 0 0;
+				width: 2.02rem;
+				height: 2.22rem;*/
+				/*----- qrA5-2 -------*/
+				/*padding: .2rem 0 0 0;
+				width: 1.35rem;
+				height: 1.55rem;*/
+				/*----- qrB4-5 -------*/
+				/*padding: .19rem 0 0 0;
+				width: 2rem;
+				height: 2rem;*/
+				/*----- qrB4-3 -------*/
+				/*padding: .15rem 0 0 0;
+				width: 1.2rem;
+				height: 1.35rem;*/
+				/*----- qrB4-2 -------*/
+				/*padding: .1rem 0 0 0;
+				width: 0.85rem;
+				height: 0.95rem;*/
+				/*----- qrB5-5 -------*/
+				/*padding: .34rem 0 0 0;
+				width: 2.84rem;
+				height: 3.18rem;*/
+				/*----- qrB5-3 -------*/
+				/*padding: .2rem 0 0 0;
+				width: 1.7rem;
+				height: 1.9rem;*/
+				/*----- qrB5-2 -------*/
+				/*padding: .07rem 0 0 0;
+				width: 1.13rem;
+				height: 1.13rem;*/
+				/*----- qrA41 -------*/
+				/*width: 7.15rem;
+				height: 7.15rem;*/
+				/*----- qrA51 -------*/
+				/*width: 7.42rem;
+				height: 7.42rem;*/
+				/*----- qrB41 -------*/
+				/*width: 8.01rem;
+				height: 8.01rem;*/
+				/*----- qrB51 -------*/
+				/*width: 7.38rem;
+				height: 7.38rem;*/
+			}
+			
+			.qrcode {
+
+				/*A4 5CM 3CM  A5 5CM*/
+				/*padding: .40rem 0;*/
+				/*A4 2CM*/
+				/*padding: .10rem 0;*/
+				/*b4 5CM 3CM b5 3cm  */
+				/*padding: .08rem 0;*/
+				/*b5 5CM */
+				/*padding: 1rem 0;*/
+				/*b5 2CM */
+				/*padding: 0;*/
+				/*   a41   */
+				/*padding-top: 1.88rem;
+				padding-bottom: 3.74rem;*/
+				/*   a51   */
+				/*padding-top: 1.85rem;
+				padding-bottom: 3.7rem;*/
+				/*   b41   */
+				/*padding-top: 1.6rem;
+				padding-bottom: 4.05rem;*/
+				/*   b51   */
+				/*padding-top: 1.85rem;
+				padding-bottom: 3.7rem;*/
+				/*padding: 0;*/
+				text-align: center;
+			}
+			
+			.mui-content {
+				background-color: white;
+			}
+			
+			.mui-bar {
+				height: 1.17rem;
+				width: 100%;
+			}
+			
+			.mui-bar .mui-icon {
+				padding-top: 0.21rem;
+				font-size: 0.8rem;
+				color: black;
+			}
+			
+			.bar-title {
+				display: inline-block;
+				vertical-align: middle;
+				padding-top: .21rem;
+				font-size: 0.43rem;
+			}
+			
+			.mui-bar-nav~.mui-content {
+				padding-top: 1.17rem;
+			}
+			
+			.mui-content>.mui-table-view:first-child {
+				margin-top: 0px;
+			}
+			
+			.rotate{
+				transform: rotate(-90deg);
+				-ms-transform: rotate(9deg);
+				/* Internet Explorer */
+				-moz-transform: rotate(9deg);
+				/* Firefox */
+				-webkit-transform: rotate(-90deg);
+				/* Safari 和 Chrome */
+				-o-transform: rotate(9deg);
+			}
+		</style>
+	</head>
+
+	<body id="body">
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" id="back">
+				<span class="bar-title">智加物联网识别标签预览</span>
+			</a>
+		</header>
+
+		<footer class="mui-bar-tab mui-bar">
+			<div class="bottom-left" id="send">
+				<span class="qr-main-span">发送</span>
+			</div>
+			<div class="bottom-right" id="save">
+				<span style="color: #3298FF;">保存</span>
+			</div>
+		</footer>
+
+		<div class="mui-content" style="margin-top: 20px;">
+			<div id="qrcode" class="qrcode">
+			</div>
+
+			<!--<div id="qrcode" class="qrcode"></div>
+			<div id="qrcode" class="qrcode"></div>-->
+			<!-- style="border: 1px solid blue" -->
+			<div id="imgs"></div>
+		</div>
+
+		<script type="text/javascript" src="../js/mui.js"></script>
+		<script type="text/javascript" src="../js/vue.min.js"></script>
+		<script type="text/javascript" src="../js/native.js"></script>
+		<script type="text/javascript" src="../js/jquery.js"></script>
+		<script type="text/javascript" src="../js/utf.js"></script>
+		<script type="text/javascript" src="../js/qr.js"></script>
+		<script type="text/javascript" src="../js/qrcode.js"></script>
+		<script type="text/javascript" src="../js/html2canvas.js"></script>
+		<script type="text/javascript" src="../js/canvas2image.js"></script>
+		<script type="text/javascript">
+			mui.init({
+				longtap: true,
+				zoom: false
+			});
+			var aaa = null;
+
+			$(document).ready(function() {
+				
+				var search = location.search;
+//				alert(location.href)
+				request = GetRequest(search);
+				var size = request['size'];
+				var typeSetting = request['typeSetting'];
+				var number = request['number'];
+				size = 5;
+				typeSetting = 'A4';
+				number = 12;
+				//												 alert(JSON.stringify(request));
+
+				var headimg = localStorage.getItem('headimg');
+				var qrgroup = document.getElementById('qrcode');
+				//				alert(headimg);
+
+				//1111
+				//size控制二维码的大小与class的选择，number控制生成数量,headimg是头像,qrgroup是渲染的地方
+				createQR(size, number, typeSetting, headimg, qrgroup);
+
+//				createQR('20', '1', 'B41', headimg, qrgroup);
+
+				//				for(var i = 0; i < 1; i++) {
+				//					var a = document.createElement('div');
+				//					a.setAttribute('id', 'qr' + i);
+				//					a.setAttribute('class', 'qr-B51');
+				//					qrgroup.appendChild(a);
+				//
+				//					$("#qr" + i).qrcode({
+				//						render: 'canvas', //设置渲染方式，有table和canvas，使用canvas方式渲染性能相对来说比较好
+				//						text: localurl + "item/qrMain.html?uuid=" + guid(), //扫描二维码后显示的内容,可以直接填一个网址，扫描二维码后自动跳向该链接
+				//						// 						width: $(window).get(0).innerWidth, //二维码的宽度
+				//						// 						height: $(window).get(0).innerWidth, //二维码的高度
+				//						//						width: 591, //二维码的宽度
+				//						//						height: 591, //二维码的高度
+				//						width: 900, //二维码的宽度
+				//						height: 900, //二维码的高度
+				//						background: "#ffffff", //二维码的后景色
+				//						foreground: "#000000", //二维码的前景色
+				//						//						src: '../img/ico/aqua.jpg',
+				//						// src: 'http://139.159.148.149:8081/platform/file/ff808081685e94a101686fc8590207ad.jpg'
+				//						// src: imgurl,
+				//						src: headimg,
+				//					});
+				//					var qrp = document.createElement('p');
+				//					qrp.innerHTML = '智加扫我聊一聊';
+				//					document.getElementById('qr' + i).appendChild(qrp);
+				//				}
+
+				document.getElementById('send').addEventListener('tap', function() {
+					openWindow('item/qrMain.html');
+				});
+
+				document.getElementById('save').addEventListener('tap', function() {
+					html2canvas(document.getElementById("qrcode")).then(function(canvas) {
+						var h2qrcode = {};
+						switch(typeSetting) {
+							case 'A4':
+								h2qrcode = Canvas2Image.convertToPNG(canvas, 2480, 3508);
+								break;
+							case 'A5':
+								h2qrcode = Canvas2Image.convertToPNG(canvas, 1748, 2480);
+								break;
+							case 'B4':
+								h2qrcode = Canvas2Image.convertToPNG(canvas, 2952, 4169);
+								break;
+							case 'B5':
+								h2qrcode = Canvas2Image.convertToPNG(canvas, 2078, 2952);
+								break;
+							case 'A41':
+								h2qrcode = Canvas2Image.convertToPNG(canvas, 2480, 3508);
+								break;
+							case 'A51':
+								h2qrcode = Canvas2Image.convertToPNG(canvas, 1748, 2480);
+								break;
+							case 'B41':
+								h2qrcode = Canvas2Image.convertToPNG(canvas, 2952, 4169);
+								break;
+							case 'B51':
+								h2qrcode = Canvas2Image.convertToPNG(canvas, 2078, 2952);
+								break;
+							default:
+								break;
+						}
+						var h2qrcodeloc = h2qrcode.src.replace('data:image/png;base64,', "");
+						decoderBase64File(h2qrcodeloc);
+					});
+
+					//					var qr = document.createElement('div');
+					//					$(qr).qrcode({
+					//						render: 'canvas', //设置渲染方式，有table和canvas，使用canvas方式渲染性能相对来说比较好
+					//						text: "https://github.com/RiceSmall/QRcode", //扫描二维码后显示的内容,可以直接填一个网址，扫描二维码后自动跳向该链接
+					//						width: "800", //二维码的宽度
+					//						height: "800", //二维码的高度
+					//						background: "#ffffff", //二维码的后景色
+					//						foreground: "#000000", //二维码的前景色
+					//						//      src: 'img/photo.jpg'
+					//					});
+					//					
+					//					var h2qrcode = Canvas2Image.convertToPNG(qr.childNodes[0], 800, 800);
+					//					var h2qrcodeloc = h2qrcode.src.replace('data:image/png;base64,', "");
+					//					decoderBase64File(h2qrcodeloc);
+
+				});
+
+				document.getElementById('back').addEventListener('tap', function() {
+					window.JsInterface.closeWindow();
+				});
+			});
+		</script>
+	</body>
+
+</html>

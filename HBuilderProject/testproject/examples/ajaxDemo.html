@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<meta name="HandheldFriendly" content="true" />
+		<meta name="MobileOptimized" content="320" />
+		<title>XMLHttpRequest</title>
+		<script type="text/javascript">
+			var url = "http://node1.xiuhuahui.xyz:8080/platform/api/tree/v1/data/get";
+			var xhr = null;
+
+// 			function tree1001() {
+// 				xhr = new plus.net.XMLHttpRequest();
+// 				xhr.timeout = 10000;
+// 				xhr.ontimeout = function(event) {
+// 					alert("请求超时！");
+// 				}
+// 
+// 				xhr.open("POST", url);
+// 				var data = {
+// 					tree: {
+// 						id: "4028836a6750c926016750c94cd20000"
+// 					}
+// 				};
+// 				xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+// 				xhr.send(JSON.stringify(data));
+// 				xhr.onreadystatechange = function() {
+// 					if (xhr.readyState == 4 && xhr.status == 200) {
+// 						alert(xhr.responseText);
+// 					} 
+// 				}
+// 			}
+		</script>
+	</head>
+	<body>
+		<button onclick="tree1001()">XMLHttpRequest</button><br />
+	</body>
+</html>
+
+<!-- 
+mui.ajax('http://node1.xiuhuahui.xyz:8080/platform/api/tree/v1/data/get', {
+					data: {
+						tree: {
+							// id: treeid,
+							id: "4028836a6750c926016750c94cd20000"
+						}
+					},	
+					type: 'post', //HTTP请求类型
+					timeout: 10000, //超时时间设置为10秒；
+					headers: {
+						'Content-Type': 'application/json;charset=UTF-8',
+
+					},
+					success: function(data) {
+						// console.log(JSON.stringify(data));
+						console.log(JSON.stringify(data.data));
+						header.banner = {
+							name: data.data.item.name,
+							points: data.data.item.points,
+						};
+						content.item = data.data.item;
+						// console.log(JSON.stringify(content.item));
+						content.bubbleList = data.data.bubbleList;
+						content.wishList = data.data.wishList;
+						// console.log(JSON.stringify(content.bubbleList));
+						createBubble();
+						createywk();
+					},
+					error: function(xhr, type, errorThrown) {
+						console.log("获取许愿树失败" + JSON.stringify(xhr));
+						// mui.toast("获取许愿树失败" + errorThrown + type + JSON.stringify(xhr));
+					}
+				}); -->

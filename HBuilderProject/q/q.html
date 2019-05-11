@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta name="flexible" content="initial-dpr=2" />
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<title></title>
+		<script src="http://g.tbcdn.cn/mtb/lib-flexible/0.3.4/??flexible_css.js,flexible.js"></script>
+		<link href="css/mui.css" rel="stylesheet" />
+		<style type="text/css">
+			[v-cloak] {
+				display: none
+			}
+			
+			html,
+			body {
+				background-color: #efeff4;
+			}
+			
+			p {
+				margin-bottom: 0px;
+			}
+			
+			.mui-bar {
+				height: 1.17rem;
+			}
+			
+			.mui-bar .mui-icon {
+				padding-top: 0.21rem;
+				font-size: 0.8rem;
+				color: black;
+			}
+			
+			.bar-title {
+				display: inline-block;
+				vertical-align: middle;
+				padding-top: .21rem;
+				font-size: 0.43rem;
+			}
+			
+			.mui-bar-nav~.mui-content {
+				padding-top: 1.17rem;
+			}
+			
+			.mui-content>.mui-table-view:first-child {
+				margin-top: 0px;
+			}
+			
+			.main {
+				height: 4.96rem;
+				width: 9.2rem;
+				background-color: white;
+				position: absolute;
+				left: .4rem;
+				top: 4.25rem;
+			}
+			
+			.content {
+				height: 3.77rem;
+				width: 100%;
+			}
+			
+			.bottom {
+				height: 1.19rem;
+				width: 100%;
+				background-color: #CCCCCC;
+				display: flex;
+			}
+			
+			.bottom-left {
+				width: 50%;
+				text-align: center;
+				font-size: .43rem;
+				line-height: 1.17rem;
+				/* background-color: red; */
+				height: 1.19rem;
+			}
+			
+			.bottom-right {
+				width: 50%;
+				height: 1.19rem;
+				font-size: .43rem;
+				line-height: 1.17rem;
+				/* background-color: blue;	 */
+				text-align: center;
+				display: inline-block;
+			}
+			
+			.bottom-left:before {
+				content: '';
+				position: absolute;
+				right: 50%;
+				text-align: left;
+				height: 1.17rem;
+				line-height: 0;
+				width: 1px;
+				background-color: #a89d9e;
+			}
+			
+			.qr-content-title {
+				font-weight: 600;
+				font-size: 0.48rem;
+				color: #000000;
+				margin: .55rem 0 .44rem .43rem;
+				line-height: 0.61rem;
+			}
+			
+			.qr-content-p {
+				line-height: 0.61rem;
+				color: #909090;
+				margin: 0 0 0 .43rem;
+				font-size: 0.37rem;
+			}
+			
+			.qr-content-bottom-p {
+				font-weight: 600;
+				font-size: 0.37rem;
+				color: #282828;
+				margin: .44rem 0 0 .43rem;
+			}
+			
+			.main-2 {
+				width: 9.2rem;
+				background-color: white;
+				position: absolute;
+				left: .4rem;
+				top: 4.25rem;
+			}
+			
+			.main-2-top {
+				height: 2.21rem;
+				width: 100%;
+				background-color: #1672FA;
+			}
+			
+			.qr-content-title-2 {
+				font-weight: 600;
+				font-size: 0.48rem;
+				color: #FEFEFE;
+				font-weight: bold;
+				padding: 0.4rem 0 .21rem 0.47rem;
+			}
+			
+			.qr-bottom-p-1 {
+				color: #000000;
+				font-size: .37rem;
+				white-space: normal;
+				word-wrap: break-word;
+				margin: .22rem .48rem .2rem .48rem;
+			}
+			
+			.qr-bottom-p-2 {
+				color: #3298FF;
+				font-size: .37rem;
+				white-space: normal;
+				word-wrap: break-word;
+				margin: .22rem .48rem .2rem .48rem;
+			}
+			
+			.qr-content-p-2 {
+				font-weight: 600;
+				font-size: 0.37rem;
+				color: #000000;
+				padding: 0 0 0.28rem .40rem;
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<div class="mui-content" id="content">
+			<!--<div class="main" v-if="status" v-cloak>
+				<div class="content">
+					<p class="qr-content-title">智加物联网标签</p>
+					<p class="qr-content-p">编号：{{number}}</p>
+					<p class="qr-content-p">状态：未被使用</p>
+					<p class="qr-content-bottom-p">是否进行绑定操作？</p>
+				</div>
+				<div class="bottom">
+					<div class="bottom-left">
+						<span class="qr-main-span">返回</span>
+					</div>
+					<div class="bottom-right" id="binding">
+						<span style="color: #3298FF;">去绑定智物</span>
+					</div>
+				</div>
+			</div>-->
+
+			<div class="main-2" v-show="status" v-cloak>
+				<div class="main-2-top">
+					<p class="qr-content-title-2">智加物联网标识</p>
+					<p class="qr-content-p-2">【编号：{{number}}】</p>
+					<img src="img/ico/pub_label_bz_zjiot@2x.png" style="position: absolute; top: .33rem; right: .11rem; height: 0.51rem; width: 1.81rem;" />
+				</div>
+				<div class="main-2-bottom">
+					<p class="qr-bottom-p-1">本标签未被使用 </p>
+					<p class="qr-bottom-p-2" id="zhiwu">去绑定一个智物>></p>
+					<div>
+
+						<p class="qr-content-p-2"><img src="img/ico/pub_label_bz_zjfx@2x.png" style="display: inline-block; height: 0.53rem; width: 1.81rem; margin-bottom: -.07rem;" />/ 智慧物联网 / 实物分享社交 / 公益</p>
+					</div>
+				</div>
+			</div>
+
+			<!--<button type="button" style="width: 95%; height: 1rem;">
+				<a id="go">open Android app</a>
+			</button>-->
+
+			<!--<button type="button" style="width: 95%; height: 1rem;">
+				<a href="javascript:startApp()">open Android app</a>
+			</button>-->
+		</div>
+		<script type="text/javascript" src="js/mui.js"></script>
+		<script type="text/javascript" src="js/vue.min.js"></script>
+		<script type="text/javascript" src="js/native.js"></script>
+		<script type="text/javascript" src="js/jquery.js"></script>
+		<script type="text/javascript" src="js/utf.js"></script>
+		<script type="text/javascript" src="js/qrcode.js"></script>
+		<script type="text/javascript" src="js/shareH5.js" ></script>
+		<script type="text/javascript" src="js/base64.js" ></script>
+		<script type="text/javascript">
+			document.styleSheets[0].cssRules[17].style.textDecoration = 'none';
+
+			var qrcode = new Vue({
+				el: '#content',
+				data: {
+					number: '',
+					adv: '进入链接http:\\awpefpfk.com',
+					status: false,
+				}
+			});
+
+			$(document).ready(function() {
+				var search = location.search;
+				request = GetRequest(search);
+				var code = request['l'];
+				qrcode.number = code;
+				//				qrcode.number = '6542635423326521212'
+				//				alert('地址:'+ search + 'request' + JSON.stringify(request));
+
+				//判断uuid是否已经使用，修改stauts字段
+				lcodeCheck(code, function(type, data) {
+					if(type == 0) {
+						console.log(data);
+						var base = new Base64();
+						var code = base.encode('id=' + data.no + '&name=0')
+						if(data.qtype == 0) {
+							//智物
+							window.location.href = './item/zhiwu.html?share=' + code;
+						} else if(data.qtype == 1) {
+							//单位
+							window.location.href = './item/org.html?share=' + code;
+						} else if(data.qtype == 2) {
+							//							//技能h5分享店做
+						} else if(data.qtype == 3) {
+							//许愿树
+//							window.location.href = './item/wishtree.html?share=' + code;
+						} else if(data.qtype == 4) {
+							//商品
+						} else if(data.qtype == 5) {
+							//订单
+						} else if(data.qtype == 6) {
+							//支付
+						} else if(data.qtype == 7) {
+							//分享
+						} else if(data.qtype == 8) {
+							window.location.href = './item/family.html?share=' + code;
+						} else if(data.qtype == 9) {
+							//通讯录
+							window.location.href = './item/contacts.html?share=' + code;
+						} else if(data.qtype == 10) {
+							//收藏对象
+						}
+					} else {
+						console.log('失败' + data);
+						qrcode.status = true;
+					}
+				})
+
+				//				$('#go').click(function() {
+				//					alert(1)
+				//					window.location = "zhijia://com.zhijiawuliao.zhijia?param=2018&type=zhiwu";
+				//				});
+				//
+				//				function startApp() {
+				//					alert(1)
+				//					window.location = "zhijia://com.zhijiawuliao.zhijia?param=2018&type=zhiwu";
+				//				}
+
+				$('#zhiwu').on('tap', function() {
+					startApp();
+				})
+
+				//跳转到绑定页面
+				var startApp = function() { //启动APP
+					if(isInWx()) { //微信中
+//						alert("请在浏览器中打开");
+						var hasApp = true,
+								t = 1000;
+							setTimeout(function() { //没有安装APP则跳转至应用宝下载，延时时间设置为2秒
+								if(!hasApp) window.location.href = "http://a.app.qq.com/o/simple.jsp?pkgname=[name]";
+							}, 2000);
+							var t1 = Date.now();
+							window.location.href = "zhijia://com.zhijiawuliao.zhijia?param=1&type=zhiwu";
+							setTimeout(function() { //t的时间就是出发APP启动的时间，若APP启动了，再次返回页面时t2这行代码执行，hasApp即为true。反之若APP没有启动即为false
+								var t2 = Date.now();
+								hasApp = !(!t1 || t2 - t1 < t + 150);
+							}, t);
+					} else { //非微信中
+						if(isInIos()) {　　　　 //IOS系统，直接去itunes中，既可以下载也可以打开
+
+							window.location.href = "https://itunes.apple.com/cn/app/[name]/id[id]";
+						} else { //android系统，通过定时器的方式，判断是否安装有APP
+
+							var hasApp = true,
+								t = 1000;
+							setTimeout(function() { //没有安装APP则跳转至应用宝下载，延时时间设置为2秒
+								if(!hasApp) window.location.href = "http://a.app.qq.com/o/simple.jsp?pkgname=[name]";
+							}, 2000);
+							var t1 = Date.now();
+							window.location.href = "zhijia://com.zhijiawuliao.zhijia?param=1&type=zhiwu";
+							setTimeout(function() { //t的时间就是出发APP启动的时间，若APP启动了，再次返回页面时t2这行代码执行，hasApp即为true。反之若APP没有启动即为false
+								var t2 = Date.now();
+								hasApp = !(!t1 || t2 - t1 < t + 150);
+							}, t);
+						}
+					}
+				}
+
+				function isInWx() {
+					var agent = window.navigator.userAgent.toLowerCase();
+					return agent.match(/MicroMessenger/i) == 'micromessenger';
+				}
+
+				function isInIos() {
+					var userAgentInfo = navigator.userAgent,
+						Agents = ["iPhone", "iPad", "iPod"];
+					for(var v = 0; v < Agents.length; v++) {
+						if(userAgentInfo.indexOf(Agents[v]) > 0) {
+							return true;
+						}
+					}
+					return false;
+				}
+			});
+		</script>
+	</body>
+
+</html>

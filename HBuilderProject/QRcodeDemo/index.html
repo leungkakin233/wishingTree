@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>Document</title>
+		<style>
+			/*body img {
+				display: block;
+			}*/
+			
+			canvas {
+				width: 320px;
+				height: 320px;
+			}
+		</style>
+	</head>
+
+	<body id="body">
+		<div id="qrcode"></div>
+		<!--<canvas id="canvas"></canvas>-->
+		<!--<img src="img/222.jpg"  alt="" style="width: 300px; height: 300px; border-radius: 10%;" />-->
+
+		<!--<canvas id="tutorial" width="600" height="400"></canvas>-->
+
+		<script type="text/javascript" src="js/jquery.js"></script>
+		<script type="text/javascript" src="js/utf.js"></script>
+		<script type="text/javascript" src="js/qrcode.js"></script>
+		<script type="text/javascript" src="js/canvas2image.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$("#qrcode").qrcode({
+					render: 'canvas', //设置渲染方式，有table和canvas，使用canvas方式渲染性能相对来说比较好
+					text: "http://zjfx.vip/q.html?u=06c5c10e-b3c3-b600-6374-4dbcca708d0c", //扫描二维码后显示的内容,可以直接填一个网址，扫描二维码后自动跳向该链接
+					width: "400", //二维码的宽度
+					height: "400", //二维码的高度
+					background: "#ffffff", //二维码的后景色
+					foreground: "#000000", //二维码的前景色
+					//					src: "img/zjfx.png",
+					fillStyle: 'blue',
+				});
+
+				var img = new Image();
+				//				img.setAttribute("crossOrigin", 'anonymous');
+				//				img.src = 'img/111.jpg' + "?timeStamp=" + new Date();
+				img.src = 'img/111.jpg'
+				img.onload = function() {
+					draw(this);
+				};
+				
+				function guid() {
+					function S4() {
+						return(((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
+					}
+//					+ "-" + S4() + "-" + S4() + "-" + S4() + "-" + S4() + S4() + S4()
+					console.log(S4() + S4());
+					return(S4() + S4());
+				};
+				
+//				guid()
+			});
+
+			CanvasRenderingContext2D.prototype.roundRect = function(x, y, w, h, r) {
+				var min_size = Math.min(w, h);
+				if(r > min_size / 2) r = min_size / 2;
+				// 开始绘制
+				this.beginPath();
+				this.moveTo(x + r, y);
+				this.arcTo(x + w, y, x + w, y + h, r);
+				this.arcTo(x + w, y + h, x, y + h, r);
+				this.arcTo(x, y + h, x, y, r);
+				this.arcTo(x, y, x + w, y, r);
+				this.closePath();
+				return this;
+			}
+
+			function draw(obj) {
+				var canvas = document.createElement("canvas");
+				var context = canvas.getContext("2d");
+				var pattern = context.createPattern(obj, "no-repeat");
+				context.roundRect(0, 0, obj.width, obj.height, 12);
+				context.fillStyle = pattern;
+				context.fill();
+				document.getElementById('body').appendChild(canvas);
+				//				base64 = canvas.toDataURL("image/png"); 
+				var imgAsDataURL = canvas.toDataURL('image/jpg', 1);
+				//				console.log(imgAsDataURL)
+				var image = document.createElement('img');
+				image.src = imgAsDataURL;
+
+			}
+		</script>
+	</body>
+
+</html>

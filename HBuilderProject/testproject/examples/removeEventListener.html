@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<input type="button" value="test1" id="btn1">
+<input type="button" value="test2" id="btn2">
+<input type="button" value="test3" id="btn3">
+<script>
+    var btn1=document.getElementById("btn1");/*实名函数*/
+    var count=0;
+    var handle1=function() {
+        console.log(count++);
+    }
+    btn1.addEventListener('click',handle1,false);
+
+
+    var btn2=document.getElementById("btn2");/*匿名函数*/
+	function handle2() {
+		btn1.removeEventListener("click",handle1,false);
+	}
+     btn2.addEventListener('click',handle2,false);
+	
+	 var btn3=document.getElementById("btn3");
+	 function handle3(){
+		 btn1.addEventListener("click",handle1,false);
+	 }
+	 btn3.addEventListener('click',handle3,false);
+	
+</script>
+</body>
+</html>

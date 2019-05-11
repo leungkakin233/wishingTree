@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link href="../css/mui.css" rel="stylesheet" />
+		<style type="text/css">
+			.mui-content>.mui-table-view:first-child {
+				margin-top: 0;
+			}
+
+			.head {
+				height: 40px;
+			}
+
+			#head1 {
+				line-height: 40px;
+			}
+			
+			#head2 {
+				line-height: 40px;
+			}
+
+			.head-img {
+				position: absolute;
+				bottom: 10px;
+				right: 40px;
+				width: 40px;
+				height: 40px;
+			}
+			.donation{
+				margin-top: 35px;
+				background-color: #3298FF;
+				color: #FAFAFA;
+				font-size: 16px;
+				width: 350px;
+				height: 45px;
+			}
+			.button-center{
+				text-align: center;
+			}
+			.m-span{
+				padding-right: 20px;
+				text-align: right;
+				font-size: 14px;
+				width: 220px;
+				word-wrap:break-word;
+				word-break:break-all;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+			}
+		</style>
+	</head>
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" id="back"></a>
+			<h1 class="mui-title">移植到自己的个性树</h1>
+		</header>
+		<div class="mui-content">
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<a id="head1" class="mui-navigate-right">
+						上传场景图
+						<span class="mui-pull-right head">
+							<img class="head-img mui-action-preview" id="head-img1" src="" />
+						</span>
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a id="head2" class="mui-navigate-right">
+						<span class="span-first">上传树种图 </span>
+						<span class="mui-pull-right head">
+							<img class="head-img mui-action-preview" id="head-img2" src="" />
+						</span>
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right">
+						<span class="span-first">绑定地址</span>
+						<span class="mui-pull-right m-span">珠海市香洲区吉大景园路758号</span>
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right">
+						<span class="span-first">绑定标识</span>
+						<span class="mui-pull-right m-span">32988888</span>
+					</a>
+				</li>
+			</ul>
+			<div class="button-center">
+				<button class="donation">
+					确定
+				</button>
+			</div>
+		</div>
+		<script src="../js/mui.js"></script>
+		<script type="text/javascript">
+			mui.init()
+			setTimeout(function() {
+				defaultImg();
+				setTimeout(function() {
+					initImgPreview();
+				}, 300);
+			}, 500);
+
+			/*点击头像触发*/
+			document.getElementById('head-img1').addEventListener('tap', function() {
+				if (mui.os.plus) {
+					var a = [{
+						title: "拍照"
+					}, {
+						title: "从手机相册选择"
+					}];
+					plus.nativeUI.actionSheet({
+						cancel: "取消",
+						buttons: a
+					}, function(b) { /*actionSheet 按钮点击事件*/
+						switch (b.index) {
+							case 0:
+								break;
+							case 1:
+								getImage1(); /*拍照*/
+								break;
+							case 2:
+								galleryImg1(); /*打开相册*/
+								break;
+							default:
+								break;
+						}
+					})
+				}
+			}, false);
+
+			document.getElementById('head-img2').addEventListener('tap', function() {
+				if (mui.os.plus) {
+					var a = [{
+						title: "拍照"
+					}, {
+						title: "从手机相册选择"
+					}];
+					plus.nativeUI.actionSheet({
+						cancel: "取消",
+						buttons: a
+					}, function(b) { /*actionSheet 按钮点击事件*/
+						switch (b.index) {
+							case 0:
+								break;
+							case 1:
+								getImage2(); /*拍照*/
+								break;
+							case 2:
+								galleryImg2(); /*打开相册*/
+								break;
+							default:
+								break;
+						}
+					})
+				}
+			}, false);
+
+			//拍照 
+			function getImage1() {
+				var c = plus.camera.getCamera();
+				c.captureImage(function(e) {
+					plus.io.resolveLocalFileSystemURL(e, function(entry) {
+						var s = entry.toLocalURL() + "?version=" + new Date().getTime();
+						console.log(s);
+						document.getElementById("head-img1").src = s;
+
+						//变更大图预览的src
+						//目前仅有一张图片，暂时如此处理，后续需要通过标准组件实现
+						uploadHead(s);
+					}, function(e) {
+						console.log("读取拍照文件错误：" + e.message);
+					});
+				}, function(s) {
+					console.log("error" + s);
+				}, {
+					filename: "_doc/head1.jpg"
+				})
+			}
+
+			function getImage2() {
+				var c = plus.camera.getCamera();
+				c.captureImage(function(e) {
+					plus.io.resolveLocalFileSystemURL(e, function(entry) {
+						var s = entry.toLocalURL() + "?version=" + new Date().getTime();
+						console.log(s);
+						document.getElementById("head-img2").src = s;
+
+						//变更大图预览的src
+						//目前仅有一张图片，暂时如此处理，后续需要通过标准组件实现
+						uploadHead(s);
+					}, function(e) {
+						console.log("读取拍照文件错误：" + e.message);
+					});
+				}, function(s) {
+					console.log("error" + s);
+				}, {
+					filename: "_doc/head2.jpg"
+				})
+			}
+
+			//本地相册选择 
+			function galleryImg1() {
+				plus.gallery.pick(function(a) {
+					plus.io.resolveLocalFileSystemURL(a, function(entry) {
+						plus.io.resolveLocalFileSystemURL("_doc/", function(root) {
+							root.getFile("head1.jpg", {}, function(file) {
+								//文件已存在
+								file.remove(function() {
+									console.log("file remove success");
+									entry.copyTo(root, 'head1.jpg', function(e) {
+											var e = e.fullPath + "?version=" + new Date().getTime();
+
+											uploadHead(e);
+											document.getElementById("head-img1").src = e;
+											//变更大图预览的src
+											//目前仅有一张图片，暂时如此处理，后续需要通过标准组件实现
+
+										},
+										function(e) {
+											console.log('copy image fail:' + e.message);
+										});
+								}, function() {
+									console.log("delete image fail:" + e.message);
+								});
+							}, function() {
+								//文件不存在
+								entry.copyTo(root, 'head1.jpg', function(e) {
+										var path = e.fullPath + "?version=" + new Date().getTime();
+										uploadHead(path); /*上传图片*/
+										document.getElementById("head-img1").src = path;
+
+										//变更大图预览的src
+										//目前仅有一张图片，暂时如此处理，后续需要通过标准组件实现
+									},
+									function(e) {
+										console.log('copy image fail:' + e.message);
+									});
+							});
+						}, function(e) {
+							console.log("get _www folder fail");
+						})
+					}, function(e) {
+						console.log("读取拍照文件错误：" + e.message);
+					});
+				}, function(a) {}, {
+					filter: "image"
+				})
+			};
+
+			function galleryImg2() {
+				plus.gallery.pick(function(a) {
+					plus.io.resolveLocalFileSystemURL(a, function(entry) {
+						plus.io.resolveLocalFileSystemURL("_doc/", function(root) {
+							root.getFile("head2.jpg", {}, function(file) {
+								//文件已存在
+								file.remove(function() {
+									console.log("file remove success");
+									entry.copyTo(root, 'head2.jpg', function(e) {
+											var e = e.fullPath + "?version=" + new Date().getTime();
+
+											uploadHead(e);
+
+											document.getElementById("head-img2").src = e;
+											//变更大图预览的src
+											//目前仅有一张图片，暂时如此处理，后续需要通过标准组件实现
+
+										},
+										function(e) {
+											console.log('copy image fail:' + e.message);
+										});
+								}, function() {
+									console.log("delete image fail:" + e.message);
+								});
+							}, function() {
+								//文件不存在
+								entry.copyTo(root, 'head2.jpg', function(e) {
+										var path = e.fullPath + "?version=" + new Date().getTime();
+										uploadHead(path); /*上传图片*/
+										document.getElementById("head-img2").src = path;
+										//变更大图预览的src
+										//目前仅有一张图片，暂时如此处理，后续需要通过标准组件实现
+									},
+									function(e) {
+										console.log('copy image fail:' + e.message);
+									});
+							});
+						}, function(e) {
+							console.log("get _www folder fail");
+						})
+					}, function(e) {
+						console.log("读取拍照文件错误：" + e.message);
+					});
+				}, function(a) {}, {
+					filter: "image"
+				})
+			};
+
+			function defaultImg() {
+				if (mui.os.plus) {
+					plus.io.resolveLocalFileSystemURL("_doc/head.jpg", function(entry) {
+						var s = entry.fullPath + "?version=" + new Date().getTime();;
+						document.getElementById("head-img1").src = s;
+						document.getElementById("head-img2").src = s;
+					}, function(e) {
+						document.getElementById("head-img1").src = '../images/logo.png';
+						document.getElementById("head-img2").src = '../images/logo.png';
+					})
+				} else {
+					document.getElementById("head-img1").src = '../images/logo.png';
+					document.getElementById("head-img2").src = '../images/logo.png';
+				}
+
+			}
+			document.getElementById("head-img1").addEventListener('tap', function(e) {
+				e.stopPropagation();
+			});
+			document.getElementById("head-img2").addEventListener('tap', function(e) {
+				e.stopPropagation();
+			});
+
+			//上传头像图片 
+			function uploadHead(imgPath) {
+				console.log("imgPath = " + imgPath);
+				// 				mainImage.src = imgPath;
+				// 				mainImage.style.width = "60px";
+				// 				mainImage.style.height = "60px";
+
+				var image = new Image();
+				image.src = imgPath;
+				image.onload = function() {
+					var imgData = getBase64Image(image);
+					/*在这里调用上传接口*/
+					//              mui.ajax("图片上传接口", { 
+					//                  data: { 
+					//                       
+					//                  }, 
+					//                  dataType: 'json', 
+					//                  type: 'post', 
+					//                  timeout: 10000, 
+					//                  success: function(data) { 
+					//                      console.log('上传成功'); 
+					//                  }, 
+					//                  error: function(xhr, type, errorThrown) { 
+					//                      mui.toast('网络异常，请稍后再试！'); 
+					//                  } 
+					//              }); 
+				}
+			}
+			//将图片压缩转成base64 
+			function getBase64Image(img) {
+				var canvas = document.createElement("canvas");
+				var width = img.width;
+				var height = img.height;
+				// calculate the width and height, constraining the proportions 
+				if (width > height) {
+					if (width > 100) {
+						height = Math.round(height *= 100 / width);
+						width = 100;
+					}
+				} else {
+					if (height > 100) {
+						width = Math.round(width *= 100 / height);
+						height = 100;
+					}
+				}
+				canvas.width = width; /*设置新的图片的宽度*/
+				canvas.height = height; /*设置新的图片的长度*/
+				var ctx = canvas.getContext("2d");
+				ctx.drawImage(img, 0, 0, width, height); /*绘图*/
+				var dataURL = canvas.toDataURL("image/png", 0.8);
+				return dataURL.replace("data:image/png;base64,", "");
+			}
+
+			function initImgPreview() {
+				var imgs = document.querySelectorAll("img.mui-action-preview");
+				imgs = mui.slice.call(imgs);
+				if (imgs && imgs.length > 0) {
+					var slider = document.createElement("div");
+					slider.setAttribute("id", "__mui-imageview__");
+					slider.classList.add("mui-slider");
+					slider.classList.add("mui-fullscreen");
+					slider.style.display = "none";
+					slider.addEventListener("tap", function() {
+						slider.style.display = "none";
+					});
+					slider.addEventListener("touchmove", function(event) {
+						event.preventDefault();
+					})
+					var slider_group = document.createElement("div");
+					slider_group.setAttribute("id", "__mui-imageview__group");
+					slider_group.classList.add("mui-slider-group");
+					imgs.forEach(function(value, index, array) {
+						//给图片添加点击事件，触发预览显示；
+						value.addEventListener('tap', function() {
+							slider.style.display = "block";
+							_slider.refresh();
+							_slider.gotoItem(index, 0);
+						})
+						var item = document.createElement("div");
+						item.classList.add("mui-slider-item");
+						var a = document.createElement("a");
+						var img = document.createElement("img");
+						img.setAttribute("src", value.src);
+						a.appendChild(img)
+						item.appendChild(a);
+						slider_group.appendChild(item);
+					});
+					slider.appendChild(slider_group);
+					document.body.appendChild(slider);
+					var _slider = mui(slider).slider();
+				}
+			}
+			
+			document.getElementById('back').addEventListener('tap', function() {
+								//				alert('111');
+								localStorage.clear();
+								window.JsInterface.closeWindow();
+			
+							});
+		</script>
+	</body>
+</html>
